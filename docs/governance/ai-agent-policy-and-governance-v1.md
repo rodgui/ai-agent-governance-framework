@@ -312,4 +312,4 @@ Microsoft Learn — _Responsible Generative AI Development on Windows – (sourc
 
 ---
 
-*Templates: [`/templates/`](../templates/)*
+*Templates: [`templates/`](../../templates/)*
