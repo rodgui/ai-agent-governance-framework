@@ -16,7 +16,7 @@ This framework was developed in **January 2026** for a large industrial enterpri
 ## What's included
 
 | Area | Contents |
-|---|---|
+| --- | --- |
 | `docs/governance/` | Core policy — governance model, autonomy levels, HITL, blast radius, approval matrix, lifecycle |
 | `templates/` | Self-assessment form and example, publication checklist, sunset plan |
 | `docs/identity/` | Agent identity, authentication, authorization and workload identity |
@@ -34,6 +34,17 @@ This framework was developed in **January 2026** for a large industrial enterpri
 | `assessments/` | Technology and maturity evaluations |
 | `experiments/` | Hypotheses, PoCs and benchmarks |
 | `references/` | Sources, glossary and bibliography |
+
+## Recommended reading path
+
+1. [Policy v1](docs/governance/ai-agent-policy-and-governance-v1.md) — the adopted baseline for autonomy, HITL, blast radius, approval, catalog, observability and sunset.
+2. [Microsoft Customer Zero case study](docs/explanations/microsoft-agent-governance-case-study.md) — evidence-backed synthesis of five Microsoft Inside Track articles.
+3. [Microsoft × framework crosswalk](assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) — current coverage, gaps and proposed v2 backlog.
+4. [Reference architecture](docs/architecture/overview.md) — five connected governance planes and end-to-end lifecycle.
+5. [90-day implementation plan](docs/guides/implementation-plan-90-days.md) — pilots, workstreams, decision gates and exit criteria.
+6. [Executive brief](docs/executive/governing-agents-at-scale.md) — decision-oriented version for leadership.
+
+![Agent governance operating model](docs/architecture/diagrams/agent-governance-operating-model.png)
 
 ## Core concepts
 
@@ -64,9 +75,11 @@ Scales with user count, environment (PoC vs Production), and risk triggers (pers
 ## How to use
 
 1. Review the core policy at [`docs/governance/ai-agent-policy-and-governance-v1.md`](docs/governance/ai-agent-policy-and-governance-v1.md).
-2. Adapt the policy to your platforms, regulatory framework, and governance structure.
-3. Use the templates as-is or extend them.
-4. Register every agent in a catalog before Production (catalog fields defined in policy section 11).
+2. Read the [Microsoft case study](docs/explanations/microsoft-agent-governance-case-study.md) without treating Customer Zero claims as independent validation.
+3. Use the [crosswalk](assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) to distinguish existing policy coverage from recommendations for v2.
+4. Adapt the framework to your platforms, regulatory context, data architecture and risk tolerance.
+5. Use the templates as-is or extend them with traceable evidence.
+6. Register every agent in a catalog before Production (catalog fields defined in policy section 11).
 
 ## License
 

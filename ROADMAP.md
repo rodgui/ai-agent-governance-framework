@@ -8,8 +8,24 @@
 - [x] Exemplo de auto-avaliação preenchido
 - [x] Estrutura do repositório reorganizada
 
+## Fase 1.1 — Consolidação Microsoft Customer Zero (Concluída)
+
+- [x] Estudo fundamentado em cinco artigos Microsoft Inside Track
+- [x] Crosswalk entre Customer Zero e Policy v1
+- [x] Arquitetura de referência em cinco planos
+- [x] Brief executivo e plano de evolução de 90 dias
+- [x] Infográfico reproduzível por código
+- [x] Registro de fontes com datas de acesso e limitações
+
 ## Fase 2 — Aprofundamento temático
 
+- [ ] Definir schema mínimo de registry e agent blueprint
+- [ ] Expandir risk matrix por capacidade, alcance e reversibilidade
+- [ ] Definir critérios de AI-ready data e connector gates
+- [ ] Formalizar impact assessment e release assessment
+- [ ] Criar controles específicos para MCP servers e tool provenance
+- [ ] Definir adoption lead, champion network e suporte em camadas
+- [ ] Separar métricas de criação, descoberta, uso, qualidade e valor
 - [ ] Documentar identidade de agentes (`docs/identity/`)
 - [ ] Mapear controles para a policy (`controls/`)
 - [ ] Criar schemas JSON/YAML para catálogo (`schemas/`)
@@ -27,7 +43,8 @@
 - [ ] Assessments comparativos (`assessments/`)
 - [ ] Experimentos com controles (`experiments/`)
 - [ ] Revisão formal da policy
-- [ ] Atualizar para v2 com aprendizados
+- [ ] Executar pilotos e registrar evidências do plano de 90 dias
+- [ ] Propor v2 com aprendizados, preservando a policy v1
 
 ## Fase 4 — Evolução
 
