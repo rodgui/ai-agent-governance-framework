@@ -422,25 +422,36 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
         ("schemas/control-catalog.schema.json", "controls/control-catalog.json"),
         ("schemas/maturity-assessment.schema.json", "examples/maturity-assessment.example.json"),
     ]
+    missing_instance = object()
+    schema_invalid_instances: set[str] = set()
     for schema_rel, instance_rel in pairs:
         schema = parsed.get(schema_rel)
-        instance = parsed.get(instance_rel)
-        if not isinstance(schema, dict) or instance is None:
+        instance = parsed.get(instance_rel, missing_instance)
+        if not isinstance(schema, dict) or instance is missing_instance:
             continue
         try:
             Draft202012Validator.check_schema(schema)
             validator = Draft202012Validator(schema, format_checker=FormatChecker())
-            for error in sorted(validator.iter_errors(instance), key=lambda item: list(item.path)):
+            schema_errors = sorted(validator.iter_errors(instance), key=lambda item: list(item.path))
+            if schema_errors:
+                schema_invalid_instances.add(instance_rel)
+            for error in schema_errors:
                 location = "/".join(str(part) for part in error.path) or "$"
                 issues.append(Issue("schema", instance_rel, f"{location}: {error.message}"))
         except Exception as exc:  # schema-library errors have heterogeneous types
+            schema_invalid_instances.add(instance_rel)
             issues.append(Issue("schema", schema_rel, str(exc)))
 
+    schema_valid_records = {
+        relative_path: value
+        for relative_path, value in parsed.items()
+        if relative_path not in schema_invalid_instances
+    }
     issues.extend(validate_json_references(parsed))
-    issues.extend(validate_cross_record_invariants(parsed))
+    issues.extend(validate_cross_record_invariants(schema_valid_records))
 
     guardrail_cases: list[tuple[str, Any, str]] = []
-    registry_example = parsed.get("examples/agent-registry.example.json")
+    registry_example = schema_valid_records.get("examples/agent-registry.example.json")
     if isinstance(registry_example, dict):
         without_attestation = copy.deepcopy(registry_example)
         without_attestation.pop("attestation", None)
@@ -460,7 +471,7 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
                 "active or production registry record without evidenceLinks was accepted",
             )
         )
-    blueprint_example = parsed.get("examples/agent-blueprint.example.json")
+    blueprint_example = schema_valid_records.get("examples/agent-blueprint.example.json")
     if isinstance(blueprint_example, dict):
         without_release_evidence = copy.deepcopy(blueprint_example)
         without_release_evidence.get("governance", {}).pop("releaseEvidenceRef", None)
@@ -537,7 +548,7 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
                     "T4 state-changing tool with empty enforcement references was accepted",
                 )
             )
-    maturity_example = parsed.get("examples/maturity-assessment.example.json")
+    maturity_example = schema_valid_records.get("examples/maturity-assessment.example.json")
     if isinstance(maturity_example, dict):
         without_review = copy.deepcopy(maturity_example)
         without_review.pop("review", None)
@@ -585,7 +596,7 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
             invariant_guardrails.append((invalid_sample, "sampleSize exceeds populationSize"))
 
     for invalid_assessment, expected_message in invariant_guardrails:
-        records = dict(parsed)
+        records = dict(schema_valid_records)
         records["examples/maturity-assessment.example.json"] = invalid_assessment
         observed = validate_cross_record_invariants(records)
         if not any(expected_message in issue.message for issue in observed):
@@ -602,7 +613,7 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
         attestation = expired_attestation.get("attestation", {})
         if isinstance(attestation, dict):
             attestation["expiresAt"] = "2000-01-01"
-            records = dict(parsed)
+            records = dict(schema_valid_records)
             records["examples/agent-registry.example.json"] = expired_attestation
             observed = validate_cross_record_invariants(records)
             if not any("attestation expires before lastReviewed" in issue.message for issue in observed):
@@ -626,8 +637,8 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
             )
         )
 
-    catalog = parsed.get("controls/control-catalog.json")
-    blueprint = parsed.get("examples/agent-blueprint.example.json")
+    catalog = schema_valid_records.get("controls/control-catalog.json")
+    blueprint = schema_valid_records.get("examples/agent-blueprint.example.json")
     if isinstance(catalog, dict):
         controls = catalog.get("controls", [])
         ids = [

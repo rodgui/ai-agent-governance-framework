@@ -32,6 +32,7 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 - Repository validation now rejects extra commercial offers and case-insensitive vendor references outside allowed mapping areas.
 - Malformed schema examples now produce actionable findings instead of uncaught validator exceptions.
+- Schema-invalid records are excluded from secondary invariant and guardrail checks after their schema findings are recorded.
 - Control catalogs must declare `lastReviewed`, and negative tests preserve duplicate-ID enforcement.
 - Canonical self-assessment and release templates now use the modular policy instead of historical Policy v1 labels and assumptions.
 
