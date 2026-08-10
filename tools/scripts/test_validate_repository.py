@@ -571,6 +571,21 @@ class CaseBundleTests(unittest.TestCase):
             )
         )
 
+    def test_case_without_own_catalogs_still_checks_bindings(self) -> None:
+        """A case that omits catalogs inherits the shared ones instead of skipping the checks."""
+        json_files = self.seed_case(
+            mutate_blueprint=lambda document: document["tools"][0].__setitem__(
+                "catalogEntryId", "TLR-NOT-CATALOGED-999"
+            )
+        )
+        for role_file in ("model-catalog.json", "source-catalog.json", "tool-catalog.json"):
+            (self.root / self.case / role_file).unlink()
+        json_files = sorted(self.root.rglob("*.json"))
+        issues = validator.validate_json_and_schemas(json_files)
+        self.assertTrue(
+            any("TLR-NOT-CATALOGED-999" in issue.message for issue in self.case_issues(issues))
+        )
+
     def test_case_failures_do_not_blame_the_canonical_example(self) -> None:
         json_files = self.seed_case(
             mutate_blueprint=lambda document: document["governance"].__setitem__("riskTier", "T3")

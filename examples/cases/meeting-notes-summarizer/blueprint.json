@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "2.0",
+  "agentId": "meeting-notes-summarizer",
+  "version": "1.0",
+  "architecture": {
+    "pattern": "tool-using-agent",
+    "description": "Exemplo fictício de agente somente leitura que recupera notas já registradas e devolve um resumo, sem escrever em sistema algum.",
+    "diagramRef": "examples/architecture.example.md",
+    "trustBoundaries": [
+      "Canal interno para o runtime do agente",
+      "Runtime para o serviço de recuperação"
+    ],
+    "dependencies": [
+      {
+        "name": "example-managed-ai-platform",
+        "type": "platform",
+        "criticality": "moderate",
+        "owner": "Example AI Platform Team"
+      },
+      {
+        "name": "approved-knowledge-index",
+        "type": "data",
+        "criticality": "moderate",
+        "owner": "Example Knowledge Owner"
+      }
+    ]
+  },
+  "models": [
+    {
+      "modelId": "example-instruction-model",
+      "provider": "example-provider",
+      "purpose": "Classificar intenção, sintetizar fontes e preparar respostas.",
+      "hosting": "managed",
+      "versionPinned": true,
+      "dataUse": "no-training",
+      "limitations": [
+        "Pode gerar conteúdo incorreto",
+        "Não possui autoridade para executar mudanças"
+      ],
+      "modelVersion": "2026-07-15",
+      "catalogEntryId": "MPC-EXAMPLE-INSTRUCTION-001",
+      "evaluationRef": "examples/evaluation-report.example.md",
+      "role": "primary",
+      "allowedDataClasses": [
+        "public",
+        "internal"
+      ],
+      "allowedRegions": [
+        "example-region"
+      ],
+      "fallback": {
+        "mode": "fail-closed",
+        "rationale": "Sem alternativa avaliada, indisponibilidade do modelo interrompe novas respostas."
+      }
+    }
+  ],
+  "data": {
+    "sources": [
+      {
+        "sourceId": "approved-knowledge-index",
+        "classification": "internal",
+        "purpose": "Recuperar procedimentos aprovados para analistas internos.",
+        "owner": "Example Knowledge Owner",
+        "connectorRef": "example-connector-001",
+        "authorizationMode": "pre-retrieval",
+        "retention": "Index rebuild diário; source retention governa o original.",
+        "region": "example-region",
+        "catalogEntryId": "SRC-APPROVED-KNOWLEDGE-001"
+      }
+    ],
+    "memory": {
+      "mode": "session",
+      "retention": "Encerrada ao fim da sessão.",
+      "deletionMechanism": "Automatic session cleanup",
+      "sensitiveDataAllowed": false
+    }
+  },
+  "identity": {
+    "model": "delegated-user",
+    "principal": "workload://example/meeting-notes-summarizer",
+    "scopes": [
+      "knowledge.search"
+    ],
+    "expiry": "Token delegado do usuário, válido apenas durante a sessão.",
+    "secretManagement": "Managed secret store; nenhum segredo no prompt ou código.",
+    "breakGlass": "Não aplicável; o agente não recebe privilégio emergencial."
+  },
+  "tools": [
+    {
+      "toolId": "knowledge.search",
+      "name": "Approved Knowledge Search",
+      "class": "observe",
+      "protocol": "api",
+      "stateChanging": false,
+      "reversible": true,
+      "approvalMode": "automated",
+      "owner": "Example Knowledge Platform Team",
+      "scopes": [
+        "knowledge.search"
+      ],
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/knowledge-search",
+      "version": "1.0",
+      "catalogEntryId": "TLR-KNOWLEDGE-SEARCH-001"
+    }
+  ],
+  "runtime": {
+    "environments": [
+      "test",
+      "production"
+    ],
+    "regions": [
+      "example-region"
+    ],
+    "observability": "Correlation de usuário, versão do agente e fontes recuperadas; conteúdo da nota não é retido em log.",
+    "quarantine": "Control plane bloqueia novas sessões; sem estado a reverter.",
+    "rollback": "Retorno à última versão aprovada do blueprint e do prompt.",
+    "killSwitch": "Revogação do escopo de recuperação no gateway.",
+    "supportRef": "examples/support-runbook.example.md",
+    "sloRef": "examples/slo.example.md"
+  },
+  "governance": {
+    "riskTier": "T1",
+    "admissibility": "permitted",
+    "admissibilityRationale": "Uso interno, somente leitura, sem ação de estado e sem dado pessoal.",
+    "controlIds": [
+      "AGF-REG-001",
+      "AGF-IDN-001",
+      "AGF-DAT-001",
+      "AGF-OPS-001"
+    ],
+    "assessmentRefs": [
+      "examples/cases/meeting-notes-summarizer/release-manifest.json"
+    ],
+    "prohibitedUses": [
+      "Ação de escrita em qualquer sistema",
+      "Dados pessoais ou de cliente",
+      "Envio a destinatário externo"
+    ],
+    "materialChangeTriggers": [
+      "Inclusão de qualquer tool que altere estado",
+      "Ampliação para dado acima de interno",
+      "Uso por população externa",
+      "Mudança de modelo ou provedor"
+    ],
+    "releaseEvidenceRef": "examples/cases/meeting-notes-summarizer/release-manifest.json",
+    "attestationExpiresAt": "2027-06-20"
+  }
+}

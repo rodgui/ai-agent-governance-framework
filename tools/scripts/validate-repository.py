@@ -654,6 +654,13 @@ def discover_case_bundles(parsed: dict[str, Any]) -> list[dict[str, str]]:
             continue
         seen.add(case_id)
         bundle: dict[str, str] = {"caseLabel": f"examples/cases/{case_id}"}
+        # Catálogos de modelo, fonte e tool são corporativos: um estate tem um catálogo, não
+        # um por agente. Um caso herda os compartilhados e só os sobrescreve se declarar os
+        # próprios — herdar mantém as verificações de binding vivas em vez de desligá-las.
+        for role in ("modelCatalog", "sourceCatalog", "toolCatalog"):
+            shared = FLAT_CASE_BUNDLE[role]
+            if shared in parsed:
+                bundle[role] = shared
         for role, filename in CASE_ROLE_FILES.items():
             candidate = f"examples/cases/{case_id}/{filename}"
             if candidate in parsed:
