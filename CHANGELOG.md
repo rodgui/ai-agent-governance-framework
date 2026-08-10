@@ -30,6 +30,11 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 ### Fixed
 
+- Repository validation now rejects extra commercial offers and case-insensitive vendor references outside allowed mapping areas.
+- Malformed schema examples now produce actionable findings instead of uncaught validator exceptions.
+- Control catalogs must declare `lastReviewed`, and negative tests preserve duplicate-ID enforcement.
+- Canonical self-assessment and release templates now use the modular policy instead of historical Policy v1 labels and assumptions.
+
 ### Security
 
 ## [[previous version(s)]]

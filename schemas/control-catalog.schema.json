@@ -9,6 +9,7 @@
     "schemaVersion",
     "catalogVersion",
     "title",
+    "lastReviewed",
     "controls"
   ],
   "properties": {

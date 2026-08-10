@@ -18,7 +18,25 @@ EXCLUDED_DIRS = {".git", ".venv", "venv", "dist", "__pycache__", ".pytest_cache"
 TEXT_SUFFIXES = {".md", ".py", ".json", ".yml", ".yaml", ".toml", ".txt"}
 INLINE_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 CITATION_RE = re.compile(r"(?<!\!)\[(\d+)\]")
-VENDOR_NAME_RE = re.compile(r"\b(?:Microsoft|Agent 365|Cloudflare|Azure|Copilot|Entra|Purview|Defender)\b")
+VENDOR_NAME_RE = re.compile(
+    r"\b(?:Microsoft|Agent 365|Cloudflare|Azure|Copilot|Purview|Key Vault"
+    r"|Entra (?:ID|Agent ID|Suite)|Defender (?:XDR|for Cloud|for Endpoint|for Identity|for Office 365))\b",
+    flags=re.IGNORECASE,
+)
+STRUCTURED_VENDOR_NAME_RE = re.compile(
+    r"\b(?:Microsoft|Agent 365|Cloudflare|Azure|Copilot|Entra|Purview|Defender|Key Vault)\b",
+    flags=re.IGNORECASE,
+)
+LEGACY_POLICY_TEMPLATE_RE = re.compile(
+    r"(?:\bPolicy\s+V1\b|Self-Assessment Form\s+—\s+AI Agents\s+\(V1\)"
+    r"|AI Agent Publication Checklist\s+\(V1\))",
+    flags=re.IGNORECASE,
+)
+ALLOWED_VENDOR_LITERALS = {
+    ".github/workflows/quality-gates.yml": (
+        "docs/explanations/diagrams/microsoft-customer-zero-agent-governance.png",
+    ),
+}
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 REPOSITORY_REF_RE = re.compile(
     r"^[A-Za-z0-9._/-]+\.(?:md|json|yaml|yml|png)(?:#[A-Za-z0-9._~!$&'()*+,;=:@/?%-]*)?$"
@@ -478,8 +496,9 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
                 )
                 break
         unsafe_tool = copy.deepcopy(blueprint_example)
-        first_tool = unsafe_tool.get("tools", [{}])[0]
-        if isinstance(first_tool, dict):
+        unsafe_tools = unsafe_tool.get("tools", [])
+        if isinstance(unsafe_tools, list) and unsafe_tools and isinstance(unsafe_tools[0], dict):
+            first_tool = unsafe_tools[0]
             first_tool.update(
                 {
                     "class": "delete",
@@ -560,8 +579,9 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
 
         invalid_sample = copy.deepcopy(maturity_example)
         sampling = invalid_sample.get("sampling", {})
-        if isinstance(sampling, dict):
-            sampling["sampleSize"] = sampling.get("populationSize", 0) + 1
+        population = sampling.get("populationSize") if isinstance(sampling, dict) else None
+        if isinstance(population, int) and not isinstance(population, bool):
+            sampling["sampleSize"] = population + 1
             invariant_guardrails.append((invalid_sample, "sampleSize exceeds populationSize"))
 
     for invalid_assessment, expected_message in invariant_guardrails:
@@ -688,7 +708,7 @@ def validate_commercial_boundary() -> list[Issue]:
 
     model = model_path.read_text(encoding="utf-8")
     packaging = packaging_path.read_text(encoding="utf-8")
-    offers = re.findall(r"^## Oferta ([1-9]) — (.+)$", model, flags=re.MULTILINE)
+    offers = re.findall(r"^## Oferta (\d+) — (.+)$", model, flags=re.MULTILINE)
     numbers = [int(number) for number, _ in offers]
     if numbers != list(range(1, 10)):
         issues.append(Issue("boundary", relative(model_path), "expected exactly nine ordered offer modules"))
@@ -736,7 +756,10 @@ def validate_vendor_neutrality(files: list[Path]) -> list[Issue]:
         if rel in allowed_files or rel.startswith(allowed_prefixes):
             continue
         text = path.read_text(encoding="utf-8")
-        match = VENDOR_NAME_RE.search(text)
+        for allowed_literal in ALLOWED_VENDOR_LITERALS.get(rel, ()):
+            text = text.replace(allowed_literal, " " * len(allowed_literal))
+        vendor_pattern = VENDOR_NAME_RE if path.suffix.lower() == ".md" else STRUCTURED_VENDOR_NAME_RE
+        match = vendor_pattern.search(text)
         if match:
             line = text.count("\n", 0, match.start()) + 1
             issues.append(
@@ -745,8 +768,32 @@ def validate_vendor_neutrality(files: list[Path]) -> list[Issue]:
     return issues
 
 
+def validate_policy_history_boundary(files: list[Path]) -> list[Issue]:
+    issues: list[Issue] = []
+    for path in files:
+        rel = relative(path)
+        if not rel.startswith("templates/") or path.suffix.lower() != ".md":
+            continue
+        text = path.read_text(encoding="utf-8")
+        match = LEGACY_POLICY_TEMPLATE_RE.search(text)
+        if match:
+            line = text.count("\n", 0, match.start()) + 1
+            issues.append(
+                Issue(
+                    "policy-history",
+                    rel,
+                    f"canonical template references historical Policy v1 at line {line}",
+                )
+            )
+    return issues
+
+
 def validate_product_boundaries(files: list[Path]) -> list[Issue]:
-    return validate_commercial_boundary() + validate_vendor_neutrality(files)
+    return (
+        validate_commercial_boundary()
+        + validate_vendor_neutrality(files)
+        + validate_policy_history_boundary(files)
+    )
 
 
 def validate_sensitive_content(files: list[Path]) -> list[Issue]:
