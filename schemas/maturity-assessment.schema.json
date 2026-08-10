@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rodgui.github.io/ai-agent-governance-framework/schemas/maturity-assessment.schema.json",
+  "title": "AI Governance Maturity Assessment",
+  "description": "Assessment de maturidade com método, sampling, evidence register, score, confidence, coverage, review e limitações rastreáveis.",
+  "$comment": "Referential integrity, reviewer separation, sampling bounds and temporal invariants are cross-field rules enforced by tools/scripts/validate-repository.py; JSON Schema alone cannot express them portably.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "methodVersion",
+    "assessmentId",
+    "scope",
+    "assessedAt",
+    "assessor",
+    "sampling",
+    "evidenceRegister",
+    "dimensions",
+    "priorities",
+    "review",
+    "limitations"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "methodVersion": { "const": "1.0" },
+    "assessmentId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,80}$" },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organization", "included", "excluded", "evidenceCutoff"],
+      "properties": {
+        "organization": { "type": "string", "minLength": 2 },
+        "included": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 2 } },
+        "excluded": { "type": "array", "items": { "type": "string", "minLength": 2 } },
+        "evidenceCutoff": { "type": "string", "format": "date" }
+      }
+    },
+    "assessedAt": { "type": "string", "format": "date" },
+    "assessor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role", "organization", "mode", "conflicts"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "role": { "type": "string", "minLength": 2 },
+        "organization": { "type": "string", "minLength": 2 },
+        "mode": {
+          "enum": [
+            "self-assessment",
+            "facilitated-assessment",
+            "peer-review",
+            "limited-scope-review"
+          ]
+        },
+        "conflicts": { "type": "array", "items": { "type": "string", "minLength": 3 } }
+      }
+    },
+    "sampling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "populationDescription",
+        "populationSize",
+        "sampleSize",
+        "rationale",
+        "limitations"
+      ],
+      "properties": {
+        "method": {
+          "enum": ["full-population", "judgmental", "random", "stratified", "not-applicable"]
+        },
+        "populationDescription": { "type": "string", "minLength": 10 },
+        "populationSize": { "type": "integer", "minimum": 0 },
+        "sampleSize": { "type": "integer", "minimum": 0 },
+        "rationale": { "type": "string", "minLength": 20 },
+        "limitations": { "type": "array", "items": { "type": "string", "minLength": 5 } }
+      }
+    },
+    "evidenceRegister": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/evidence" }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "strategyValue",
+        "operatingModel",
+        "registryLifecycle",
+        "identityAccess",
+        "dataConnectors",
+        "toolsMcp",
+        "riskResponsibleAi",
+        "evaluationsRelease",
+        "auditOperations",
+        "adoptionSupport"
+      ],
+      "properties": {
+        "strategyValue": { "$ref": "#/$defs/dimension" },
+        "operatingModel": { "$ref": "#/$defs/dimension" },
+        "registryLifecycle": { "$ref": "#/$defs/dimension" },
+        "identityAccess": { "$ref": "#/$defs/dimension" },
+        "dataConnectors": { "$ref": "#/$defs/dimension" },
+        "toolsMcp": { "$ref": "#/$defs/dimension" },
+        "riskResponsibleAi": { "$ref": "#/$defs/dimension" },
+        "evaluationsRelease": { "$ref": "#/$defs/dimension" },
+        "auditOperations": { "$ref": "#/$defs/dimension" },
+        "adoptionSupport": { "$ref": "#/$defs/dimension" }
+      }
+    },
+    "priorities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["severity", "outcome", "owner", "targetDate", "acceptanceCriteria"],
+        "properties": {
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "outcome": { "type": "string", "minLength": 10 },
+          "owner": { "type": "string", "minLength": 2 },
+          "targetDate": { "type": "string", "format": "date" },
+          "acceptanceCriteria": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 3 }
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer",
+        "reviewedAt",
+        "disposition",
+        "conflictsChecked",
+        "comments"
+      ],
+      "properties": {
+        "reviewer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "role", "organization"],
+          "properties": {
+            "name": { "type": "string", "minLength": 2 },
+            "role": { "type": "string", "minLength": 2 },
+            "organization": { "type": "string", "minLength": 2 }
+          }
+        },
+        "reviewedAt": { "type": "string", "format": "date" },
+        "disposition": { "enum": ["accepted", "accepted-with-conditions", "disputed"] },
+        "conflictsChecked": { "const": true },
+        "comments": { "type": "array", "items": { "type": "string", "minLength": 3 } }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 5 }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "type",
+        "reference",
+        "observedAt",
+        "collectedBy",
+        "scope",
+        "limitations"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^EV-[A-Z0-9-]{3,60}$" },
+        "title": { "type": "string", "minLength": 3 },
+        "type": {
+          "enum": [
+            "policy",
+            "process-record",
+            "system-record",
+            "interview",
+            "walkthrough",
+            "test",
+            "metric",
+            "sample",
+            "other"
+          ]
+        },
+        "reference": { "type": "string", "format": "uri-reference", "minLength": 3 },
+        "observedAt": { "type": "string", "format": "date" },
+        "collectedBy": { "type": "string", "minLength": 2 },
+        "scope": { "type": "string", "minLength": 3 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "limitations": { "type": "array", "items": { "type": "string", "minLength": 5 } }
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "confidence",
+        "confidenceRationale",
+        "coverage",
+        "coverageBasis",
+        "evidenceRefs",
+        "gaps",
+        "rationale",
+        "target",
+        "owner"
+      ],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "confidenceRationale": { "type": "string", "minLength": 20 },
+        "coverage": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "coverageBasis": { "type": "string", "minLength": 10 },
+        "evidenceRefs": {
+          "description": "IDs que devem existir em evidenceRegister; integridade referencial é validada pelo repository validator.",
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^EV-[A-Z0-9-]{3,60}$" }
+        },
+        "gaps": { "type": "array", "items": { "type": "string", "minLength": 3 } },
+        "rationale": { "type": "string", "minLength": 20 },
+        "target": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "owner": { "type": "string", "minLength": 2 },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "agentId": "service-desk-knowledge-agent",
+  "name": "Service Desk Knowledge Agent",
+  "description": "Exemplo fictício de agente interno de consulta a conhecimento aprovado.",
+  "purpose": "Ajudar analistas internos a localizar procedimentos aprovados e preparar respostas com referências.",
+  "intendedUsers": ["service-desk-analysts"],
+  "prohibitedUses": [
+    "Executar mudanças em sistemas",
+    "Responder a usuários externos sem revisão humana",
+    "Acessar dados pessoais ou credenciais"
+  ],
+  "ownership": {
+    "businessOwner": {
+      "name": "Example Business Owner",
+      "role": "Head of Service Operations",
+      "contact": "owner@example.invalid",
+      "organizationUnit": "Example Operations"
+    },
+    "technicalOwner": {
+      "name": "Example Technical Owner",
+      "role": "AI Platform Lead",
+      "contact": "technical@example.invalid",
+      "organizationUnit": "Example Technology"
+    },
+    "runOwner": {
+      "name": "Example Run Owner",
+      "role": "Service Reliability Lead"
+    }
+  },
+  "lifecycle": {
+    "status": "active",
+    "createdAt": "2026-07-01",
+    "approvedAt": "2026-08-01",
+    "sunsetBy": "2027-08-01",
+    "statusReason": "Exemplo aprovado para documentação; não representa deployment real."
+  },
+  "risk": {
+    "tier": "T2",
+    "assessmentRef": "examples/risk-assessment.example.md",
+    "classifiedAt": "2026-08-01",
+    "redFlags": [],
+    "residualRisk": "moderate"
+  },
+  "currentBlueprint": {
+    "version": "1.0",
+    "path": "examples/agent-blueprint.example.json"
+  },
+  "platforms": [
+    {
+      "name": "example-managed-ai-platform",
+      "environment": "production",
+      "tenant": "example-tenant",
+      "region": "example-region",
+      "externalId": "example-agent-001"
+    }
+  ],
+  "capabilities": ["observe", "create"],
+  "evidenceLinks": [
+    {
+      "type": "evaluation",
+      "path": "examples/evaluation-report.example.md"
+    },
+    {
+      "type": "approval",
+      "path": "examples/release-decision.example.md"
+    }
+  ],
+  "attestation": {
+    "status": "valid",
+    "attestedAt": "2026-08-01",
+    "expiresAt": "2026-11-01",
+    "decisionRef": "examples/release-decision.example.md"
+  },
+  "tags": ["internal", "knowledge", "read-only"],
+  "source": {
+    "system": "example-control-plane",
+    "lastSeenAt": "2026-08-09T12:00:00Z",
+    "confidence": "high"
+  },
+  "lastReviewed": "2026-08-09"
+}

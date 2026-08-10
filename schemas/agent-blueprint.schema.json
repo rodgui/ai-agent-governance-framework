@@ -1,0 +1,270 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rodgui.github.io/ai-agent-governance-framework/schemas/agent-blueprint.schema.json",
+  "title": "AI Agent Blueprint",
+  "description": "Descrição técnica versionada de arquitetura, dados, identidade, tools, runtime e governança.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "agentId",
+    "version",
+    "architecture",
+    "models",
+    "data",
+    "identity",
+    "tools",
+    "runtime",
+    "governance"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "agentId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$" },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+    "architecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pattern", "description", "trustBoundaries", "dependencies"],
+      "properties": {
+        "pattern": { "enum": ["assistant", "workflow-agent", "tool-using-agent", "multi-agent", "embedded-ai", "other"] },
+        "description": { "type": "string", "minLength": 20 },
+        "diagramRef": { "type": "string", "minLength": 3 },
+        "trustBoundaries": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 3 }
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "type", "criticality"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "enum": ["platform", "model", "data", "tool", "identity", "network", "human-process", "other"] },
+              "criticality": { "enum": ["low", "moderate", "high", "critical"] },
+              "owner": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["modelId", "provider", "purpose", "hosting"],
+        "properties": {
+          "modelId": { "type": "string" },
+          "provider": { "type": "string" },
+          "purpose": { "type": "string" },
+          "hosting": { "enum": ["saas", "managed", "self-hosted", "on-device"] },
+          "versionPinned": { "type": "boolean" },
+          "dataUse": { "enum": ["no-training", "contract-defined", "unknown"] },
+          "limitations": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "memory"],
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sourceId", "classification", "purpose", "owner", "connectorRef"],
+            "properties": {
+              "sourceId": { "type": "string" },
+              "classification": { "enum": ["public", "internal", "confidential", "restricted", "regulated"] },
+              "purpose": { "type": "string" },
+              "owner": { "type": "string" },
+              "connectorRef": { "type": "string" },
+              "authorizationMode": { "enum": ["pre-retrieval", "source-enforced", "post-retrieval", "none"] },
+              "retention": { "type": "string" },
+              "region": { "type": "string" }
+            }
+          }
+        },
+        "memory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mode", "retention"],
+          "properties": {
+            "mode": { "enum": ["none", "session", "user", "team", "organization"] },
+            "retention": { "type": "string" },
+            "deletionMechanism": { "type": "string" },
+            "sensitiveDataAllowed": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "principal", "scopes", "secretManagement"],
+      "properties": {
+        "model": { "enum": ["workload", "delegated-user", "per-execution", "hybrid"] },
+        "principal": { "type": "string", "minLength": 3 },
+        "scopes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+        "expiry": { "type": "string" },
+        "secretManagement": { "type": "string", "minLength": 3 },
+        "breakGlass": { "type": "string" }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["toolId", "name", "class", "protocol", "stateChanging", "reversible", "approvalMode", "owner"],
+        "properties": {
+          "toolId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,80}$" },
+          "name": { "type": "string" },
+          "class": { "enum": ["observe", "create", "modify", "execute", "approve", "delete", "delegate"] },
+          "protocol": { "enum": ["api", "mcp", "browser", "code", "queue", "other"] },
+          "stateChanging": { "type": "boolean" },
+          "reversible": { "type": "boolean" },
+          "approvalMode": { "enum": ["automated", "human", "dual-control", "prohibited"] },
+          "owner": { "type": "string" },
+          "scopes": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "gatewayRef": { "type": "string", "minLength": 3 },
+          "killSwitchRef": { "type": "string", "minLength": 3 },
+          "version": { "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "stateChanging": { "const": true } },
+              "required": ["stateChanging"]
+            },
+            "then": {
+              "required": ["gatewayRef", "killSwitchRef", "scopes"],
+              "properties": { "scopes": { "minItems": 1 } }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "stateChanging": { "const": true },
+                "reversible": { "const": false }
+              },
+              "required": ["stateChanging", "reversible"]
+            },
+            "then": {
+              "properties": {
+                "approvalMode": { "enum": ["human", "dual-control", "prohibited"] }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": { "class": { "const": "observe" } },
+              "required": ["class"]
+            },
+            "then": { "properties": { "stateChanging": { "const": false } } }
+          },
+          {
+            "if": {
+              "properties": {
+                "class": { "enum": ["create", "modify", "execute", "approve", "delete", "delegate"] }
+              },
+              "required": ["class"]
+            },
+            "then": { "properties": { "stateChanging": { "const": true } } }
+          }
+        ]
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["environments", "observability", "quarantine", "rollback", "killSwitch"],
+      "properties": {
+        "environments": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["development", "test", "staging", "production"] },
+          "uniqueItems": true
+        },
+        "regions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "observability": { "type": "string", "minLength": 3 },
+        "quarantine": { "type": "string", "minLength": 3 },
+        "rollback": { "type": "string", "minLength": 3 },
+        "killSwitch": { "type": "string", "minLength": 3 },
+        "supportRef": { "type": "string", "minLength": 3 },
+        "sloRef": { "type": "string", "minLength": 3 }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["riskTier", "controlIds", "assessmentRefs", "prohibitedUses", "materialChangeTriggers"],
+      "properties": {
+        "riskTier": { "enum": ["T1", "T2", "T3", "T4"] },
+        "controlIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^AGF-[A-Z]{3,5}-[0-9]{3}$" },
+          "uniqueItems": true
+        },
+        "assessmentRefs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 3 }, "uniqueItems": true },
+        "prohibitedUses": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "materialChangeTriggers": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+        "releaseEvidenceRef": { "type": "string", "minLength": 3 },
+        "attestationExpiresAt": { "type": "string", "format": "date" }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "runtime": {
+            "properties": {
+              "environments": { "contains": { "const": "production" } }
+            },
+            "required": ["environments"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "governance": { "required": ["releaseEvidenceRef", "attestationExpiresAt"] }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "governance": {
+            "properties": { "riskTier": { "enum": ["T3", "T4"] } },
+            "required": ["riskTier"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "tools": {
+            "items": {
+              "if": {
+                "properties": { "stateChanging": { "const": true } },
+                "required": ["stateChanging"]
+              },
+              "then": {
+                "properties": {
+                  "approvalMode": { "enum": ["human", "dual-control", "prohibited"] }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

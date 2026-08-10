@@ -1,81 +1,104 @@
-# AI Agent Policy and Governance Framework
+# AI Agent Governance Framework
 
-A practical, enterprise-grade governance framework for the creation, publication, and operation of AI Agents across corporate platforms.
+**Framework vendor-neutral para governar sistemas de IA e agentes do mandato executivo ao runtime.**
 
-## Why this framework exists
+Este repositório reúne policy, operating model, arquitetura, design patterns, controles, assessments, schemas e templates em uma única fonte canônica. O mesmo conteúdo pode ser consumido como referência técnica, guia de implantação, handbook e base para futuras publicações.
 
-As organizations deploy AI agents at scale — across platforms like n8n, AWS Bedrock, Azure AI Foundry, Microsoft Copilot Studio, and others — governance gaps emerge fast:
+> **Status normativo:** a [policy modular](docs/governance/policy.md) é a fonte canônica em evolução. Uma organização só deve declarar uma release como adotada após aprovação explícita e versionada pela authority competente.
 
-- Agents with no designated owner
-- Irreversible actions without human oversight
-- Data leakage through ungoverned LLM calls
-- No audit trail, no kill-switch, no sunset plan
+![AI Agent Governance Framework](docs/architecture/diagrams/ai-agent-governance-framework.png)
 
-This framework was developed in **January 2026** for a large industrial enterprise and submitted to its AI Governance Committee. The organization's official Responsible AI Policy, published in June 2026, aligned closely with the structure proposed here.
+## O problema que o framework resolve
 
-## What's included
+Agentes combinam modelos probabilísticos, dados, identidades, ferramentas e capacidade de ação. Sem um sistema de governança, a organização perde respostas básicas:
 
-| Area | Contents |
+- o que existe, por que existe e quem responde;
+- quais dados, tools, APIs e MCP servers podem ser usados;
+- qual autonomia e blast radius foram aprovados;
+- quais testes e evidências sustentam a publicação;
+- como detectar desvio, conter, remediar e aposentar;
+- se criação, adoção, qualidade e valor estão sendo medidos separadamente.
+
+O framework conecta essas respostas em um lifecycle verificável e proporcional ao risco.
+
+## Cinco planos conectados
+
+1. **Estratégia e valor** — mandato, portfólio, owner, hipótese e métricas.
+2. **Control plane** — registry, blueprint, identidade, policy e lifecycle.
+3. **Assurance plane** — risco, Responsible AI, privacy, security e avaliações.
+4. **Adoção e suporte** — enablement, change, suporte e feedback.
+5. **Runtime e melhoria** — telemetria, incidentes, contenção, attestation e valor.
+
+Control plane e assurance plane são complementares. Inventário, identidade e telemetria não comprovam, sozinhos, segurança, equidade, transparência ou impacto responsável.
+
+## Comece pelo seu objetivo
+
+| Se você precisa... | Comece aqui |
 |---|---|
-| `docs/governance/` | Core policy — governance model, autonomy levels, HITL, blast radius, approval matrix, lifecycle |
-| `templates/` | Self-assessment form and example, publication checklist, sunset plan |
-| `docs/identity/` | Agent identity, authentication, authorization and workload identity |
-| `docs/tool-governance/` | Tool approval, sandbox, least-privilege and approval gates |
-| `docs/data-access/` | Data classification, DLP, lineage, provenance and consent |
-| `docs/risk-management/` | Risk taxonomy, blast radius assessment and mitigation |
-| `docs/evaluations/` | Quality gates, evals and continuous assessment |
-| `docs/auditability/` | Logging, trail retention and compliance evidence |
-| `docs/human-oversight/` | HITL design, approval flows and escalation |
-| `docs/responsible-ai/` | Principles, controls, safety and monitoring |
-| `docs/executive/` | Briefs, recommendations and executive communication |
-| `schemas/` | JSON/YAML schemas for agent catalog and self-assessment |
-| `controls/` | Control library mapping policy requirements to implementations |
-| `examples/` | Real-world examples and case studies |
-| `assessments/` | Technology and maturity evaluations |
-| `experiments/` | Hypotheses, PoCs and benchmarks |
-| `references/` | Sources, glossary and bibliography |
+| entender o framework em 20 minutos | [Brief executivo](docs/executive/governing-agents-at-scale.md) |
+| estudar a referência completa | [Handbook e ordem de leitura](docs/handbook/README.md) |
+| implantar a governança | [Implementation playbook](docs/guides/framework-implementation-playbook.md) |
+| executar os primeiros 90 dias | [Roadmap de 90 dias](docs/guides/implementation-plan-90-days.md) |
+| avaliar maturidade | [Maturity model](docs/guides/maturity-model.md) |
+| reutilizar soluções arquiteturais | [Catálogo de design patterns](docs/patterns/README.md) |
+| adotar controles verificáveis | [Control catalog](controls/README.md) |
+| registrar agentes e arquitetura | [Schemas e exemplos](schemas/README.md) |
+| conhecer a produtificação comercial separada | [Consultoria: três pacotes e nove módulos](consulting/README.md) |
+| estudar uma referência externa opcional | [Caso Microsoft Customer Zero](docs/explanations/microsoft-agent-governance-case-study.md) |
 
-## Core concepts
+## Toolkit
 
-### Autonomy Levels (L0–L3)
+| Artefato | Uso |
+|---|---|
+| [Policy modular](docs/governance/policy.md) | entrada normativa, composição, boundaries e versionamento |
+| [Operating model](docs/governance/operating-model.md) | papéis, decision rights, fóruns e handoffs |
+| [Arquitetura](docs/architecture/overview.md) | planos, fluxos e boundaries |
+| [Patterns](docs/patterns/README.md) | soluções recorrentes e antipatterns |
+| [Control catalog](controls/README.md) | requisitos, implementações e evidências |
+| [Registry + blueprint](schemas/README.md) | inventário, arquitetura e accountability estruturados |
+| [Assessments](assessments/README.md) | risco, maturidade e comparações |
+| [Templates](templates/README.md) | execução humana e evidências |
+| [Handbook](docs/handbook/README.md) | ordem editorial para leitura linear e futura publicação |
 
-- **L0** — AI only suggests; human executes everything
-- **L1** — AI executes routine, bounded, reversible tasks with logging
-- **L2** — AI executes with periodic human review; HITL at key decision points
-- **L3** — High autonomy; requires exceptional approval, continuous monitoring, kill-switch mandatory
+## Princípios não negociáveis
 
-### Blast Radius
+- **AI-operated, human-led:** automação não remove accountability humana.
+- **Proporcionalidade:** controles crescem com alcance, autonomia, criticidade, dados, irreversibilidade e capacidade de ação.
+- **Governança distribuída:** negócio, identidade, dados, segurança, plataforma, Responsible AI e operações preservam seus decision rights.
+- **Build time ≠ runtime:** release gates não substituem observabilidade e contenção.
+- **Registry ≠ governança completa:** inventário precisa de ownership, lifecycle, assurance e remediação.
+- **Visibilidade deve levar à ação:** dashboard sem owner, SLA e workflow é apenas observação.
+- **Valor exige evidência:** volume de agentes não prova adoção, qualidade ou retorno.
+- **Vendor-neutral core:** produtos implementam capacidades; não definem o framework.
 
-Every agent is assessed before deployment on:
+## Preparado para publicação futura
 
-- **Probability** = f(Permissions, Autonomy, Interconnectivity, Auth Strength)
-- **Impact** = data/privacy · financial · operational · reputational
+Os documentos modulares permanecem como fonte canônica e o [handbook](docs/handbook/README.md) define uma ordem editorial estável. Quando o conteúdo estiver maduro, PDF, EPUB ou outros formatos devem ser gerados a partir dessa fonte — nunca mantidos como cópias editoriais independentes.
 
-Result maps directly to the Approval Matrix.
+## Camada comercial separada
 
-### HITL (Human-in-the-Loop)
+A produtificação pessoal deste conhecimento está em [`consulting/`](consulting/README.md), organizada em três pacotes compostos por nove módulos. Ela deriva do framework, mas não integra a policy, o handbook ou a comunicação executiva canônica.
 
-All irreversible, high-impact actions require explicit human confirmation through an approved channel. No exceptions without documented waiver and rollback plan.
+O framework **não é certificação**, parecer jurídico, garantia de conformidade nem promessa de retorno financeiro. Resultados dependem de contexto, implementação, adoção e evidência observável.
 
-### Approval Matrix
+## Origem e limites
 
-Scales with user count, environment (PoC vs Production), and risk triggers (personal data, financial controls, critical systems). Any red flag escalates to Production-level regardless of size.
+O framework surgiu de trabalho aplicado de governança de agentes em contexto industrial e evoluiu com referências públicas como NIST AI RMF, ISO/IEC 42001 e 23894, OECD AI Principles, EU AI Act, OWASP GenAI e MITRE ATLAS. O [caso Microsoft](docs/explanations/microsoft-agent-governance-case-study.md) é evidência institucional útil, não auditoria independente nem arquitetura universal.
 
-## How to use
+## Navegação
 
-1. Review the core policy at [`docs/governance/ai-agent-policy-and-governance-v1.md`](docs/governance/ai-agent-policy-and-governance-v1.md).
-2. Adapt the policy to your platforms, regulatory framework, and governance structure.
-3. Use the templates as-is or extend them.
-4. Register every agent in a catalog before Production (catalog fields defined in policy section 11).
+- [Índice completo e jornadas por persona](docs/index.md)
+- [Roadmap do produto de conhecimento](ROADMAP.md)
+- [Glossário](references/glossary.md)
+- [Fontes](references/sources.md)
+- [Como contribuir](CONTRIBUTING.md)
 
-## License
+## Licença
 
-[Creative Commons Attribution 4.0 International](LICENSE) — free to use, adapt, and share with attribution.
+[Creative Commons Attribution 4.0 International](LICENSE) — uso, adaptação e compartilhamento permitidos com atribuição.
 
-## Author
+## Autor
 
 **Rodrigo Garcia Guimarães**  
 Infrastructure Senior Architect | AI Governance | Hybrid Cloud & Industrial Edge  
 [LinkedIn](https://linkedin.com/in/rodgui) · [GitHub](https://github.com/rodgui)
-
-*Framework created January 2026.*

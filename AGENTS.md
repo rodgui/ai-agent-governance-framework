@@ -21,20 +21,29 @@ Este repositório contém o framework de governança de agentes de IA corporativ
 
 | Artefato | Finalidade |
 |---|---|
+| `docs/handbook/` | Ordem editorial, nunca segunda fonte canônica |
+| `docs/fundamentals/` | Conceitos, boundaries e princípios |
 | `docs/governance/` | Policy, operating model, lifecycle, controles |
 | `docs/identity/` | Identidade, autenticação e autorização de agentes |
 | `docs/tool-governance/` | Aprovação de ferramentas, sandbox e gates |
 | `docs/data-access/` | Classificação de dados, DLP e proveniência |
-| `docs/risk-management/` | Taxonomia de riscos e blast radius |
+| `docs/risk-management/` | Taxonomia de riscos, tiers e blast radius |
 | `docs/evaluations/` | Quality gates e avaliação contínua |
-| `docs/auditability/` | Logs, trail retention e evidência de conformidade |
+| `docs/auditability/` | Logs, evidence packages e auditabilidade |
 | `docs/human-oversight/` | HITL, approval flows e escalonamento |
 | `docs/responsible-ai/` | Princípios, controles, safety e monitoring |
-| `docs/executive/` | Briefs executivos e comunicação orientada a decisão |
-| `schemas/` | Schemas JSON/YAML para catálogo e auto-avaliação |
+| `docs/operations/` | Runtime, resposta, containment, attestation e sunset |
+| `docs/adoption/` | Enablement, paved road, suporte e feedback |
+| `docs/value/` | Estratégia, portfólio, hipóteses e evidência de valor |
+| `docs/patterns/` | Patterns vendor-neutral e antipatterns |
+| `docs/explanations/` | Estudos de caso e contexto não normativo |
+| `docs/executive/` | Briefs e comunicação orientada a decisão |
+| `consulting/` | Produtificação comercial pessoal, separada da policy e do handbook |
+| `schemas/` | Schemas JSON/YAML para registros estruturados |
 | `controls/` | Biblioteca de controles mapeando policy para implementações |
-| `templates/` | Modelos de auto-avaliação, checklist e sunset |
-| `examples/` | Exemplos práticos e case studies |
+| `templates/` | Modelos canônicos de implantação, assessment e evidência |
+| `examples/` | Exemplos fictícios, sanitizados e verificáveis |
+| `specs/` | Mudanças materiais com requisitos e critérios de aceite |
 
 ## Antes de criar ou alterar conteúdo
 
@@ -56,12 +65,18 @@ O agente deve:
 - Não apagar ADRs rejeitadas ou substituídas.
 - Ao mudar uma decisão aceita: criar nova ADR, atualizar as referências cruzadas e o índice.
 
-## Regras de policy
+## Regras de policy e neutralidade
 
 - O documento principal de policy em `docs/governance/` é o artefato mais sensível.
+- A policy modular é a fonte canônica em evolução; versões anteriores são apenas histórico preservado.
 - Qualquer modificação deve ser revisada antes de merge.
 - Alterações de policy devem incluir changelog entry explicando o motivo.
 - Versões antigas da policy devem ser preservadas, nunca reescritas.
+- Guidance, patterns, backlog e estudos de caso não podem ser apresentados como policy adotada.
+- O núcleo e o visual principal devem permanecer vendor-neutral.
+- Fornecedores pertencem somente a fontes, mappings, assessments ou estudos de caso opcionais com limitações explícitas; nunca são componentes necessários.
+- A camada `consulting/` pode definir packaging e pricing, mas não pode redefinir policy, controls ou decision gates.
+- Relato institucional não prova causalidade, ROI, compliance ou efetividade independente.
 
 ## Metadados
 

@@ -1,0 +1,304 @@
+{
+  "schemaVersion": "1.0",
+  "methodVersion": "1.0",
+  "assessmentId": "example-enterprise-ai-governance-2026q3",
+  "scope": {
+    "organization": "Example Organization",
+    "included": [
+      "Enterprise AI governance process",
+      "Internal agent platforms",
+      "Production lifecycle and controls"
+    ],
+    "excluded": [
+      "Consumer AI tools outside corporate accounts",
+      "Statutory legal compliance opinion"
+    ],
+    "evidenceCutoff": "2026-08-01"
+  },
+  "assessedAt": "2026-08-09",
+  "assessor": {
+    "name": "Example Assessor",
+    "role": "AI Governance Advisor",
+    "organization": "Example Advisory",
+    "mode": "facilitated-assessment",
+    "conflicts": []
+  },
+  "sampling": {
+    "method": "stratified",
+    "populationDescription": "Forty in-scope AI initiatives across internal platforms and lifecycle states.",
+    "populationSize": 40,
+    "sampleSize": 24,
+    "rationale": "The fictitious sample covers every platform, all four risk tiers and both build-time and runtime evidence.",
+    "limitations": [
+      "The sample is fictitious and does not establish statistical representativeness.",
+      "Consumer tools and statutory legal conclusions are outside scope."
+    ]
+  },
+  "evidenceRegister": [
+    {
+      "id": "EV-STRATEGY-001",
+      "title": "Example portfolio review minutes",
+      "type": "process-record",
+      "reference": "urn:example:evidence:portfolio-review",
+      "observedAt": "2026-07-15",
+      "collectedBy": "Example Assessor",
+      "scope": "Strategy and value",
+      "limitations": ["Outcomes were recorded for only part of the portfolio."]
+    },
+    {
+      "id": "EV-OPERATING-001",
+      "title": "Example governance charter and RACI walkthrough",
+      "type": "walkthrough",
+      "reference": "urn:example:evidence:governance-raci",
+      "observedAt": "2026-07-16",
+      "collectedBy": "Example Assessor",
+      "scope": "Operating model",
+      "limitations": ["Run Authority was not formally approved."]
+    },
+    {
+      "id": "EV-REGISTRY-001",
+      "title": "Example platform inventory sample",
+      "type": "sample",
+      "reference": "urn:example:evidence:platform-inventories",
+      "observedAt": "2026-07-18",
+      "collectedBy": "Example Assessor",
+      "scope": "Registry and lifecycle",
+      "limitations": ["Inventories were not reconciled across platforms."]
+    },
+    {
+      "id": "EV-IDENTITY-001",
+      "title": "Example identity standard and account sample",
+      "type": "sample",
+      "reference": "urn:example:evidence:identity-sample",
+      "observedAt": "2026-07-19",
+      "collectedBy": "Example Assessor",
+      "scope": "Identity and access",
+      "limitations": ["Shared service accounts remained in the sample."]
+    },
+    {
+      "id": "EV-DATA-001",
+      "title": "Example data classification and connector walkthrough",
+      "type": "walkthrough",
+      "reference": "urn:example:evidence:data-connectors",
+      "observedAt": "2026-07-20",
+      "collectedBy": "Example Assessor",
+      "scope": "Data and connectors",
+      "limitations": ["Connector gates were not common across platforms."]
+    },
+    {
+      "id": "EV-TOOLS-001",
+      "title": "Example tool allowlist sample",
+      "type": "sample",
+      "reference": "urn:example:evidence:tool-allowlists",
+      "observedAt": "2026-07-21",
+      "collectedBy": "Example Assessor",
+      "scope": "Tools, APIs and MCP",
+      "limitations": ["Coverage was low and provenance was inconsistent."]
+    },
+    {
+      "id": "EV-RISK-001",
+      "title": "Example risk and Responsible AI assessment sample",
+      "type": "sample",
+      "reference": "urn:example:evidence:risk-rai",
+      "observedAt": "2026-07-22",
+      "collectedBy": "Example Assessor",
+      "scope": "Risk and Responsible AI",
+      "limitations": ["Tiering and impact assessment were not integrated."]
+    },
+    {
+      "id": "EV-EVAL-001",
+      "title": "Example evaluation and release reports",
+      "type": "test",
+      "reference": "urn:example:evidence:evaluation-release",
+      "observedAt": "2026-07-23",
+      "collectedBy": "Example Assessor",
+      "scope": "Evaluations and release",
+      "limitations": ["Thresholds varied by team."]
+    },
+    {
+      "id": "EV-OPS-001",
+      "title": "Example runtime dashboard and containment walkthrough",
+      "type": "walkthrough",
+      "reference": "urn:example:evidence:runtime-operations",
+      "observedAt": "2026-07-24",
+      "collectedBy": "Example Assessor",
+      "scope": "Auditability and operations",
+      "limitations": ["Correlation and quarantine were not end-to-end."]
+    },
+    {
+      "id": "EV-ADOPTION-001",
+      "title": "Example training and support process records",
+      "type": "process-record",
+      "reference": "urn:example:evidence:adoption-support",
+      "observedAt": "2026-07-25",
+      "collectedBy": "Example Assessor",
+      "scope": "Adoption and support",
+      "limitations": ["Discovery and support outcomes were not measured consistently."]
+    }
+  ],
+  "dimensions": {
+    "strategyValue": {
+      "score": 2,
+      "confidence": "medium",
+      "confidenceRationale": "A portfolio process was observed, but outcome baselines covered only part of the population.",
+      "coverage": 70,
+      "coverageBasis": "Seventeen of twenty-four sampled initiatives had a recorded business baseline.",
+      "evidenceRefs": ["EV-STRATEGY-001"],
+      "gaps": ["Outcomes não são medidos de forma consistente"],
+      "rationale": "Ownership and portfolio review were defined, while consistent outcome measurement was not demonstrated.",
+      "target": 3,
+      "owner": "Example Strategy Owner"
+    },
+    "operatingModel": {
+      "score": 2,
+      "confidence": "medium",
+      "confidenceRationale": "Charter, RACI and walkthroughs supported the defined process, but Run Authority approval remained incomplete and no corroborating operating test was available.",
+      "coverage": 80,
+      "coverageBasis": "The walkthrough covered all central forums and four of five domain authorities.",
+      "evidenceRefs": ["EV-OPERATING-001"],
+      "gaps": ["Run Authority não está formalizada"],
+      "rationale": "Decision forums and responsibilities existed, but runtime containment authority remained incomplete.",
+      "target": 3,
+      "owner": "Example Governance Owner"
+    },
+    "registryLifecycle": {
+      "score": 1,
+      "confidence": "high",
+      "confidenceRationale": "Multiple inventory sources consistently demonstrated fragmentation and missing reconciliation.",
+      "coverage": 45,
+      "coverageBasis": "Eleven of twenty-four sampled initiatives appeared in a reconciled inventory view.",
+      "evidenceRefs": ["EV-REGISTRY-001"],
+      "gaps": ["Inventários não são reconciliados", "Attestation não expira"],
+      "rationale": "Inventories existed in isolated systems without a common lifecycle or reliable attestation.",
+      "target": 3,
+      "owner": "Example Registry Owner"
+    },
+    "identityAccess": {
+      "score": 2,
+      "confidence": "medium",
+      "confidenceRationale": "Standards and account records were available, but the sample exposed shared identities.",
+      "coverage": 60,
+      "coverageBasis": "Fourteen of twenty-four sampled initiatives used a traceable workload identity.",
+      "evidenceRefs": ["EV-IDENTITY-001"],
+      "gaps": ["Service accounts compartilhadas permanecem"],
+      "rationale": "Identity requirements were defined and partially implemented, without consistent least-privilege evidence.",
+      "target": 3,
+      "owner": "Example Identity Owner"
+    },
+    "dataConnectors": {
+      "score": 1,
+      "confidence": "medium",
+      "confidenceRationale": "Classification policy was available, while connector implementation evidence was incomplete.",
+      "coverage": 50,
+      "coverageBasis": "Twelve of twenty-four sampled initiatives had owner and classification for every connector.",
+      "evidenceRefs": ["EV-DATA-001"],
+      "gaps": ["Data contracts e connector gates não são comuns"],
+      "rationale": "Policies existed, but operational data contracts and connector gates were not consistently demonstrated.",
+      "target": 3,
+      "owner": "Example Data Owner"
+    },
+    "toolsMcp": {
+      "score": 1,
+      "confidence": "low",
+      "confidenceRationale": "Only local allowlists were available and the sample did not cover every tool chain.",
+      "coverage": 35,
+      "coverageBasis": "Eight of twenty-four sampled initiatives had complete tool provenance and ownership records.",
+      "evidenceRefs": ["EV-TOOLS-001"],
+      "gaps": ["Tool provenance e kill switch não são padronizados"],
+      "rationale": "Local controls existed without common registry, provenance, scopes or tested revocation.",
+      "target": 3,
+      "owner": "Example Platform Owner"
+    },
+    "riskResponsibleAi": {
+      "score": 2,
+      "confidence": "medium",
+      "confidenceRationale": "Assessment records were observed, but triggers and tiering differed between teams.",
+      "coverage": 65,
+      "coverageBasis": "Sixteen of twenty-four sampled initiatives had both risk and impact assessment evidence.",
+      "evidenceRefs": ["EV-RISK-001"],
+      "gaps": ["Tiering e impact assessment não estão integrados"],
+      "rationale": "Risk and Responsible AI processes were defined but not integrated into one proportional release path.",
+      "target": 3,
+      "owner": "Example Risk Owner"
+    },
+    "evaluationsRelease": {
+      "score": 2,
+      "confidence": "medium",
+      "confidenceRationale": "Evaluation reports existed for the sample, with inconsistent thresholds and regression depth.",
+      "coverage": 55,
+      "coverageBasis": "Thirteen of twenty-four sampled initiatives had versioned evaluation and release records.",
+      "evidenceRefs": ["EV-EVAL-001"],
+      "gaps": ["Thresholds e regression suites variam por equipe"],
+      "rationale": "Evaluation and release practices were defined, while consistent measured execution was not demonstrated.",
+      "target": 3,
+      "owner": "Example Quality Owner"
+    },
+    "auditOperations": {
+      "score": 1,
+      "confidence": "medium",
+      "confidenceRationale": "Dashboards and walkthroughs exposed fragmented correlation and incomplete containment paths.",
+      "coverage": 50,
+      "coverageBasis": "Twelve of twenty-four sampled initiatives linked material runtime signals to an accountable action.",
+      "evidenceRefs": ["EV-OPS-001"],
+      "gaps": ["Correlation e quarantine não são end-to-end"],
+      "rationale": "Operational signals existed, but action, containment and evidence continuity were not consistently connected.",
+      "target": 3,
+      "owner": "Example Run Owner"
+    },
+    "adoptionSupport": {
+      "score": 2,
+      "confidence": "medium",
+      "confidenceRationale": "Training and support records were available, but outcomes and discovery were only partially measured.",
+      "coverage": 70,
+      "coverageBasis": "Seventeen of twenty-four sampled initiatives had a published support path and owner.",
+      "evidenceRefs": ["EV-ADOPTION-001"],
+      "gaps": ["Discovery e support outcomes não são medidos"],
+      "rationale": "Enablement and support processes were defined without consistent outcome and feedback evidence.",
+      "target": 3,
+      "owner": "Example Adoption Owner"
+    }
+  },
+  "priorities": [
+    {
+      "severity": "critical",
+      "outcome": "Formalizar Run Authority e containment para agents state-changing.",
+      "owner": "Example Governance Owner",
+      "targetDate": "2026-09-30",
+      "acceptanceCriteria": [
+        "Authority matrix aprovada",
+        "Quarantine e rollback exercitados",
+        "Runbooks vinculados a signals"
+      ]
+    },
+    {
+      "severity": "high",
+      "outcome": "Reconciliar registry e blueprints do escopo de produção.",
+      "owner": "Example Registry Owner",
+      "targetDate": "2026-10-31",
+      "acceptanceCriteria": [
+        "Coverage declarado",
+        "Owners confirmados",
+        "Missing evidence visível"
+      ]
+    }
+  ],
+  "review": {
+    "reviewer": {
+      "name": "Example Reviewer",
+      "role": "Enterprise Risk Reviewer",
+      "organization": "Example Organization"
+    },
+    "reviewedAt": "2026-08-09",
+    "disposition": "accepted-with-conditions",
+    "conflictsChecked": true,
+    "comments": [
+      "Low-confidence dimensions require additional evidence before investment decisions.",
+      "This review is not an audit, certification or independent assurance conclusion."
+    ]
+  },
+  "limitations": [
+    "Exemplo fictício; não representa uma organização real.",
+    "Coverage e scores servem apenas para demonstrar o schema e o método.",
+    "Nenhuma conclusão jurídica, certificação ou assurance independente pode ser derivada deste arquivo."
+  ]
+}

@@ -1,0 +1,1228 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "1.0",
+  "title": "AI Agent Governance Framework — Control Catalog",
+  "lastReviewed": "2026-08-09",
+  "controls": [
+    {
+      "id": "AGF-ORG-001",
+      "title": "Mandato e ownership",
+      "domain": "organization",
+      "type": [
+        "preventive"
+      ],
+      "statement": "Toda capacidade de IA deve possuir finalidade, business owner, technical owner e autoridade de governança antes de produção.",
+      "rationale": "Sem mandato e ownership não existe accountability legítima para risco, valor, operação ou sunset.",
+      "ownerRole": "AI Governance Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Registrar purpose e owners no registry.",
+        "Aprovar governance charter e escalation."
+      ],
+      "evidence": [
+        "Governance charter",
+        "Registry ownership record"
+      ],
+      "metrics": [
+        "Percentual com owners válidos",
+        "Ownerless agents"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-ORG-002",
+      "title": "Decision rights e segregation",
+      "domain": "organization",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Decisões de build, release, risk acceptance, containment e reactivation devem possuir authorities e segregation proporcionais ao tier.",
+      "rationale": "A mesma pessoa ou equipe não deve construir, autoaprovar e aceitar isoladamente risco material.",
+      "ownerRole": "AI Governance Council",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Publicar RACI e decision matrix.",
+        "Aplicar reviewer independente nos tiers aplicáveis."
+      ],
+      "evidence": [
+        "RACI",
+        "Decision log",
+        "Reviewer identity"
+      ],
+      "metrics": [
+        "Decisões sem authority",
+        "Segregation exceptions"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-ORG-003",
+      "title": "Exceção com expiração",
+      "domain": "organization",
+      "type": [
+        "preventive",
+        "corrective"
+      ],
+      "statement": "Toda exceção deve registrar requisito, rationale, owner, compensating controls, expiry e review trigger.",
+      "rationale": "Exceção sem expiração se torna alteração de policy não governada.",
+      "ownerRole": "AI Governance Council",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Usar workflow versionado de waiver.",
+        "Alertar owner antes do vencimento e bloquear extensão automática."
+      ],
+      "evidence": [
+        "Waiver record",
+        "Compensating-control evidence",
+        "Expiry decision"
+      ],
+      "metrics": [
+        "Exceções vencidas",
+        "Exceções recorrentes"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-REG-001",
+      "title": "Registry e ownership",
+      "domain": "registry",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Todo agente deve possuir ID estável, owners, lifecycle status, tier, current version e evidence links em registry reconciliável.",
+      "rationale": "Visibilidade acionável é pré-requisito para approval, operação, attestation e sunset.",
+      "ownerRole": "Registry Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Validar records contra schema.",
+        "Reconciliar fontes de plataforma e declaração humana."
+      ],
+      "evidence": [
+        "Registry record",
+        "Reconciliation report"
+      ],
+      "metrics": [
+        "Registry coverage",
+        "Ownerless ou stale records"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-REG-002",
+      "title": "Blueprint e mudança material",
+      "domain": "registry",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada versão deve possuir blueprint de modelos, dados, identidade, tools, permissions, trust boundaries e runtime; mudanças materiais reabrem gates.",
+      "rationale": "Registry sem arquitetura não explica blast radius nem permite review proporcional.",
+      "ownerRole": "Technical Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Versionar blueprint.",
+        "Detectar changes em model, data, identity, tool, exposure e autonomy."
+      ],
+      "evidence": [
+        "Blueprint",
+        "Material-change diff",
+        "Reassessment decision"
+      ],
+      "metrics": [
+        "Versões sem blueprint",
+        "Mudanças não declaradas"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-REG-003",
+      "title": "Attestation e sunset",
+      "domain": "registry",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Aprovação deve expirar; owners devem reconfirmar finalidade, risco, controls, uso e valor ou executar sunset completo.",
+      "rationale": "Agents e privilégios tornam-se órfãos quando aprovação é tratada como permanente.",
+      "ownerRole": "Business Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Definir cadence por tier.",
+        "Revogar identity, connectors e discovery no sunset."
+      ],
+      "evidence": [
+        "Attestation",
+        "Sunset plan",
+        "Revocation proof"
+      ],
+      "metrics": [
+        "Attestations expiradas",
+        "Tempo para sunset",
+        "Órfãos após retirement"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-IDN-001",
+      "title": "Workload identity atribuível",
+      "domain": "identity",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Agentes em produção devem usar identidade apropriada e atribuível; shared accounts exigem exceção temporária.",
+      "rationale": "Identidade genérica reduz atribuição, amplia blast radius e dificulta revogação.",
+      "ownerRole": "Identity Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Provisionar workload identity.",
+        "Correlacionar user, agent e delegated subject quando aplicável."
+      ],
+      "evidence": [
+        "Identity record",
+        "Authentication configuration",
+        "Correlation logs"
+      ],
+      "metrics": [
+        "Shared accounts",
+        "Actions sem agent identity"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-IDN-002",
+      "title": "Least privilege e autorização",
+      "domain": "identity",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Scopes devem ser derivados de tarefas aprovadas, limitados por finalidade, ambiente e duração e testados com casos positivos e negativos.",
+      "rationale": "Autenticação forte não impede excessive agency quando autorização é ampla.",
+      "ownerRole": "Identity Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Manter permission matrix.",
+        "Usar JIT ou bounded tokens nos tiers altos."
+      ],
+      "evidence": [
+        "Permission matrix",
+        "Role/scope binding",
+        "Positive/negative tests"
+      ],
+      "metrics": [
+        "Scopes não usados",
+        "Authorization denials",
+        "Standing privileges"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-IDN-003",
+      "title": "Secrets e revogação",
+      "domain": "identity",
+      "type": [
+        "preventive",
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Secrets devem permanecer em storage gerenciado e identities/tokens devem ser revogáveis no incident, change ou sunset.",
+      "rationale": "Credenciais embutidas ou persistentes impedem contenção confiável.",
+      "ownerRole": "Identity Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Bloquear secrets em prompt e código.",
+        "Testar revocation e orphan scan."
+      ],
+      "evidence": [
+        "Secret-scan result",
+        "Revocation drill",
+        "Orphan report"
+      ],
+      "metrics": [
+        "Secrets detectados",
+        "Tempo de revogação",
+        "Orphan identities"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-DAT-001",
+      "title": "Data contract e owner",
+      "domain": "data",
+      "type": [
+        "preventive"
+      ],
+      "statement": "Toda fonte, index, memory ou connector deve possuir owner, purpose, classification, provenance, quality, access, retention e region definidos.",
+      "rationale": "Disponibilidade técnica não demonstra adequação à finalidade de IA.",
+      "ownerRole": "Data Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Criar data contract.",
+        "Obter approval do data owner antes do connector."
+      ],
+      "evidence": [
+        "Data contract",
+        "Owner approval",
+        "Classification record"
+      ],
+      "metrics": [
+        "Connectors sem contract",
+        "Sources sem owner"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-DAT-002",
+      "title": "Autorização e minimização",
+      "domain": "data",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Retrieval deve aplicar autorização antes de retornar conteúdo e limitar dados ao necessário para finalidade e user context.",
+      "rationale": "Filtrar apenas a resposta permite acesso indevido durante retrieval e agent reasoning.",
+      "ownerRole": "Data Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Aplicar pre-retrieval authorization.",
+        "Testar segregação entre users, groups e tenants."
+      ],
+      "evidence": [
+        "Access policy",
+        "Leakage tests",
+        "DLP results"
+      ],
+      "metrics": [
+        "Unauthorized retrieval attempts",
+        "Leakage failures",
+        "Dados não necessários acessados"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-DAT-003",
+      "title": "Provenance, retenção e exclusão",
+      "domain": "data",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Fontes, outputs, memories, indexes e traces devem preservar provenance e cumprir retention, correction e deletion aplicáveis.",
+      "rationale": "Stores derivados podem sobreviver à fonte e perpetuar dados incorretos ou proibidos.",
+      "ownerRole": "Data Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Versionar lineage e source IDs.",
+        "Testar propagação de correction/deletion."
+      ],
+      "evidence": [
+        "Lineage record",
+        "Retention policy",
+        "Deletion test"
+      ],
+      "metrics": [
+        "Stale indexes",
+        "Deletion failures",
+        "Records sem provenance"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-TOL-001",
+      "title": "Tool/MCP registry e provenance",
+      "domain": "tools",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Toda tool, API ou MCP server deve possuir owner, version/provenance, operations, data flow, scopes, side effects e approval validity registrados.",
+      "rationale": "Descriptions e discovery dinâmico não constituem base de confiança.",
+      "ownerRole": "Tool Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Manter tool registry/allowlist.",
+        "Detectar version e capability changes."
+      ],
+      "evidence": [
+        "Tool record",
+        "Provenance/version",
+        "Change report"
+      ],
+      "metrics": [
+        "Tools não registradas",
+        "Versões fora de baseline"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-TOL-002",
+      "title": "Gateway e validação de ação",
+      "domain": "tools",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Tools state-changing devem passar por enforcement que valida caller, policy, schema, arguments, destination, limits e human approval quando exigido.",
+      "rationale": "Prompt instructions não substituem autorização e validação técnica.",
+      "ownerRole": "Tool Authority",
+      "appliesToTiers": [
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Usar API/MCP gateway ou broker.",
+        "Emitir credencial limitada à ação/transação."
+      ],
+      "evidence": [
+        "Gateway policy",
+        "Allow/deny tests",
+        "Approval logs"
+      ],
+      "metrics": [
+        "Bypass calls",
+        "Denied actions",
+        "Calls sem correlation"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-TOL-003",
+      "title": "Kill switch e circuit breaker",
+      "domain": "tools",
+      "type": [
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Cada capability material deve ser revogável independentemente do agente e possuir circuit breaker para anomalia, budget ou policy breach.",
+      "rationale": "Containment dentro do agente pode falhar quando o próprio agente está comprometido.",
+      "ownerRole": "Run Authority",
+      "appliesToTiers": [
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Implementar revogação no gateway/IAM.",
+        "Executar drill de kill switch e recovery."
+      ],
+      "evidence": [
+        "Kill-switch configuration",
+        "Drill result",
+        "Reactivation decision"
+      ],
+      "metrics": [
+        "Tempo para revogar",
+        "Failed containment",
+        "Reactivation sem regression"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-SEC-001",
+      "title": "Threat model do sistema agentic",
+      "domain": "security",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "O blueprint deve possuir threat model cobrindo prompts, retrieval, memory, identity, tools, supply chain, egress e multi-agent trust.",
+      "rationale": "Model-only review ignora caminhos que transformam saída em efeito operacional.",
+      "ownerRole": "Security Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Mapear assets, trust boundaries e misuse cases.",
+        "Revisar após material change ou incident."
+      ],
+      "evidence": [
+        "Threat model",
+        "Misuse cases",
+        "Residual risk"
+      ],
+      "metrics": [
+        "Coverage de threat models",
+        "Incidentes fora do model"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-SEC-002",
+      "title": "Sandbox, egress e supply chain",
+      "domain": "security",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Code execution e components externos devem usar sandbox, resource limits, egress control e provenance/versioning compatíveis com o tier.",
+      "rationale": "Agents podem transformar dependency compromise ou prompt injection em execução e exfiltration.",
+      "ownerRole": "Security Authority",
+      "appliesToTiers": [
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Isolar filesystem/process/network.",
+        "Verificar model, prompt, package e MCP provenance."
+      ],
+      "evidence": [
+        "Sandbox policy",
+        "Egress tests",
+        "Dependency/provenance report"
+      ],
+      "metrics": [
+        "Egress violations",
+        "Assets sem provenance",
+        "Resource-limit events"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-SEC-003",
+      "title": "Adversarial testing e regression",
+      "domain": "security",
+      "type": [
+        "detective",
+        "corrective"
+      ],
+      "statement": "Testes devem cobrir direct/indirect injection, tool poisoning, data exfiltration, authorization bypass e chain failure; incidentes viram regressions.",
+      "rationale": "Testes felizes não demonstram resistência a abuso ou comportamento emergente.",
+      "ownerRole": "Security Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar component, chain e system tests.",
+        "Adicionar escaped incidents à regression suite."
+      ],
+      "evidence": [
+        "Adversarial test results",
+        "Red-team report",
+        "Regression update"
+      ],
+      "metrics": [
+        "Attack success rate",
+        "Escaped security defects",
+        "Recurrence"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-RSK-001",
+      "title": "Tiering e red flags",
+      "domain": "risk",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada agente deve ser classificado por finalidade, alcance, dados, autonomia, capability, interconectividade, reversibilidade, exposure e affected parties.",
+      "rationale": "Um único score ou user count não representa blast radius e contexto.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Aplicar dimensions versionadas.",
+        "Elevar tier por red flags independentemente da média."
+      ],
+      "evidence": [
+        "Risk assessment",
+        "Tier rationale",
+        "Red-flag record"
+      ],
+      "metrics": [
+        "Tier distribution",
+        "Overrides",
+        "Reclassifications"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-RSK-002",
+      "title": "Assessment e residual risk",
+      "domain": "risk",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Assessments aplicáveis devem mapear impacts, threats, controls, effectiveness, uncertainty e residual risk para authority compatível.",
+      "rationale": "Control presence não equivale a control effectiveness nem elimina risco residual.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Integrar impact, security, privacy e RAI assessments.",
+        "Registrar acceptance, conditions ou rejection."
+      ],
+      "evidence": [
+        "Assessment package",
+        "Control evidence",
+        "Residual-risk decision"
+      ],
+      "metrics": [
+        "Risks sem owner",
+        "Acceptance sem authority",
+        "Controls sem evidence"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-RSK-003",
+      "title": "Reavaliação contínua",
+      "domain": "risk",
+      "type": [
+        "detective",
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Mudança material, incident, drift, nova obrigação ou exception expiry deve reabrir classificação e controls proporcionais.",
+      "rationale": "Risco de sistema dinâmico não permanece estável após release.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Configurar change triggers.",
+        "Ligar runtime signals a reassessment workflow."
+      ],
+      "evidence": [
+        "Change event",
+        "Reclassification history",
+        "Updated control mapping"
+      ],
+      "metrics": [
+        "Changes sem reassessment",
+        "Tempo para reclassificar"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-RAI-001",
+      "title": "Impact assessment",
+      "domain": "responsible-ai",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Sistemas com impacto material em pessoas devem avaliar intended use, affected parties, harms/benefits, data, slices, transparency, oversight e redress.",
+      "rationale": "Princípios abstratos não identificam distribuição de impactos no contexto real.",
+      "ownerRole": "Responsible AI Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar assessment proporcional.",
+        "Registrar limitations e residual impact."
+      ],
+      "evidence": [
+        "Impact assessment",
+        "Affected-party map",
+        "Residual-impact decision"
+      ],
+      "metrics": [
+        "Assessments aplicáveis concluídos",
+        "Findings e remediation time"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-RAI-002",
+      "title": "Human accountability e contestação",
+      "domain": "responsible-ai",
+      "type": [
+        "preventive",
+        "responsive"
+      ],
+      "statement": "Ações materiais devem possuir accountability boundary, oversight significativo, authority humana e contest/correction path quando aplicável.",
+      "rationale": "Humano nominal ou botão genérico não previne automation bias nem assegura redress.",
+      "ownerRole": "Business Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Definir recommend/prepare/execute/prohibit.",
+        "Testar approval UX, override e contestation."
+      ],
+      "evidence": [
+        "Boundary matrix",
+        "Approval logs",
+        "Contest records"
+      ],
+      "metrics": [
+        "Rubber-stamp rate",
+        "Overrides",
+        "Correction time"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-RAI-003",
+      "title": "Transparência, fairness e monitoramento",
+      "domain": "responsible-ai",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Limites, papel da IA e canais de suporte devem ser comunicados; performance e harms devem ser avaliados por slices relevantes e monitorados.",
+      "rationale": "Métrica agregada e disclosure genérico podem esconder falha material ou impacto desigual.",
+      "ownerRole": "Responsible AI Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Criar transparency artifacts.",
+        "Definir slices, thresholds e remediation actions."
+      ],
+      "evidence": [
+        "User notice",
+        "Slice evaluation",
+        "Monitoring report"
+      ],
+      "metrics": [
+        "Performance disparities",
+        "Complaints",
+        "Limitations não comunicadas"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-EVA-001",
+      "title": "Evaluation strategy e thresholds",
+      "domain": "evaluation",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada agent version deve possuir intended use, scenarios, metrics, datasets, thresholds, negative cases e promotion/rollback criteria.",
+      "rationale": "Demo ou média genérica não demonstra readiness para o contexto e tier.",
+      "ownerRole": "Evaluation Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Versionar evaluation plan e test sets.",
+        "Definir red flags binárias quando tolerância é zero."
+      ],
+      "evidence": [
+        "Evaluation plan",
+        "Dataset provenance",
+        "Raw results"
+      ],
+      "metrics": [
+        "Critical-scenario coverage",
+        "Pass/fail por slice",
+        "Threshold exceptions"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-EVA-002",
+      "title": "Release evidence gate",
+      "domain": "evaluation",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Release deve depender de evidence package completo, findings tratados, residual risk decidido, run readiness e approvals do tier.",
+      "rationale": "Approval sem raw evidence transforma governance em assinatura.",
+      "ownerRole": "Design Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Validar package contra baseline do tier.",
+        "Bloquear missing evidence ou registrar condition explícita."
+      ],
+      "evidence": [
+        "Release package",
+        "Gate decision",
+        "Conditions/expiry"
+      ],
+      "metrics": [
+        "Packages incompletos",
+        "Devoluções",
+        "Agents com evidence expirada"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-EVA-003",
+      "title": "Runtime evaluation e regression",
+      "domain": "evaluation",
+      "type": [
+        "detective",
+        "corrective"
+      ],
+      "statement": "Qualidade, safety, policy e tool outcomes devem ser amostrados em runtime; incidents e failures devem atualizar regression suites.",
+      "rationale": "Pre-release evidence perde validade com drift, mudança e uso real.",
+      "ownerRole": "Evaluation Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar runtime sampling e drift checks.",
+        "Converter failures em tests antes da reactivation."
+      ],
+      "evidence": [
+        "Runtime evaluation",
+        "Drift report",
+        "Regression update"
+      ],
+      "metrics": [
+        "Escaped defects",
+        "Regression recurrence",
+        "Time-to-evaluate change"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-AUD-001",
+      "title": "Correlation e version traceability",
+      "domain": "audit",
+      "type": [
+        "detective"
+      ],
+      "statement": "Ações devem correlacionar user/delegated subject, agent ID/version, model, data source, tool, target, policy decision e outcome.",
+      "rationale": "Sem correlation não é possível reconstruir chain, atribuir efeito ou investigar blast radius.",
+      "ownerRole": "Auditability Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Definir event envelope comum.",
+        "Preservar version/hash e correlation IDs."
+      ],
+      "evidence": [
+        "Event schema",
+        "Sample correlated trace",
+        "Gap report"
+      ],
+      "metrics": [
+        "Actions sem correlation",
+        "Events sem version"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-AUD-002",
+      "title": "Evidence package e integridade",
+      "domain": "audit",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Decisões, tests e configurations devem ser versionados, tamper-evident e ligados ao agent/version; missing, not-applicable e passed devem ser distintos.",
+      "rationale": "Evidence mutável ou dispersa impede review reproduzível.",
+      "ownerRole": "Auditability Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Usar manifest e hashes.",
+        "Segregar author, reviewer e release authority conforme tier."
+      ],
+      "evidence": [
+        "Evidence manifest",
+        "Hashes/signature",
+        "Reviewer identity"
+      ],
+      "metrics": [
+        "Broken links",
+        "Missing artifacts",
+        "Changes após approval"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-AUD-003",
+      "title": "Acesso, retenção e export",
+      "domain": "audit",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Logs e evidências devem ter minimização, role-based access, retention, legal hold, deletion e export testados.",
+      "rationale": "Logar tudo pode criar risco de privacy sem produzir evidence útil.",
+      "ownerRole": "Records/Audit Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Classificar events e payloads.",
+        "Testar restore/export e deletion."
+      ],
+      "evidence": [
+        "Retention policy",
+        "Access logs",
+        "Export/deletion test"
+      ],
+      "metrics": [
+        "Unauthorized log access",
+        "Retention failures",
+        "Time to reconstruct incident"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-OPS-001",
+      "title": "Observabilidade orientada a ação",
+      "domain": "operations",
+      "type": [
+        "detective",
+        "responsive"
+      ],
+      "statement": "Cada signal material deve possuir threshold, owner, severity, decision e action definidos.",
+      "rationale": "Dashboard sem remediação não reduz risco nem assegura resposta.",
+      "ownerRole": "Run Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Mapear signals a runbooks e containment.",
+        "Monitorar agent, identity, data e tool chain."
+      ],
+      "evidence": [
+        "Signal catalog",
+        "Dashboard/runbook mapping",
+        "Alert tests"
+      ],
+      "metrics": [
+        "Alerts sem action",
+        "MTTD",
+        "MTTDecide"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-OPS-002",
+      "title": "Quarantine, rollback e reactivation",
+      "domain": "operations",
+      "type": [
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Run Authority deve poder conter agent, identity, tool ou connector, preservar evidence e exigir cause/regression antes de reactivation.",
+      "rationale": "Detecção sem containment permite propagação; reactivation sem prova repete falha.",
+      "ownerRole": "Run Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Implementar containment ladder.",
+        "Executar drills de quarantine e rollback."
+      ],
+      "evidence": [
+        "Runbooks",
+        "Drill/incident record",
+        "Reactivation decision"
+      ],
+      "metrics": [
+        "MTTC",
+        "Failed containment",
+        "Recurrence"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-OPS-003",
+      "title": "Change, incident e attestation loop",
+      "domain": "operations",
+      "type": [
+        "detective",
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Material changes e incidents devem atualizar registry, risk, controls, evaluations, runbooks e attestation.",
+      "rationale": "Correção local sem learning loop preserva causa sistêmica.",
+      "ownerRole": "Run Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Integrar change/incident workflows.",
+        "Revisar controls e portfolio após eventos materiais."
+      ],
+      "evidence": [
+        "Change record",
+        "Post-incident review",
+        "Attestation update"
+      ],
+      "metrics": [
+        "Changes sem gate",
+        "Repeat incidents",
+        "Expired attestations"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-ADP-001",
+      "title": "Discovery, guidance e suporte",
+      "domain": "adoption",
+      "type": [
+        "preventive",
+        "responsive"
+      ],
+      "statement": "Agentes publicados devem possuir catalog entry, intended/prohibited use, limitations, support owner e escalation path.",
+      "rationale": "Publicação sem discovery e suporte aumenta duplicidade, misuse e tempo de resposta.",
+      "ownerRole": "Adoption Lead",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Publicar entry versionada.",
+        "Definir support tiers e escalation."
+      ],
+      "evidence": [
+        "Catalog entry",
+        "Guidance",
+        "Support runbook"
+      ],
+      "metrics": [
+        "Discovery-to-use",
+        "Duplicate creation",
+        "Support resolution time"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-ADP-002",
+      "title": "Competência e feedback loop",
+      "domain": "adoption",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Builders, reviewers, users e operators devem receber enablement por persona; feedback deve ser triado em decisions e backlog.",
+      "rationale": "Treinamento genérico e feedback sem owner não mudam comportamento nem controls.",
+      "ownerRole": "Adoption Lead",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Criar learning paths e paved road.",
+        "Medir competence, misuse e feedback-to-decision."
+      ],
+      "evidence": [
+        "Learning assets",
+        "Competence record",
+        "Feedback backlog"
+      ],
+      "metrics": [
+        "Training competence",
+        "Misuse reports",
+        "Feedback cycle time"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-VAL-001",
+      "title": "Business case e baseline",
+      "domain": "value",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada agente deve possuir problema, owner, alternativa, baseline ou plano para obtê-lo, value hypothesis, costs e sunset criteria.",
+      "rationale": "Sem baseline e hipótese explícita, uso pode ser apresentado indevidamente como valor.",
+      "ownerRole": "Business Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Registrar business case no portfolio.",
+        "Definir metrics e data lineage antes de scale."
+      ],
+      "evidence": [
+        "Business case",
+        "Baseline",
+        "Metric definitions"
+      ],
+      "metrics": [
+        "Itens sem baseline",
+        "Value hypotheses sem owner"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-VAL-002",
+      "title": "Métricas separadas",
+      "domain": "value",
+      "type": [
+        "detective"
+      ],
+      "statement": "Criação, discovery, adoção, uso, qualidade, eficiência, outcome e impacto devem ser medidos separadamente.",
+      "rationale": "Agregação prematura cria métricas de vaidade e claims de ROI frágeis.",
+      "ownerRole": "Business Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Manter metric dictionary.",
+        "Incluir quality e support cost em análises de eficiência."
+      ],
+      "evidence": [
+        "Metric dictionary",
+        "Outcome report",
+        "Cost model"
+      ],
+      "metrics": [
+        "Agents com uso sem outcome",
+        "Claims sem baseline"
+      ],
+      "automation": "mixed"
+    },
+    {
+      "id": "AGF-VAL-003",
+      "title": "Portfolio review e decisão",
+      "domain": "value",
+      "type": [
+        "detective",
+        "corrective"
+      ],
+      "statement": "O portfólio deve revisar ownership, risco, uso, qualidade, outcome, custo, duplicidade e concentração e decidir manter, expandir, corrigir, restringir ou aposentar.",
+      "rationale": "Sunk cost e volume de criação perpetuam agent sprawl e risco órfão.",
+      "ownerRole": "Portfolio Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar review periódico.",
+        "Vincular decisão a attestation e sunset workflow."
+      ],
+      "evidence": [
+        "Portfolio review",
+        "Decision record",
+        "Sunset/reinvestment evidence"
+      ],
+      "metrics": [
+        "Inactive agents",
+        "Duplicates",
+        "Time-to-sunset"
+      ],
+      "automation": "mixed"
+    }
+  ]
+}

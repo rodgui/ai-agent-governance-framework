@@ -1,17 +1,13 @@
-# Readme
-
 # Specifications
 
-Use specs para implementação, automação, laboratório complexo, definição de plataforma, framework ou trabalho multi-etapas.
+Specifications registram scope, requirements, acceptance criteria, plano e validation antes de mudança material.
 
-## Estrutura
+## Especificações
 
-```text
-NNN-capability-name/
-├── spec.md
-├── plan.md
-├── tasks.md
-└── validation.md
-```
+- [`001-handbook-consulting-product`](001-handbook-consulting-product/spec.md) — productização do framework como handbook canônico e base de consultoria; publicação em formatos fica para etapa futura.
 
-Não use spec para uma nota de estudo comum ou uma pequena correção documental.
+## Lifecycle
+
+`draft → approved → in-progress → validated → completed → superseded`
+
+A aprovação de uma spec autoriza seu scope técnico/editorial; não altera policy ou risk appetite sem authority correspondente.
