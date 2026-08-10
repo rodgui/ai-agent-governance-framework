@@ -3,6 +3,7 @@
 Atalhos para artefatos usados como consulta durante design, assessment e operação.
 
 - [Glossário canônico](../../references/glossary.md)
+- [Catálogo de artefatos do programa](artifact-catalog.md)
 - [Registro de fontes](../../references/sources.md)
 - [Bibliografia](../../references/bibliography.md)
 - [Control catalog](../../controls/README.md)

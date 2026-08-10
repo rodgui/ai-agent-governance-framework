@@ -4,15 +4,29 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 ## [Unreleased]
 
+Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a release 1.1.0. Sete achados; nenhum deles havia sido fechado pela 1.1.0.
+
 ### Added
 
+- Catálogo de artefatos do programa em `docs/reference/artifact-catalog.md`, com propósito, owner típico e fase de cada artefato — o instrumento de planejamento e controle de completude que o corpus descrevia e não entregava.
+- Tabela normativa dos dez escaladores de risco, com criticidade mínima, efeito adicional e a pergunta correspondente do pre-screen.
+- Colunas "quando evoluir para assessment formal" e "efeito na aprovação" no tiering de assurance de Responsible AI.
+- Três níveis de leitura de um domínio (entender, decidir, executar) no handbook, e entrada por estágio da organização no índice.
+- Termos que o corpus passou a usar e o glossário não definia, com destaque para `admissibilidade` — dimensão criada pela ADR-0009 e até aqui sem definição canônica.
+
 ### Changed
+
+- O evidence pack de T2 declara herança de T1, como T3 e T4 já faziam.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+- O evidence pack de T1 exigia menos do que o Minimum Production Bar do mesmo tier: faltavam blueprint reduzido, referências de dados e tools, padrão de identidade aprovado, testes funcionais, rollback e aprovação de owner. O gate exigia controles cuja existência ninguém precisava demonstrar.
+- A lista normativa de red flags tinha oito itens em prosa; o guia define dez. Os dois ausentes eram os de criticidade T4.
+- Identidade, Responsible AI e operating model rotulavam tier como `baixo/moderado/alto/crítico`, anteriores à taxonomia canônica. `validate_tier_labels` passa a reprovar rótulo em prosa na primeira coluna de tabela.
 
 ### Security
 

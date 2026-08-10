@@ -14,6 +14,18 @@ related:
 
 O repositório usa documentos modulares como fonte canônica. Escolha uma jornada; não é necessário ler tudo em sequência.
 
+## Por onde começar, conforme o estágio da organização
+
+As jornadas por persona respondem "o que eu leio". Esta tabela responde antes: **por onde a organização entra**.
+
+| Estágio | Entrada recomendada | Por quê |
+|---|---|---|
+| **sem programa formal** | [brief executivo](executive/governing-agents-at-scale.md) → [decisão arquitetural](architecture/agent-or-not.md) → [descoberta do estate](registry/discovery-and-forecast.md) → [capability map](guides/capability-map.md) | não comece comprando ferramenta; comece por escopo, estate e mandato |
+| **com pilotos em andamento** | [maturity model](guides/maturity-model.md) → [gestão de riscos](risk-management/README.md) → [Minimum Production Bar](risk-management/minimum-production-bar.md) | descubra os gaps e defina o piso de controles antes de escalar o que já existe |
+| **já operando em escala** | [control catalog](../controls/README.md) → [evidence pack por tier](auditability/evidence-pack-by-tier.md) → [catálogo de artefatos](reference/artifact-catalog.md) | use os domínios como modelo de auditoria e o catálogo como índice de completude |
+
+Os únicos gates canônicos são G0–G7. O [programa de 24 semanas](guides/implementation-program-24-weeks.md), o roadmap de 90 dias e o plano de piloto são recortes adaptáveis do mesmo conjunto de gates — não programas concorrentes nem prazos de compliance.
+
 ## Jornada por persona
 
 ### Conselho, executivo ou sponsor
@@ -119,6 +131,7 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 | inventariar agentes | [Estate e registry](registry/README.md) + [descoberta e forecast](registry/discovery-and-forecast.md) + [schemas](../schemas/README.md) |
 | decidir se o caso pede um agente | [Decisão arquitetural](architecture/agent-or-not.md) + [intake](../templates/use-case-intake.md) |
 | mapear capacidades atuais e alvo | [Capability map](guides/capability-map.md) + [maturity model](guides/maturity-model.md) |
+| planejar artefatos, owners e fases | [Catálogo de artefatos](reference/artifact-catalog.md) + [programa de 24 semanas](guides/implementation-program-24-weeks.md) |
 | classificar risco e admissibilidade | [Risk-tiered governance](patterns/risk-tiered-governance.md) + [risk management](risk-management/README.md) + [Agent Risk Record](../templates/agent-risk-record.md) |
 | governar identidade e dados | [Identity](identity/README.md) + [data access](data-access/README.md) |
 | governar tools e MCP | [Tool governance](tool-governance/README.md) + [MCP gateway pattern](patterns/tool-and-mcp-gateway.md) |

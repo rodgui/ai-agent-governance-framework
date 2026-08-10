@@ -39,7 +39,9 @@ Responda `sim`, `não` ou `não sei`. **`Não sei` não é `não`** — é um ga
 
 ## Leitura do resultado
 
-- **Qualquer `sim` nas perguntas 3, 5, 6, 7, 9, 10** aciona escalador e retira o caso do fast path, independentemente do score.
+- **Escaladores.** As perguntas 3, 5, 6, 7, 8, 9 e 10 mapeiam uma a uma para [escaladores](../docs/risk-management/README.md#red-flags-e-escaladores). Duas exigem combinação: `2` com `3` (transação financeira material) e `4` com `14` (comunicação pública autônoma em escala). Qualquer escalador acionado retira o caso do fast path e aplica a criticidade mínima da tabela normativa, independentemente do score.
+- **A pergunta 1 configura o escalador de criticidade T4 apenas quando o dado restrito é enviado a provedor externo.** Registre o destino na coluna de evidência; dado restrito processado internamente é outro caso.
+- A tabela de escaladores é a norma. Este questionário é o instrumento que a coleta — se divergirem, corrija o questionário.
 - **Qualquer `sim` na pergunta 6** aciona o impact trigger screen de Responsible AI, mesmo em caso tecnicamente simples.
 - **`Não` na pergunta 15**, combinado com `sim` em 2 ou 3, é bloqueador: capacidade de ação sem contenção testável não vai a produção.
 - **`Não sei` em qualquer item** impede a conclusão da classificação. Registre owner e prazo.

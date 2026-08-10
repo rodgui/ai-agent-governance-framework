@@ -124,6 +124,7 @@ nav:
       - Implementation playbook: docs/guides/framework-implementation-playbook.md
       - Roadmap sugestivo de 90 dias: docs/guides/implementation-plan-90-days.md
       - Programa sugestivo de 24 semanas: docs/guides/implementation-program-24-weeks.md
+      - Catálogo de artefatos: docs/reference/artifact-catalog.md
       - Plano opcional de piloto: docs/guides/pilot-plan.md
       - Design patterns: docs/patterns/README.md
       - Control catalog: controls/README.md

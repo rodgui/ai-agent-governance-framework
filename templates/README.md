@@ -2,6 +2,8 @@
 
 Templates para coleta, decisão, evidence e comunicação. Quando houver schema correspondente, o documento humano deve ser convertido para um record estruturado e validado.
 
+Esta página lista os templates por finalidade. Para saber **quando** cada artefato precisa existir e sob responsabilidade de quem, use o [catálogo de artefatos](../docs/reference/artifact-catalog.md).
+
 ## Governança e arquitetura
 
 - [Governance Charter](governance-charter-template.md)
