@@ -170,12 +170,15 @@ class JsonValidationRobustnessTests(unittest.TestCase):
         self.original_root = getattr(validator, "ROOT")
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
+        self.reset_json_tree()
+        self.json_files = sorted(self.root.rglob("*.json"))
+        setattr(validator, "ROOT", self.root)
+
+    def reset_json_tree(self) -> None:
         for source in REPO_ROOT.rglob("*.json"):
             destination = self.root / source.relative_to(REPO_ROOT)
             destination.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source, destination)
-        self.json_files = sorted(self.root.rglob("*.json"))
-        setattr(validator, "ROOT", self.root)
 
     def tearDown(self) -> None:
         setattr(validator, "ROOT", self.original_root)
@@ -186,6 +189,10 @@ class JsonValidationRobustnessTests(unittest.TestCase):
         document = json.loads(path.read_text(encoding="utf-8"))
         mutate(document)
         path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    def write_json_value(self, relative_path: str, value) -> None:
+        path = self.root / relative_path
+        path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     def test_accepts_empty_blueprint_tools_without_crashing(self) -> None:
         self.rewrite_json("examples/agent-blueprint.example.json", lambda document: document.__setitem__("tools", []))
@@ -204,6 +211,63 @@ class JsonValidationRobustnessTests(unittest.TestCase):
         )
         issues = validator.validate_json_and_schemas(self.json_files)
         self.assertTrue(any(issue.category == "schema" for issue in issues))
+
+    def test_reports_schema_invalid_nested_types_without_crashing(self) -> None:
+        cases = (
+            ("examples/agent-blueprint.example.json", "tools", None),
+            ("examples/agent-blueprint.example.json", "tools", {}),
+            ("examples/agent-blueprint.example.json", "tools", "invalid"),
+            ("examples/agent-blueprint.example.json", "governance", None),
+            ("examples/agent-blueprint.example.json", "governance", []),
+            ("examples/agent-blueprint.example.json", "governance", "invalid"),
+            ("examples/maturity-assessment.example.json", "review", None),
+            ("examples/maturity-assessment.example.json", "review", []),
+            ("examples/maturity-assessment.example.json", "review", "invalid"),
+            ("examples/maturity-assessment.example.json", "evidenceRegister", None),
+            ("examples/maturity-assessment.example.json", "evidenceRegister", {}),
+            ("examples/maturity-assessment.example.json", "evidenceRegister", "invalid"),
+            ("examples/maturity-assessment.example.json", "sampling", None),
+            ("examples/maturity-assessment.example.json", "sampling", []),
+            ("examples/maturity-assessment.example.json", "sampling", "invalid"),
+            ("examples/agent-registry.example.json", "deployment", None),
+            ("examples/agent-registry.example.json", "deployment", []),
+            ("examples/agent-registry.example.json", "deployment", "invalid"),
+            ("examples/agent-registry.example.json", "attestation", None),
+            ("examples/agent-registry.example.json", "attestation", []),
+            ("examples/agent-registry.example.json", "attestation", "invalid"),
+            ("controls/control-catalog.json", "controls", None),
+            ("controls/control-catalog.json", "controls", {}),
+            ("controls/control-catalog.json", "controls", "invalid"),
+        )
+        for relative_path, field, invalid_value in cases:
+            with self.subTest(path=relative_path, field=field, value=invalid_value):
+                self.reset_json_tree()
+                self.rewrite_json(
+                    relative_path,
+                    lambda document, key=field, value=invalid_value: document.__setitem__(key, value),
+                )
+                issues = validator.validate_json_and_schemas(self.json_files)
+                self.assertTrue(
+                    any(issue.category == "schema" and issue.path == relative_path for issue in issues)
+                )
+
+    def test_reports_schema_invalid_top_level_values_without_crashing(self) -> None:
+        records = (
+            "examples/agent-registry.example.json",
+            "examples/agent-blueprint.example.json",
+            "examples/control-catalog.example.json",
+            "controls/control-catalog.json",
+            "examples/maturity-assessment.example.json",
+        )
+        for relative_path in records:
+            for invalid_value in (None, [], "invalid"):
+                with self.subTest(path=relative_path, value=invalid_value):
+                    self.reset_json_tree()
+                    self.write_json_value(relative_path, invalid_value)
+                    issues = validator.validate_json_and_schemas(self.json_files)
+                    self.assertTrue(
+                        any(issue.category == "schema" and issue.path == relative_path for issue in issues)
+                    )
 
     def test_requires_catalog_last_reviewed(self) -> None:
         self.rewrite_json("controls/control-catalog.json", lambda document: document.pop("lastReviewed"))
