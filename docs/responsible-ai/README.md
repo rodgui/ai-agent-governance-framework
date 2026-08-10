@@ -64,12 +64,14 @@ O assessment deve responder:
 
 ## Tiering de assurance
 
-| Tier | Assurance mínima |
-|---|---|
-| baixo | intended use, limitations, basic quality e owner review |
-| moderado | impact assessment, slices relevantes e user transparency |
-| alto | domain review, adversarial/edge testing, human oversight e monitoring |
-| crítico | challenge com segregation formal, contestability, continuous review e executive authority; usar `independent assurance` somente quando regras de independência, conflitos, amostragem, reporting e forma da conclusão estiverem aprovadas e demonstradas |
+| Tier | Assurance mínima | Quando evoluir para assessment formal | Efeito na aprovação |
+|---|---|---|---|
+| T1 — baixo | intended use, limitations, basic quality e owner review | qualquer `sim` no impact trigger screen; uso por população vulnerável; reclamação recorrente | owner aprova dentro da rota automatizada; RAI não entra na fila |
+| T2 — moderado | impact assessment, slices relevantes e user transparency | decisão que influencia direitos, oportunidades ou acesso a serviço; dado pessoal sensível; proxy de atributo protegido | aprovação condicionada às mitigações registradas e ao residual impact aceito por quem responde pelo processo |
+| T3 — alto | domain review, adversarial/edge testing, human oversight e monitoring | disparidade material entre grupos; automation bias observado; mudança de população ou de contexto de uso | RAI é authority de veto no gate; sem oversight design e evaluation por slices, o release não passa |
+| T4 — crítico | challenge com segregation formal, contestability, continuous review e executive authority; usar `independent assurance` somente quando regras de independência, conflitos, amostragem, reporting e forma da conclusão estiverem aprovadas e demonstradas | sempre — em T4 o assessment formal é a linha de base, não uma evolução | aprovação executiva com residual impact explícito; ausência de contestability é bloqueador, não finding |
+
+"RAI mínimo" é a evidência mínima esperada naquele tier, não um teto. Um caso T1 que dispara impact trigger executa o assessment formal do mesmo jeito — o tier determina proporcionalidade, o trigger determina obrigatoriedade.
 
 ## Transparência
 

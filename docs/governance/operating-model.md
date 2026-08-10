@@ -162,10 +162,10 @@ Um handoff sem owner receptor e evidência não está concluído.
 
 | Tier | Separação mínima |
 |---|---|
-| baixo | technical owner pode executar; business owner aprova propósito |
-| moderado | peer reviewer separado da execução de build valida release evidence |
-| alto | Design Authority e domain authorities aplicáveis aprovam; conflitos são declarados |
-| crítico | aprovação executiva ou comitê, challenge com segregation formal e runtime oversight contínuo; usar `independent assurance` somente se os requisitos acima forem demonstrados |
+| T1 — baixo | technical owner pode executar; business owner aprova propósito |
+| T2 — moderado | peer reviewer separado da execução de build valida release evidence |
+| T3 — alto | Design Authority e domain authorities aplicáveis aprovam; conflitos são declarados |
+| T4 — crítico | aprovação executiva ou comitê, challenge com segregation formal e runtime oversight contínuo; usar `independent assurance` somente se os requisitos acima forem demonstrados |
 
 ## Exceções
 

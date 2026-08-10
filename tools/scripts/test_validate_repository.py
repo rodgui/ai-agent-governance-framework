@@ -457,6 +457,62 @@ class TierTaxonomyTests(unittest.TestCase):
         self.assertTrue(any(issue.category == "control-scope" for issue in issues))
 
 
+class TierLabelTests(unittest.TestCase):
+    """ADR-0009 in prose: a tier column says T1-T4, not baixo/moderado/alto/critico."""
+
+    def setUp(self) -> None:
+        self.original_root = getattr(validator, "ROOT")
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        setattr(validator, "ROOT", self.root)
+
+    def tearDown(self) -> None:
+        setattr(validator, "ROOT", self.original_root)
+        self.temporary.cleanup()
+
+    def write(self, relative_path: str, body: str) -> Path:
+        path = self.root / relative_path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(body, encoding="utf-8")
+        return path
+
+    def test_accepts_canonical_tier_labels(self) -> None:
+        path = self.write(
+            "docs/identity/README.md",
+            "| Tier | Controle |\n|---|---|\n| T1 — baixo | scopes documentados |\n",
+        )
+        self.assertEqual([], validator.validate_tier_labels([path]))
+
+    def test_rejects_prose_tier_label_in_first_column(self) -> None:
+        path = self.write(
+            "docs/identity/README.md",
+            "| Tier | Controle |\n|---|---|\n| moderado | workload identity |\n",
+        )
+        issues = validator.validate_tier_labels([path])
+        self.assertTrue(
+            any(issue.category == "tier-taxonomy" and "moderado" in issue.message for issue in issues)
+        )
+
+    def test_allows_prose_word_outside_the_first_column(self) -> None:
+        path = self.write(
+            "docs/registry/discovery-and-forecast.md",
+            "| Ação | Confiança |\n|---|---|\n| aprovar T1 | baixo |\n",
+        )
+        self.assertEqual([], validator.validate_tier_labels([path]))
+
+    def test_skips_historical_policy(self) -> None:
+        path = self.write(
+            "docs/governance/ai-agent-policy-and-governance-v1.md",
+            "| Tier | Controle |\n|---|---|\n| alto | revisão reforçada |\n",
+        )
+        self.assertEqual([], validator.validate_tier_labels([path]))
+
+    def test_canonical_corpus_has_no_prose_tier_labels(self) -> None:
+        setattr(validator, "ROOT", self.original_root)
+        markdown = [path for path in validator.repository_files() if path.suffix == ".md"]
+        self.assertEqual([], validator.validate_tier_labels(markdown))
+
+
 class GovernanceContractV2Tests(unittest.TestCase):
     """Approved spec 002: structured governance contracts are explicit and versioned."""
 

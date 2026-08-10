@@ -48,6 +48,7 @@ ALLOWED_VENDOR_LITERALS = {
     ),
 }
 CANONICAL_TIERS = ("T1", "T2", "T3", "T4")
+PROSE_TIER_ROW_RE = re.compile(r"^\|\s*(baixo|moderado|alto|crítico)\s*\|", flags=re.IGNORECASE)
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 REPOSITORY_REF_RE = re.compile(
     r"^[A-Za-z0-9._/-]+\.(?:md|json|yaml|yml|png)(?:#[A-Za-z0-9._~!$&'()*+,;=:@/?%-]*)?$"
@@ -1063,6 +1064,30 @@ def validate_tier_taxonomy() -> list[Issue]:
     return issues
 
 
+def validate_tier_labels(markdown_files: list[Path]) -> list[Issue]:
+    """Enforce ADR-0009 in prose: a tier column says T1-T4, not baixo/moderado/alto/critico.
+
+    Only the first column is inspected. A row like `| aprovar T1 | baixo |` uses the word
+    as an attribute of something else, not as the tier label, and stays legitimate.
+    """
+    issues: list[Issue] = []
+    for path in markdown_files:
+        rel = relative(path)
+        if rel.startswith("docs/governance/ai-agent-policy"):
+            continue
+        for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+            match = PROSE_TIER_ROW_RE.match(line)
+            if match:
+                issues.append(
+                    Issue(
+                        "tier-taxonomy",
+                        f"{rel}:{number}",
+                        f"tier column says '{match.group(1)}'; use the canonical T1-T4 label",
+                    )
+                )
+    return issues
+
+
 def validate_control_scope() -> list[Issue]:
     """Enforce ADR-0010: an organization-scoped control cannot block a release."""
     issues: list[Issue] = []
@@ -1277,6 +1302,7 @@ def main() -> int:
     issues.extend(validate_assets())
     issues.extend(validate_policy_integrity())
     issues.extend(validate_tier_taxonomy())
+    issues.extend(validate_tier_labels(markdown_files))
     issues.extend(validate_control_scope())
     issues.extend(validate_product_boundaries(files))
     issues.extend(validate_sensitive_content(files))
