@@ -97,6 +97,8 @@ nav:
       - Operating model e decision rights: docs/governance/operating-model.md
       - Arquitetura de referência: docs/architecture/overview.md
       - Capability para tecnologia: docs/architecture/capability-to-technology.md
+      - Atributos de qualidade: docs/architecture/quality-attributes.md
+      - Riscos arquiteturais: docs/architecture/risks.md
       - Gestão proporcional de riscos: docs/risk-management/README.md
       - Minimum Production Bar: docs/risk-management/minimum-production-bar.md
       - Capability map: docs/guides/capability-map.md
@@ -121,6 +123,7 @@ nav:
       - FinOps e unit economics: docs/operations/finops.md
       - KPIs, KRIs e dashboard: docs/operations/kpi-kri-dashboard.md
       - Adoção e enablement: docs/adoption/README.md
+      - Developer experience e paved road: docs/devex/README.md
   - Parte IV — Método e toolkit:
       - Implementation playbook: docs/guides/framework-implementation-playbook.md
       - Roadmap sugestivo de 90 dias: docs/guides/implementation-plan-90-days.md
