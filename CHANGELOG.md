@@ -13,6 +13,9 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 - Colunas "quando evoluir para assessment formal" e "efeito na aprovação" no tiering de assurance de Responsible AI.
 - Três níveis de leitura de um domínio (entender, decidir, executar) no handbook, e entrada por estágio da organização no índice.
 - Termos que o corpus passou a usar e o glossário não definia, com destaque para `admissibilidade` — dimensão criada pela ADR-0009 e até aqui sem definição canônica.
+- Método de mapeamento de capability para tecnologia, separado da arquitetura para que trocar de produto não exija reescrever a arquitetura.
+- Template de Agent Use-Case Portfolio, o registro que faltava para as decisões de portfólio que o domínio de valor já descrevia.
+- Checklist de autossuficiência, com a autoavaliação declarada deste repositório contra ele — dois critérios abertos e um parcial.
 
 ### Changed
 

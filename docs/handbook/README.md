@@ -50,6 +50,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 5. [Policy modular — fonte canônica](../governance/policy.md)
 6. [Operating model e decision rights](../governance/operating-model.md)
 7. [Arquitetura de referência](../architecture/overview.md)
+   - [Mapeamento de capability para tecnologia](../architecture/capability-to-technology.md)
 8. [Gestão proporcional de riscos](../risk-management/README.md)
 9. [Maturity model](../guides/maturity-model.md)
 
@@ -77,6 +78,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
     - [Capability map](../guides/capability-map.md)
 26. [Programa sugestivo de implantação em 24 semanas](../guides/implementation-program-24-weeks.md)
     - [Catálogo de artefatos do programa](../reference/artifact-catalog.md)
+    - [Checklist de autossuficiência](../reference/self-sufficiency-checklist.md)
 27. [Plano opcional de piloto e critérios de expansão](../guides/pilot-plan.md)
 28. [Catálogo de design patterns](../patterns/README.md)
 29. [Control catalog](../../controls/README.md)

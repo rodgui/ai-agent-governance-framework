@@ -21,6 +21,8 @@ Este documento integra a [policy modular](../governance/policy.md) como arquitet
 
 Conectar estratégia, dados, controles, Responsible AI, adoção, suporte e operação em um único fluxo verificável. O modelo define capabilities e boundaries independentes de produto; qualquer plataforma é uma implementação substituível e opcional.
 
+A ligação entre estas capabilities e os sistemas que a organização já opera é artefato separado, por decisão: [mapeamento de capability para tecnologia](capability-to-technology.md). Mantê-lo fora daqui é o que permite trocar de produto sem reescrever a arquitetura.
+
 ## Modelo em cinco planos
 
 ```mermaid

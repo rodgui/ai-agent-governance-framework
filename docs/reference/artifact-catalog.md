@@ -47,6 +47,7 @@ Duas ressalvas sobre a coluna de fase. Ela referencia as fases F0–F6 do [progr
 | Handoff matrix | transições com pré-condição, evidência e SLA | gestão do programa | F2 | [exemplo](../../examples/handoff-matrix.example.md) |
 | Risk classification standard | tiers, escaladores, red flags e admissibilidade | risco + segurança | F2 | [gestão de riscos](../risk-management/README.md) · [ADR-0009](../architecture/decisions/0009-risk-tier-and-admissibility.md) |
 | Use-case intake | problema, baseline e hipótese de valor | negócio + governança | F2 | [template](../../templates/use-case-intake.md) |
+| Agent use-case portfolio | priorizar investimento, detectar duplicidade e medir valor | portfolio owner | F2/F4 | [template](../../templates/use-case-portfolio.md) · [estratégia e valor](../value/README.md) |
 | Risk pre-screen | roteamento rápido e acionamento de escaladores | governança | F2 | [template](../../templates/risk-pre-screen.md) |
 | Agent risk record | tier, admissibilidade, residual risk e authority por agente | risco + owners | F2/F3 | [template](../../templates/agent-risk-record.md) |
 | Impact assessment | impactos sobre pessoas, mitigações e residual | Responsible AI + risco | F2 | [Responsible AI](../responsible-ai/README.md#impact-assessment) |
@@ -69,6 +70,7 @@ Duas ressalvas sobre a coluna de fase. Ela referencia as fases F0–F6 do [progr
 | Model e provider governance standard | critérios, versão, fallback e saída | plataforma de IA | F3 | [modelos e provedores](../model-governance/README.md) |
 | Approved model/provider catalog | combinações permitidas por classe de dados | plataforma de IA | F3 | [schema](../../schemas/model-provider-catalog.schema.json) · [exemplo](../../examples/model-provider-catalog.example.json) |
 | Reference architecture | planos, fluxos e pontos de enforcement | arquitetura corporativa | F2 | [arquitetura de referência](../architecture/overview.md) · [exemplo](../../examples/architecture.example.md) |
+| Capability-to-technology mapping | qual sistema existente responde por cada capability, com source of truth por atributo | arquitetura corporativa | F2/F3 | [método de mapeamento](../architecture/capability-to-technology.md) |
 | Decisão arquitetural por caso | agente é o mecanismo certo? | arquitetura | F2 | [árvore de decisão](../architecture/agent-or-not.md) |
 
 ## Assurance, runtime e valor

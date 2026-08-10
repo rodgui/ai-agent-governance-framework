@@ -96,6 +96,7 @@ nav:
       - Policy modular: docs/governance/policy.md
       - Operating model e decision rights: docs/governance/operating-model.md
       - Arquitetura de referência: docs/architecture/overview.md
+      - Capability para tecnologia: docs/architecture/capability-to-technology.md
       - Gestão proporcional de riscos: docs/risk-management/README.md
       - Minimum Production Bar: docs/risk-management/minimum-production-bar.md
       - Capability map: docs/guides/capability-map.md
@@ -125,6 +126,7 @@ nav:
       - Roadmap sugestivo de 90 dias: docs/guides/implementation-plan-90-days.md
       - Programa sugestivo de 24 semanas: docs/guides/implementation-program-24-weeks.md
       - Catálogo de artefatos: docs/reference/artifact-catalog.md
+      - Checklist de autossuficiência: docs/reference/self-sufficiency-checklist.md
       - Plano opcional de piloto: docs/guides/pilot-plan.md
       - Design patterns: docs/patterns/README.md
       - Control catalog: controls/README.md

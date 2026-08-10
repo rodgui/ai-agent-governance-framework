@@ -20,6 +20,7 @@ Esta página lista os templates por finalidade. Para saber **quando** cada artef
 - [Maturity Assessment](maturity-assessment-template.md)
 - [Capability Assessment Worksheet](capability-assessment-worksheet.md)
 - [Intake de caso de uso](use-case-intake.md)
+- [Agent Use-Case Portfolio](use-case-portfolio.md)
 - [Risk pre-screen](risk-pre-screen.md)
 - [Agent Risk Record](agent-risk-record.md)
 - [Autoavaliação de agente](self-assessment-form.md)
