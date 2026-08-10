@@ -338,6 +338,36 @@ class JsonValidationRobustnessTests(unittest.TestCase):
             )
         )
 
+    def test_rejects_conditional_release_without_recorded_conditions(self) -> None:
+        self.rewrite_json(
+            "examples/release-evidence-manifest.example.json",
+            lambda document: document.pop("conditions"),
+        )
+        issues = validator.validate_json_and_schemas(self.json_files)
+        self.assertTrue(
+            any(
+                issue.category == "schema"
+                and issue.path == "examples/release-evidence-manifest.example.json"
+                and "conditions" in issue.message
+                for issue in issues
+            )
+        )
+
+    def test_rejects_conditional_release_without_expiry(self) -> None:
+        self.rewrite_json(
+            "examples/release-evidence-manifest.example.json",
+            lambda document: document.pop("expiresAt"),
+        )
+        issues = validator.validate_json_and_schemas(self.json_files)
+        self.assertTrue(
+            any(
+                issue.category == "schema"
+                and issue.path == "examples/release-evidence-manifest.example.json"
+                and "expiresAt" in issue.message
+                for issue in issues
+            )
+        )
+
     def test_requires_control_automation_mode(self) -> None:
         self.rewrite_json(
             "controls/control-catalog.json",

@@ -28,6 +28,11 @@
 3. any new connector or state-changing tool returns to G4/G5;
 4. quarantine and rollback must be exercised before reactivation after incident.
 
+These four conditions are carried in machine-readable form by
+[`release-evidence-manifest.example.json`](release-evidence-manifest.example.json), each with an
+owner and a stated verification method. A condition that exists only in prose cannot be checked
+at the next gate.
+
 ## Rationale
 
 The limited read-and-draft scope, evidence package and revocation path support conditional release. The decision does not cover new populations, tools, data classes or model versions.

@@ -143,6 +143,7 @@ Os únicos gates canônicos são G0–G7. O [programa de 24 semanas](guides/impl
 | medir portfólio e valor | [Strategy and value](value/README.md) + [lifecycle pattern](patterns/lifecycle-attestation-and-sunset.md) |
 | estruturar adoção e suporte | [Adoption](adoption/README.md) + [operations](operations/README.md) |
 | estudar um caso Microsoft opcional | [Customer Zero case](explanations/microsoft-agent-governance-case-study.md) + [crosswalk histórico](../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) |
+| ver o framework aplicado ponta a ponta | [Casos de referência](explanations/cases/README.md) + [implementation playbook](guides/framework-implementation-playbook.md) |
 | seguir uma leitura linear | [Handbook](handbook/README.md) |
 
 ## Navegação por pasta
