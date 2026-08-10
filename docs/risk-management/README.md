@@ -98,6 +98,19 @@ flowchart LR
     A --> M
 ```
 
+## Playbook do fluxo risco → impacto → aprovação
+
+Classificação, impact assessment e aprovação não são três aprovações concorrentes. Resolvem problemas diferentes e operam em sequência.
+
+1. **Pre-screen no intake** com perguntas objetivas sobre dados, autonomia, ações, pessoas afetadas e alcance. Use o [template de risk pre-screen](../../templates/risk-pre-screen.md).
+2. **Calcular o risco base e aplicar os red flags.** O score apoia consistência; os red flags impedem que um fator crítico seja diluído por uma média.
+3. **Definir o tier preliminar e os controles obrigatórios** correspondentes, conforme o [Minimum Production Bar](minimum-production-bar.md).
+4. **Aplicar o impact trigger screen.** O agente influencia direitos, oportunidades, acesso a serviços, decisões sobre pessoas, segurança física, comunicação pública ou processo regulado? Se sim, executa-se o [impact assessment](../responsible-ai/README.md#impact-assessment) formal — **mesmo em caso tecnicamente simples**.
+5. **Acionar domain reviews apenas quando relevantes.** Privacidade por dados pessoais; segurança por ferramentas e privilégio; dados por fontes; arquitetura por mudança de pattern; jurídico por obrigação aplicável. Review acionada por regra fixa vira fila.
+6. **Registrar riscos, mitigações, residual risk e owner.** **Nenhuma review aprovada deve existir sem residual risk explícito** e sem a authority compatível com o tier.
+7. **Compilar o evidence pack.** O gate de publicação verifica a evidência exigida pelo tier — ele não refaz as reviews. Ver [evidence pack por tier](../auditability/evidence-pack-by-tier.md).
+8. **Após mudança material, o reassessment recomeça do ponto afetado**, não do zero. Reassessment integral por padrão é caro, e o que é caro deixa de ser feito.
+
 ## Risk register mínimo
 
 - risk ID e categoria;

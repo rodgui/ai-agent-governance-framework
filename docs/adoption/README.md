@@ -95,6 +95,19 @@ flowchart LR
 
 Feedback é evidência contextual, não prova isolada de valor ou segurança.
 
+## Playbook de implantação
+
+Governança só escala quando cada papel consegue executá-la sem depender do time central para cada decisão. Adoção transforma regra em competência prática, suporte e hábito.
+
+1. **Segmentar personas.** Citizen builder, desenvolvedor profissional, business owner, technical owner, reviewer, administrador de plataforma, operação de segurança, data owner, sponsor e usuário final. Cada persona tem objetivo de aprendizagem distinto.
+2. **Separar awareness de competência.** Awareness ensina a reconhecer a regra e pedir ajuda; competência exige executar a atividade e demonstrar resultado. **Não habilite um reviewer de impact assessment porque ele concluiu um treinamento introdutório.**
+3. **Montar currículo por papel e risco.** Builders precisam de registry, risco, dados, ferramentas, identidade e telemetria; owners precisam de accountability, valor e attestation; reviewers precisam de critérios e evidência; segurança precisa de contenção e forensics. Com laboratórios e casos calibrados.
+4. **Implantar rede de champions.** Escolher áreas por volume e risco, definir tempo alocado e **limite de autoridade**. O champion orienta a primeira linha e escala; não substitui as funções de controle nem aprova localmente o que exige authority.
+5. **Tornar o caminho governado o mais fácil.** Builders aprovados, templates, catálogos de fontes e ferramentas, office hours, policy gates self-service e exemplos. **Fricção desnecessária é o principal produtor de shadow AI.**
+6. **Calibrar reviewers com casos comuns.** Os mesmos 10 a 20 casos aplicados por reviewers diferentes. Divergência vira discussão de critério, não preferência individual. Versionar os exemplos quando o standard mudar.
+7. **Criar suporte e comunidade de prática.** Office hours, FAQ, canais de escalation e encontros regulares reduzem retrabalho. Perguntas recorrentes viram melhoria de documentação e automação.
+8. **Medir eficácia, não conclusão.** Taxa de conclusão de treinamento é métrica fraca isolada. Medir verificação de conhecimento, retrabalho de review, violações de policy, tickets de suporte, tempo até assessment, qualidade da evidência e padrões de shadow AI — e ajustar o currículo com esses sinais.
+
 ## Evidências
 
 - persona e stakeholder map;
