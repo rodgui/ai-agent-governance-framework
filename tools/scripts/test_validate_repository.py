@@ -316,5 +316,67 @@ class FrontmatterRelatedPathTests(unittest.TestCase):
         self.assertTrue(any(issue.category == "frontmatter-related" for issue in issues))
 
 
+class TierTaxonomyTests(unittest.TestCase):
+    """ADR-0004: T1-T4 is the canonical risk-tier taxonomy."""
+
+    def setUp(self) -> None:
+        self.original_root = getattr(validator, "ROOT")
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        for source in REPO_ROOT.rglob("*.json"):
+            destination = self.root / source.relative_to(REPO_ROOT)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+        setattr(validator, "ROOT", self.root)
+
+    def tearDown(self) -> None:
+        setattr(validator, "ROOT", self.original_root)
+        self.temporary.cleanup()
+
+    def rewrite_json(self, relative_path: str, mutate) -> None:
+        path = self.root / relative_path
+        document = json.loads(path.read_text(encoding="utf-8"))
+        mutate(document)
+        path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    def test_accepts_canonical_taxonomy(self) -> None:
+        self.assertEqual([], validator.validate_tier_taxonomy())
+
+    def test_rejects_extra_tier_in_registry_schema(self) -> None:
+        self.rewrite_json(
+            "schemas/agent-registry.schema.json",
+            lambda document: document["$defs"]["risk"]["properties"]["tier"].__setitem__(
+                "enum", ["T0", "T1", "T2", "T3", "T4"]
+            ),
+        )
+        issues = validator.validate_tier_taxonomy()
+        self.assertTrue(any(issue.category == "tier-taxonomy" for issue in issues))
+
+    def test_rejects_extra_tier_in_blueprint_schema(self) -> None:
+        self.rewrite_json(
+            "schemas/agent-blueprint.schema.json",
+            lambda document: document["properties"]["governance"]["properties"]["riskTier"].__setitem__(
+                "enum", ["T1", "T2", "T3", "T4", "T5"]
+            ),
+        )
+        issues = validator.validate_tier_taxonomy()
+        self.assertTrue(any(issue.category == "tier-taxonomy" for issue in issues))
+
+    def test_rejects_non_canonical_tier_in_control(self) -> None:
+        self.rewrite_json(
+            "controls/control-catalog.json",
+            lambda document: document["controls"][0].__setitem__("appliesToTiers", ["T0", "T1"]),
+        )
+        issues = validator.validate_tier_taxonomy()
+        self.assertTrue(
+            any(issue.category == "tier-taxonomy" and "T0" in issue.message for issue in issues)
+        )
+
+    def test_reports_missing_schema(self) -> None:
+        (self.root / "schemas/control-catalog.schema.json").unlink()
+        issues = validator.validate_tier_taxonomy()
+        self.assertTrue(any(issue.category == "tier-taxonomy" for issue in issues))
+
+
 if __name__ == "__main__":
     unittest.main()

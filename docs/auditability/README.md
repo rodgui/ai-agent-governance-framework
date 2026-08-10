@@ -76,6 +76,8 @@ Um package de release ou attestation deve ser:
 
 “Sem evidência” não significa “controle passou”.
 
+A composição mínima de cada package por nível de risco está em [evidence pack proporcional por tier](evidence-pack-by-tier.md).
+
 ## Integridade e acesso
 
 - clock synchronization;

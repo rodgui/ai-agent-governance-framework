@@ -46,6 +46,8 @@ Os controls são módulos diretos da [policy canônica](../docs/governance/polic
 
 O catálogo integra a policy candidate. Ele se torna baseline normativa de uma organização somente quando a release correspondente é explicitamente aprovada e adotada.
 
+O piso operacional que traduz esta baseline em gate verificável é o [Minimum Production Bar por tier](../docs/risk-management/minimum-production-bar.md).
+
 ## Cobertura
 
 - **adoption:** 2 controls

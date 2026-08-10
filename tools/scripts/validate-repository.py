@@ -37,6 +37,7 @@ ALLOWED_VENDOR_LITERALS = {
         "docs/explanations/diagrams/microsoft-customer-zero-agent-governance.png",
     ),
 }
+CANONICAL_TIERS = ("T1", "T2", "T3", "T4")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 REPOSITORY_REF_RE = re.compile(
     r"^[A-Za-z0-9._/-]+\.(?:md|json|yaml|yml|png)(?:#[A-Za-z0-9._~!$&'()*+,;=:@/?%-]*)?$"
@@ -120,7 +121,10 @@ def requires_frontmatter(path: Path) -> bool:
         "docs/evaluations/README.md",
         "docs/human-oversight/README.md",
         "docs/identity/README.md",
+        "docs/lifecycle/README.md",
+        "docs/model-governance/README.md",
         "docs/operations/README.md",
+        "docs/registry/README.md",
         "docs/responsible-ai/README.md",
         "docs/risk-management/README.md",
         "docs/security/README.md",
@@ -702,6 +706,53 @@ def validate_policy_integrity() -> list[Issue]:
     return []
 
 
+def validate_tier_taxonomy() -> list[Issue]:
+    """Enforce ADR-0004: T1-T4 is the canonical risk-tier taxonomy."""
+    issues: list[Issue] = []
+    enum_locations = [
+        ("schemas/control-catalog.schema.json", ("$defs", "control", "properties", "appliesToTiers", "items")),
+        ("schemas/agent-blueprint.schema.json", ("properties", "governance", "properties", "riskTier")),
+        ("schemas/agent-registry.schema.json", ("$defs", "risk", "properties", "tier")),
+    ]
+    for rel, trail in enum_locations:
+        path = ROOT / rel
+        if not path.exists():
+            issues.append(Issue("tier-taxonomy", rel, "schema declaring the tier enum is missing"))
+            continue
+        node: Any = load_json(path)
+        for key in trail:
+            if not isinstance(node, dict) or key not in node:
+                node = None
+                break
+            node = node[key]
+        found = node.get("enum") if isinstance(node, dict) else None
+        if found != list(CANONICAL_TIERS):
+            issues.append(
+                Issue("tier-taxonomy", rel, f"tier enum must be {list(CANONICAL_TIERS)}, found {found}")
+            )
+
+    catalog_path = ROOT / "controls/control-catalog.json"
+    if catalog_path.exists():
+        catalog = load_json(catalog_path)
+        controls = catalog.get("controls", []) if isinstance(catalog, dict) else []
+        for control in controls:
+            if not isinstance(control, dict):
+                continue
+            tiers = control.get("appliesToTiers")
+            if not isinstance(tiers, list):
+                continue
+            unknown = sorted(str(tier) for tier in tiers if tier not in CANONICAL_TIERS)
+            if unknown:
+                issues.append(
+                    Issue(
+                        "tier-taxonomy",
+                        relative(catalog_path),
+                        f"{control.get('id', '<unknown>')} declares non-canonical tier(s): {', '.join(unknown)}",
+                    )
+                )
+    return issues
+
+
 def validate_commercial_boundary() -> list[Issue]:
     issues: list[Issue] = []
     legacy_paths = [
@@ -876,6 +927,7 @@ def main() -> int:
     issues.extend(validate_json_and_schemas(json_files))
     issues.extend(validate_assets())
     issues.extend(validate_policy_integrity())
+    issues.extend(validate_tier_taxonomy())
     issues.extend(validate_product_boundaries(files))
     issues.extend(validate_sensitive_content(files))
 

@@ -60,6 +60,8 @@ Cada seta é uma hipótese que precisa de evidência. Um bom output pode não ge
 
 Não agregue essas camadas em uma única “AI adoption score” sem preservar significado.
 
+A medição de custo por resultado que sustenta a camada de eficiência está em [FinOps e unit economics](../operations/finops.md); a separação entre KPI, KRI e métrica operacional está em [KPIs, KRIs e governance dashboard](../operations/kpi-kri-dashboard.md).
+
 ## Baseline e atribuição
 
 - medir o processo antes ou reconstruir baseline com limitações declaradas;
