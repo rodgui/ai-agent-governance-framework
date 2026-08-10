@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "1.0",
+  "title": "Example AI Governance Control Catalog",
+  "lastReviewed": "2026-08-09",
+  "controls": [
+    {
+      "id": "AGF-REG-001",
+      "title": "Registro e ownership",
+      "domain": "registry",
+      "type": ["preventive", "detective"],
+      "statement": "Todo agente deve possuir registro, business owner, technical owner, status e versão ativa antes de produção.",
+      "rationale": "Sem ownership e lifecycle não é possível atribuir decisão, corrigir ou aposentar o agente.",
+      "ownerRole": "Registry Owner",
+      "appliesToTiers": ["T1", "T2", "T3", "T4"],
+      "implementation": [
+        "Validar records contra o schema de registry.",
+        "Reconciliar fontes de plataforma e declarações humanas."
+      ],
+      "evidence": ["Registry record", "Reconciliation report"],
+      "metrics": ["Percentual com owners válidos", "Ownerless records"],
+      "automation": "mixed",
+      "policyRefs": ["Policy v1 section 11"]
+    },
+    {
+      "id": "AGF-OPS-001",
+      "title": "Observabilidade orientada a ação",
+      "domain": "operations",
+      "type": ["detective", "responsive"],
+      "statement": "Cada sinal material deve possuir threshold, owner, decisão e ação de resposta definidos.",
+      "rationale": "Dashboard sem resposta não reduz risco nem assegura remediação.",
+      "ownerRole": "Run Authority",
+      "appliesToTiers": ["T2", "T3", "T4"],
+      "implementation": [
+        "Mapear signals a runbooks e containment controls.",
+        "Testar alertas e escalation em drills."
+      ],
+      "evidence": ["Signal catalog", "Runbook", "Drill result"],
+      "metrics": ["Alerts sem action", "Mean time to contain"],
+      "automation": "mixed",
+      "policyRefs": ["Policy v1 section 12"]
+    }
+  ]
+}

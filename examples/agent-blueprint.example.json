@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0",
+  "agentId": "service-desk-knowledge-agent",
+  "version": "1.0",
+  "architecture": {
+    "pattern": "tool-using-agent",
+    "description": "Exemplo fictício de agente interno com retrieval autorizado e criação de draft sem capacidade de alterar sistemas.",
+    "diagramRef": "examples/architecture.example.md",
+    "trustBoundaries": [
+      "Canal interno para o runtime do agente",
+      "Runtime para o serviço de retrieval",
+      "Serviço de retrieval para o repositório de conhecimento"
+    ],
+    "dependencies": [
+      {
+        "name": "example-managed-ai-platform",
+        "type": "platform",
+        "criticality": "moderate",
+        "owner": "Example AI Platform Team"
+      },
+      {
+        "name": "approved-knowledge-index",
+        "type": "data",
+        "criticality": "moderate",
+        "owner": "Example Knowledge Owner"
+      }
+    ]
+  },
+  "models": [
+    {
+      "modelId": "example-instruction-model",
+      "provider": "example-provider",
+      "purpose": "Classificar intenção, sintetizar fontes e preparar respostas.",
+      "hosting": "managed",
+      "versionPinned": true,
+      "dataUse": "no-training",
+      "limitations": [
+        "Pode gerar conteúdo incorreto",
+        "Não possui autoridade para executar mudanças"
+      ]
+    }
+  ],
+  "data": {
+    "sources": [
+      {
+        "sourceId": "approved-knowledge-index",
+        "classification": "internal",
+        "purpose": "Recuperar procedimentos aprovados para analistas internos.",
+        "owner": "Example Knowledge Owner",
+        "connectorRef": "example-connector-001",
+        "authorizationMode": "pre-retrieval",
+        "retention": "Index rebuild diário; source retention governa o original.",
+        "region": "example-region"
+      }
+    ],
+    "memory": {
+      "mode": "session",
+      "retention": "Encerrada ao fim da sessão.",
+      "deletionMechanism": "Automatic session cleanup",
+      "sensitiveDataAllowed": false
+    }
+  },
+  "identity": {
+    "model": "hybrid",
+    "principal": "workload://example/service-desk-knowledge-agent",
+    "scopes": ["knowledge.search", "draft.create"],
+    "expiry": "Workload token de curta duração por sessão.",
+    "secretManagement": "Managed secret store; nenhum segredo no prompt ou código.",
+    "breakGlass": "Não aplicável; o agente não recebe privilégio emergencial."
+  },
+  "tools": [
+    {
+      "toolId": "knowledge.search",
+      "name": "Approved Knowledge Search",
+      "class": "observe",
+      "protocol": "api",
+      "stateChanging": false,
+      "reversible": true,
+      "approvalMode": "automated",
+      "owner": "Example Knowledge Platform Team",
+      "scopes": ["knowledge.search"],
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/knowledge-search",
+      "version": "1.0"
+    },
+    {
+      "toolId": "draft.create",
+      "name": "Draft Response Builder",
+      "class": "create",
+      "protocol": "api",
+      "stateChanging": true,
+      "reversible": true,
+      "approvalMode": "human",
+      "owner": "Example Service Operations",
+      "scopes": ["draft.create"],
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/draft-create",
+      "version": "1.0"
+    }
+  ],
+  "runtime": {
+    "environments": ["test", "production"],
+    "regions": ["example-region"],
+    "observability": "Correlation de user, agent version, sources e tool calls; payload sensível é redigido.",
+    "quarantine": "Control plane bloqueia novas sessões e o gateway nega tools.",
+    "rollback": "Retorno à última versão aprovada do blueprint e do prompt.",
+    "killSwitch": "Revogação no tool gateway e status quarantined no registry.",
+    "supportRef": "examples/support-runbook.example.md",
+    "sloRef": "examples/slo.example.md"
+  },
+  "governance": {
+    "riskTier": "T2",
+    "controlIds": [
+      "AGF-REG-001",
+      "AGF-IDN-001",
+      "AGF-DAT-001",
+      "AGF-EVA-001",
+      "AGF-OPS-001"
+    ],
+    "assessmentRefs": [
+      "examples/risk-assessment.example.md",
+      "examples/evaluation-report.example.md"
+    ],
+    "prohibitedUses": [
+      "Execução de mudanças",
+      "Acesso a dados pessoais",
+      "Resposta externa sem revisão humana"
+    ],
+    "materialChangeTriggers": [
+      "Novo dataset ou connector",
+      "Nova tool state-changing",
+      "Mudança de model provider",
+      "Expansão para usuários externos"
+    ],
+    "releaseEvidenceRef": "examples/release-decision.example.md",
+    "attestationExpiresAt": "2026-11-01"
+  }
+}

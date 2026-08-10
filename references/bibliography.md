@@ -1,6 +1,22 @@
 # Bibliography
 
-A bibliografia detalhada e as datas de acesso são mantidas no [registro de fontes](sources.md).
+A data de acesso, classificação da fonte e finalidade são mantidas no [registro de fontes](sources.md).
+
+## Frameworks, standards e regulation
+
+- European Union. *Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence*. 2024.
+- ISO/IEC. *ISO/IEC 42001:2023 — Information technology — Artificial intelligence — Management system*. 2023.
+- ISO/IEC. *ISO/IEC 23894:2023 — Information technology — Artificial intelligence — Guidance on risk management*. 2023.
+- ISO/IEC. *ISO/IEC 22989:2022 — Information technology — Artificial intelligence — Artificial intelligence concepts and terminology*. 2022.
+- NIST. *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1, 2023.
+- NIST. *Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile*. NIST AI 600-1, 2024.
+- OECD. *OECD AI Principles*. Atualizados em 2024.
+
+## Security
+
+- MITRE. *Adversarial Threat Landscape for Artificial-Intelligence Systems (ATLAS)*.
+- OWASP GenAI Security Project. *Agentic AI — Threats and Mitigations*.
+- OWASP GenAI Security Project. *Top 10 for Large Language Model Applications*.
 
 ## Microsoft Customer Zero series
 
@@ -10,12 +26,10 @@ A bibliografia detalhada e as datas de acesso são mantidas no [registro de font
 - Microsoft. *Becoming a Frontier Firm: A guide for deploying AI agents based on our experience at Microsoft*. 2026.
 - Microsoft. *Governing AI agents at scale: Lessons from our journey at Microsoft*. 2026.
 
-## Standards already referenced by policy v1
+## Uso correto
 
-- NIST AI Risk Management Framework 1.0.
-- NIST AI 600-1, *Generative AI Profile*.
-- ISO/IEC 42001:2023, AI Management System.
-- ISO/IEC 23894:2023, Guidance on AI risk management.
-- ISO/IEC 22989:2022, AI concepts and terminology.
-
-> The standards above remain to be converted into individually verified source records with canonical URLs and review dates.
+- Cite a fonte que suporta o claim, não apenas a bibliografia geral.
+- Registre evidence cutoff para claim temporal.
+- Não apresente mapping como equivalência ou certificação.
+- Diferencie source claim, observation, inference e recommendation.
+- Trate relatos de fornecedor como evidência de implementação declarada, não prova causal.

@@ -1,0 +1,93 @@
+name: Quality gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Install validation dependencies
+        run: python -m pip install --requirement requirements-ci.txt
+
+      - name: Resolve base commit
+        env:
+          CANDIDATE_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          base="$CANDIDATE_BASE"
+          if [[ -z "$base" || "$base" =~ ^0+$ ]] || ! git cat-file -e "$base^{commit}"; then
+            base="$(git rev-list --max-parents=0 "$GITHUB_SHA" | tail -n 1)"
+          fi
+          echo "BASE_SHA=$base" >> "$GITHUB_ENV"
+
+      - name: Validate changed Markdown
+        run: |
+          mapfile -d '' files < <(
+            git diff --name-only --diff-filter=ACMR -z \
+              "$BASE_SHA" "$GITHUB_SHA" -- '*.md'
+          )
+          if ((${#files[@]})); then
+            npx --yes markdownlint-cli2@0.18.1 "${files[@]}"
+          else
+            echo "No changed Markdown files."
+          fi
+
+      - name: Validate repository
+        run: python tools/scripts/validate-repository.py
+
+      - name: Check Python
+        run: |
+          ruff check tools/scripts
+          python -m py_compile tools/scripts/*.py
+
+      - name: Verify deterministic visual pixels
+        run: |
+          output_dir="$(mktemp -d)"
+          trap 'rm -rf "$output_dir"' EXIT
+          python tools/scripts/render-agent-governance-infographic.py --output-dir "$output_dir"
+          python - "$output_dir" <<'PY'
+          import sys
+          from pathlib import Path
+          from PIL import Image, ImageChops
+
+          root = Path.cwd()
+          output_dir = Path(sys.argv[1])
+          expected = [
+              root / "docs/architecture/diagrams/ai-agent-governance-framework.png",
+              root / "docs/explanations/diagrams/microsoft-customer-zero-agent-governance.png",
+          ]
+          failures = []
+          for tracked in expected:
+              generated = output_dir / tracked.name
+              with Image.open(tracked) as left, Image.open(generated) as right:
+                  left_rgba = left.convert("RGBA")
+                  right_rgba = right.convert("RGBA")
+                  if left_rgba.size != right_rgba.size or ImageChops.difference(left_rgba, right_rgba).getbbox():
+                      failures.append(str(tracked.relative_to(root)))
+          if failures:
+              raise SystemExit("visual pixel mismatch: " + ", ".join(failures))
+          print("PASS: rendered pixels match tracked visuals")
+          PY
+
+      - name: Detect whitespace errors
+        run: git diff --check "$BASE_SHA" "$GITHUB_SHA"

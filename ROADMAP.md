@@ -1,54 +1,182 @@
-# Roadmap
+# Roadmap do AI Agent Governance Framework
 
-## Fase 1 — Framework inicial (Concluída)
+## Objetivo do produto
 
-- [x] Policy principal v1 criada
-- [x] Templates de auto-avaliação e checklist
-- [x] Sunset plan template
-- [x] Exemplo de auto-avaliação preenchido
-- [x] Estrutura do repositório reorganizada
+Evoluir uma fonte canônica, vendor-neutral e verificável para:
 
-## Fase 1.1 — Consolidação Microsoft Customer Zero (Concluída)
+- governança organizacional de IA e agentes;
+- implantação por decision gates;
+- padrões e controls reutilizáveis;
+- toolkit de diagnóstico, design, assurance e operação;
+- oferta profissional de consultoria;
+- futura publicação executiva quando o conteúdo estiver maduro.
 
-- [x] Estudo fundamentado em cinco artigos Microsoft Inside Track
-- [x] Crosswalk entre Customer Zero e Policy v1
-- [x] Arquitetura de referência em cinco planos
-- [x] Brief executivo e plano de evolução de 90 dias
-- [x] Infográfico reproduzível por código
-- [x] Registro de fontes com datas de acesso e limitações
+O roadmap não altera a [Policy v1](docs/governance/ai-agent-policy-and-governance-v1.md) por implicação. Mudança normativa exige proposta, revisão e versionamento próprios.
 
-## Fase 2 — Aprofundamento temático
+## Estado atual
 
-- [ ] Definir schema mínimo de registry e agent blueprint
-- [ ] Expandir risk matrix por capacidade, alcance e reversibilidade
-- [ ] Definir critérios de AI-ready data e connector gates
-- [ ] Formalizar impact assessment e release assessment
-- [ ] Criar controles específicos para MCP servers e tool provenance
-- [ ] Definir adoption lead, champion network e suporte em camadas
-- [ ] Separar métricas de criação, descoberta, uso, qualidade e valor
-- [ ] Documentar identidade de agentes (`docs/identity/`)
-- [ ] Mapear controles para a policy (`controls/`)
-- [ ] Criar schemas JSON/YAML para catálogo (`schemas/`)
-- [ ] Expandir governança de ferramentas (`docs/tool-governance/`)
-- [ ] Documentar acessos a dados e DLP (`docs/data-access/`)
-- [ ] Documentar taxonomia de riscos (`docs/risk-management/`)
-- [ ] Documentar quality gates e evals (`docs/evaluations/`)
-- [ ] Documentar auditability (`docs/auditability/`)
-- [ ] Documentar HITL (`docs/human-oversight/`)
-- [ ] Documentar Responsible AI (`docs/responsible-ai/`)
+- fonte canônica modular e jornadas por persona;
+- brief executivo, fundamentos, operating model e arquitetura;
+- domínios de control e implementation playbook;
+- maturity model e roadmap de 90 dias;
+- 10 design patterns e catálogo de antipatterns;
+- 38 controls estruturados em 13 domínios;
+- schemas, examples e templates;
+- caso Microsoft separado do framework neutro;
+- visual principal vendor-neutral;
+- modelo de engagement de consultoria.
 
-## Fase 3 — Validação
+## Trilha A — Qualidade canônica
 
-- [ ] Exemplos práticos de uso (`examples/`)
-- [ ] Assessments comparativos (`assessments/`)
-- [ ] Experimentos com controles (`experiments/`)
-- [ ] Revisão formal da policy
-- [ ] Executar pilotos e registrar evidências do plano de 90 dias
-- [ ] Propor v2 com aprendizados, preservando a policy v1
+### A1. Vocabulário e taxonomia
 
-## Fase 4 — Evolução
+- [ ] estabilizar glossary e synonyms;
+- [ ] versionar taxonomia de lifecycle/status;
+- [ ] alinhar IDs de domains, risks, controls e evidence types;
+- [ ] publicar regras de deprecation e migration.
 
-- [ ] Publicação sanitizada para público
-- [ ] Integração com ferramentas de governança
-- [ ] Templates para múltiplas plataformas
-- [ ] Avaliar MkDocs se navegação GitHub for insuficiente
+**Gate:** termos centrais têm definição única, owner e uso consistente.
+
+### A2. Crosswalk de controls
+
+- [ ] mapear controls para NIST AI RMF;
+- [ ] mapear controls para ISO/IEC 42001 e 23894;
+- [ ] mapear security controls para OWASP e MITRE ATLAS;
+- [ ] separar equivalência, cobertura parcial e evidência inexistente.
+
+**Gate:** mappings são informativos, revisados e não afirmam certificação.
+
+### A3. Threat e failure pattern catalog
+
+- [ ] modelar prompt injection, excessive agency, confused deputy e supply chain;
+- [ ] vincular failure modes a controls e evaluations;
+- [ ] criar exemplos de containment e recovery;
+- [ ] versionar negative scenario packs.
+
+**Gate:** cada threat pattern possui prevenção, detecção, resposta e evidência.
+
+## Trilha B — Toolkit operacional
+
+### B1. Registry e blueprint lifecycle
+
+- [ ] definir reconciliation algorithm e source precedence;
+- [ ] criar material-change diff;
+- [ ] validar cross-record references;
+- [ ] criar attestation e sunset records estruturados.
+
+**Gate:** um record de exemplo percorre create, change, attest e retire sem campos ambíguos.
+
+### B2. Assessment toolkit
+
+- [ ] formalizar risk assessment schema;
+- [ ] produzir facilitation guide do maturity assessment;
+- [ ] criar evidence sampling guide;
+- [ ] separar self-assessment de independent assessment.
+
+**Gate:** dois assessors conseguem produzir resultados comparáveis com as mesmas evidências.
+
+### B3. Evaluation e release toolkit
+
+- [ ] criar evaluation strategy template estruturado;
+- [ ] criar release evidence manifest;
+- [ ] vincular thresholds a risk tier;
+- [ ] definir regression e expiry rules.
+
+**Gate:** decision authority consegue aprovar, condicionar ou rejeitar usando apenas o package.
+
+### B4. Runtime governance
+
+- [ ] definir event schema vendor-neutral;
+- [ ] documentar policy decision e action logs;
+- [ ] criar drill scripts para quarantine, rollback e reactivation;
+- [ ] modelar evidence continuity durante incident.
+
+**Gate:** runtime signal alcança action, owner, incident record e attestation.
+
+## Trilha C — Evidência e application mappings
+
+### C1. Casos de estudo
+
+- [ ] adicionar casos de outros ecossistemas e open source;
+- [ ] separar source claim, observation e inference;
+- [ ] registrar evidence cutoff e limitações;
+- [ ] evitar ROI ou causalidade sem dados independentes.
+
+**Gate:** nenhum fornecedor domina a arquitetura canônica.
+
+### C2. Platform mappings
+
+- [ ] criar template de mapping por capability;
+- [ ] mapear identity, data, tools, runtime e evidence export;
+- [ ] declarar gaps e compensating controls;
+- [ ] adicionar portability e exit criteria.
+
+**Gate:** mapping pode ser removido sem alterar policy, patterns ou controls.
+
+## Trilha D — Produto de consultoria
+
+### D1. Readiness assessment
+
+- [ ] criar interview e evidence request packs;
+- [ ] definir sampling e confidence rules;
+- [ ] produzir relatório-exemplo fictício;
+- [ ] definir acceptance e handoff.
+
+### D2. Target operating model
+
+- [ ] criar workshop guides;
+- [ ] modelar decision-right scenarios;
+- [ ] criar package de charter, RACI e forums;
+- [ ] definir transition plan.
+
+### D3. Control implementation
+
+- [ ] criar implementation patterns por domínio;
+- [ ] definir evidence automation backlog;
+- [ ] criar effectiveness test procedures;
+- [ ] produzir examples sanitizados.
+
+### D4. Independent assurance
+
+- [ ] definir independence e conflict rules;
+- [ ] criar finding severity e remediation workflow;
+- [ ] documentar attestation statement;
+- [ ] definir renewal e continuous assurance.
+
+**Gate da trilha:** cada engagement possui inputs, entregáveis, acceptance criteria, limitations e knowledge transfer.
+
+## Trilha E — Publicação futura
+
+Esta trilha não está no escopo da etapa atual.
+
+Quando o conteúdo estiver maduro:
+
+- [ ] congelar uma edição com evidence cutoff;
+- [ ] revisar coesão e redundância editorial;
+- [ ] definir manifesto a partir do handbook canônico;
+- [ ] gerar formatos de leitura sem criar segunda fonte;
+- [ ] executar revisão técnica, editorial e executiva;
+- [ ] publicar errata e política de atualização.
+
+**Gate:** conteúdo canônico está estável e a publicação é reproduzível e revisada.
+
+## Regras de priorização
+
+1. corrigir falha normativa ou de segurança;
+2. fechar ambiguidade que afeta decisão ou evidência;
+3. completar toolkit necessário para implantação;
+4. ampliar mappings e casos;
+5. melhorar apresentação e publicação.
+
+## Definition of done
+
+Uma evolução só está concluída quando possui:
+
+- owner e status;
+- rationale e boundaries;
+- documentação e artifact quando aplicável;
+- evidence e validation;
+- links e references íntegros;
+- no secrets ou dados não autorizados;
+- compatibility ou migration explícita;
+- reviewer independente para mudança material.

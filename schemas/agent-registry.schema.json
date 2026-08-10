@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rodgui.github.io/ai-agent-governance-framework/schemas/agent-registry.schema.json",
+  "title": "AI Agent Registry Record",
+  "description": "Registro canônico de lifecycle, ownership, risco e evidências de um agente.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "agentId",
+    "name",
+    "purpose",
+    "ownership",
+    "lifecycle",
+    "risk",
+    "currentBlueprint",
+    "platforms",
+    "lastReviewed"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "agentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "name": { "type": "string", "minLength": 3, "maxLength": 160 },
+    "description": { "type": "string", "maxLength": 2000 },
+    "purpose": { "type": "string", "minLength": 10, "maxLength": 1000 },
+    "intendedUsers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 2 },
+      "uniqueItems": true
+    },
+    "prohibitedUses": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 3 },
+      "uniqueItems": true
+    },
+    "ownership": { "$ref": "#/$defs/ownership" },
+    "lifecycle": { "$ref": "#/$defs/lifecycle" },
+    "risk": { "$ref": "#/$defs/risk" },
+    "currentBlueprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "path"],
+      "properties": {
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
+        "path": { "type": "string", "minLength": 3 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "platforms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "environment"],
+        "properties": {
+          "name": { "type": "string", "minLength": 2 },
+          "environment": { "enum": ["development", "test", "staging", "production"] },
+          "tenant": { "type": "string" },
+          "region": { "type": "string" },
+          "externalId": { "type": "string" }
+        }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "enum": ["observe", "create", "modify", "execute", "approve", "delete", "delegate"]
+      },
+      "uniqueItems": true
+    },
+    "evidenceLinks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/evidenceLink" }
+    },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "expiresAt"],
+      "properties": {
+        "status": { "enum": ["valid", "conditional", "expired", "not-required"] },
+        "attestedAt": { "type": "string", "format": "date" },
+        "expiresAt": { "type": "string", "format": "date" },
+        "decisionRef": { "type": "string" }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,39}$" },
+      "uniqueItems": true
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system", "lastSeenAt"],
+      "properties": {
+        "system": { "type": "string" },
+        "lastSeenAt": { "type": "string", "format": "date-time" },
+        "confidence": { "enum": ["low", "medium", "high"] }
+      }
+    },
+    "lastReviewed": { "type": "string", "format": "date" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {
+            "properties": {
+              "lifecycle": {
+                "properties": { "status": { "enum": ["conditional", "approved", "active"] } },
+                "required": ["status"]
+              }
+            }
+          },
+          {
+            "properties": {
+              "platforms": {
+                "contains": {
+                  "properties": { "environment": { "const": "production" } },
+                  "required": ["environment"]
+                }
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "required": ["attestation", "evidenceLinks"],
+        "properties": {
+          "evidenceLinks": { "minItems": 1 },
+          "attestation": {
+            "required": ["status", "attestedAt", "expiresAt", "decisionRef"],
+            "properties": {
+              "status": { "enum": ["valid", "conditional"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle": {
+            "properties": { "status": { "enum": ["conditional", "approved", "active"] } },
+            "required": ["status"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "lifecycle": { "required": ["approvedAt"] }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "role": { "type": "string", "minLength": 2 },
+        "contact": { "type": "string", "maxLength": 200 },
+        "organizationUnit": { "type": "string" }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["businessOwner", "technicalOwner"],
+      "properties": {
+        "businessOwner": { "$ref": "#/$defs/owner" },
+        "technicalOwner": { "$ref": "#/$defs/owner" },
+        "runOwner": { "$ref": "#/$defs/owner" },
+        "dataOwners": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/owner" }
+        }
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "createdAt"],
+      "properties": {
+        "status": {
+          "enum": [
+            "discovered",
+            "registered",
+            "assessed",
+            "conditional",
+            "approved",
+            "active",
+            "quarantined",
+            "sunset-planned",
+            "retired",
+            "archived"
+          ]
+        },
+        "createdAt": { "type": "string", "format": "date" },
+        "approvedAt": { "type": "string", "format": "date" },
+        "sunsetBy": { "type": "string", "format": "date" },
+        "statusReason": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier", "assessmentRef", "classifiedAt"],
+      "properties": {
+        "tier": { "enum": ["T1", "T2", "T3", "T4"] },
+        "assessmentRef": { "type": "string", "minLength": 3 },
+        "classifiedAt": { "type": "string", "format": "date" },
+        "redFlags": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 3 },
+          "uniqueItems": true
+        },
+        "residualRisk": { "enum": ["low", "moderate", "high", "critical", "unknown"] }
+      }
+    },
+    "evidenceLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "path"],
+      "properties": {
+        "type": {
+          "enum": ["assessment", "control", "evaluation", "approval", "incident", "attestation", "sunset"]
+        },
+        "path": { "type": "string", "minLength": 3 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}

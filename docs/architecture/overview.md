@@ -136,13 +136,14 @@ O modelo combina os níveis L0–L3 e o blast radius da policy v1 com uma matriz
 
 ## Visual consolidado
 
-![Modelo operacional de governança de agentes](diagrams/agent-governance-operating-model.png)
+![Modelo operacional de governança de agentes](diagrams/ai-agent-governance-framework.png)
 
 A fonte reproduzível está em [`tools/scripts/render-agent-governance-infographic.py`](../../tools/scripts/render-agent-governance-infographic.py).
 
 ## Próximos passos
 
-- revisar o [crosswalk Microsoft × framework](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md);
+- aprovar mandato, escopo, sponsorship e risk appetite;
 - executar o [plano de 90 dias](../guides/implementation-plan-90-days.md);
-- validar registry, blueprint e risk matrix em pilotos;
-- somente então propor uma policy v2 preservando a v1.
+- implantar registry, blueprint e risk tiering no portfólio inicial;
+- validar decision gates, containment, rollback e attestation por evidência;
+- tratar qualquer mudança de policy como proposta separada, formal e versionada.

@@ -19,7 +19,7 @@ tags: [architecture, principles, agent-governance]
 7. **Lifecycle-aware:** criação, mudança, attestation, transferência e decommissioning fazem parte do mesmo sistema.
 8. **Platform-agnostic:** policy e control objectives são comuns; implementação varia por plataforma.
 9. **Value-linked:** criação e uso só importam quando conectados a qualidade, risco, experiência e resultado.
-10. **Iterative:** arquitetura, controles e risk matrix evoluem com tecnologia, regulação e evidência dos pilotos.
+10. **Iterative:** arquitetura, controles e risk matrix evoluem com tecnologia, regulação e evidência operacional.
 
 ## Relationship to policy
 

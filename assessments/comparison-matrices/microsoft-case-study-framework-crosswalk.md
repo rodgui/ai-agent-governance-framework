@@ -37,7 +37,7 @@ Este assessment não altera a policy v1. Mudanças de policy exigem revisão for
 | Identidade do agente | Identidade, acesso, provisionamento e desprovisionamento[1][2] | RBAC/ABAC, auth strength, secrets e access reviews | Parcial | Definir workload identity, owner lifecycle e transferência/desativação por vínculo |
 | Dados AI-ready | Certificação, labels, data owners e automação[5] | Data classification, DLP, DPIA e data owners | Parcial | Definir critério AI-ready, quality gate de dados e connector gate por label |
 | Data mesh | Ownership por domínio com controles comuns automatizados[5] | Não há modelo de produtos de dados ou federação | Lacuna | Adotar apenas se compatível com a arquitetura de dados corporativa; registrar como proposta |
-| Risk matrix por capacidade | Alcance, toolchain, fontes, ações, regionalidade e criticidade[5] | Blast radius, autonomia L0–L3, users e red flags | Parcial | Expandir matriz com read/write/action/workflow, no/low/pro-code, região e reversibilidade |
+| Risk matrix por capacidade | Alcance, toolchain, fontes, ações, regionalidade e criticidade[5] | Blast radius, HITL e títulos para autonomy levels/approval matrix ainda sem definição operacional | Parcial | Expandir matriz com read/write/action/workflow, no/low/pro-code, região e reversibilidade; submeter qualquer detalhe normativo a versionamento formal |
 | Impact assessment | Avaliação inicial de danos, grupos afetados e mitigadores[3] | Self-Assessment e AI Impact Assessment para alto risco | Parcial | Tornar escopo, triggers e evidências explícitos; evitar duplicação com DPIA |
 | Release assessment | Revisão detalhada antes da liberação[3] | Publication Checklist e Approval Matrix | Parcial | Mapear checklist para security, privacy, RAI, accessibility e regional reviews |
 | Responsible AI network | Office, council, champions e especialistas distribuídos[3] | AI Governance Committee e princípios RAI | Parcial | Formalizar champion, reviewer, escalation path e authority model |
@@ -53,16 +53,18 @@ Este assessment não altera a policy v1. Mudanças de policy exigem revisão for
 
 ## Leitura consolidada
 
-A v1 é particularmente forte em **controle operacional**:
+A v1 é particularmente forte ao estabelecer a **intenção e a base de controle operacional**:
 
 - owners nominativos;
-- autonomia e HITL;
-- blast radius;
-- approval matrix;
+- HITL e intenção de padronizar autonomia;
+- avaliação de blast radius;
+- critérios narrativos de aprovação, sem uma matriz executável materializada;
 - catálogo;
 - observabilidade;
 - quarantine, kill switch e sunset;
 - governança multiplataforma.
+
+Os níveis L0–L3 e a approval matrix são anunciados, mas não definidos no texto congelado. O crosswalk não os trata como controls operacionais até que sejam formalizados.
 
 As principais lacunas estão menos na proteção básica e mais na evolução para um **sistema operacional em escala**:
 
@@ -74,9 +76,9 @@ As principais lacunas estão menos na proteção básica e mais na evolução pa
 6. attestation por equipe e lifecycle vinculado à identidade;
 7. métricas que conectem criação, uso, qualidade e valor.
 
-## Backlog recomendado para policy v2
+## Backlog de evolução do framework
 
-### P0 — antes de escalar novos pilotos
+### P0 — antes de expandir o portfólio governado
 
 - ampliar o catálogo com identidade, conectores, destinos, assessment, attestation e valor;
 - definir matriz de risco por capacidade, alcance e reversibilidade;
@@ -93,9 +95,9 @@ As principais lacunas estão menos na proteção básica e mais na evolução pa
 - criar métricas de discovery, adoption, quality e business outcome;
 - testar lifecycle de saída do usuário e attestation de equipe.
 
-### P2 — após evidência dos pilotos
+### P2 — após evidência operacional
 
-- propor policy v2 preservando a v1;
+- avaliar formalmente se alguma mudança normativa é necessária, preservando a v1 até aprovação explícita;
 - converter controles estáveis em policy-as-code;
 - avaliar integração com um control plane corporativo;
 - decidir se data mesh é aplicável à arquitetura de dados da organização;

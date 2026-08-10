@@ -1,7 +1,7 @@
 ---
 title: "Microsoft Customer Zero: governança e operação de agentes em escala"
 status: stable
-maturity: validated
+maturity: observed
 last_reviewed: 2026-08-09
 review_cycle: 180d
 owners: [rodgui]
@@ -30,6 +30,12 @@ Os textos são relatos oficiais da própria Microsoft, incluindo sua experiênci
 | Responsible AI at Microsoft[3] | 2026-03-26 | Princípios, impact assessment, release assessment e accountability |
 | Becoming a Frontier Firm[4] | 2026-04-16 | Maturidade, adoção, suporte, change management e medição de valor |
 | Governing AI agents at scale[5] | 2026-05-21 | Dados AI-ready, matriz de risco, MCP, lifecycle e métricas |
+
+## Visual do caso de estudo
+
+![Microsoft Customer Zero — governança e operação de agentes](diagrams/microsoft-customer-zero-agent-governance.png)
+
+O visual sintetiza relatos institucionais da Microsoft. Ele não representa arquitetura universal nem auditoria independente.
 
 ## Síntese executiva
 
@@ -208,14 +214,16 @@ Os artigos reconhecem que a metodologia de impacto ainda estava em evolução. P
 
 ## 8. Implicações para a policy v1 deste repositório
 
-A [policy v1](../governance/ai-agent-policy-and-governance-v1.md) já cobre de forma forte:
+A [Policy v1](../governance/ai-agent-policy-and-governance-v1.md) fornece o ponto de partida interno adotado:
 
 - Design Authority, Run Authority e accountability por agente;
-- autonomia L0–L3 e HITL;
-- blast radius e approval matrix;
+- HITL para ações relevantes e intenção de padronizar autonomia;
+- avaliação de blast radius e intenção de usar uma matriz de aprovação;
 - catálogo, observabilidade, quarentena e kill switch;
 - lifecycle, revisão periódica e sunset;
 - regras multiplataforma e onboarding de plataformas.
+
+O texto congelado apenas anuncia níveis L0–L3 e uma approval matrix; não define os níveis nem materializa a matriz. Este estudo não preenche essa lacuna por inferência, e qualquer detalhamento normativo exige aprovação e versionamento separados.
 
 Os artigos reforçam essa base e revelam áreas para uma futura v2:
 

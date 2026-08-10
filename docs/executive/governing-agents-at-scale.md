@@ -1,102 +1,181 @@
 ---
-title: "Governar agentes em escala: da policy ao sistema operacional"
-status: stable
-maturity: validated
+title: Governar agentes em escala — da policy ao sistema operacional
+status: maintained
+owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-09
-review_cycle: 180d
-owners: [rodgui]
-tags: [executive, agent-governance, operating-model, policy-v2]
+review_cycle: quarterly
+supersedes: null
 related:
-  study: ../explanations/microsoft-agent-governance-case-study.md
-  policy: ../governance/ai-agent-policy-and-governance-v1.md
-  plan: ../guides/implementation-plan-90-days.md
+  - ../governance/ai-agent-policy-and-governance-v1.md
+  - ../governance/operating-model.md
+  - ../guides/framework-implementation-playbook.md
+  - ../guides/implementation-plan-90-days.md
+  - ../architecture/overview.md
 ---
 
-# Governar agentes em escala: da policy ao sistema operacional
+# Governar agentes em escala — da policy ao sistema operacional
 
 ## Decision requested
 
-Usar a policy v1 como baseline de controle e autorizar uma fase de 90 dias para validar registry, blueprint, AI-ready data, matriz de risco, assessments, adoção, MCP e métricas de valor antes de propor uma v2.
+Autorizar a implantação de um sistema federado de governança para o portfólio de IA e agentes, com:
 
-## Context
+- mandato e scope explícitos;
+- owners e decision rights;
+- registry e blueprint;
+- tiering proporcional;
+- controls de build time e runtime;
+- evidence package e attestation;
+- roadmap inicial de 90 dias governado por decision gates.
 
-A policy v1 deste repositório já estabelece fundamentos raros em iniciativas ainda imaturas: owners nominativos, autonomia L0–L3, HITL, blast radius, approval matrix, catálogo, observabilidade, quarantine, kill switch e sunset.
+A decisão não exige substituir a Policy v1, escolher uma plataforma universal ou iniciar um programa de certificação.
 
-Uma análise de cinco artigos do Microsoft Inside Track mostra que essa direção está alinhada com a jornada interna da Microsoft. Também revela que governar agentes em escala exige capacidades que vão além da policy: dados certificados, governança embutida, adoption, suporte, identidade, telemetria e decisões de lifecycle.
+## Contexto
+
+A Policy v1 fornece o ponto de partida normativo adotado: nomeia authorities e owners, exige HITL para ações relevantes, introduz blast radius, approval, catálogo, observabilidade, containment, lifecycle e sunset. Ela também anuncia uma matriz de aprovação e níveis de autonomia L0–L3, mas o texto congelado não materializa a matriz nem define cada nível. Esses detalhes precisam ser operacionalizados como guidance versionado ou submetidos a mudança formal de policy; não podem ser presumidos.
+
+O gap tratado por este framework é transformar esse ponto de partida em um sistema operacional capaz de responder, com evidência:
+
+1. quais sistemas e agentes existem;
+2. para que servem e quem responde por eles;
+3. que dados, identidades e tools utilizam;
+4. quanto risco e capacidade de ação possuem;
+5. que controls estão implementados e eficazes;
+6. quem pode liberar, conter, reativar e aposentar;
+7. se uso, qualidade e valor justificam continuidade.
 
 ## Why now
 
-Agentes não apenas geram respostas. Eles podem acessar dados, usar credenciais, chamar ferramentas, escrever em sistemas e executar workflows. A combinação de autonomia, alcance e interconectividade transforma exceções locais em risco sistêmico.
+Agentes não apenas produzem conteúdo. Eles podem recuperar dados, usar credenciais, chamar tools, escrever em sistemas e orquestrar workflows. Autonomia, alcance e interconectividade tornam inadequados tanto o laissez-faire quanto um único approval flow para tudo.
 
-Ao mesmo tempo, uma governança que trata todos os agentes como aplicações críticas cria filas, shadow AI e perda de confiança. O modelo precisa ser proporcional: baixo atrito para agentes de baixo risco e revisão profunda para agentes com escrita, ação, dados sensíveis ou impacto empresarial.
+Governança proporcional permite:
 
-## Recommendation
+- baixo atrito para baixo risco;
+- revisão profunda para high impact e state-changing actions;
+- enforcement nos pontos de controle adequados;
+- especialistas concentrados em exceções e material decisions;
+- contenção e recovery quando o comportamento muda em runtime.
 
-Adotar uma arquitetura operacional em cinco planos:
+## Recomendação
 
-1. **Estratégia e valor:** objetivo, persona, baseline, KPI e business owner.
-2. **Control plane:** registry, blueprint, identidade, lifecycle e policy.
-3. **Assurance plane:** impact assessment, release assessment, segurança, privacy e Responsible AI.
-4. **Adoption and support:** coortes, champions, enablement, self-service e especialistas.
-5. **Runtime and value:** telemetria, detecção, remediação, attestation, uso e outcomes.
+Adotar cinco planos conectados:
 
-Esses planos não precisam de um superadministrador. Precisam de contexto compartilhado, responsabilidades explícitas e workflows capazes de conduzir sinais até decisão e ação.
+1. **Estratégia e valor:** mandato, portfolio, baseline, outcomes e business ownership.
+2. **Control plane:** registry, blueprint, identidade, lifecycle, configuração e administrative action.
+3. **Assurance plane:** risk, security, privacy, Responsible AI, evaluations e challenge proporcional; independência só quando formalmente demonstrada.
+4. **Adoção e suporte:** paved road, catálogo, enablement, suporte e feedback.
+5. **Runtime e melhoria:** telemetry, policy decisions, containment, recovery, attestation e value evidence.
 
-## What changes relative to policy v1
+![AI Agent Governance Framework](../architecture/diagrams/ai-agent-governance-framework.png)
 
-### Preserve
+O framework é vendor-neutral. Produtos podem implementar partes do control plane ou do assurance plane, mas nenhum produto substitui operating model, accountability e controles especializados de dados, identidade, segurança, privacy e operação.
+
+## Operating model proposto
+
+| Autoridade | Accountability principal |
+|---|---|
+| Sponsor executivo | mandato, appetite, funding e material trade-offs |
+| Governance Owner | framework, control catalog, decisões e exceptions |
+| Business Owner | finalidade, uso permitido, outcomes e continuidade |
+| Technical Owner | arquitetura, change, evaluations e remediation |
+| Design Authority | admissibilidade pré-release e conditions |
+| Run Authority | containment, quarantine, rollback e reactivation |
+| Domain Owners | controls de identity, data, tools, security, privacy e RAI |
+| Assurance / challenge | testar design e eficácia conforme tier; só usar o rótulo independente quando conflitos e segregação estiverem formalizados |
+
+Decision rights são definidos no [operating model](../governance/operating-model.md).
+
+## O que preservar da Policy v1
 
 - Design Authority, Run Authority e human accountability;
-- níveis de autonomia e HITL;
-- blast radius e approval matrix;
+- exigência de HITL e intenção de padronizar níveis de autonomia;
+- avaliação de blast radius e intenção de usar uma matriz de aprovação;
 - catálogo, observabilidade e enforcement;
-- policy multiplataforma;
-- lifecycle e sunset.
+- arquitetura multiplataforma;
+- lifecycle, periodic review e sunset.
 
-### Validate for v2
+A taxonomia L0–L3 detalhada, a matriz executável e thresholds não estão definidos no texto congelado; qualquer adoção normativa desses elementos exige aprovação e versionamento próprios.
 
-- agent blueprint separado do registry;
-- AI-ready data e connector gates;
-- matriz no-code/low-code/pro-code por capacidade;
-- impact assessment versus release assessment;
-- adoption lead, champions e suporte por camadas;
-- MCP governance;
-- attestation de equipe e lifecycle vinculado à identidade;
-- métricas de criação, descoberta, uso, qualidade e valor.
+## O que operacionalizar agora
 
-## Benefits
+- registry e blueprint separados;
+- risk tiering por ação, dados, alcance, criticidade e reversibilidade;
+- identity, data e tool contracts;
+- control catalog com owner, implementation, evidence e metrics;
+- release evidence proporcional;
+- runtime signals ligados a ação administrativa;
+- attestation e sunset como processos reais;
+- métricas separadas de criação, descoberta, uso, qualidade, risco e valor.
 
-- inovação com caminhos claros e proporcionais;
-- menos agentes sem owner, duplicados ou sem uso;
-- visibilidade sobre dados, ferramentas e ações;
-- especialistas focados em exceções, não em todos os casos;
-- melhor capacidade de quarantine, rollback e sunset;
-- decisões de investimento baseadas em uso e outcomes, não em volume.
+Qualquer mudança normativa futura deve ser proposta, revisada e versionada separadamente. O roadmap operacional não altera a Policy v1 por implicação.
 
-## Risks and mitigations
+## Outcomes esperados
 
-- **Burocracia:** reduzir com defaults, templates e gates proporcionais.
-- **Falsa confiança:** mostrar campos e evidências ausentes no catálogo.
-- **Centralização:** manter ownership federado com controles comuns.
-- **Automação prematura:** estabilizar policy e exceções antes de policy-as-code.
-- **Métricas de vaidade:** exigir baseline e resultado por agente.
-- **Dependência de fornecedor:** preservar contratos e controles multiplataforma.
+### Governança
 
-## Next steps
+- visão única do portfólio e ownership;
+- decisões proporcionais e rastreáveis;
+- exceções temporárias e compensadas;
+- evidências recuperáveis para assurance.
 
-1. Selecionar 2–3 pilotos de riscos diferentes.
-2. Nomear owners de operating model, dados, identidade, assurance, adoção e runtime.
-3. Executar o [plano de evolução de 90 dias](../guides/implementation-plan-90-days.md).
-4. Usar o [crosswalk Microsoft × framework](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) como backlog de validação.
-5. Propor policy v2 somente depois dos pilotos e de revisão formal.
+### Engenharia e operação
 
-## Visual
+- paved road para builders;
+- permissions e tools explícitas;
+- release e rollback repetíveis;
+- quarantine e incident response exercitáveis.
 
-![Modelo operacional de governança de agentes](../architecture/diagrams/agent-governance-operating-model.png)
+### Negócio
 
-## Supporting material
+- investimento ligado a problema e baseline;
+- uso, qualidade e valor medidos separadamente;
+- continuidade, remediação ou sunset baseados em evidence.
 
-- [Estudo Microsoft Customer Zero](../explanations/microsoft-agent-governance-case-study.md)
-- [Arquitetura de referência](../architecture/overview.md)
+Esses outcomes são objetivos do sistema; não constituem garantia de ROI, compliance ou ausência de incidentes.
+
+## Riscos e mitigadores
+
+| Risco | Mitigação |
+|---|---|
+| Burocracia | tiering, defaults, self-service e SLA por gate |
+| Falsa segurança documental | system evidence, drills e effectiveness testing |
+| Centralização | ownership federado e controls comuns |
+| Tool-led governance | capabilities e contracts vendor-neutral |
+| Métricas de vaidade | baseline, denominadores e outcomes separados |
+| Backlog sem decisão | gates com authority, prazo e output claros |
+| Scope excessivo | portfolio boundary e rollout por coortes operacionais |
+
+## Plano inicial de 90 dias
+
+1. aprovar mandate, scope, sponsorship e risk appetite;
+2. estabelecer baseline e reconcile inventory;
+3. implantar registry e blueprint para o portfolio in-scope;
+4. configurar tiering e controls mínimos por domínio;
+5. ativar decision gates, evidence package e exception flow;
+6. validar release, containment, rollback e reactivation em exercícios;
+7. iniciar operação, attestation e portfolio review;
+8. aprovar roadmap de melhoria com owners e acceptance criteria.
+
+Detalhes: [implementation playbook](../guides/framework-implementation-playbook.md) e [roadmap de 90 dias](../guides/implementation-plan-90-days.md).
+
+## Success criteria
+
+- scope e authorities aprovados;
+- registry reconciliado para o portfolio in-scope;
+- owners e attestations válidos;
+- tiering e blueprint completos conforme applicability;
+- controls aplicáveis ao tier definidos como bloqueantes possuem evidence;
+- release e runtime actions exercitados;
+- exceptions possuem expiry;
+- metrics têm baseline e owners;
+- roadmap seguinte é baseado em gaps e outcomes observados.
+
+## Evidência complementar
+
 - [Policy v1](../governance/ai-agent-policy-and-governance-v1.md)
-- [Plano de 90 dias](../guides/implementation-plan-90-days.md)
+- [Arquitetura de referência](../architecture/overview.md)
+- [Maturity model](../guides/maturity-model.md)
+- [Control catalog](../../controls/README.md)
+- [Microsoft Customer Zero case](../explanations/microsoft-agent-governance-case-study.md)
+- [Microsoft × framework crosswalk](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md)
+
+O caso Microsoft é evidência de implementação declarada por um fornecedor; não é arquitetura universal nem auditoria independente.
