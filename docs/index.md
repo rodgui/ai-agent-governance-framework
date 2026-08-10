@@ -63,11 +63,12 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 1. [Implementation playbook](guides/framework-implementation-playbook.md)
 2. [Roadmap de 90 dias](guides/implementation-plan-90-days.md)
-3. [Evaluations](evaluations/README.md)
-4. [Adoção e suporte](adoption/README.md)
-5. [Templates](../templates/README.md)
-6. [Examples](../examples/README.md)
-7. [Publication checklist](../templates/publication-checklist.md)
+3. [Risk pre-screen](../templates/risk-pre-screen.md)
+4. [Evaluations](evaluations/README.md)
+5. [Adoção e suporte](adoption/README.md)
+6. [Templates](../templates/README.md)
+7. [Examples](../examples/README.md)
+8. [Publication checklist](../templates/publication-checklist.md)
 
 **Decisões esperadas:** escopo, risco, dados, tools, evals, release, rollback e sunset.
 
@@ -102,9 +103,11 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 1. [Handbook](handbook/README.md)
 2. [Implementation playbook](guides/framework-implementation-playbook.md)
-3. [Maturity model](guides/maturity-model.md)
-4. [Design patterns](patterns/README.md)
-5. [Toolkit](../templates/README.md)
+3. [Programa de 24 semanas](guides/implementation-program-24-weeks.md)
+4. [Plano de piloto](guides/pilot-plan.md)
+5. [Maturity model](guides/maturity-model.md)
+6. [Design patterns](patterns/README.md)
+7. [Toolkit](../templates/README.md)
 
 **Decisões esperadas:** baseline, gaps, target operating model, backlog priorizado, entregáveis e critérios de aceite.
 

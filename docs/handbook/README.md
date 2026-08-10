@@ -11,7 +11,7 @@ related:
 ---
 
 <!-- markdownlint-disable MD029 -->
-<!-- A numeração 1–30 é deliberadamente contínua entre as partes editoriais. -->
+<!-- A numeração 1–32 é deliberadamente contínua entre as partes editoriais. -->
 
 # Handbook de governança de IA e agentes
 
@@ -20,8 +20,8 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 ## Como ler
 
 - **Leitura executiva:** capítulos 1, 2, 6 e 10.
-- **Implantação:** capítulos 1–30 na ordem.
-- **Arquitetura:** capítulos 3, 7, 11–17, 22 e 26–29.
+- **Implantação:** capítulos 1–32 na ordem.
+- **Arquitetura:** capítulos 3, 7, 11–17, 22 e 28–31.
 - **Assurance:** capítulos 8, 9 e 18–21.
 - **Referência:** consulte por domínio; não precisa seguir a ordem.
 
@@ -61,14 +61,16 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 
 24. [Implementation playbook](../guides/framework-implementation-playbook.md)
 25. [Roadmap de 90 dias](../guides/implementation-plan-90-days.md)
-26. [Catálogo de design patterns](../patterns/README.md)
-27. [Control catalog](../../controls/README.md)
-28. [Schemas e examples](../../schemas/README.md)
-29. [Templates](../../templates/README.md)
+26. [Programa de implantação em 24 semanas](../guides/implementation-program-24-weeks.md)
+27. [Plano de piloto e critérios de expansão](../guides/pilot-plan.md)
+28. [Catálogo de design patterns](../patterns/README.md)
+29. [Control catalog](../../controls/README.md)
+30. [Schemas e examples](../../schemas/README.md)
+31. [Templates](../../templates/README.md)
 
 ## Parte V — Fontes e limitações
 
-30. [Fontes e bibliografia](../../references/sources.md)
+32. [Fontes e bibliografia](../../references/sources.md)
 
 ## Casos e mappings opcionais
 

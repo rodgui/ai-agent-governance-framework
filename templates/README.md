@@ -13,6 +13,7 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 ## Assessment e release
 
 - [Maturity Assessment](maturity-assessment-template.md)
+- [Risk pre-screen](risk-pre-screen.md)
 - [Autoavaliação de agente](self-assessment-form.md)
 - [Exemplo de autoavaliação](self-assessment-example.md)
 - [Technology Assessment](assessment-template.md)
