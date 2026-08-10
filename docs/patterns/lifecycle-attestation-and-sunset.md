@@ -8,7 +8,7 @@ supersedes: null
 related:
   - README.md
   - ../operations/README.md
-  - ../../../templates/sunset-plan.md
+  - ../../templates/sunset-plan.md
 ---
 
 # Pattern — Lifecycle Attestation and Sunset

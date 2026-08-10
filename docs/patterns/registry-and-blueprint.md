@@ -7,8 +7,8 @@ review_cycle: quarterly
 supersedes: null
 related:
   - README.md
-  - ../../identity/README.md
-  - ../../../schemas/README.md
+  - ../identity/README.md
+  - ../../schemas/README.md
 ---
 
 # Pattern — Registry and Blueprint

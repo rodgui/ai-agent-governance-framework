@@ -18,6 +18,7 @@ EXCLUDED_DIRS = {".git", ".venv", "venv", "dist", "__pycache__", ".pytest_cache"
 TEXT_SUFFIXES = {".md", ".py", ".json", ".yml", ".yaml", ".toml", ".txt"}
 INLINE_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 CITATION_RE = re.compile(r"(?<!\!)\[(\d+)\]")
+VENDOR_NAME_RE = re.compile(r"\b(?:Microsoft|Agent 365|Cloudflare|Azure|Copilot|Entra|Purview|Defender)\b")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 REPOSITORY_REF_RE = re.compile(
     r"^[A-Za-z0-9._/-]+\.(?:md|json|yaml|yml|png)(?:#[A-Za-z0-9._~!$&'()*+,;=:@/?%-]*)?$"
@@ -33,6 +34,7 @@ ALLOWED_STATUSES = {
     "maintained",
     "review",
     "stable",
+    "superseded",
     "validated",
 }
 
@@ -81,10 +83,12 @@ def requires_frontmatter(path: Path) -> bool:
     rel = relative(path)
     exact = {
         "docs/fundamentals/README.md",
+        "docs/governance/policy.md",
         "docs/governance/operating-model.md",
         "docs/architecture/overview.md",
         "docs/executive/governing-agents-at-scale.md",
-        "docs/executive/consulting-engagement-model.md",
+        "consulting/README.md",
+        "consulting/consulting-engagement-model.md",
         "docs/explanations/microsoft-agent-governance-case-study.md",
         "docs/guides/framework-implementation-playbook.md",
         "docs/guides/implementation-plan-90-days.md",
@@ -134,6 +138,53 @@ def validate_frontmatter(markdown_files: list[Path]) -> list[Issue]:
         reviewed = metadata.get("last_reviewed", "")
         if reviewed and not DATE_RE.match(reviewed):
             issues.append(Issue("frontmatter", relative(path), f"invalid last_reviewed date: {reviewed}"))
+    return issues
+
+
+def frontmatter_related_values(text: str) -> list[str]:
+    if not text.startswith("---\n"):
+        return []
+    end = text.find("\n---\n", 4)
+    if end < 0:
+        return []
+    values: list[str] = []
+    in_related = False
+    for raw in text[4:end].splitlines():
+        if raw == "related:":
+            in_related = True
+            continue
+        if not in_related:
+            continue
+        if raw and not raw.startswith(" "):
+            break
+        stripped = raw.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("- "):
+            value = stripped[2:]
+        elif ":" in stripped:
+            _, value = stripped.split(":", 1)
+        else:
+            continue
+        value = value.strip().strip('"').strip("'")
+        if value and value not in {"null", "[]", "{}"}:
+            values.append(value)
+    return values
+
+
+def validate_frontmatter_related_paths(markdown_files: list[Path]) -> list[Issue]:
+    issues: list[Issue] = []
+    for path in markdown_files:
+        text = path.read_text(encoding="utf-8")
+        for raw_target in frontmatter_related_values(text):
+            if "://" in raw_target or raw_target.startswith(("mailto:", "#")):
+                continue
+            target = raw_target.split("#", 1)[0]
+            candidate = (path.parent / target).resolve()
+            if not candidate.exists():
+                issues.append(Issue("frontmatter-related", relative(path), f"target does not exist: {raw_target}"))
+            elif not has_exact_case(candidate):
+                issues.append(Issue("frontmatter-related", relative(path), f"path casing does not match filesystem: {raw_target}"))
     return issues
 
 
@@ -616,8 +667,86 @@ def validate_assets() -> list[Issue]:
 def validate_policy_integrity() -> list[Issue]:
     digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
     if digest != POLICY_V1_SHA256:
-        return [Issue("policy", relative(POLICY_PATH), f"Policy v1 changed: expected {POLICY_V1_SHA256}, found {digest}")]
+        return [Issue("policy-history", relative(POLICY_PATH), f"Historical Policy v1 changed: expected {POLICY_V1_SHA256}, found {digest}")]
     return []
+
+
+def validate_commercial_boundary() -> list[Issue]:
+    issues: list[Issue] = []
+    legacy_paths = [
+        "docs/executive/consulting-engagement-model.md",
+        "templates/consulting-proposal-template.md",
+    ]
+    for item in legacy_paths:
+        if (ROOT / item).exists():
+            issues.append(Issue("boundary", item, "commercial artifact must live under consulting/"))
+
+    model_path = ROOT / "consulting/consulting-engagement-model.md"
+    packaging_path = ROOT / "consulting/README.md"
+    if not model_path.exists() or not packaging_path.exists():
+        return issues
+
+    model = model_path.read_text(encoding="utf-8")
+    packaging = packaging_path.read_text(encoding="utf-8")
+    offers = re.findall(r"^## Oferta ([1-9]) — (.+)$", model, flags=re.MULTILINE)
+    numbers = [int(number) for number, _ in offers]
+    if numbers != list(range(1, 10)):
+        issues.append(Issue("boundary", relative(model_path), "expected exactly nine ordered offer modules"))
+
+    package_rows = re.findall(
+        r"^\| \*\*([1-3])\.[^|]+\*\* \| [^|]+ \| ([^|]+) \|$",
+        packaging,
+        flags=re.MULTILINE,
+    )
+    if [number for number, _ in package_rows] != ["1", "2", "3"]:
+        issues.append(Issue("boundary", relative(packaging_path), "expected exactly three ordered package rows"))
+    module_cells = "\n".join(modules for _, modules in package_rows)
+    for _, title in offers:
+        if module_cells.count(title) != 1:
+            issues.append(
+                Issue("boundary", relative(packaging_path), f"offer module must appear once in package rows: {title}")
+            )
+    return issues
+
+
+def validate_vendor_neutrality(files: list[Path]) -> list[Issue]:
+    issues: list[Issue] = []
+    allowed_prefixes = (
+        "assessments/",
+        "docs/architecture/decisions/",
+        "docs/explanations/",
+        "references/",
+        "specs/",
+    )
+    allowed_files = {
+        "CHANGELOG.md",
+        "README.md",
+        "ROADMAP.md",
+        "docs/architecture/diagrams/README.md",
+        "docs/governance/ai-agent-policy-and-governance-v1.md",
+        "docs/handbook/README.md",
+        "docs/index.md",
+        "tools/scripts/README.md",
+    }
+    scanned_suffixes = {".md", ".json", ".yaml", ".yml", ".toml"}
+    for path in files:
+        rel = relative(path)
+        if path.suffix.lower() not in scanned_suffixes:
+            continue
+        if rel in allowed_files or rel.startswith(allowed_prefixes):
+            continue
+        text = path.read_text(encoding="utf-8")
+        match = VENDOR_NAME_RE.search(text)
+        if match:
+            line = text.count("\n", 0, match.start()) + 1
+            issues.append(
+                Issue("vendor-neutrality", rel, f"vendor name outside source/case/mapping area at line {line}")
+            )
+    return issues
+
+
+def validate_product_boundaries(files: list[Path]) -> list[Issue]:
+    return validate_commercial_boundary() + validate_vendor_neutrality(files)
 
 
 def validate_sensitive_content(files: list[Path]) -> list[Issue]:
@@ -653,6 +782,8 @@ def validate_required_paths() -> list[Issue]:
         "README.md",
         "ROADMAP.md",
         "docs/index.md",
+        "docs/governance/policy.md",
+        "docs/governance/history/README.md",
         "docs/handbook/README.md",
         "docs/guides/framework-implementation-playbook.md",
         "docs/guides/maturity-model.md",
@@ -662,6 +793,10 @@ def validate_required_paths() -> list[Issue]:
         "schemas/agent-blueprint.schema.json",
         "schemas/control-catalog.schema.json",
         "schemas/maturity-assessment.schema.json",
+        "consulting/README.md",
+        "consulting/ROADMAP.md",
+        "consulting/consulting-engagement-model.md",
+        "consulting/templates/consulting-proposal-template.md",
         "tools/assets/fonts/DejaVuSans.ttf",
         "tools/assets/fonts/DejaVuSans-Bold.ttf",
         "tools/assets/fonts/LICENSE_DEJAVU",
@@ -677,11 +812,13 @@ def main() -> int:
     issues: list[Issue] = []
     issues.extend(validate_required_paths())
     issues.extend(validate_frontmatter(markdown_files))
+    issues.extend(validate_frontmatter_related_paths(markdown_files))
     issues.extend(validate_markdown_links(markdown_files))
     issues.extend(validate_citations(markdown_files))
     issues.extend(validate_json_and_schemas(json_files))
     issues.extend(validate_assets())
     issues.extend(validate_policy_integrity())
+    issues.extend(validate_product_boundaries(files))
     issues.extend(validate_sensitive_content(files))
 
     if issues:

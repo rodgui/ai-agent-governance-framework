@@ -1,26 +1,25 @@
 ---
 title: "Arquitetura de referência para governança de agentes"
-status: review
-maturity: observed
+status: maintained
+maturity: validated
 last_reviewed: 2026-08-09
 review_cycle: 180d
 owners: [rodgui]
 tags: [architecture, operating-model, control-plane, responsible-ai]
 related:
-  policy: ../governance/ai-agent-policy-and-governance-v1.md
-  study: ../explanations/microsoft-agent-governance-case-study.md
-  crosswalk: ../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md
+  policy: ../governance/policy.md
+  decision: decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md
 ---
 
 # Arquitetura de referência para governança de agentes
 
 ## Status desta arquitetura
 
-Este documento propõe uma arquitetura conceitual derivada da [policy v1](../governance/ai-agent-policy-and-governance-v1.md) e do [estudo Microsoft Customer Zero](../explanations/microsoft-agent-governance-case-study.md). Ele está em revisão e **não substitui a policy adotada**.
+Este documento integra a [policy modular](../governance/policy.md) como arquitetura canônica do framework. A adoção normativa de uma release continua dependendo da authority competente.
 
 ## Objetivo
 
-Conectar estratégia, dados, controles, Responsible AI, adoção, suporte e operação em um único fluxo verificável. O modelo é independente de produto: Agent 365 pode implementar parte do control plane, mas não substitui identidade, segurança, dados, plataformas, assurance ou accountability humana.
+Conectar estratégia, dados, controles, Responsible AI, adoção, suporte e operação em um único fluxo verificável. O modelo define capabilities e boundaries independentes de produto; qualquer plataforma é uma implementação substituível e opcional.
 
 ## Modelo em cinco planos
 
@@ -104,7 +103,7 @@ O grau de governança deve aumentar quando cresce qualquer uma destas dimensões
 - autonomia;
 - distribuição regional e exposição externa.
 
-O modelo combina os níveis L0–L3 e o blast radius da policy v1 com uma matriz adicional por capacidade e método de construção.
+O modelo combina autonomia, blast radius, capacidade de ação, criticidade, reversibilidade, dados e alcance. Taxonomias organizacionais adicionais podem ser mapeadas sem alterar a arquitetura.
 
 ## Boundaries
 
@@ -146,4 +145,4 @@ A fonte reproduzível está em [`tools/scripts/render-agent-governance-infograph
 - executar o [plano de 90 dias](../guides/implementation-plan-90-days.md);
 - implantar registry, blueprint e risk tiering no portfólio inicial;
 - validar decision gates, containment, rollback e attestation por evidência;
-- tratar qualquer mudança de policy como proposta separada, formal e versionada.
+- promover mudanças normativas por proposta, revisão, authority, changelog e release versionada.

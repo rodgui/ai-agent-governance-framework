@@ -2,9 +2,9 @@
 
 **Framework vendor-neutral para governar sistemas de IA e agentes do mandato executivo ao runtime.**
 
-Este repositório reúne policy, operating model, arquitetura, design patterns, controles, assessments, schemas e templates em uma única fonte canônica. O mesmo conteúdo pode ser consumido como referência técnica, guia de implantação, handbook, ebook ou toolkit de consultoria.
+Este repositório reúne policy, operating model, arquitetura, design patterns, controles, assessments, schemas e templates em uma única fonte canônica. O mesmo conteúdo pode ser consumido como referência técnica, guia de implantação, handbook e base para futuras publicações.
 
-> **Status normativo:** somente a [Policy v1](docs/governance/ai-agent-policy-and-governance-v1.md) é baseline adotada. Arquiteturas, patterns, playbooks, crosswalks e propostas são guidance até aprovação explícita e versionada.
+> **Status normativo:** a [policy modular](docs/governance/policy.md) é a fonte canônica em evolução. Uma organização só deve declarar uma release como adotada após aprovação explícita e versionada pela authority competente.
 
 ![AI Agent Governance Framework](docs/architecture/diagrams/ai-agent-governance-framework.png)
 
@@ -43,14 +43,14 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 | reutilizar soluções arquiteturais | [Catálogo de design patterns](docs/patterns/README.md) |
 | adotar controles verificáveis | [Control catalog](controls/README.md) |
 | registrar agentes e arquitetura | [Schemas e exemplos](schemas/README.md) |
-| adaptar para uma consultoria | [Modelo de engagement](docs/executive/consulting-engagement-model.md) |
-| entender a evidência Microsoft | [Caso Microsoft Customer Zero](docs/explanations/microsoft-agent-governance-case-study.md) |
+| conhecer a produtificação comercial separada | [Consultoria: três pacotes e nove módulos](consulting/README.md) |
+| estudar uma referência externa opcional | [Caso Microsoft Customer Zero](docs/explanations/microsoft-agent-governance-case-study.md) |
 
 ## Toolkit
 
 | Artefato | Uso |
 |---|---|
-| [Policy v1](docs/governance/ai-agent-policy-and-governance-v1.md) | baseline normativa de autonomia, HITL, aprovação, lifecycle e sunset |
+| [Policy modular](docs/governance/policy.md) | entrada normativa, composição, boundaries e versionamento |
 | [Operating model](docs/governance/operating-model.md) | papéis, decision rights, fóruns e handoffs |
 | [Arquitetura](docs/architecture/overview.md) | planos, fluxos e boundaries |
 | [Patterns](docs/patterns/README.md) | soluções recorrentes e antipatterns |
@@ -75,11 +75,11 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 
 Os documentos modulares permanecem como fonte canônica e o [handbook](docs/handbook/README.md) define uma ordem editorial estável. Quando o conteúdo estiver maduro, PDF, EPUB ou outros formatos devem ser gerados a partir dessa fonte — nunca mantidos como cópias editoriais independentes.
 
-## Uso em consultoria
+## Camada comercial separada
 
-O material pode apoiar diagnóstico, target operating model, desenho de policy e controles, registry/lifecycle, Responsible AI assurance, runtime governance, MCP/tool governance e enablement. Cada engagement deve adaptar o método ao contexto jurídico, setorial e tecnológico do cliente.
+A produtificação pessoal deste conhecimento está em [`consulting/`](consulting/README.md), organizada em três pacotes compostos por nove módulos. Ela deriva do framework, mas não integra a policy, o handbook ou a comunicação executiva canônica.
 
-Este framework **não é certificação**, parecer jurídico, garantia de conformidade nem promessa de retorno financeiro. Resultados dependem de contexto, implementação, adoção e evidência observável.
+O framework **não é certificação**, parecer jurídico, garantia de conformidade nem promessa de retorno financeiro. Resultados dependem de contexto, implementação, adoção e evidência observável.
 
 ## Origem e limites
 

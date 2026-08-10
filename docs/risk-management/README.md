@@ -6,7 +6,7 @@ last_reviewed: 2026-08-09
 review_cycle: quarterly
 supersedes: null
 related:
-  - ../governance/ai-agent-policy-and-governance-v1.md
+  - ../governance/policy.md
   - ../responsible-ai/README.md
   - ../security/README.md
   - ../patterns/risk-tiered-governance.md
@@ -51,7 +51,7 @@ Não existe fórmula universal. Scoring apoia consistência; a decisão preserva
 
 ## Tiers
 
-A Policy v1 adotada usa `Low/Medium/High` para blast radius. Os tiers T1–T4 abaixo são **guidance do framework**, não alteração silenciosa da policy nem crosswalk normativo já aprovado. Enquanto a organização não aprovar um crosswalk, registre as duas classificações e aplique o caminho decisório mais restritivo quando houver ambiguidade.
+T1–T4 é a taxonomia canônica de risco da policy modular. Uma organização pode mapear classificações locais, regulatórias ou legadas, desde que preserve os critérios, documente divergências e aplique o caminho decisório mais restritivo quando houver ambiguidade.
 
 | Tier | Perfil | Exemplo de controle |
 |---|---|---|

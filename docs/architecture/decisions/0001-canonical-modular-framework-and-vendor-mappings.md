@@ -1,10 +1,11 @@
 ---
 title: ADR-0001 — Núcleo canônico modular e mappings por fornecedor
-status: accepted
+status: superseded
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-09
 review_cycle: major-change
 supersedes: null
+superseded_by: 0002-modular-policy-vendor-neutrality-and-commercial-boundary.md
 related:
   - ../../../specs/001-handbook-consulting-product/spec.md
   - ../../index.md
@@ -12,6 +13,8 @@ related:
 ---
 
 # ADR-0001 — Núcleo canônico modular e mappings por fornecedor
+
+> **Superseded:** a [ADR-0002](0002-modular-policy-vendor-neutrality-and-commercial-boundary.md) preserva o núcleo modular e vendor-neutral, mas redefine a Policy v1 como origem histórica e separa a camada comercial.
 
 ## Contexto
 

@@ -24,7 +24,7 @@ related:
 
 ## Aplicação corporativa
 
-## Implicações para Azure
+## Implicações para plataformas e portabilidade
 
 ## Implicações para governança de agentes
 

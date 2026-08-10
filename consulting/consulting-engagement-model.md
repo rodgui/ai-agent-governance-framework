@@ -6,13 +6,18 @@ last_reviewed: 2026-08-09
 review_cycle: quarterly
 supersedes: null
 related:
-  - ../guides/framework-implementation-playbook.md
-  - ../guides/maturity-model.md
-  - ../../controls/README.md
-  - ../../templates/README.md
+  - README.md
+  - ../docs/guides/framework-implementation-playbook.md
+  - ../docs/guides/maturity-model.md
+  - ../controls/README.md
+  - ../templates/README.md
 ---
 
 # Modelo de engagement de consultoria
+
+## Boundary do produto
+
+Este modelo pertence à camada comercial pessoal em `consulting/`. Ele deriva do framework canônico, mas não integra a policy, o handbook ou a comunicação executiva do conhecimento público. Alterações de packaging, buyer, duração ou proposta comercial não modificam controls ou requisitos do framework.
 
 ## Proposta de valor
 
@@ -30,6 +35,16 @@ A oferta não vende “um pacote de documentos”. O método produz decisões, a
 - proteger confidencialidade e substituir secrets por `[REDACTED]`;
 - adaptar a obrigações jurídicas e setoriais com especialistas do cliente;
 - identificar mappings de fornecedor como implementação possível, não requisito universal.
+
+## Packaging comercial
+
+As nove ofertas abaixo são módulos de entrega agrupados em três pacotes:
+
+1. **Readiness, Operating Model & Adoption:** ofertas 1, 2 e 8;
+2. **Policy, Controls & Lifecycle:** ofertas 3, 4 e 5;
+3. **Runtime, Tools & Evidence:** ofertas 6, 7 e 9.
+
+Uma proposta pode ajustar sequência e profundidade, mas deve declarar os módulos incluídos, exclusões e dependências. Os nove módulos não devem ser apresentados como nove produtos desconectados.
 
 ## Oferta 1 — Governance Readiness Assessment
 
@@ -385,7 +400,7 @@ Owners precisam de challenge documentado sobre claims, controls e evidências se
 
 Auditoria interna ou estatutária, certificação, parecer jurídico, attestation, opinião de compliance, assurance independente e continuous assurance.
 
-A oferta só poderá evoluir para independent assurance após aprovação das regras previstas na trilha D4 do roadmap.
+Uma oferta distinta só poderá reivindicar independent assurance depois que capacidade institucional, independência, conflitos, serviços incompatíveis, reporting line, sampling e forma da conclusão estiverem formalmente definidos, demonstrados e aprovados. Essa capacidade não integra o catálogo atual.
 
 ## Participantes do cliente
 

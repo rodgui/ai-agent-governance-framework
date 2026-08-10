@@ -8,7 +8,7 @@ supersedes: null
 related:
   - README.md
   - ../risk-management/README.md
-  - ../../../controls/README.md
+  - ../../controls/README.md
 ---
 
 # Pattern — Risk-Tiered Governance

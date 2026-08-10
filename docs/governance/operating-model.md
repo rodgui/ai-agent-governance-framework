@@ -6,7 +6,7 @@ last_reviewed: 2026-08-09
 review_cycle: quarterly
 supersedes: null
 related:
-  - ai-agent-policy-and-governance-v1.md
+  - policy.md
   - ../architecture/overview.md
   - ../guides/framework-implementation-playbook.md
   - ../../controls/README.md
@@ -16,7 +16,7 @@ related:
 
 ## Objetivo
 
-Converter princípios e policy em decisões executáveis, com autoridade, handoffs, evidências e tempos de resposta definidos. Este documento é guidance; não altera a [Policy v1](ai-agent-policy-and-governance-v1.md).
+Converter os princípios da [policy modular](policy.md) em decisões executáveis, com autoridade, handoffs, evidências e tempos de resposta definidos. Sua adoção organizacional depende de release e authority explícitas.
 
 ## Modelo federado
 

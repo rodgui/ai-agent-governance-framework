@@ -32,10 +32,7 @@
         "Percentual com owners válidos",
         "Ownerless agents"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Governance Model"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-ORG-002",
@@ -66,10 +63,7 @@
         "Decisões sem authority",
         "Segregation exceptions"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Approval Matrix"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-ORG-003",
@@ -101,10 +95,7 @@
         "Exceções vencidas",
         "Exceções recorrentes"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Exceptions"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-REG-001",
@@ -135,10 +126,7 @@
         "Registry coverage",
         "Ownerless ou stale records"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Agent Catalog"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-REG-002",
@@ -169,10 +157,7 @@
         "Versões sem blueprint",
         "Mudanças não declaradas"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Pre-Deployment Assessment"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-REG-003",
@@ -206,10 +191,7 @@
         "Tempo para sunset",
         "Órfãos após retirement"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Sunset and Review"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-IDN-001",
@@ -240,10 +222,7 @@
         "Shared accounts",
         "Actions sem agent identity"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Authentication and Authorization"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-IDN-002",
@@ -276,10 +255,7 @@
         "Authorization denials",
         "Standing privileges"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Least Privilege"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-IDN-003",
@@ -313,10 +289,7 @@
         "Tempo de revogação",
         "Orphan identities"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Credential Management"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-DAT-001",
@@ -347,10 +320,7 @@
         "Connectors sem contract",
         "Sources sem owner"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Data Governance"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-DAT-002",
@@ -382,10 +352,7 @@
         "Leakage failures",
         "Dados não necessários acessados"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Data Access"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-DAT-003",
@@ -419,10 +386,7 @@
         "Deletion failures",
         "Records sem provenance"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Auditability and Retention"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-TOL-001",
@@ -453,10 +417,7 @@
         "Tools não registradas",
         "Versões fora de baseline"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Tool Governance"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-TOL-002",
@@ -487,10 +448,7 @@
         "Denied actions",
         "Calls sem correlation"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Approval Gates"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-TOL-003",
@@ -521,10 +479,7 @@
         "Failed containment",
         "Reactivation sem regression"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Kill Switch"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-SEC-001",
@@ -555,10 +510,7 @@
         "Coverage de threat models",
         "Incidentes fora do model"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Security Assessment"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-SEC-002",
@@ -589,10 +541,7 @@
         "Assets sem provenance",
         "Resource-limit events"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Sandboxing"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-SEC-003",
@@ -624,10 +573,7 @@
         "Escaped security defects",
         "Recurrence"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Testing"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-RSK-001",
@@ -660,10 +606,7 @@
         "Overrides",
         "Reclassifications"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Blast Radius"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-RSK-002",
@@ -695,10 +638,7 @@
         "Acceptance sem authority",
         "Controls sem evidence"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Risk Assessment"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-RSK-003",
@@ -731,10 +671,7 @@
         "Changes sem reassessment",
         "Tempo para reclassificar"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Continuous Review"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-RAI-001",
@@ -765,10 +702,7 @@
         "Assessments aplicáveis concluídos",
         "Findings e remediation time"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Responsible AI"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-RAI-002",
@@ -800,10 +734,7 @@
         "Overrides",
         "Correction time"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Human-in-the-Loop"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-RAI-003",
@@ -836,10 +767,7 @@
         "Complaints",
         "Limitations não comunicadas"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Transparency and Fairness"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-EVA-001",
@@ -872,10 +800,7 @@
         "Pass/fail por slice",
         "Threshold exceptions"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Testing and Evaluation"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-EVA-002",
@@ -908,10 +833,7 @@
         "Devoluções",
         "Agents com evidence expirada"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Publication Checklist"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-EVA-003",
@@ -943,10 +865,7 @@
         "Regression recurrence",
         "Time-to-evaluate change"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Continuous Monitoring"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-AUD-001",
@@ -976,10 +895,7 @@
         "Actions sem correlation",
         "Events sem version"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Auditability"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-AUD-002",
@@ -1012,10 +928,7 @@
         "Missing artifacts",
         "Changes após approval"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Evidence Retention"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-AUD-003",
@@ -1049,10 +962,7 @@
         "Retention failures",
         "Time to reconstruct incident"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Logging and Retention"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-OPS-001",
@@ -1084,10 +994,7 @@
         "MTTD",
         "MTTDecide"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Monitoring"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-OPS-002",
@@ -1119,10 +1026,7 @@
         "Failed containment",
         "Recurrence"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Kill Switch and Rollback"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-OPS-003",
@@ -1156,10 +1060,7 @@
         "Repeat incidents",
         "Expired attestations"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Lifecycle"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-ADP-001",
@@ -1192,10 +1093,7 @@
         "Duplicate creation",
         "Support resolution time"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Publication"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-ADP-002",
@@ -1228,10 +1126,7 @@
         "Misuse reports",
         "Feedback cycle time"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Training and Awareness"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-VAL-001",
@@ -1263,10 +1158,7 @@
         "Itens sem baseline",
         "Value hypotheses sem owner"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Business Justification"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-VAL-002",
@@ -1297,10 +1189,7 @@
         "Agents com uso sem outcome",
         "Claims sem baseline"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Metrics"
-      ]
+      "automation": "mixed"
     },
     {
       "id": "AGF-VAL-003",
@@ -1333,10 +1222,7 @@
         "Duplicates",
         "Time-to-sunset"
       ],
-      "automation": "mixed",
-      "policyRefs": [
-        "Policy v1 — Periodic Review"
-      ]
+      "automation": "mixed"
     }
   ]
 }

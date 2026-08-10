@@ -4,7 +4,7 @@ Avaliações comparativas, de risco, maturidade, tecnologia e control effectiven
 
 ## Artefatos
 
-- [Microsoft Customer Zero × framework](comparison-matrices/microsoft-case-study-framework-crosswalk.md) — coverage, gaps e backlog de evolução.
+- [Crosswalk histórico Microsoft Customer Zero × Policy v1](comparison-matrices/microsoft-case-study-framework-crosswalk.md) — registro depreciado da primeira consolidação; não é fonte normativa corrente.
 - [Maturity model](../docs/guides/maturity-model.md) — escala e dimensões.
 - [Maturity assessment example](../examples/maturity-assessment.example.json) — record fictício validado.
 - [Assessment templates](../templates/README.md) — coleta e decisão humana.

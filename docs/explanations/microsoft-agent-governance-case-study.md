@@ -7,7 +7,7 @@ review_cycle: 180d
 owners: [rodgui]
 tags: [agent-governance, microsoft, agent-365, responsible-ai, frontier-firm]
 related:
-  policy: ../governance/ai-agent-policy-and-governance-v1.md
+  policy: ../governance/policy.md
   architecture: ../architecture/overview.md
   assessment: ../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md
   plan: ../guides/implementation-plan-90-days.md
@@ -212,22 +212,13 @@ Métricas de controle e métricas de valor não devem ser misturadas.
 
 Os artigos reconhecem que a metodologia de impacto ainda estava em evolução. Portanto, essas dimensões orientam o desenho de medição, mas não provam ROI já realizado.[4][5]
 
-## 8. Implicações para a policy v1 deste repositório
+## 8. Implicações para o framework vendor-neutral
 
-A [Policy v1](../governance/ai-agent-policy-and-governance-v1.md) fornece o ponto de partida interno adotado:
+Este caso é uma referência institucional entre várias possíveis. Ele não integra a solução necessária, não cria dependência de Agent 365 e não substitui standards, evidência independente ou decisão de arquitetura.
 
-- Design Authority, Run Authority e accountability por agente;
-- HITL para ações relevantes e intenção de padronizar autonomia;
-- avaliação de blast radius e intenção de usar uma matriz de aprovação;
-- catálogo, observabilidade, quarentena e kill switch;
-- lifecycle, revisão periódica e sunset;
-- regras multiplataforma e onboarding de plataformas.
+As capacidades transferíveis observadas nos artigos ajudam a testar se o framework consegue:
 
-O texto congelado apenas anuncia níveis L0–L3 e uma approval matrix; não define os níveis nem materializa a matriz. Este estudo não preenche essa lacuna por inferência, e qualquer detalhamento normativo exige aprovação e versionamento separados.
-
-Os artigos reforçam essa base e revelam áreas para uma futura v2:
-
-- tornar explícita a arquitetura em cinco planos;
+- manter explícita a arquitetura em cinco planos;
 - diferenciar registry e blueprint;
 - formalizar impact assessment e release assessment;
 - ampliar catálogo com attestation, adoção e valor;
@@ -237,7 +228,7 @@ Os artigos reforçam essa base e revelam áreas para uma futura v2:
 - introduzir controles específicos para MCP;
 - distinguir lifecycle individual e de equipe.
 
-A análise detalhada está no [crosswalk Microsoft × framework](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md). Essas lacunas são recomendações para revisão; não alteram silenciosamente a policy adotada.
+A comparação originalmente feita com a Policy v1 foi preservada apenas como [crosswalk histórico](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md). A policy corrente evolui no corpus modular e não depende desse caso.
 
 ## 9. Conclusão
 

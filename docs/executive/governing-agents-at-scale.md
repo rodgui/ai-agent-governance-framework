@@ -6,7 +6,7 @@ last_reviewed: 2026-08-09
 review_cycle: quarterly
 supersedes: null
 related:
-  - ../governance/ai-agent-policy-and-governance-v1.md
+  - ../governance/policy.md
   - ../governance/operating-model.md
   - ../guides/framework-implementation-playbook.md
   - ../guides/implementation-plan-90-days.md
@@ -27,13 +27,13 @@ Autorizar a implantação de um sistema federado de governança para o portfóli
 - evidence package e attestation;
 - roadmap inicial de 90 dias governado por decision gates.
 
-A decisão não exige substituir a Policy v1, escolher uma plataforma universal ou iniciar um programa de certificação.
+A decisão não exige escolher uma plataforma universal, adotar um fornecedor específico ou iniciar um programa de certificação.
 
 ## Contexto
 
-A Policy v1 fornece o ponto de partida normativo adotado: nomeia authorities e owners, exige HITL para ações relevantes, introduz blast radius, approval, catálogo, observabilidade, containment, lifecycle e sunset. Ela também anuncia uma matriz de aprovação e níveis de autonomia L0–L3, mas o texto congelado não materializa a matriz nem define cada nível. Esses detalhes precisam ser operacionalizados como guidance versionado ou submetidos a mudança formal de policy; não podem ser presumidos.
+A [policy modular](../governance/policy.md) consolida princípios, decision rights, controls, evidências e lifecycle em uma fonte canônica que pode evoluir até a release final. A adoção organizacional continua sendo uma decisão explícita da authority competente.
 
-O gap tratado por este framework é transformar esse ponto de partida em um sistema operacional capaz de responder, com evidência:
+O gap tratado pelo framework é transformar intenção de governança em um sistema operacional capaz de responder, com evidência:
 
 1. quais sistemas e agentes existem;
 2. para que servem e quem responde por eles;
@@ -84,18 +84,7 @@ O framework é vendor-neutral. Produtos podem implementar partes do control plan
 
 Decision rights são definidos no [operating model](../governance/operating-model.md).
 
-## O que preservar da Policy v1
-
-- Design Authority, Run Authority e human accountability;
-- exigência de HITL e intenção de padronizar níveis de autonomia;
-- avaliação de blast radius e intenção de usar uma matriz de aprovação;
-- catálogo, observabilidade e enforcement;
-- arquitetura multiplataforma;
-- lifecycle, periodic review e sunset.
-
-A taxonomia L0–L3 detalhada, a matriz executável e thresholds não estão definidos no texto congelado; qualquer adoção normativa desses elementos exige aprovação e versionamento próprios.
-
-## O que operacionalizar agora
+## O que a policy modular operacionaliza
 
 - registry e blueprint separados;
 - risk tiering por ação, dados, alcance, criticidade e reversibilidade;
@@ -106,7 +95,7 @@ A taxonomia L0–L3 detalhada, a matriz executável e thresholds não estão def
 - attestation e sunset como processos reais;
 - métricas separadas de criação, descoberta, uso, qualidade, risco e valor.
 
-Qualquer mudança normativa futura deve ser proposta, revisada e versionada separadamente. O roadmap operacional não altera a Policy v1 por implicação.
+Mudanças normativas são propostas, revisadas e versionadas no próprio corpus modular. Casos de estudo, mappings e roadmap não alteram a policy por implicação.
 
 ## Outcomes esperados
 
@@ -171,11 +160,9 @@ Detalhes: [implementation playbook](../guides/framework-implementation-playbook.
 
 ## Evidência complementar
 
-- [Policy v1](../governance/ai-agent-policy-and-governance-v1.md)
+- [Policy modular](../governance/policy.md)
 - [Arquitetura de referência](../architecture/overview.md)
 - [Maturity model](../guides/maturity-model.md)
 - [Control catalog](../../controls/README.md)
-- [Microsoft Customer Zero case](../explanations/microsoft-agent-governance-case-study.md)
-- [Microsoft × framework crosswalk](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md)
 
-O caso Microsoft é evidência de implementação declarada por um fornecedor; não é arquitetura universal nem auditoria independente.
+Casos e mappings de fornecedores são referências externas opcionais. Eles não integram a solução necessária nem redefinem o framework.

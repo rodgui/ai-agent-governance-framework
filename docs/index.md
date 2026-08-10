@@ -25,7 +25,6 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 3. [Estratégia e valor](value/README.md)
 4. [Operating model](governance/operating-model.md)
 5. [Maturity model](guides/maturity-model.md)
-6. [Modelo de engagement](executive/consulting-engagement-model.md)
 
 **Decisões esperadas:** sponsor, escopo, risk appetite, autoridade de contenção e critérios de valor.
 
@@ -33,7 +32,7 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 **Objetivo:** definir controles, assurance, exceções e evidências.
 
-1. [Policy v1](governance/ai-agent-policy-and-governance-v1.md)
+1. [Policy modular](governance/policy.md)
 2. [Gestão de riscos](risk-management/README.md)
 3. [Segurança](security/README.md)
 4. [Responsible AI](responsible-ai/README.md)
@@ -101,9 +100,8 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 1. [Handbook](handbook/README.md)
 2. [Implementation playbook](guides/framework-implementation-playbook.md)
 3. [Maturity model](guides/maturity-model.md)
-4. [Modelo de engagement](executive/consulting-engagement-model.md)
-5. [Design patterns](patterns/README.md)
-6. [Toolkit](../templates/README.md)
+4. [Design patterns](patterns/README.md)
+5. [Toolkit](../templates/README.md)
 
 **Decisões esperadas:** baseline, gaps, target operating model, backlog priorizado, entregáveis e critérios de aceite.
 
@@ -111,7 +109,7 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 | Objetivo | Documentos principais |
 |---|---|
-| definir policy e accountability | [Policy v1](governance/ai-agent-policy-and-governance-v1.md) + [operating model](governance/operating-model.md) |
+| definir policy e accountability | [Policy modular](governance/policy.md) + [operating model](governance/operating-model.md) |
 | inventariar agentes | [Registry + blueprint pattern](patterns/registry-and-blueprint.md) + [schemas](../schemas/README.md) |
 | classificar risco | [Risk-tiered governance](patterns/risk-tiered-governance.md) + [risk management](risk-management/README.md) |
 | governar identidade e dados | [Identity](identity/README.md) + [data access](data-access/README.md) |
@@ -121,18 +119,19 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 | medir maturidade | [Maturity model](guides/maturity-model.md) + [assessment example](../examples/maturity-assessment.example.json) |
 | medir portfólio e valor | [Strategy and value](value/README.md) + [lifecycle pattern](patterns/lifecycle-attestation-and-sunset.md) |
 | estruturar adoção e suporte | [Adoption](adoption/README.md) + [operations](operations/README.md) |
-| estudar implementação Microsoft | [Customer Zero case](explanations/microsoft-agent-governance-case-study.md) + [crosswalk](../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) |
+| estudar um caso Microsoft opcional | [Customer Zero case](explanations/microsoft-agent-governance-case-study.md) + [crosswalk histórico](../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) |
 | seguir uma leitura linear | [Handbook](handbook/README.md) |
 
 ## Camadas do conhecimento
 
-- **Normativo:** Policy v1 e decisões formalmente aprovadas.
+- **Normativo:** policy modular e decisões formalmente aprovadas.
 - **Arquitetural:** princípios, operating model, boundaries e patterns.
 - **Operacional:** playbooks, controls, schemas, templates e checklists.
 - **Explicativo:** rationale, casos, mappings e referências.
-- **Comercial:** assessment, engagement, entregáveis e critérios de aceite.
 
 Um documento de guidance não altera a policy. Um estudo de caso não comprova eficácia causal. Um mapping de fornecedor não redefine o núcleo.
+
+A produtificação comercial pessoal está separada em [`consulting/`](../consulting/README.md). Ela reutiliza o conhecimento canônico, mas não integra estas camadas nem redefine a policy.
 
 ## Leitura completa
 

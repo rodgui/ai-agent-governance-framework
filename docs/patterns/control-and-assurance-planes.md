@@ -117,10 +117,9 @@ Um control plane mostra owner, identity, DLP e telemetry. O assurance workflow u
 
 ## Mappings de implementação
 
-- Agent 365 como parte do control plane;
-- IAM, DLP, SIEM e CMDB integrados;
-- GRC/assessment platform no assurance plane;
-- workflows Git-based para menor escala.
+Implementações podem integrar IAM, DLP, SIEM, CMDB, GRC, evidence stores, case management ou workflows Git-based. Esses componentes são adapters substituíveis: o pattern não exige uma plataforma, suíte ou control plane comercial específico.
+
+Mappings nomeados pertencem a estudos de caso ou assessments opcionais e podem ser removidos sem alterar participantes, fluxo, controls ou evidências deste pattern.
 
 ## Patterns relacionados
 

@@ -25,10 +25,11 @@ export AGF_FONT_BOLD=/path/to/bold.ttf
 
 ## Validação
 
-`validate-repository.py` executa gates de estrutura, links Markdown, referências em JSON (inclusive fragmentos), front matter, schemas, negative schema guardrails, invariantes entre records, examples, controls, assets e segurança básica. Os casos negativos incluem evidence IDs inexistentes, assessor/reviewer coincidentes, sampling inválido, attestation vencida no `lastReviewed`, records de produção sem evidência e tools state-changing com enforcement incompleto.
+`validate-repository.py` executa gates de estrutura, links Markdown, paths em `related:` do front matter, referências em JSON (inclusive fragmentos), schemas, negative schema guardrails, invariantes entre records, examples, controls, assets e segurança básica. Também protege os boundaries de produto: consultoria somente em `consulting/`, três pacotes compostos pelos nove módulos e nomes de fornecedores restritos a fontes, casos, assessments e mappings permitidos. Os casos negativos incluem evidence IDs inexistentes, assessor/reviewer coincidentes, sampling inválido, attestation vencida no `lastReviewed`, records de produção sem evidência e tools state-changing com enforcement incompleto.
 
 ```bash
 uv run --with-requirements requirements-ci.txt python3 tools/scripts/validate-repository.py
+uv run --with-requirements requirements-ci.txt python3 -m unittest tools/scripts/test_validate_repository.py
 ```
 
 Os scripts nunca devem materializar secrets, credenciais ou paths pessoais nos artefatos.

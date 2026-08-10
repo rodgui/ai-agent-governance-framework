@@ -19,12 +19,13 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 - [Publication Checklist](publication-checklist.md)
 - [Sunset Plan](sunset-plan.md)
 
-## Comunicação e consultoria
+## Comunicação e pesquisa
 
 - [Executive Brief](executive-brief-template.md)
-- [Consulting Proposal](consulting-proposal-template.md)
 - [Study Note](study-note-template.md)
 - [Experiment](experiment-template.md)
+
+O template de proposta comercial pertence à camada separada em [`consulting/templates/`](../consulting/templates/consulting-proposal-template.md).
 
 ## Regras de uso
 

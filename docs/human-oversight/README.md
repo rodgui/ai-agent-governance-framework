@@ -6,7 +6,7 @@ last_reviewed: 2026-08-09
 review_cycle: quarterly
 supersedes: null
 related:
-  - ../governance/ai-agent-policy-and-governance-v1.md
+  - ../governance/policy.md
   - ../governance/operating-model.md
   - ../responsible-ai/README.md
   - ../patterns/human-accountability-boundary.md

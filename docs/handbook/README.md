@@ -11,7 +11,7 @@ related:
 ---
 
 <!-- markdownlint-disable MD029 -->
-<!-- A numeração 1–30 é deliberadamente contínua entre as partes editoriais. -->
+<!-- A numeração 1–27 é deliberadamente contínua entre as partes editoriais. -->
 
 # Handbook de governança de IA e agentes
 
@@ -19,11 +19,10 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 
 ## Como ler
 
-- **Leitura executiva:** capítulos 1, 2, 6, 10 e 30.
+- **Leitura executiva:** capítulos 1, 2, 6 e 10.
 - **Implantação:** capítulos 1–26 na ordem.
 - **Arquitetura:** capítulos 3, 7–19 e 21–25.
 - **Assurance:** capítulos 8, 9 e 14–19.
-- **Consultoria:** capítulos 1–10, 21–26 e 30.
 - **Referência:** consulte por domínio; não precisa seguir a ordem.
 
 ## Parte I — Fundamentos
@@ -35,7 +34,7 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 
 ## Parte II — Política, operating model e risco
 
-5. [Policy v1 — baseline adotada](../governance/ai-agent-policy-and-governance-v1.md)
+5. [Policy modular — fonte canônica](../governance/policy.md)
 6. [Operating model e decision rights](../governance/operating-model.md)
 7. [Arquitetura de referência](../architecture/overview.md)
 8. [Gestão proporcional de riscos](../risk-management/README.md)
@@ -64,15 +63,16 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 25. [Schemas e examples](../../schemas/README.md)
 26. [Templates](../../templates/README.md)
 
-## Parte V — Evidência externa e application mappings
+## Parte V — Fontes e limitações
 
-27. [Microsoft Customer Zero — caso de estudo](../explanations/microsoft-agent-governance-case-study.md)
-28. [Crosswalk Microsoft × framework](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md)
-29. [Fontes e bibliografia](../../references/sources.md)
+27. [Fontes e bibliografia](../../references/sources.md)
 
-## Parte VI — Aplicação profissional
+## Casos e mappings opcionais
 
-30. [Modelo de engagement de consultoria](../executive/consulting-engagement-model.md)
+- [Microsoft Customer Zero — caso de estudo](../explanations/microsoft-agent-governance-case-study.md)
+- [Crosswalk histórico Microsoft × Policy v1](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md)
+
+Casos e mappings ajudam a interpretar implementações, mas não são capítulos necessários, componentes da solução ou requisitos do framework. A camada comercial também permanece fora do handbook, em [`consulting/`](../../consulting/README.md).
 
 ## Artefatos de manutenção do repositório
 

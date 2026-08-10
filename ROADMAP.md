@@ -8,10 +8,9 @@ Evoluir uma fonte canônica, vendor-neutral e verificável para:
 - implantação por decision gates;
 - padrões e controls reutilizáveis;
 - toolkit de diagnóstico, design, assurance e operação;
-- oferta profissional de consultoria;
 - futura publicação executiva quando o conteúdo estiver maduro.
 
-O roadmap não altera a [Policy v1](docs/governance/ai-agent-policy-and-governance-v1.md) por implicação. Mudança normativa exige proposta, revisão e versionamento próprios.
+O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudança normativa ainda exige proposta, revisão, authority, changelog e release. A produtificação comercial possui [roadmap próprio](consulting/ROADMAP.md).
 
 ## Estado atual
 
@@ -24,7 +23,7 @@ O roadmap não altera a [Policy v1](docs/governance/ai-agent-policy-and-governan
 - schemas, examples e templates;
 - caso Microsoft separado do framework neutro;
 - visual principal vendor-neutral;
-- modelo de engagement de consultoria.
+- camada comercial separada em `consulting/`.
 
 ## Trilha A — Qualidade canônica
 
@@ -113,39 +112,7 @@ O roadmap não altera a [Policy v1](docs/governance/ai-agent-policy-and-governan
 
 **Gate:** mapping pode ser removido sem alterar policy, patterns ou controls.
 
-## Trilha D — Produto de consultoria
-
-### D1. Readiness assessment
-
-- [ ] criar interview e evidence request packs;
-- [ ] definir sampling e confidence rules;
-- [ ] produzir relatório-exemplo fictício;
-- [ ] definir acceptance e handoff.
-
-### D2. Target operating model
-
-- [ ] criar workshop guides;
-- [ ] modelar decision-right scenarios;
-- [ ] criar package de charter, RACI e forums;
-- [ ] definir transition plan.
-
-### D3. Control implementation
-
-- [ ] criar implementation patterns por domínio;
-- [ ] definir evidence automation backlog;
-- [ ] criar effectiveness test procedures;
-- [ ] produzir examples sanitizados.
-
-### D4. Independent assurance
-
-- [ ] definir independence e conflict rules;
-- [ ] criar finding severity e remediation workflow;
-- [ ] documentar attestation statement;
-- [ ] definir renewal e continuous assurance.
-
-**Gate da trilha:** cada engagement possui inputs, entregáveis, acceptance criteria, limitations e knowledge transfer.
-
-## Trilha E — Publicação futura
+## Trilha D — Publicação futura
 
 Esta trilha não está no escopo da etapa atual.
 

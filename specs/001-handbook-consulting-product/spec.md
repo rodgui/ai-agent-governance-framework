@@ -1,18 +1,21 @@
 ---
 title: Productização do framework como handbook e oferta de consultoria
-status: approved
+status: superseded
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-09
 review_cycle: major-change
 supersedes: null
 related:
   - ../../docs/architecture/decisions/0001-canonical-modular-framework-and-vendor-mappings.md
+  - ../../docs/architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md
   - plan.md
   - tasks.md
   - validation.md
 ---
 
 # Especificação: framework canônico, handbook e oferta de consultoria
+
+> **Registro histórico:** esta especificação documenta a primeira consolidação. A [ADR-0002](../../docs/architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md) substituiu seus boundaries de policy e produto: a Policy v1 tornou-se origem histórica e a consultoria foi separada em `consulting/`.
 
 ## Problema
 

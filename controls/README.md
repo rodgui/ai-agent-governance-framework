@@ -28,9 +28,9 @@ Cada control declara:
 - implementation patterns;
 - evidence esperada;
 - metrics;
-- `policyRefs` quando houver relação temática com a Policy v1.
+- mappings externos opcionais quando houver referência verificável.
 
-No schema 1.0, `policyRefs` são **rótulos de mapping temático**, não citações exatas nem prova de que o statement inteiro foi adotado como policy. Uma referência normativa rastreável precisa identificar documento e seção/âncora; até a evolução do schema, o control permanece guidance salvo aprovação organizacional explícita.
+Os controls são módulos diretos da [policy canônica](../docs/governance/policy.md), não mappings de uma policy histórica. `frameworkMappings` documenta alinhamentos externos e não transforma standards ou fornecedores em dependências normativas.
 
 ## Como aplicar
 
@@ -44,7 +44,7 @@ No schema 1.0, `policyRefs` são **rótulos de mapping temático**, não citaç�
 8. trate findings e residual risk;
 9. reavalie após change, incident ou attestation.
 
-O catálogo é guidance. Torná-lo baseline normativa exige aprovação explícita da organização.
+O catálogo integra a policy candidate. Ele se torna baseline normativa de uma organização somente quando a release correspondente é explicitamente aprovada e adotada.
 
 ## Cobertura
 

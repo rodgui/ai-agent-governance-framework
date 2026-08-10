@@ -1,7 +1,7 @@
 ---
 title: "Princípios arquiteturais de governança de agentes"
-status: review
-maturity: observed
+status: maintained
+maturity: validated
 last_reviewed: 2026-08-09
 review_cycle: 180d
 owners: [rodgui]
@@ -23,4 +23,4 @@ tags: [architecture, principles, agent-governance]
 
 ## Relationship to policy
 
-Esses princípios interpretam e estendem a [policy v1](../governance/ai-agent-policy-and-governance-v1.md) como proposta arquitetural. Eles não alteram requisitos adotados sem revisão formal.
+Esses princípios integram a [policy modular](../governance/policy.md). Sua adoção e alteração exigem revisão formal, decision authority e release versionada; mappings de plataforma não podem redefini-los.

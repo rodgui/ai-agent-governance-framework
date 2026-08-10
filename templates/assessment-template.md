@@ -15,7 +15,7 @@
 |---|---:|---|
 | Segurança | 5 | |
 | Governança | 5 | |
-| Integração Azure | 4 | |
+| Integração e interoperabilidade | 4 | |
 | Operabilidade | 4 | |
 | Custo | 3 | |
 | Portabilidade | 3 | |

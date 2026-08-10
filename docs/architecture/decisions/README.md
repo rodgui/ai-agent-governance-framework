@@ -4,7 +4,8 @@ Decisões arquiteturais estáveis, com contexto, alternativas e consequências.
 
 | ADR | Status | Decisão |
 |---|---|---|
-| [ADR-0001](0001-canonical-modular-framework-and-vendor-mappings.md) | accepted | Núcleo canônico modular e mappings por fornecedor |
+| [ADR-0001](0001-canonical-modular-framework-and-vendor-mappings.md) | superseded | Núcleo canônico modular e mappings por fornecedor |
+| [ADR-0002](0002-modular-policy-vendor-neutrality-and-commercial-boundary.md) | accepted | Policy modular, neutralidade estrita e boundary comercial |
 
 ## Convenções
 

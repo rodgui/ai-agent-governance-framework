@@ -1,24 +1,24 @@
 ---
-title: "Crosswalk: Microsoft Customer Zero × AI Agent Policy v1"
-status: review
+title: "Crosswalk histórico: Microsoft Customer Zero × AI Agent Policy v1"
+status: deprecated
 maturity: observed
 last_reviewed: 2026-08-09
 review_cycle: 90d
 owners: [rodgui]
-tags: [assessment, crosswalk, policy-v2, microsoft, agent-governance]
+tags: [assessment, crosswalk, policy-history, microsoft, agent-governance]
 related:
-  policy: ../../docs/governance/ai-agent-policy-and-governance-v1.md
+  policy_history: ../../docs/governance/ai-agent-policy-and-governance-v1.md
   study: ../../docs/explanations/microsoft-agent-governance-case-study.md
   plan: ../../docs/guides/implementation-plan-90-days.md
 ---
 
-# Crosswalk: Microsoft Customer Zero × AI Agent Policy v1
+# Crosswalk histórico: Microsoft Customer Zero × AI Agent Policy v1
 
 ## Objetivo
 
-Comparar as capacidades descritas em cinco artigos do Microsoft Inside Track com a [AI Agent Policy and Governance v1](../../docs/governance/ai-agent-policy-and-governance-v1.md). O resultado identifica cobertura existente, lacunas e prioridades para uma futura v2.
+Comparar as capacidades descritas em cinco artigos do Microsoft Inside Track com a [AI Agent Policy and Governance v1 histórica](../../docs/governance/ai-agent-policy-and-governance-v1.md). O resultado registrou cobertura, lacunas e hipóteses de evolução na primeira consolidação.
 
-Este assessment não altera a policy v1. Mudanças de policy exigem revisão formal, changelog e uma nova versão preservando o histórico.
+Este assessment está depreciado como instrumento de evolução normativa pela [ADR-0002](../../docs/architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md). Ele é preservado para rastreabilidade; não é fonte da policy modular nem backlog obrigatório.
 
 ## Escala de cobertura
 
@@ -28,7 +28,7 @@ Este assessment não altera a policy v1. Mudanças de policy exigem revisão for
 
 ## Crosswalk
 
-| Capacidade | Evidência nos artigos Microsoft | Cobertura na policy v1 | Avaliação | Próxima ação proposta |
+| Capacidade | Evidência nos artigos Microsoft | Cobertura na policy v1 histórica | Avaliação | Próxima ação registrada |
 | --- | --- | --- | --- | --- |
 | Operating model distribuído | AI admins, identity, platform, security/compliance e RAI atuam com visão comum[1][3] | Design Authority, Run Authority, Business Owner e Technical Owner | Parcial | Expandir RACI com data owner, identity admin, platform owner, adoption lead e RAI champion |
 | Control plane multiplataforma | Registry, observabilidade e ações administrativas centralizam contexto[1][2] | Catálogo, dashboard unificado e regra multiplataforma | Forte | Definir contrato de integração e campos mínimos por plataforma |
@@ -117,7 +117,7 @@ As principais lacunas estão menos na proteção básica e mais na evolução pa
 - O crosswalk compara documentos, não controles implantados em produção.
 - “Forte” significa cobertura documental explícita, não eficácia operacional comprovada.
 - A experiência Microsoft pode não refletir regulação, estrutura ou tolerância de risco locais.
-- Thresholds e exemplos da policy v1 devem ser validados antes de adoção ampla.
+- Thresholds e exemplos da policy v1 pertencem ao contexto histórico e não são herdados automaticamente pela policy modular.
 
 ## Sources
 

@@ -22,13 +22,13 @@ O resultado não é “governança concluída”. É uma capacidade inicial veri
 
 ## Constraints
 
-- Policy v1 permanece baseline até mudança explícita.
+- A policy modular é a fonte canônica; adoção organizacional requer release e authority explícitas.
 - Core e controls são multiplataforma.
 - Thresholds são aprovados no contexto da organização.
 - Dados, identidade, segurança, privacy, legal e RAI mantêm suas authorities.
 - Automação é aplicada somente a regras estáveis e testadas.
 - Lacuna de evidência permanece visível; não é preenchida por suposição.
-- A Policy v1 menciona pilots como possibilidade de execução. Este roadmap não exige piloto: uma coorte de onboarding ou rollout controlado delimita o primeiro escopo operacional e usa os mesmos gates, controls e critérios de produção.
+- Este roadmap não exige piloto: uma coorte de onboarding ou rollout controlado delimita o primeiro escopo operacional e usa os mesmos gates, controls e critérios de produção.
 
 ## Mapeamento entre calendário e gates
 
@@ -182,7 +182,7 @@ O [contrato comum dos gates](framework-implementation-playbook.md#contrato-comum
 - publicar catalog entries, guidance e support paths;
 - ligar incident, support e domain escalation;
 - medir fricção, gaps e bypass attempts;
-- corrigir controles e templates sem alterar a Policy v1.
+- corrigir controls e templates pelo processo versionado da policy modular.
 
 ### Entregáveis
 

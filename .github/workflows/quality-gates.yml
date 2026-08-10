@@ -55,6 +55,9 @@ jobs:
       - name: Validate repository
         run: python tools/scripts/validate-repository.py
 
+      - name: Test repository validator
+        run: python -m unittest tools/scripts/test_validate_repository.py
+
       - name: Check Python
         run: |
           ruff check tools/scripts
