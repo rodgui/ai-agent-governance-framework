@@ -17,9 +17,9 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 - fonte canônica modular e jornadas por persona;
 - brief executivo, fundamentos, operating model e arquitetura;
 - domínios de control e implementation playbook;
-- maturity model e roadmap de 90 dias;
+- maturity model, roadmap de 90 dias e programa de 24 semanas;
 - 10 design patterns e catálogo de antipatterns;
-- 38 controls estruturados em 13 domínios;
+- 43 controls estruturados em 15 domínios, com verificação e bloqueio declarados;
 - schemas, examples e templates;
 - caso Microsoft separado do framework neutro;
 - visual principal vendor-neutral;

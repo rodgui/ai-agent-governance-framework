@@ -1,9 +1,10 @@
 name: Publish documentation site
 
+# Publicação manual até que Pages esteja habilitado no repositório
+# (Settings → Pages → Source: GitHub Actions). Enquanto não estiver, um
+# gatilho automático falharia a cada push sem nada a corrigir no código.
+# O build do site continua verificado a cada PR pelo workflow de quality gates.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
