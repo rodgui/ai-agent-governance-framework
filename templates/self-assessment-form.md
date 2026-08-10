@@ -1,36 +1,77 @@
-# Self-Assessment Form — AI Agents (V1)
+# Template — Autoavaliação de agente de IA
 
-Complete before creating or publishing any agent. Fields marked `*` are mandatory.
+Preencha antes de solicitar aprovação de design, release ou mudança material. Respostas sem evidência devem ser marcadas como `missing`, não presumidas como atendidas.
 
----
+## 1. Identificação e finalidade
 
+- Agent ID:
+- Nome:
+- Versão do blueprint:
+- Business owner:
+- Technical owner:
+- Finalidade autorizada:
+- Usuários e regiões:
+- Outcome esperado e métrica:
+- Usos explicitamente proibidos:
 
-## SELF-ASSESSMENT FORM — AI AGENTS (V1)
-Complete this form before creating/publishing the agent. Use concise, objective language. Fields marked with * are mandatory.
-1) Agent Identification
-2) Owners and Contacts
-3) Purpose and Scope
-4) Data and Permissions
-5) Integrations and Interconnections
-6) Autonomy and HITL
-7) Reach/Users and Impact
-8) Risks and Controls (Blast Radius)
-9) Usage and Costs
-10) Publishing, Review, and Sunset
-Confirmations and Approval
-Prompt Injection / Jailbreak
-Test malicious instructions (“ignore the rules”, “show the system prompt”, “execute X”).
-Test injection in RAG content (a document with hidden instructions).
-Evidence: test logs + expected outcome (“refused / followed policy / requested approval”).
-Data Exfiltration / Leakage
-Test requests to exfiltrate secrets (tokens, keys, prompts, internal data).
-Test leakage via tools (email/webhook/HTTP/external connector).
-Test cross-tenant / cross-domain access (data the user should not be able to access).
-Evidence: attempt + block via RBAC/DLP/guardrails + event log.
-Safety / Content and Behavior
-Test responses with risk: harassment, discrimination, inappropriate content, dangerous instructions, acting as disciplinary HR.
-Test “authoritative tone” in sensitive decisions (to avoid reputational harm/harassment).
-Evidence: outcome + standard messages (refusal / escalation / human handoff).
-Secure tool-use
-Test “unintended actions”: the agent must not perform writes without a condition (HITL/limits).
-Test rollback/compensation when possible.
+## 2. Alcance, dados e impacto
+
+- Processos ou direitos afetados:
+- Sistemas e integrações:
+- Categorias e classificação dos dados:
+- Origem, qualidade e retenção dos dados:
+- População e volume estimados:
+- Impactos sobre pessoas, finanças, operações e reputação:
+- Tier de risco proposto e rationale:
+
+## 3. Autonomia, tools e autoridade
+
+Para cada tool ou ação, registre capability, scopes, condição de uso, reversibilidade, approval mode e enforcement técnico.
+
+| Tool/ação | Capability | State-changing | Scopes | Reversível | Aprovação | Gateway/controle |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+- Decision rights aplicáveis:
+- Human accountability boundary:
+- Segregation of duties:
+- Kill switch, quarantine e rollback:
+- Ações que o agente não pode executar:
+
+## 4. Controls e evidências
+
+| Control ID | Implementação | Owner | Evidência | Status |
+|---|---|---|---|---|
+| | | | | `missing` |
+
+- Evidence package:
+- Exceptions abertas, owner e expiry:
+- Riscos residuais e autoridade de aceitação:
+
+## 5. Evaluation e release
+
+- Testes funcionais e de integração:
+- Prompt injection e conteúdo adversarial:
+- Exfiltração, acesso indevido e isolamento:
+- Qualidade, safety, fairness e human oversight aplicáveis:
+- Tool-use, autorização e ações inesperadas:
+- Cenários de falha, rollback e recuperação:
+- Release evidence e disposition:
+
+## 6. Operação e lifecycle
+
+- Logs, métricas, alertas e retenção:
+- Thresholds de containment:
+- Incident owner e escalation path:
+- Frequência de review e attestation:
+- Critérios de suspensão, reativação e sunset:
+
+## 7. Disposition
+
+- Gate solicitado:
+- Decisão: `approved` / `conditional` / `rejected` / `expired`
+- Decision authority:
+- Condições e prazo:
+- Evidence refs:
+
+Use a [policy modular](../docs/governance/policy.md), o [operating model](../docs/governance/operating-model.md), o [playbook](../docs/guides/framework-implementation-playbook.md) e os [schemas](../schemas/README.md) como referências correntes.

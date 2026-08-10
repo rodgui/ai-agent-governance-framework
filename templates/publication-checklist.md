@@ -1,64 +1,70 @@
-# AI Agent Publication Checklist (V1)
+# Template — Checklist de decisão de release
 
-Complete before go-live. Attach evidence (links to docs, logs, approvals) for each item.
+Use antes de qualquer release ou mudança material. Cada item deve ter owner e evidência; marcar uma caixa sem evidence ref não satisfaz o gate.
 
----
+## 1. Registro e escopo
 
-Appendix B — AI Agent Publication Checklist (V1)
-Use this checklist before go-live. Check off each completed item and attach evidence (links to documentation, logs, and approvals).
-1) Identification and Scope
-Agent ID / Name: _________________________________
-Platform / Environment (Dev/UAT/Prod): ______________
-Business Unit/Segment: _____________________________________
-Business Owner: _____________________________________
-Technical Owner: ________________________________________
-No. of users (1–10 / 10–100 / >100): _____________________
-Risk: Likelihood ____  Impact ____  Rating ____
-DPIA (Yes/No/In review): _____________________________
-2) Owners and Governance
-☐ Owners (business and technical) defined and communicated
-☐ RACI published (Design/Run/Human Accountability)
-☐ Approval recorded per Matrix (Local / Segment / Digital Council)
-☐ HITL defined (decision points with documented human confirmation)
-3) Data and Privacy
-☐ Databases and respective data owners identified
-☐ Data classification (personal/sensitive/confidential) recorded
-☐ DPIA completed or formally waived by the DPO (when applicable)
-☐ Legal basis (applicable data protection law (e.g., GDPR/LGPD)) defined and recorded
-4) Security and Permissions
-☐ Least-privilege permissions (RBAC/ABAC) applied and reviewed
-☐ Segregation of duties (SOX/ITGC) met for critical actions
-☐ Secrets/credentials stored securely (e.g., Key Vault)
-☐ Encryption in transit and at rest validated
-☐ DLP policies active for sensitive data
-5) Observability and Audit
-☐ Immutable logs enabled (agent actions and integrations)
-☐ Audit trail available for verification (retention per policy)
-☐ Monitoring dashboard (errors, latency, consumption) published
-☐ Anomaly/error alerts defined and tested
-6) Usage and Costs
-☐ Monthly cap (R$ or tokens) defined
-☐ Alerts configured for 70% and 90% of the cap
-☐ Blocking/quarantine mechanism in case of abuse or drift
-☐ Budget owner assigned
-7) Quality and Testing
-☐ Test cases approved (functional and integration)
-☐ HITL test executed (decision points verified)
-☐ Regression test (when applicable)
-☐ UAT (user acceptance testing) completed and recorded
-8) Documentation and Repositories
-☐ Functional and technical documentation published
-☐ Runbook and ROLLBACK PLAN documented and tested
-☐ Agent registered in the Catalog with all required minimum fields
-☐ Repository/versioning set up (code, IaC, pipelines)
-9) Go-live and Post Go-live
-☐ Deployment window defined and communicated
-☐ Communication plan to users/stakeholders
-☐ Rollback tested and reversion window defined
-☐ T+7 / T+30 / T+90 reviews scheduled on the calendar
-10) Final Approvals
-Business Owner — Signature/Date: __________________________
-Technical Owner — Signature/Date: _____________________________
-Local Compliance/IT — Signature/Date: ________________________
-Segment Approval — Signature/Date: ________________________
-Digital Council Approval — Signature/Date: __________________
+- [ ] Agent ID, versão e ambientes identificados.
+- [ ] Finalidade autorizada, usuários, regiões e usos proibidos registrados.
+- [ ] Business owner, technical owner e risk owner confirmados.
+- [ ] Registry e blueprint apontam para a mesma versão.
+
+Evidence refs:
+
+## 2. Risk tier e decision rights
+
+- [ ] Tier e rationale aprovados pela autoridade competente.
+- [ ] Decision rights e segregation of duties são proporcionais ao risco.
+- [ ] Human accountability boundary está explícita.
+- [ ] Exceptions possuem owner, prazo e expiry.
+
+Evidence refs:
+
+## 3. Dados, identidade e segurança
+
+- [ ] Dados, classificação, origem, retenção e base aplicável registrados.
+- [ ] Identidade própria e least privilege validados.
+- [ ] Secrets e credenciais usam mecanismo aprovado e rotacionável.
+- [ ] Acesso entre domínios, tenants e regiões foi testado.
+- [ ] Threat model e riscos de prompt injection/exfiltração foram avaliados.
+
+Evidence refs:
+
+## 4. Tools, autonomia e enforcement
+
+- [ ] Tools possuem classes, scopes, approval mode e limites documentados.
+- [ ] Ações state-changing são declaradas e tecnicamente controladas.
+- [ ] Ações irreversíveis não dependem apenas de instrução em prompt.
+- [ ] Gateway, kill switch, quarantine e rollback foram testados quando aplicáveis.
+
+Evidence refs:
+
+## 5. Evaluation e Responsible AI
+
+- [ ] Evaluation suite cobre qualidade, safety e cenários adversariais aplicáveis.
+- [ ] Privacy, fairness, transparency e human oversight foram avaliados conforme o tier.
+- [ ] Acceptance criteria, thresholds e limitações estão documentados.
+- [ ] Findings abertos possuem disposition, owner e prazo.
+
+Evidence refs:
+
+## 6. Observabilidade, resposta e lifecycle
+
+- [ ] Logs, métricas, alertas e retenção foram validados.
+- [ ] Incident owner, escalation path e containment estão operacionais.
+- [ ] Attestation, review cadence e triggers de revisão estão definidos.
+- [ ] Critérios de suspensão, reativação e sunset estão documentados.
+
+Evidence refs:
+
+## 7. Release disposition
+
+- Gate:
+- Decisão: `approved` / `conditional` / `rejected` / `expired`
+- Decision authority:
+- Data:
+- Condições:
+- Evidence package:
+- Próxima revisão:
+
+A decisão deve seguir a [policy modular](../docs/governance/policy.md), o [operating model](../docs/governance/operating-model.md) e os [decision gates](../docs/guides/framework-implementation-playbook.md). Este checklist não constitui aprovação automática.

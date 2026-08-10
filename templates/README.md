@@ -13,10 +13,10 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 ## Assessment e release
 
 - [Maturity Assessment](maturity-assessment-template.md)
-- [Self-Assessment Form](self-assessment-form.md)
-- [Self-Assessment Example](self-assessment-example.md)
+- [Autoavaliação de agente](self-assessment-form.md)
+- [Exemplo de autoavaliação](self-assessment-example.md)
 - [Technology Assessment](assessment-template.md)
-- [Publication Checklist](publication-checklist.md)
+- [Checklist de decisão de release](publication-checklist.md)
 - [Sunset Plan](sunset-plan.md)
 
 ## Comunicação e pesquisa
