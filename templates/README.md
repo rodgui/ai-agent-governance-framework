@@ -5,6 +5,8 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 ## Governança e arquitetura
 
 - [Governance Charter](governance-charter-template.md)
+- [Terms of reference de fórum](governance-forum-tor.md)
+- [Dicionário de taxonomia e metadados](agent-taxonomy-dictionary.md)
 - [Agent Registry Record](agent-registry-template.md)
 - [Agent Blueprint](agent-blueprint-template.md)
 - [ADR](adr-template.md)
