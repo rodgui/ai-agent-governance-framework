@@ -70,3 +70,7 @@ Mudanças normativas devem:
 ## Origem histórica
 
 A [AI Agent Policy and Governance v1](ai-agent-policy-and-governance-v1.md) foi o ponto inicial deste trabalho. Ela é preservada byte a byte para rastreabilidade histórica, mas não é usada como fonte normativa recorrente do framework modular.
+
+O guia externo "Governança de Agentes de IA em Escala", mantido anteriormente como documento independente, também é **origem histórica**. Seu conteúdo procedural foi absorvido por este repositório conforme a [ADR-0003](../architecture/decisions/0003-single-canonical-source-and-guide-absorption.md), reescrito no formato canônico. Cópias daquele documento não são normativas e podem conter taxonomia divergente: onde usarem uma faixa `T0`, aplica-se a conversão definida na [ADR-0004](../architecture/decisions/0004-risk-tier-taxonomy-and-fast-path.md).
+
+Este repositório é a **fonte única e final**. Qualquer publicação em outro formato deve ser derivada destes módulos, nunca mantida como cópia editorial independente.

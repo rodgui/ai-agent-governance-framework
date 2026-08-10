@@ -62,6 +62,22 @@ T1–T4 é a taxonomia canônica de risco da policy modular. Uma organização p
 
 Red flags podem elevar o tier independentemente do score: decisão sobre direitos, dados altamente sensíveis, ações financeiras, produção industrial crítica, acesso privilegiado, público externo, code execution ou impossibilidade de rollback.
 
+### Fast path de T1
+
+Em estates com alto volume de casos simples, exigir revisão humana caso a caso transforma a governança em gargalo — e a organização passa a contorná-la. O fast path é a rota **automatizada** de T1, definida na [ADR-0004](../architecture/decisions/0004-risk-tier-taxonomy-and-fast-path.md).
+
+O fast path elimina revisão manual caso a caso. Ele **não** elimina controle. Permanecem obrigatórios:
+
+- descoberta e registro com `agent_id` e owner atribuído;
+- logging básico e telemetria mínima recuperável;
+- uso restrito a fontes de dados e tools já aprovadas;
+- termos de uso aceitos pelo owner;
+- evidência proporcional e recuperável da classificação.
+
+A saída do fast path é **automática**: qualquer red flag, escalador ou impact trigger remove o agente da rota rápida e exige a rota do tier resultante. A entrada é que precisa ser conquistada — na dúvida, o caso não entra.
+
+Materiais externos que usem uma faixa `T0` convergem para T1: `T0` e `T1` externos mapeiam para T1 canônico; `T2`, `T3` e `T4` permanecem equivalentes.
+
 ## Processo
 
 ```mermaid

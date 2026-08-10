@@ -60,11 +60,16 @@ Evidence refs:
 ## 7. Release disposition
 
 - Gate:
-- Decisão: `approved` / `conditional` / `rejected` / `expired`
+- Decisão: `approve` / `condition` / `hold` / `reject`
 - Decision authority:
 - Data:
-- Condições:
+- Versão do agente e do risk model:
+- Rationale:
+- Condições e compensating controls:
 - Evidence package:
+- Expiry da decisão:
 - Próxima revisão:
+
+Os quatro estados são os do [contrato comum dos decision gates](../docs/guides/framework-implementation-playbook.md#estados-de-decisão). `expired` não é uma disposição: é o estado que uma decisão `approve` ou `condition` assume quando ultrapassa o expiry sem revalidação, e exige nova decisão antes da continuidade.
 
 A decisão deve seguir a [policy modular](../docs/governance/policy.md), o [operating model](../docs/governance/operating-model.md) e os [decision gates](../docs/guides/framework-implementation-playbook.md). Este checklist não constitui aprovação automática.

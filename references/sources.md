@@ -11,6 +11,7 @@ Registro de fontes primárias usadas pelo framework. Claims temporais devem regi
 | ISO-001 | ISO/IEC 42001:2023 — Artificial intelligence management system | Norma internacional — página oficial | <https://www.iso.org/standard/81230.html> | 2026-08-09 | AI management system |
 | ISO-002 | ISO/IEC 23894:2023 — Guidance on risk management | Norma internacional — página oficial | <https://www.iso.org/standard/77304.html> | 2026-08-09 | AI risk management |
 | ISO-003 | ISO/IEC 22989:2022 — AI concepts and terminology | Norma internacional — página oficial | <https://www.iso.org/standard/74296.html> | 2026-08-09 | Terminologia de IA |
+| ISO-004 | ISO/IEC 42005:2025 — AI system impact assessment | Norma internacional — página oficial | <https://www.iso.org/standard/42005> | 2026-08-10 | Impact assessment ao longo do lifecycle |
 | EU-001 | Regulation (EU) 2024/1689 — Artificial Intelligence Act | Legislação oficial | <https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng> | 2026-08-09 | Risk management, logging, transparency e human oversight |
 | OECD-001 | OECD AI Principles | Princípios intergovernamentais | <https://oecd.ai/en/ai-principles> | 2026-08-09 | Human-centred values, transparency, robustness e accountability |
 
@@ -20,7 +21,10 @@ Registro de fontes primárias usadas pelo framework. Claims temporais devem regi
 |---|---|---|---|---:|---|
 | OWASP-001 | Agentic AI — Threats and Mitigations | Guia técnico aberto | <https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations> | 2026-08-09 | Threats, mitigations e agentic security |
 | OWASP-002 | OWASP GenAI Security Project | Projeto técnico aberto | <https://owasp.org/www-project-top-10-for-large-language-model-applications/> | 2026-08-09 | LLM, agentic e GenAI application security |
+| OWASP-003 | OWASP Top 10 for Agentic Applications 2026 | Guia técnico aberto | <https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/> | 2026-08-10 | Riscos específicos de sistemas agentic e autonomia |
+| OWASP-004 | OWASP MCP Top 10 | Projeto técnico aberto | <https://owasp.org/www-project-mcp-top-10/> | 2026-08-10 | Riscos de MCP: misbinding, context spoofing, memória e canais encobertos |
 | MITRE-001 | MITRE ATLAS | Knowledge base pública | <https://atlas.mitre.org/> | 2026-08-09 | Threat-informed defense e adversarial techniques |
+| CSA-001 | Cloud Security Alliance AI Controls Matrix (AICM) v1.1 | Framework aberto de controles | <https://cloudsecurityalliance.org/artifacts/ai-controls-matrix-v1-1> | 2026-08-10 | Objetivos de controle por domínio e mappings para frameworks de IA |
 
 ## Microsoft Customer Zero — application evidence
 
