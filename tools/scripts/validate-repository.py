@@ -14,7 +14,17 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[2]
 POLICY_PATH = ROOT / "docs/governance/ai-agent-policy-and-governance-v1.md"
 POLICY_V1_SHA256 = "cdd8c232019a4b388ebb71d7f1dd82f3c568d039d416beab1838ee59f4047140"
-EXCLUDED_DIRS = {".git", ".venv", "venv", "dist", "__pycache__", ".pytest_cache", ".ruff_cache"}
+EXCLUDED_DIRS = {
+    ".git",
+    ".venv",
+    "venv",
+    "dist",
+    "site",
+    "site_src",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+}
 TEXT_SUFFIXES = {".md", ".py", ".json", ".yml", ".yaml", ".toml", ".txt"}
 INLINE_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 CITATION_RE = re.compile(r"(?<!\!)\[(\d+)\]")
