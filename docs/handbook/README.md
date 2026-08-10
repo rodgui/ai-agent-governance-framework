@@ -11,7 +11,7 @@ related:
 ---
 
 <!-- markdownlint-disable MD029 -->
-<!-- A numeração 1–27 é deliberadamente contínua entre as partes editoriais. -->
+<!-- A numeração 1–30 é deliberadamente contínua entre as partes editoriais. -->
 
 # Handbook de governança de IA e agentes
 
@@ -20,9 +20,9 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 ## Como ler
 
 - **Leitura executiva:** capítulos 1, 2, 6 e 10.
-- **Implantação:** capítulos 1–26 na ordem.
-- **Arquitetura:** capítulos 3, 7–19 e 21–25.
-- **Assurance:** capítulos 8, 9 e 14–19.
+- **Implantação:** capítulos 1–30 na ordem.
+- **Arquitetura:** capítulos 3, 7, 11–17, 22 e 26–29.
+- **Assurance:** capítulos 8, 9 e 18–21.
 - **Referência:** consulte por domínio; não precisa seguir a ordem.
 
 ## Parte I — Fundamentos
@@ -43,29 +43,32 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 ## Parte III — Domínios de controle
 
 10. [Estratégia, portfolio e evidência de valor](../value/README.md)
-11. [Identidade e least privilege](../identity/README.md)
-12. [Dados, acesso e provenance](../data-access/README.md)
-13. [Tools, APIs e MCP](../tool-governance/README.md)
-14. [Segurança de sistemas de IA e agentes](../security/README.md)
-15. [Responsible AI e assurance](../responsible-ai/README.md)
-16. [Human oversight e accountability](../human-oversight/README.md)
-17. [Evaluations e release evidence](../evaluations/README.md)
-18. [Auditabilidade e evidências](../auditability/README.md)
-19. [Operações, resposta e lifecycle](../operations/README.md)
-20. [Adoção, enablement e suporte](../adoption/README.md)
+11. [Estate, registry, ownership e taxonomia](../registry/README.md)
+12. [Lifecycle, mudança material, attestation e retirement](../lifecycle/README.md)
+13. [Identidade e least privilege](../identity/README.md)
+14. [Dados, acesso e provenance](../data-access/README.md)
+15. [Tools, APIs e MCP](../tool-governance/README.md)
+16. [Modelos, provedores e dependências de IA](../model-governance/README.md)
+17. [Segurança de sistemas de IA e agentes](../security/README.md)
+18. [Responsible AI e assurance](../responsible-ai/README.md)
+19. [Human oversight e accountability](../human-oversight/README.md)
+20. [Evaluations e release evidence](../evaluations/README.md)
+21. [Auditabilidade e evidências](../auditability/README.md)
+22. [Operações, resposta e runtime](../operations/README.md)
+23. [Adoção, enablement e suporte](../adoption/README.md)
 
 ## Parte IV — Método, patterns e toolkit
 
-21. [Implementation playbook](../guides/framework-implementation-playbook.md)
-22. [Roadmap de 90 dias](../guides/implementation-plan-90-days.md)
-23. [Catálogo de design patterns](../patterns/README.md)
-24. [Control catalog](../../controls/README.md)
-25. [Schemas e examples](../../schemas/README.md)
-26. [Templates](../../templates/README.md)
+24. [Implementation playbook](../guides/framework-implementation-playbook.md)
+25. [Roadmap de 90 dias](../guides/implementation-plan-90-days.md)
+26. [Catálogo de design patterns](../patterns/README.md)
+27. [Control catalog](../../controls/README.md)
+28. [Schemas e examples](../../schemas/README.md)
+29. [Templates](../../templates/README.md)
 
 ## Parte V — Fontes e limitações
 
-27. [Fontes e bibliografia](../../references/sources.md)
+30. [Fontes e bibliografia](../../references/sources.md)
 
 ## Casos e mappings opcionais
 

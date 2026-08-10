@@ -48,10 +48,12 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 1. [Arquitetura de referência](architecture/overview.md)
 2. [Design patterns](patterns/README.md)
-3. [Identidade](identity/README.md)
-4. [Dados](data-access/README.md)
-5. [Tools e MCP](tool-governance/README.md)
-6. [Schemas](../schemas/README.md)
+3. [Estate, registry e taxonomia](registry/README.md)
+4. [Identidade](identity/README.md)
+5. [Dados](data-access/README.md)
+6. [Tools e MCP](tool-governance/README.md)
+7. [Modelos e provedores](model-governance/README.md)
+8. [Schemas](../schemas/README.md)
 
 **Decisões esperadas:** source of truth, blueprint, workload identity, gateways, enforcement points e adapters por plataforma.
 
@@ -75,9 +77,10 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 1. [Operações](operations/README.md)
 2. [Auditabilidade](auditability/README.md)
-3. [Runtime observability and quarantine pattern](patterns/runtime-observability-and-quarantine.md)
-4. [Lifecycle attestation and sunset pattern](patterns/lifecycle-attestation-and-sunset.md)
-5. [Sunset plan](../templates/sunset-plan.md)
+3. [Lifecycle, mudança material e retirement](lifecycle/README.md)
+4. [Runtime observability and quarantine pattern](patterns/runtime-observability-and-quarantine.md)
+5. [Lifecycle attestation and sunset pattern](patterns/lifecycle-attestation-and-sunset.md)
+6. [Sunset plan](../templates/sunset-plan.md)
 
 **Decisões esperadas:** SLOs, alertas, incident severity, quarantine, reactivation, attestation e retirement.
 
@@ -110,10 +113,12 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 | Objetivo | Documentos principais |
 |---|---|
 | definir policy e accountability | [Policy modular](governance/policy.md) + [operating model](governance/operating-model.md) |
-| inventariar agentes | [Registry + blueprint pattern](patterns/registry-and-blueprint.md) + [schemas](../schemas/README.md) |
+| inventariar agentes | [Estate e registry](registry/README.md) + [descoberta e forecast](registry/discovery-and-forecast.md) + [schemas](../schemas/README.md) |
 | classificar risco | [Risk-tiered governance](patterns/risk-tiered-governance.md) + [risk management](risk-management/README.md) |
 | governar identidade e dados | [Identity](identity/README.md) + [data access](data-access/README.md) |
 | governar tools e MCP | [Tool governance](tool-governance/README.md) + [MCP gateway pattern](patterns/tool-and-mcp-gateway.md) |
+| governar modelos e provedores | [Model governance](model-governance/README.md) + [evaluations](evaluations/README.md) |
+| governar mudança e retirement | [Lifecycle](lifecycle/README.md) + [lifecycle pattern](patterns/lifecycle-attestation-and-sunset.md) |
 | publicar com evidência | [Evaluations](evaluations/README.md) + [control catalog](../controls/README.md) |
 | operar e conter | [Operations](operations/README.md) + [runtime pattern](patterns/runtime-observability-and-quarantine.md) |
 | medir maturidade | [Maturity model](guides/maturity-model.md) + [assessment example](../examples/maturity-assessment.example.json) |

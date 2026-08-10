@@ -69,6 +69,20 @@ Observa comportamento, segurança, acesso, performance, uso e valor; executa rem
 
 **Artefatos:** logs, dashboards, alerts, incidents, quarantine, rollback, value review, retirement decision.
 
+## Domínios canônicos por plano
+
+Os cinco planos são a arquitetura. Os domínios canônicos são a organização editorial e de ownership do corpus. Um domínio pertence a um plano principal, mas quase sempre produz evidência consumida por outros.
+
+| Plano | Domínios canônicos |
+|---|---|
+| 1. Estratégia e valor | [estratégia, portfólio e valor](../value/README.md) |
+| 2. Control plane | [estate e registry](../registry/README.md) · [lifecycle](../lifecycle/README.md) · [identidade](../identity/README.md) · [dados](../data-access/README.md) · [tools e MCP](../tool-governance/README.md) · [modelos e provedores](../model-governance/README.md) |
+| 3. Assurance plane | [risco](../risk-management/README.md) · [Responsible AI](../responsible-ai/README.md) · [segurança](../security/README.md) · [evaluations](../evaluations/README.md) · [human oversight](../human-oversight/README.md) |
+| 4. Adoção e suporte | [adoção e enablement](../adoption/README.md) |
+| 5. Runtime e valor | [operações e resposta](../operations/README.md) · [auditabilidade](../auditability/README.md) |
+
+Um domínio novo só se justifica quando altera decisão, authority, control ou evidência. Subdividir por afinidade temática, sem consequência operacional, aumenta manutenção sem aumentar governança.
+
 ## Fluxo ponta a ponta
 
 ```mermaid
