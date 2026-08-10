@@ -4,7 +4,7 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 ## [Unreleased]
 
-Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a release 1.1.0. Sete achados; nenhum deles havia sido fechado pela 1.1.0.
+Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a release 1.1.0, seguida do fechamento editorial e da construção dos casos de referência. Dez achados de auditoria — nenhum fechado pela 1.1.0 — mais quatro defeitos que só apareceram ao construir os casos.
 
 ### Added
 
@@ -13,13 +13,17 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 - Colunas "quando evoluir para assessment formal" e "efeito na aprovação" no tiering de assurance de Responsible AI.
 - Três níveis de leitura de um domínio (entender, decidir, executar) no handbook, e entrada por estágio da organização no índice.
 - Termos que o corpus passou a usar e o glossário não definia, com destaque para `admissibilidade` — dimensão criada pela ADR-0009 e até aqui sem definição canônica.
+- Três casos de referência em `docs/explanations/cases/` — T1 na rota rápida, T2 transacional e T3 com impacto sobre pessoas — percorrendo os gates G0–G7 com registry, blueprint e manifesto validados pelo CI. Fecham o critério 6 do checklist de autossuficiência.
+- Guardrail que confere `governance.controlIds` do blueprint contra o control catalog. Um ID inexistente atravessava o gate parecendo cobertura.
 - Método de mapeamento de capability para tecnologia, separado da arquitetura para que trocar de produto não exija reescrever a arquitetura.
 - Template de Agent Use-Case Portfolio, o registro que faltava para as decisões de portfólio que o domínio de valor já descrevia.
-- Checklist de autossuficiência, com a autoavaliação declarada deste repositório contra ele — dois critérios abertos e um parcial.
+- Checklist de autossuficiência, com a autoavaliação declarada deste repositório contra ele. O critério 6 fechou com os casos de referência; permanecem um aberto (nada exercitado contra estate real) e um parcial (owner e aprovador únicos).
 
 ### Changed
 
 - O evidence pack de T2 declara herança de T1, como T3 e T4 já faziam.
+- As invariantes cross-record operam sobre bundles de caso em vez de caminhos fixos, e casos em `examples/cases/<id>/` entram na validação de schema pela mesma convenção. Sem isso, um segundo caso ficaria no repositório com aparência de evidência e sem verificação.
+- Release Evidence Manifest ganha `conditions` e `expiresAt`. Uma decisão `conditional` passa a exigir as duas, em vez de exigir `exceptionRefs`: pelo glossário do próprio framework, exceção autoriza desvio de requisito e condição limita o escopo aprovado. Exigir waiver para toda aprovação condicional empurra a organização a registrar exceção falsa — e exceção falsa contamina justamente a métrica que deveria detectar acúmulo de risco.
 - Developer experience e paved road, atributos de qualidade e riscos arquiteturais entram na ordem editorial do handbook e na navegação do site. Eram conteúdo real inalcançável a partir de qualquer entrada do repositório.
 - `docs/index.md` ganha navegação por pasta, ligando os índices de seção que existiam sem nenhum caminho de entrada.
 - Os marcadores de tempo do sunset plan passam de `T0`/`T+15`/`T+30` para `D0`/`D+15`/`D+30`, eliminando a colisão com o rótulo de tier que a taxonomia canônica rejeita.

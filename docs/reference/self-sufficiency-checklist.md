@@ -48,13 +48,15 @@ Aplicar o checklist a si mesmo é parte de usá-lo honestamente. O resultado aba
 | 3 | atende | o [catálogo de artefatos](artifact-catalog.md) fecha a lacuna de owner e fase que existia até a auditoria de agosto |
 | 4 | atende | exemplos preenchidos em `examples/`, templates limpos em `templates/` |
 | 5 | atende | control catalog com `verification`, `blocking` e `scope`; verificação mecânica no CI |
-| 6 | **não atende** | há um fio de exemplos de service desk (SLO, runbook, evaluation report), mas não um conjunto declarado de casos que percorra os seis domínios de ponta a ponta |
+| 6 | atende | três [casos de referência](../explanations/cases/README.md) — T1, T2 e T3 — percorrem G0–G7 com registry, blueprint e manifesto validados pelo CI. A construção deles encontrou quatro defeitos que a leitura por domínio não encontrava |
 | 7 | atende, com divergência declarada | o repositório trata roadmaps como patterns adaptáveis e mantém G0–G7 como únicos gates canônicos, em vez de um cronograma oficial único |
 | 8 | atende | arquitetura agnóstica por [ADR-0002](../architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md); [mapeamento para tecnologia](../architecture/capability-to-technology.md) em documento separado |
 | 9 | atende | o [fast path de T1](../risk-management/README.md#fast-path-de-t1) existe exatamente para não criar fila central em baixo risco |
 | 10 | **não verificado** | o mecanismo está desenhado e documentado; nenhum control foi exercitado contra um estate real |
 | 11 | atende | [unit economics](../operations/finops.md) e value review; o corpus afirma explicitamente que adoção não é proxy de resultado |
 
-Dois critérios abertos e um parcial. Nenhum deles se resolve escrevendo mais documentação: o 6 pede um conjunto de casos que atravesse o corpus, o 10 pede execução contra um estate real, e o 2 pede um segundo par de olhos com autoridade.
+Um critério aberto e um parcial. O 10 pede execução contra um estate real e o 2 pede um segundo par de olhos com autoridade — nenhum dos dois se resolve escrevendo documentação.
+
+O critério 6 fechou construindo os casos, não descrevendo-os. Foi a construção que expôs os defeitos: um release registrado como `condition` em prosa e `approved` em JSON, um contrato que confundia condição com exceção, e um control inexistente atravessando o gate como se fosse cobertura.
 
 Declarar isso é mais útil do que um checklist todo verde. Um asset que se autoavalia sem falhar em nada não foi aplicado com seriedade.

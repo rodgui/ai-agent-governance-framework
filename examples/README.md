@@ -14,6 +14,13 @@ Exemplos fictícios e sanitizados que demonstram o uso dos schemas e templates.
 - [`release-evidence-manifest.example.json`](release-evidence-manifest.example.json) — decisão e evidence lineage de release.
 - [`audit-event.example.json`](audit-event.example.json) — envelope auditável de uma tool request sem payload sensível.
 
+## Casos de referência
+
+Records agrupados por caso em [`cases/`](cases/), validados pelos mesmos schemas e invariantes dos exemplos da raiz. Cada caso tem a narrativa correspondente em [`docs/explanations/cases/`](../docs/explanations/cases/README.md).
+
+- [`cases/meeting-notes-summarizer/`](cases/meeting-notes-summarizer/) — T1 na rota rápida, somente leitura.
+- [`cases/benefits-eligibility-triage/`](cases/benefits-eligibility-triage/) — T3 com impacto sobre pessoas e admissibilidade `conditional`.
+
 ## Evidence package operacional
 
 - [`architecture.example.md`](architecture.example.md) — arquitetura, trust boundaries e failure boundaries.

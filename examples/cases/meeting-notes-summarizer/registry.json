@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "2.0",
+  "agentId": "meeting-notes-summarizer",
+  "name": "Meeting Notes Summarizer",
+  "description": "Exemplo fictício de agente interno que resume notas de reunião já registradas.",
+  "purpose": "Reduzir tempo de consolidação de notas de reunião de equipes internas, sem alterar nenhum sistema.",
+  "intendedUsers": [
+    "internal-team-members"
+  ],
+  "prohibitedUses": [
+    "Executar qualquer ação em sistema",
+    "Processar dados pessoais ou de cliente",
+    "Enviar conteúdo a destinatário externo",
+    "Resumir material classificado acima de interno"
+  ],
+  "ownership": {
+    "businessOwner": {
+      "name": "Example Business Owner",
+      "role": "Head of Service Operations",
+      "contact": "owner@example.invalid",
+      "organizationUnit": "Example Operations"
+    },
+    "technicalOwner": {
+      "name": "Example Technical Owner",
+      "role": "AI Platform Lead",
+      "contact": "technical@example.invalid",
+      "organizationUnit": "Example Technology"
+    },
+    "runOwner": {
+      "name": "Example Run Owner",
+      "role": "Service Reliability Lead"
+    }
+  },
+  "lifecycle": {
+    "stage": "production",
+    "operationalState": "enabled",
+    "createdAt": "2026-06-15",
+    "enteredStageAt": "2026-06-20T10:00:00Z",
+    "approvedAt": "2026-06-20",
+    "sunsetBy": "2027-06-20",
+    "statusReason": "Exemplo aprovado pela rota automatizada de T1; não representa deployment real.",
+    "transitionHistory": [
+      {
+        "transitionType": "both",
+        "fromStage": "approved",
+        "toStage": "production",
+        "fromOperationalState": "not-deployed",
+        "toOperationalState": "enabled",
+        "occurredAt": "2026-06-20T10:00:00Z",
+        "authority": "Example Policy Gate",
+        "reason": "Fast path de T1: policy gate aprovou sem review manual caso a caso.",
+        "evidenceRef": "examples/cases/meeting-notes-summarizer/release-manifest.json"
+      }
+    ]
+  },
+  "risk": {
+    "tier": "T1",
+    "assessmentRef": "examples/cases/meeting-notes-summarizer/release-manifest.json",
+    "classifiedAt": "2026-06-20",
+    "redFlags": [],
+    "residualRisk": "low",
+    "admissibility": "permitted",
+    "admissibilityRationale": "Uso interno, somente leitura, sem ação de estado e sem dado pessoal. Nenhum escalador acionado no pre-screen."
+  },
+  "currentBlueprint": {
+    "version": "1.0",
+    "path": "examples/cases/meeting-notes-summarizer/blueprint.json"
+  },
+  "platforms": [
+    {
+      "name": "example-managed-ai-platform",
+      "environment": "production",
+      "tenant": "example-tenant",
+      "region": "example-region",
+      "externalId": "example-agent-001"
+    }
+  ],
+  "capabilities": [
+    "observe"
+  ],
+  "evidenceLinks": [
+    {
+      "type": "approval",
+      "path": "examples/cases/meeting-notes-summarizer/release-manifest.json"
+    }
+  ],
+  "attestation": {
+    "status": "valid",
+    "attestedAt": "2026-06-20",
+    "expiresAt": "2027-06-20",
+    "decisionRef": "examples/cases/meeting-notes-summarizer/release-manifest.json"
+  },
+  "tags": [
+    "internal",
+    "read-only",
+    "fast-path"
+  ],
+  "lastReviewed": "2026-06-20",
+  "discovery": {
+    "status": "confirmed",
+    "confidence": "high",
+    "firstSeenAt": "2026-06-15T09:00:00Z",
+    "lastSeenAt": "2026-08-09T12:00:00Z",
+    "signals": [
+      {
+        "system": "example-control-plane",
+        "signalType": "control-plane",
+        "observedAt": "2026-08-09T12:00:00Z",
+        "evidenceRef": "examples/cases/meeting-notes-summarizer/release-manifest.json"
+      }
+    ]
+  }
+}

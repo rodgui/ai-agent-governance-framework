@@ -164,6 +164,44 @@
           }
         }
       }
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Prazo após o qual a decisão deixa de sustentar a operação e precisa ser reavaliada."
+    },
+    "conditions": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Restrições de escopo que a authority impôs para aprovar. Condição não é exceção: condição limita o que foi aprovado, exceção autoriza desvio de um requisito.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "statement",
+          "owner",
+          "verification"
+        ],
+        "properties": {
+          "statement": {
+            "type": "string",
+            "minLength": 8
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 2
+          },
+          "verification": {
+            "type": "string",
+            "minLength": 8,
+            "description": "Como a satisfação da condição é verificada em runtime ou no próximo gate."
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
     }
   },
   "allOf": [
@@ -199,13 +237,9 @@
       },
       "then": {
         "required": [
-          "exceptionRefs"
-        ],
-        "properties": {
-          "exceptionRefs": {
-            "minItems": 1
-          }
-        }
+          "conditions",
+          "expiresAt"
+        ]
       }
     }
   ]

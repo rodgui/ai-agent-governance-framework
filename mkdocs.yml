@@ -144,5 +144,9 @@ nav:
   - Decisões e limites:
       - Architecture decision log: docs/architecture/decisions/README.md
       - Explicações e casos: docs/explanations/README.md
+      - Casos de referência: docs/explanations/cases/README.md
+      - Caso T1 — Meeting Notes: docs/explanations/cases/meeting-notes-summarizer.md
+      - Caso T2 — Service Desk: docs/explanations/cases/service-desk-knowledge-agent.md
+      - Caso T3 — Elegibilidade: docs/explanations/cases/benefits-eligibility-triage.md
       - Assessments: assessments/README.md
       - Camada comercial: consulting/README.md

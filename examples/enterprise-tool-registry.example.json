@@ -54,6 +54,30 @@
       ],
       "provenance": "Internal cataloged API that creates non-published drafts.",
       "reviewExpiresAt": "2026-11-01"
+    },
+    {
+      "id": "TLR-ELIGIBILITY-RECOMMENDATION-002",
+      "name": "Eligibility Recommendation Writer",
+      "version": "1.0",
+      "owner": "Example Benefits Platform Team",
+      "protocol": "api",
+      "class": "create",
+      "stateChanging": true,
+      "reversible": true,
+      "approvalModes": [
+        "human"
+      ],
+      "status": "approved",
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/eligibility-recommendation",
+      "allowedRiskTiers": [
+        "T3"
+      ],
+      "allowedScopes": [
+        "eligibility.recommendation.create"
+      ],
+      "provenance": "Internal cataloged API; escrita restrita ao campo de recomendação do caso.",
+      "reviewExpiresAt": "2026-11-01"
     }
   ]
 }

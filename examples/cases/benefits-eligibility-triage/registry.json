@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "2.0",
+  "agentId": "benefits-eligibility-triage",
+  "name": "Benefits Eligibility Triage Agent",
+  "description": "Exemplo fictício de agente que prepara recomendação de elegibilidade para decisão humana.",
+  "purpose": "Reunir a regra vigente e preparar uma recomendação de elegibilidade, com rationale citável, para que um analista decida.",
+  "intendedUsers": [
+    "benefits-analysts"
+  ],
+  "prohibitedUses": [
+    "Decidir elegibilidade sem aprovação humana",
+    "Comunicar resultado ao requerente",
+    "Usar atributo protegido ou proxy dele como critério",
+    "Operar sem canal de contestação disponível"
+  ],
+  "ownership": {
+    "businessOwner": {
+      "name": "Example Business Owner",
+      "role": "Head of Service Operations",
+      "contact": "owner@example.invalid",
+      "organizationUnit": "Example Operations"
+    },
+    "technicalOwner": {
+      "name": "Example Technical Owner",
+      "role": "AI Platform Lead",
+      "contact": "technical@example.invalid",
+      "organizationUnit": "Example Technology"
+    },
+    "runOwner": {
+      "name": "Example Run Owner",
+      "role": "Service Reliability Lead"
+    }
+  },
+  "lifecycle": {
+    "stage": "production",
+    "operationalState": "enabled",
+    "createdAt": "2026-05-02",
+    "enteredStageAt": "2026-06-01T14:00:00Z",
+    "approvedAt": "2026-06-01",
+    "sunsetBy": "2027-06-01",
+    "statusReason": "Exemplo aprovado sob condições; não representa deployment real.",
+    "transitionHistory": [
+      {
+        "transitionType": "both",
+        "fromStage": "approved",
+        "toStage": "production",
+        "fromOperationalState": "not-deployed",
+        "toOperationalState": "enabled",
+        "occurredAt": "2026-06-01T14:00:00Z",
+        "authority": "Example Design Authority",
+        "reason": "G5 aprovado sob condições, com veto de Responsible AI levantado após impact assessment.",
+        "evidenceRef": "examples/cases/benefits-eligibility-triage/release-manifest.json"
+      }
+    ]
+  },
+  "risk": {
+    "tier": "T3",
+    "assessmentRef": "examples/cases/benefits-eligibility-triage/release-manifest.json",
+    "classifiedAt": "2026-05-20",
+    "redFlags": [
+      "Decisão sobre emprego, crédito, elegibilidade ou acesso a serviço"
+    ],
+    "residualRisk": "moderate",
+    "admissibility": "conditional",
+    "admissibilityRationale": "Admitido enquanto a decisão permanecer humana, a contestação estiver disponível e o desempenho por slice for reavaliado a cada versão. Perda de qualquer condição suspende o uso.",
+    "conditionRefs": [
+      "examples/cases/benefits-eligibility-triage/release-manifest.json"
+    ]
+  },
+  "currentBlueprint": {
+    "version": "1.0",
+    "path": "examples/cases/benefits-eligibility-triage/blueprint.json"
+  },
+  "platforms": [
+    {
+      "name": "example-managed-ai-platform",
+      "environment": "production",
+      "tenant": "example-tenant",
+      "region": "example-region",
+      "externalId": "example-agent-001"
+    }
+  ],
+  "capabilities": [
+    "observe",
+    "create"
+  ],
+  "evidenceLinks": [
+    {
+      "type": "approval",
+      "path": "examples/cases/benefits-eligibility-triage/release-manifest.json"
+    }
+  ],
+  "attestation": {
+    "status": "valid",
+    "attestedAt": "2026-06-01",
+    "expiresAt": "2026-12-01",
+    "decisionRef": "examples/cases/benefits-eligibility-triage/release-manifest.json"
+  },
+  "tags": [
+    "internal",
+    "human-impact",
+    "hitl"
+  ],
+  "lastReviewed": "2026-06-01",
+  "discovery": {
+    "status": "confirmed",
+    "confidence": "high",
+    "firstSeenAt": "2026-05-02T09:00:00Z",
+    "lastSeenAt": "2026-08-09T12:00:00Z",
+    "signals": [
+      {
+        "system": "example-control-plane",
+        "signalType": "control-plane",
+        "observedAt": "2026-08-09T12:00:00Z",
+        "evidenceRef": "examples/cases/benefits-eligibility-triage/release-manifest.json"
+      }
+    ]
+  }
+}

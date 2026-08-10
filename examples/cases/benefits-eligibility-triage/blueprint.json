@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "2.0",
+  "agentId": "benefits-eligibility-triage",
+  "version": "1.0",
+  "architecture": {
+    "pattern": "tool-using-agent",
+    "description": "Exemplo fictício: recupera a regra vigente, prepara recomendação com rationale citável e devolve para decisão humana. O agente não decide.",
+    "diagramRef": "examples/architecture.example.md",
+    "trustBoundaries": [
+      "Canal interno para o runtime do agente",
+      "Runtime para o serviço de política",
+      "Runtime para o gateway de recomendação, com aprovação humana obrigatória"
+    ],
+    "dependencies": [
+      {
+        "name": "example-managed-ai-platform",
+        "type": "platform",
+        "criticality": "moderate",
+        "owner": "Example AI Platform Team"
+      },
+      {
+        "name": "approved-knowledge-index",
+        "type": "data",
+        "criticality": "moderate",
+        "owner": "Example Knowledge Owner"
+      }
+    ]
+  },
+  "models": [
+    {
+      "modelId": "example-reasoning-model",
+      "provider": "example-provider",
+      "purpose": "Preparar recomendação de elegibilidade com citação da regra aplicada.",
+      "hosting": "managed",
+      "versionPinned": true,
+      "dataUse": "no-training",
+      "limitations": [
+        "Não decide elegibilidade",
+        "Desempenho por slice reavaliado a cada versão"
+      ],
+      "modelVersion": "2026-07-20",
+      "catalogEntryId": "MPC-EXAMPLE-REASONING-002",
+      "evaluationRef": "examples/evaluation-report.example.md",
+      "role": "primary",
+      "allowedDataClasses": [
+        "public",
+        "internal",
+        "confidential"
+      ],
+      "allowedRegions": [
+        "example-region"
+      ],
+      "fallback": {
+        "mode": "fail-closed",
+        "rationale": "Sem alternativa avaliada, indisponibilidade do modelo interrompe novas respostas."
+      }
+    }
+  ],
+  "data": {
+    "sources": [
+      {
+        "sourceId": "benefits-policy-set",
+        "classification": "confidential",
+        "purpose": "Recuperar a regra de elegibilidade vigente e sua data de vigência.",
+        "owner": "Example Benefits Policy Owner",
+        "connectorRef": "example-connector-002",
+        "authorizationMode": "pre-retrieval",
+        "retention": "Index rebuild diário; source retention governa o original.",
+        "region": "example-region",
+        "catalogEntryId": "SRC-BENEFITS-POLICY-002"
+      }
+    ],
+    "memory": {
+      "mode": "session",
+      "retention": "Encerrada ao fim da sessão.",
+      "deletionMechanism": "Automatic session cleanup",
+      "sensitiveDataAllowed": false
+    }
+  },
+  "identity": {
+    "model": "hybrid",
+    "principal": "workload://example/benefits-eligibility-triage",
+    "scopes": [
+      "eligibility.recommendation.create"
+    ],
+    "expiry": "Workload token de curta duração; step-up humano exigido antes da escrita da recomendação.",
+    "secretManagement": "Managed secret store; nenhum segredo no prompt ou código.",
+    "breakGlass": "Não aplicável; o agente não recebe privilégio emergencial."
+  },
+  "tools": [
+    {
+      "toolId": "eligibility.recommendation.create",
+      "name": "Eligibility Recommendation Writer",
+      "class": "create",
+      "protocol": "api",
+      "stateChanging": true,
+      "reversible": true,
+      "approvalMode": "human",
+      "owner": "Example Benefits Platform Team",
+      "scopes": [
+        "eligibility.recommendation.create"
+      ],
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/knowledge-search",
+      "version": "1.0",
+      "catalogEntryId": "TLR-ELIGIBILITY-RECOMMENDATION-002"
+    }
+  ],
+  "runtime": {
+    "environments": [
+      "test",
+      "production"
+    ],
+    "regions": [
+      "example-region"
+    ],
+    "observability": "Correlation de caso, versão do agente, regra citada e decisão humana; atributo protegido não é logado.",
+    "quarantine": "Control plane bloqueia novas sessões e o gateway nega a escrita de recomendação.",
+    "rollback": "Recomendação é revogável antes da decisão; retorno à última versão aprovada do blueprint.",
+    "killSwitch": "Revogação do escopo de recomendação no gateway, com triagem manual como fallback.",
+    "supportRef": "examples/support-runbook.example.md",
+    "sloRef": "examples/slo.example.md"
+  },
+  "governance": {
+    "riskTier": "T3",
+    "admissibility": "conditional",
+    "admissibilityRationale": "Admitido enquanto a decisão permanecer humana, a contestação estiver disponível e o desempenho por slice for reavaliado a cada versão.",
+    "controlIds": [
+      "AGF-REG-001",
+      "AGF-IDN-001",
+      "AGF-DAT-001",
+      "AGF-EVA-001",
+      "AGF-OPS-001",
+      "AGF-RSK-004",
+      "AGF-RAI-001",
+      "AGF-RAI-002",
+      "AGF-TOL-002"
+    ],
+    "assessmentRefs": [
+      "examples/cases/benefits-eligibility-triage/release-manifest.json"
+    ],
+    "prohibitedUses": [
+      "Decisão automática de elegibilidade",
+      "Uso de atributo protegido ou proxy",
+      "Comunicação direta ao requerente"
+    ],
+    "materialChangeTriggers": [
+      "Mudança de versão de modelo",
+      "Mudança na regra de elegibilidade",
+      "Ampliação de população",
+      "Remoção da revisão humana",
+      "Disparidade material entre slices"
+    ],
+    "releaseEvidenceRef": "examples/cases/benefits-eligibility-triage/release-manifest.json",
+    "attestationExpiresAt": "2026-12-01",
+    "conditionRefs": [
+      "examples/cases/benefits-eligibility-triage/release-manifest.json"
+    ]
+  }
+}

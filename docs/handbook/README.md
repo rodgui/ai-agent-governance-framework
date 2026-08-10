@@ -95,6 +95,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 
 ## Casos e mappings opcionais
 
+- [Casos de referência](../explanations/cases/README.md) — a travessia completa do framework num agente só
 - [Microsoft Customer Zero — caso de estudo](../explanations/microsoft-agent-governance-case-study.md)
 - [Crosswalk histórico Microsoft × Policy v1](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md)
 

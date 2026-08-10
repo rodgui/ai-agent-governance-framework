@@ -46,7 +46,7 @@
         "fromOperationalState": "not-deployed",
         "toOperationalState": "enabled",
         "occurredAt": "2026-08-01T14:00:00Z",
-        "authority": "Example Release Authority",
+        "authority": "Example Design Authority",
         "reason": "Gate G5 aprovado com evidence pack do exemplo.",
         "evidenceRef": "examples/release-decision.example.md"
       }

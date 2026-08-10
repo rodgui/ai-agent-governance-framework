@@ -3,15 +3,42 @@
   "releaseId": "REL-SERVICE-DESK-001",
   "agentId": "service-desk-knowledge-agent",
   "blueprintVersion": "1.0",
-  "decision": "approved",
+  "decision": "conditional",
   "riskTier": "T2",
   "admissibility": "permitted",
   "createdAt": "2026-08-01T14:00:00Z",
+  "expiresAt": "2026-11-01T00:00:00Z",
   "approvers": [
     {
       "role": "Release Authority",
-      "authority": "Example Governance Forum",
+      "authority": "Example Design Authority",
       "decisionAt": "2026-08-01T14:00:00Z"
+    }
+  ],
+  "conditions": [
+    {
+      "statement": "Respostas a usuários externos exigem revisão humana antes do envio.",
+      "owner": "Example Business Owner",
+      "verification": "Amostragem mensal de respostas externas contra o registro de revisão.",
+      "expiresAt": "2026-11-01T00:00:00Z"
+    },
+    {
+      "statement": "Dados pessoais e credenciais permanecem proibidos no escopo aprovado.",
+      "owner": "Example Technical Owner",
+      "verification": "Verificação automatizada de classe de dado no gateway, com alerta em violação.",
+      "expiresAt": "2026-11-01T00:00:00Z"
+    },
+    {
+      "statement": "Qualquer connector novo ou tool que altere estado retorna a G4 e G5.",
+      "owner": "Example Technical Owner",
+      "verification": "Diff de blueprint no pipeline bloqueia release sem reavaliação.",
+      "expiresAt": "2026-11-01T00:00:00Z"
+    },
+    {
+      "statement": "Quarentena e rollback precisam ser exercitados antes de reativação após incidente.",
+      "owner": "Example Run Owner",
+      "verification": "Registro de exercício anexado ao evidence pack da reativação.",
+      "expiresAt": "2026-11-01T00:00:00Z"
     }
   ],
   "controlEvidence": [
