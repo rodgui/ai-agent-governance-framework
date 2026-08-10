@@ -2,7 +2,7 @@
 title: Control catalog de governança de IA e agentes
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -21,14 +21,22 @@ O catálogo traduz policy e princípios em requirements verificáveis. A fonte e
 Cada control declara:
 
 - ID estável e domain;
+- `scope`: `organization` quando é satisfeito uma vez para a organização, `agent` quando é avaliado por agente ou release;
 - statement e rationale;
 - tipos preventivo, detectivo, responsivo ou corretivo;
 - owner role;
 - tiers aplicáveis;
 - implementation patterns;
+- `verification`: os testes objetivos que decidem se o control passa;
 - evidence esperada;
+- `blocking`: se a reprovação impede release ou continuidade em produção;
 - metrics;
-- mappings externos opcionais quando houver referência verificável.
+- automation: `manual`, `assisted` ou `automated`;
+- mappings externos quando houver referência verificável.
+
+A distinção entre `evidence` e `verification` é deliberada. **Evidence é o artefato; verification é o teste.** "Governance charter" não diz o que faz o control passar — por isso todo control declara os dois.
+
+`scope` existe porque duas classes diferentes de control conviviam no mesmo catálogo: "este agente tem decision rights?" não é uma pergunta com resposta. Controls organizacionais são evidenciados uma vez, no nível do programa; controls de agente são avaliados a cada release. Os tiers de um control organizacional indicam quais tiers a capacidade precisa suportar.
 
 Os controls são módulos diretos da [policy canônica](../docs/governance/policy.md), não mappings de uma policy histórica. `frameworkMappings` documenta alinhamentos externos e não transforma standards ou fornecedores em dependências normativas.
 
@@ -50,64 +58,68 @@ O piso operacional que traduz esta baseline em gate verificável é o [Minimum P
 
 ## Cobertura
 
-- **adoption:** 2 controls
-- **audit:** 3 controls
-- **data:** 3 controls
-- **evaluation:** 3 controls
-- **identity:** 3 controls
-- **operations:** 3 controls
-- **organization:** 3 controls
-- **registry:** 3 controls
-- **responsible-ai:** 3 controls
-- **risk:** 3 controls
-- **security:** 3 controls
-- **tools:** 3 controls
-- **value:** 3 controls
+| Domínio | Controls | Domínio | Controls |
+|---|---:|---|---:|
+| adoption | 2 | organization | 3 |
+| audit | 3 | registry | 3 |
+| data | 3 | responsible-ai | 3 |
+| evaluation | 3 | risk | 3 |
+| identity | 3 | security | 3 |
+| lifecycle | 2 | tools | 3 |
+| model | 3 | value | 3 |
+| operations | 3 | | |
 
-Total: **38 controls**.
+Total: **43 controls** — 39 de escopo `agent` e 4 de escopo `organization`; 26 bloqueantes.
+
+A distribuição é aproximadamente uniforme, e isso é um sinal a observar, não uma virtude: risco real não é simétrico entre domínios. Os números atuais refletem a origem editorial do catálogo. Conforme evidência operacional se acumular, espere que alguns domínios cresçam e outros encolham — e trate uma distribuição que **permanece** uniforme como indício de que o catálogo não está aprendendo com a operação.
 
 ## Índice
 
-| ID | Domínio | Controle | Tiers |
-|---|---|---|---|
-| `AGF-ORG-001` | organization | Mandato e ownership | T1, T2, T3, T4 |
-| `AGF-ORG-002` | organization | Decision rights e segregation | T2, T3, T4 |
-| `AGF-ORG-003` | organization | Exceção com expiração | T1, T2, T3, T4 |
-| `AGF-REG-001` | registry | Registry e ownership | T1, T2, T3, T4 |
-| `AGF-REG-002` | registry | Blueprint e mudança material | T2, T3, T4 |
-| `AGF-REG-003` | registry | Attestation e sunset | T1, T2, T3, T4 |
-| `AGF-IDN-001` | identity | Workload identity atribuível | T2, T3, T4 |
-| `AGF-IDN-002` | identity | Least privilege e autorização | T1, T2, T3, T4 |
-| `AGF-IDN-003` | identity | Secrets e revogação | T1, T2, T3, T4 |
-| `AGF-DAT-001` | data | Data contract e owner | T1, T2, T3, T4 |
-| `AGF-DAT-002` | data | Autorização e minimização | T2, T3, T4 |
-| `AGF-DAT-003` | data | Provenance, retenção e exclusão | T1, T2, T3, T4 |
-| `AGF-TOL-001` | tools | Tool/MCP registry e provenance | T2, T3, T4 |
-| `AGF-TOL-002` | tools | Gateway e validação de ação | T3, T4 |
-| `AGF-TOL-003` | tools | Kill switch e circuit breaker | T3, T4 |
-| `AGF-SEC-001` | security | Threat model do sistema agentic | T2, T3, T4 |
-| `AGF-SEC-002` | security | Sandbox, egress e supply chain | T3, T4 |
-| `AGF-SEC-003` | security | Adversarial testing e regression | T2, T3, T4 |
-| `AGF-RSK-001` | risk | Tiering e red flags | T1, T2, T3, T4 |
-| `AGF-RSK-002` | risk | Assessment e residual risk | T2, T3, T4 |
-| `AGF-RSK-003` | risk | Reavaliação contínua | T1, T2, T3, T4 |
-| `AGF-RAI-001` | responsible-ai | Impact assessment | T2, T3, T4 |
-| `AGF-RAI-002` | responsible-ai | Human accountability e contestação | T2, T3, T4 |
-| `AGF-RAI-003` | responsible-ai | Transparência, fairness e monitoramento | T2, T3, T4 |
-| `AGF-EVA-001` | evaluation | Evaluation strategy e thresholds | T1, T2, T3, T4 |
-| `AGF-EVA-002` | evaluation | Release evidence gate | T1, T2, T3, T4 |
-| `AGF-EVA-003` | evaluation | Runtime evaluation e regression | T2, T3, T4 |
-| `AGF-AUD-001` | audit | Correlation e version traceability | T2, T3, T4 |
-| `AGF-AUD-002` | audit | Evidence package e integridade | T1, T2, T3, T4 |
-| `AGF-AUD-003` | audit | Acesso, retenção e export | T1, T2, T3, T4 |
-| `AGF-OPS-001` | operations | Observabilidade orientada a ação | T2, T3, T4 |
-| `AGF-OPS-002` | operations | Quarantine, rollback e reactivation | T2, T3, T4 |
-| `AGF-OPS-003` | operations | Change, incident e attestation loop | T1, T2, T3, T4 |
-| `AGF-ADP-001` | adoption | Discovery, guidance e suporte | T1, T2, T3, T4 |
-| `AGF-ADP-002` | adoption | Competência e feedback loop | T2, T3, T4 |
-| `AGF-VAL-001` | value | Business case e baseline | T1, T2, T3, T4 |
-| `AGF-VAL-002` | value | Métricas separadas | T1, T2, T3, T4 |
-| `AGF-VAL-003` | value | Portfolio review e decisão | T1, T2, T3, T4 |
+| ID | Domínio | Título | Escopo | Tiers | Bloqueia? |
+|---|---|---|---|---|---|
+| `AGF-ADP-001` | adoption | Discovery, guidance e suporte | agent | T1, T2, T3, T4 | não |
+| `AGF-ADP-002` | adoption | Competência e feedback loop | organization | T2, T3, T4 | não |
+| `AGF-AUD-001` | audit | Correlation e version traceability | agent | T2, T3, T4 | sim |
+| `AGF-AUD-002` | audit | Evidence package e integridade | agent | T1, T2, T3, T4 | sim |
+| `AGF-AUD-003` | audit | Acesso, retenção e export | agent | T1, T2, T3, T4 | não |
+| `AGF-DAT-001` | data | Data contract e owner | agent | T1, T2, T3, T4 | sim |
+| `AGF-DAT-002` | data | Autorização e minimização | agent | T2, T3, T4 | sim |
+| `AGF-DAT-003` | data | Provenance, retenção e exclusão | agent | T1, T2, T3, T4 | não |
+| `AGF-EVA-001` | evaluation | Evaluation strategy e thresholds | agent | T1, T2, T3, T4 | sim |
+| `AGF-EVA-002` | evaluation | Release evidence gate | agent | T1, T2, T3, T4 | sim |
+| `AGF-EVA-003` | evaluation | Runtime evaluation e regression | agent | T2, T3, T4 | não |
+| `AGF-IDN-001` | identity | Workload identity atribuível | agent | T2, T3, T4 | sim |
+| `AGF-IDN-002` | identity | Least privilege e autorização | agent | T1, T2, T3, T4 | sim |
+| `AGF-IDN-003` | identity | Secrets e revogação | agent | T1, T2, T3, T4 | sim |
+| `AGF-LFC-001` | lifecycle | State machine e transições autorizadas | agent | T1, T2, T3, T4 | sim |
+| `AGF-LFC-002` | lifecycle | Dormência e sucessão de ownership | agent | T1, T2, T3, T4 | não |
+| `AGF-MDL-001` | model | Catálogo de combinações aprovadas | agent | T2, T3, T4 | sim |
+| `AGF-MDL-002` | model | Evaluation vinculada à versão | agent | T2, T3, T4 | sim |
+| `AGF-MDL-003` | model | Fallback, portabilidade e saída | agent | T2, T3, T4 | não |
+| `AGF-OPS-001` | operations | Observabilidade orientada a ação | agent | T2, T3, T4 | sim |
+| `AGF-OPS-002` | operations | Quarantine, rollback e reactivation | agent | T2, T3, T4 | sim |
+| `AGF-OPS-003` | operations | Change, incident e attestation loop | agent | T1, T2, T3, T4 | não |
+| `AGF-ORG-001` | organization | Mandato e authority de governança | organization | T1, T2, T3, T4 | não |
+| `AGF-ORG-002` | organization | Decision rights e segregation | organization | T2, T3, T4 | não |
+| `AGF-ORG-003` | organization | Exceção com expiração | agent | T1, T2, T3, T4 | não |
+| `AGF-RAI-001` | responsible-ai | Impact assessment | agent | T2, T3, T4 | sim |
+| `AGF-RAI-002` | responsible-ai | Human accountability e contestação | agent | T2, T3, T4 | sim |
+| `AGF-RAI-003` | responsible-ai | Transparência, fairness e monitoramento | agent | T2, T3, T4 | não |
+| `AGF-REG-001` | registry | Registry e ownership | agent | T1, T2, T3, T4 | sim |
+| `AGF-REG-002` | registry | Blueprint e mudança material | agent | T2, T3, T4 | sim |
+| `AGF-REG-003` | registry | Attestation e sunset | agent | T1, T2, T3, T4 | não |
+| `AGF-RSK-001` | risk | Tiering e red flags | agent | T1, T2, T3, T4 | sim |
+| `AGF-RSK-002` | risk | Assessment e residual risk | agent | T2, T3, T4 | sim |
+| `AGF-RSK-003` | risk | Reavaliação contínua | agent | T1, T2, T3, T4 | não |
+| `AGF-SEC-001` | security | Threat model do sistema agentic | agent | T2, T3, T4 | sim |
+| `AGF-SEC-002` | security | Sandbox, egress e supply chain | agent | T3, T4 | sim |
+| `AGF-SEC-003` | security | Adversarial testing e regression | agent | T2, T3, T4 | não |
+| `AGF-TOL-001` | tools | Tool/MCP registry e provenance | agent | T2, T3, T4 | sim |
+| `AGF-TOL-002` | tools | Gateway e validação de ação | agent | T2, T3, T4 | sim |
+| `AGF-TOL-003` | tools | Kill switch e circuit breaker | agent | T2, T3, T4 | sim |
+| `AGF-VAL-001` | value | Business case e baseline | agent | T1, T2, T3, T4 | sim |
+| `AGF-VAL-002` | value | Métricas separadas | organization | T1, T2, T3, T4 | não |
+| `AGF-VAL-003` | value | Portfolio review e decisão | agent | T1, T2, T3, T4 | não |
 
 ## Evidência versus implementação
 
@@ -129,4 +141,8 @@ O catálogo especifica outcomes e evidências, não produtos. Por exemplo, `AGF-
 
 ## Mappings externos
 
-Mappings para NIST, ISO, OECD, EU AI Act, OWASP ou outros frameworks são informativos. Eles ajudam crosswalks, mas não constituem declaração de conformidade, certificação ou equivalência jurídica.
+Todos os 43 controls declaram `frameworkMappings` para as referências **públicas e verificáveis**: NIST AI RMF 1.0 (funções `GOVERN`, `MAP`, `MEASURE`, `MANAGE`), EU AI Act (Regulamento (UE) 2024/1689, no nível de artigo), OWASP para riscos agentic e MCP, e MITRE ATLAS para táticas adversariais.
+
+Cada mapping carrega a nota de que representa **alinhamento direcional declarado pelo framework** — não equivalência, conformidade nem atestação. Um mapping é uma afirmação sobre intenção de desenho, não sobre o resultado de uma avaliação.
+
+**ISO/IEC 42001, 23894 e 42005 não estão mapeadas.** O mapeamento exige o texto das normas, que é pago, e um número de cláusula inventado seria pior que a ausência declarada. Enquanto isso não for resolvido, o alinhamento a ISO permanece uma afirmação de leitura, não uma rastreabilidade control a control — e deve ser apresentado como tal.

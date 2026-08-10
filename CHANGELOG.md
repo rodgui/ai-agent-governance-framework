@@ -6,6 +6,33 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 ### Added
 
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.0.0] — 2026-08-10
+
+Primeira release adotada do framework modular ([ADR-0006](docs/architecture/decisions/0006-framework-release-1-0-adoption.md)). Adoção da release é decisão de versionamento deste repositório; a adoção organizacional continua sendo decisão separada de cada organização.
+
+**Lacunas conhecidas e declaradas nesta release:** ISO/IEC 42001, 23894 e 42005 não estão mapeadas control a control; a distribuição de controls por domínio reflete origem editorial e não risco observado; o corpus tem um único owner e aprovador; nenhum control foi exercitado contra um estate real.
+
+### Added
+
+- Control catalog 1.1 com `scope`, `verification` e `blocking` obrigatórios, cinco controls novos de model governance e lifecycle, e `frameworkMappings` populado em todos os 43 controls ([ADR-0005](docs/architecture/decisions/0005-control-catalog-scope-verification-and-mappings.md)).
+- Playbooks de implantação em dez domínios canônicos.
+- Domínios de registry, lifecycle e model governance, com descoberta contínua e forecast do estate.
+- Minimum Production Bar e evidence pack proporcionais por tier.
+- Behavioral analytics, FinOps com unit economics e modelo de KPI/KRI dashboard.
+- Programa de implantação em 24 semanas mapeado aos decision gates, plano de piloto e risk pre-screen.
+- Seis exemplos preenchidos e templates de terms of reference de fórum e dicionário de taxonomia.
+- Princípios arquiteturais com pergunta de decisão, aplicação e antipattern por princípio.
+
 - ADR-0003 establishing this repository as the single canonical source and absorbing the external scale guide as historical origin.
 - ADR-0004 fixing T1–T4 as the canonical risk-tier taxonomy and defining the T1 fast path for high-volume, low-risk agents.
 - Registry domain covering enterprise agent taxonomy, minimum registry capabilities and quality rules that generate findings.

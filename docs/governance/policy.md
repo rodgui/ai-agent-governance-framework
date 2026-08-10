@@ -1,8 +1,8 @@
 ---
 title: AI Agent Governance Policy — fonte canônica modular
-status: review
+status: adopted
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -19,7 +19,13 @@ related:
 
 Este repositório é a fonte modular a partir da qual a **policy final de governança de IA e agentes** será mantida, revisada e versionada. A policy não é um documento monolítico nem depende de uma plataforma específica: ela é composta por princípios, decision rights, requisitos, controls, evidências e regras de lifecycle distribuídos em módulos canônicos.
 
-Uma organização só deve declarar uma release como `adopted` após aprovação pela authority competente. Até essa adoção, o conteúdo mantido neste repositório constitui a policy candidate e a referência técnica canônica do framework.
+## Dois níveis de adoção
+
+A **release 1.0 deste framework está `adopted`** desde 2026-08-10, conforme a [ADR-0006](../architecture/decisions/0006-framework-release-1-0-adoption.md). Isso significa que esta versão é a baseline canônica estável e que mudança normativa passa a exigir proposta, rationale, authority, changelog e release versionada.
+
+Isso **não** significa que qualquer organização adotou esta policy. A adoção organizacional é uma decisão separada: cada organização declara esta baseline como sua policy interna pela sua própria authority competente, com escopo, exceções e obrigações próprias. Enquanto essa decisão não existir, o conteúdo é referência técnica canônica do framework — não a policy vigente daquela organização.
+
+Confundir os dois níveis transforma versionamento em declaração de conformidade. Nenhum claim de certificação, auditoria independente ou conformidade decorre da adoção da release.
 
 ## Composição da policy
 

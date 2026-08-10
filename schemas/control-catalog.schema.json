@@ -14,7 +14,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": "1.0"
+      "const": "1.1"
     },
     "catalogVersion": {
       "type": "string",
@@ -51,7 +51,10 @@
         "appliesToTiers",
         "implementation",
         "evidence",
-        "metrics"
+        "metrics",
+        "scope",
+        "verification",
+        "blocking"
       ],
       "properties": {
         "id": {
@@ -67,9 +70,11 @@
           "enum": [
             "organization",
             "registry",
+            "lifecycle",
             "identity",
             "data",
             "tools",
+            "model",
             "security",
             "risk",
             "responsible-ai",
@@ -171,8 +176,29 @@
               }
             }
           }
+        },
+        "scope": {
+          "description": "organization: satisfeito uma vez para a organização. agent: avaliado por agente ou release.",
+          "enum": [
+            "organization",
+            "agent"
+          ]
+        },
+        "verification": {
+          "description": "Testes objetivos que decidem se o control passa. Nome de artefato não é critério de aprovação.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 15
+          }
+        },
+        "blocking": {
+          "description": "Reprovação impede release ou continuidade em produção.",
+          "type": "boolean"
         }
       }
     }
-  }
+  },
+  "schemaVersion": null
 }

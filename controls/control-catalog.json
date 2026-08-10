@@ -1,785 +1,20 @@
 {
-  "schemaVersion": "1.0",
-  "catalogVersion": "1.0",
+  "schemaVersion": "1.1",
+  "catalogVersion": "1.1",
   "title": "AI Agent Governance Framework — Control Catalog",
-  "lastReviewed": "2026-08-09",
+  "lastReviewed": "2026-08-10",
   "controls": [
     {
-      "id": "AGF-ORG-001",
-      "title": "Mandato e ownership",
-      "domain": "organization",
-      "type": [
-        "preventive"
-      ],
-      "statement": "Toda capacidade de IA deve possuir finalidade, business owner, technical owner e autoridade de governança antes de produção.",
-      "rationale": "Sem mandato e ownership não existe accountability legítima para risco, valor, operação ou sunset.",
-      "ownerRole": "AI Governance Owner",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Registrar purpose e owners no registry.",
-        "Aprovar governance charter e escalation."
-      ],
-      "evidence": [
-        "Governance charter",
-        "Registry ownership record"
-      ],
-      "metrics": [
-        "Percentual com owners válidos",
-        "Ownerless agents"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-ORG-002",
-      "title": "Decision rights e segregation",
-      "domain": "organization",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Decisões de build, release, risk acceptance, containment e reactivation devem possuir authorities e segregation proporcionais ao tier.",
-      "rationale": "A mesma pessoa ou equipe não deve construir, autoaprovar e aceitar isoladamente risco material.",
-      "ownerRole": "AI Governance Council",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Publicar RACI e decision matrix.",
-        "Aplicar reviewer independente nos tiers aplicáveis."
-      ],
-      "evidence": [
-        "RACI",
-        "Decision log",
-        "Reviewer identity"
-      ],
-      "metrics": [
-        "Decisões sem authority",
-        "Segregation exceptions"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-ORG-003",
-      "title": "Exceção com expiração",
-      "domain": "organization",
-      "type": [
-        "preventive",
-        "corrective"
-      ],
-      "statement": "Toda exceção deve registrar requisito, rationale, owner, compensating controls, expiry e review trigger.",
-      "rationale": "Exceção sem expiração se torna alteração de policy não governada.",
-      "ownerRole": "AI Governance Council",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Usar workflow versionado de waiver.",
-        "Alertar owner antes do vencimento e bloquear extensão automática."
-      ],
-      "evidence": [
-        "Waiver record",
-        "Compensating-control evidence",
-        "Expiry decision"
-      ],
-      "metrics": [
-        "Exceções vencidas",
-        "Exceções recorrentes"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-REG-001",
-      "title": "Registry e ownership",
-      "domain": "registry",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Todo agente deve possuir ID estável, owners, lifecycle status, tier, current version e evidence links em registry reconciliável.",
-      "rationale": "Visibilidade acionável é pré-requisito para approval, operação, attestation e sunset.",
-      "ownerRole": "Registry Owner",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Validar records contra schema.",
-        "Reconciliar fontes de plataforma e declaração humana."
-      ],
-      "evidence": [
-        "Registry record",
-        "Reconciliation report"
-      ],
-      "metrics": [
-        "Registry coverage",
-        "Ownerless ou stale records"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-REG-002",
-      "title": "Blueprint e mudança material",
-      "domain": "registry",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Cada versão deve possuir blueprint de modelos, dados, identidade, tools, permissions, trust boundaries e runtime; mudanças materiais reabrem gates.",
-      "rationale": "Registry sem arquitetura não explica blast radius nem permite review proporcional.",
-      "ownerRole": "Technical Owner",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Versionar blueprint.",
-        "Detectar changes em model, data, identity, tool, exposure e autonomy."
-      ],
-      "evidence": [
-        "Blueprint",
-        "Material-change diff",
-        "Reassessment decision"
-      ],
-      "metrics": [
-        "Versões sem blueprint",
-        "Mudanças não declaradas"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-REG-003",
-      "title": "Attestation e sunset",
-      "domain": "registry",
-      "type": [
-        "preventive",
-        "detective",
-        "corrective"
-      ],
-      "statement": "Aprovação deve expirar; owners devem reconfirmar finalidade, risco, controls, uso e valor ou executar sunset completo.",
-      "rationale": "Agents e privilégios tornam-se órfãos quando aprovação é tratada como permanente.",
-      "ownerRole": "Business Owner",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Definir cadence por tier.",
-        "Revogar identity, connectors e discovery no sunset."
-      ],
-      "evidence": [
-        "Attestation",
-        "Sunset plan",
-        "Revocation proof"
-      ],
-      "metrics": [
-        "Attestations expiradas",
-        "Tempo para sunset",
-        "Órfãos após retirement"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-IDN-001",
-      "title": "Workload identity atribuível",
-      "domain": "identity",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Agentes em produção devem usar identidade apropriada e atribuível; shared accounts exigem exceção temporária.",
-      "rationale": "Identidade genérica reduz atribuição, amplia blast radius e dificulta revogação.",
-      "ownerRole": "Identity Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Provisionar workload identity.",
-        "Correlacionar user, agent e delegated subject quando aplicável."
-      ],
-      "evidence": [
-        "Identity record",
-        "Authentication configuration",
-        "Correlation logs"
-      ],
-      "metrics": [
-        "Shared accounts",
-        "Actions sem agent identity"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-IDN-002",
-      "title": "Least privilege e autorização",
-      "domain": "identity",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Scopes devem ser derivados de tarefas aprovadas, limitados por finalidade, ambiente e duração e testados com casos positivos e negativos.",
-      "rationale": "Autenticação forte não impede excessive agency quando autorização é ampla.",
-      "ownerRole": "Identity Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Manter permission matrix.",
-        "Usar JIT ou bounded tokens nos tiers altos."
-      ],
-      "evidence": [
-        "Permission matrix",
-        "Role/scope binding",
-        "Positive/negative tests"
-      ],
-      "metrics": [
-        "Scopes não usados",
-        "Authorization denials",
-        "Standing privileges"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-IDN-003",
-      "title": "Secrets e revogação",
-      "domain": "identity",
-      "type": [
-        "preventive",
-        "responsive",
-        "corrective"
-      ],
-      "statement": "Secrets devem permanecer em storage gerenciado e identities/tokens devem ser revogáveis no incident, change ou sunset.",
-      "rationale": "Credenciais embutidas ou persistentes impedem contenção confiável.",
-      "ownerRole": "Identity Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Bloquear secrets em prompt e código.",
-        "Testar revocation e orphan scan."
-      ],
-      "evidence": [
-        "Secret-scan result",
-        "Revocation drill",
-        "Orphan report"
-      ],
-      "metrics": [
-        "Secrets detectados",
-        "Tempo de revogação",
-        "Orphan identities"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-DAT-001",
-      "title": "Data contract e owner",
-      "domain": "data",
-      "type": [
-        "preventive"
-      ],
-      "statement": "Toda fonte, index, memory ou connector deve possuir owner, purpose, classification, provenance, quality, access, retention e region definidos.",
-      "rationale": "Disponibilidade técnica não demonstra adequação à finalidade de IA.",
-      "ownerRole": "Data Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Criar data contract.",
-        "Obter approval do data owner antes do connector."
-      ],
-      "evidence": [
-        "Data contract",
-        "Owner approval",
-        "Classification record"
-      ],
-      "metrics": [
-        "Connectors sem contract",
-        "Sources sem owner"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-DAT-002",
-      "title": "Autorização e minimização",
-      "domain": "data",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Retrieval deve aplicar autorização antes de retornar conteúdo e limitar dados ao necessário para finalidade e user context.",
-      "rationale": "Filtrar apenas a resposta permite acesso indevido durante retrieval e agent reasoning.",
-      "ownerRole": "Data Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Aplicar pre-retrieval authorization.",
-        "Testar segregação entre users, groups e tenants."
-      ],
-      "evidence": [
-        "Access policy",
-        "Leakage tests",
-        "DLP results"
-      ],
-      "metrics": [
-        "Unauthorized retrieval attempts",
-        "Leakage failures",
-        "Dados não necessários acessados"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-DAT-003",
-      "title": "Provenance, retenção e exclusão",
-      "domain": "data",
-      "type": [
-        "preventive",
-        "detective",
-        "corrective"
-      ],
-      "statement": "Fontes, outputs, memories, indexes e traces devem preservar provenance e cumprir retention, correction e deletion aplicáveis.",
-      "rationale": "Stores derivados podem sobreviver à fonte e perpetuar dados incorretos ou proibidos.",
-      "ownerRole": "Data Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Versionar lineage e source IDs.",
-        "Testar propagação de correction/deletion."
-      ],
-      "evidence": [
-        "Lineage record",
-        "Retention policy",
-        "Deletion test"
-      ],
-      "metrics": [
-        "Stale indexes",
-        "Deletion failures",
-        "Records sem provenance"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-TOL-001",
-      "title": "Tool/MCP registry e provenance",
-      "domain": "tools",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Toda tool, API ou MCP server deve possuir owner, version/provenance, operations, data flow, scopes, side effects e approval validity registrados.",
-      "rationale": "Descriptions e discovery dinâmico não constituem base de confiança.",
-      "ownerRole": "Tool Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Manter tool registry/allowlist.",
-        "Detectar version e capability changes."
-      ],
-      "evidence": [
-        "Tool record",
-        "Provenance/version",
-        "Change report"
-      ],
-      "metrics": [
-        "Tools não registradas",
-        "Versões fora de baseline"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-TOL-002",
-      "title": "Gateway e validação de ação",
-      "domain": "tools",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Tools state-changing devem passar por enforcement que valida caller, policy, schema, arguments, destination, limits e human approval quando exigido.",
-      "rationale": "Prompt instructions não substituem autorização e validação técnica.",
-      "ownerRole": "Tool Authority",
-      "appliesToTiers": [
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Usar API/MCP gateway ou broker.",
-        "Emitir credencial limitada à ação/transação."
-      ],
-      "evidence": [
-        "Gateway policy",
-        "Allow/deny tests",
-        "Approval logs"
-      ],
-      "metrics": [
-        "Bypass calls",
-        "Denied actions",
-        "Calls sem correlation"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-TOL-003",
-      "title": "Kill switch e circuit breaker",
-      "domain": "tools",
-      "type": [
-        "responsive",
-        "corrective"
-      ],
-      "statement": "Cada capability material deve ser revogável independentemente do agente e possuir circuit breaker para anomalia, budget ou policy breach.",
-      "rationale": "Containment dentro do agente pode falhar quando o próprio agente está comprometido.",
-      "ownerRole": "Run Authority",
-      "appliesToTiers": [
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Implementar revogação no gateway/IAM.",
-        "Executar drill de kill switch e recovery."
-      ],
-      "evidence": [
-        "Kill-switch configuration",
-        "Drill result",
-        "Reactivation decision"
-      ],
-      "metrics": [
-        "Tempo para revogar",
-        "Failed containment",
-        "Reactivation sem regression"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-SEC-001",
-      "title": "Threat model do sistema agentic",
-      "domain": "security",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "O blueprint deve possuir threat model cobrindo prompts, retrieval, memory, identity, tools, supply chain, egress e multi-agent trust.",
-      "rationale": "Model-only review ignora caminhos que transformam saída em efeito operacional.",
-      "ownerRole": "Security Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Mapear assets, trust boundaries e misuse cases.",
-        "Revisar após material change ou incident."
-      ],
-      "evidence": [
-        "Threat model",
-        "Misuse cases",
-        "Residual risk"
-      ],
-      "metrics": [
-        "Coverage de threat models",
-        "Incidentes fora do model"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-SEC-002",
-      "title": "Sandbox, egress e supply chain",
-      "domain": "security",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Code execution e components externos devem usar sandbox, resource limits, egress control e provenance/versioning compatíveis com o tier.",
-      "rationale": "Agents podem transformar dependency compromise ou prompt injection em execução e exfiltration.",
-      "ownerRole": "Security Authority",
-      "appliesToTiers": [
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Isolar filesystem/process/network.",
-        "Verificar model, prompt, package e MCP provenance."
-      ],
-      "evidence": [
-        "Sandbox policy",
-        "Egress tests",
-        "Dependency/provenance report"
-      ],
-      "metrics": [
-        "Egress violations",
-        "Assets sem provenance",
-        "Resource-limit events"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-SEC-003",
-      "title": "Adversarial testing e regression",
-      "domain": "security",
-      "type": [
-        "detective",
-        "corrective"
-      ],
-      "statement": "Testes devem cobrir direct/indirect injection, tool poisoning, data exfiltration, authorization bypass e chain failure; incidentes viram regressions.",
-      "rationale": "Testes felizes não demonstram resistência a abuso ou comportamento emergente.",
-      "ownerRole": "Security Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Executar component, chain e system tests.",
-        "Adicionar escaped incidents à regression suite."
-      ],
-      "evidence": [
-        "Adversarial test results",
-        "Red-team report",
-        "Regression update"
-      ],
-      "metrics": [
-        "Attack success rate",
-        "Escaped security defects",
-        "Recurrence"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-RSK-001",
-      "title": "Tiering e red flags",
-      "domain": "risk",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Cada agente deve ser classificado por finalidade, alcance, dados, autonomia, capability, interconectividade, reversibilidade, exposure e affected parties.",
-      "rationale": "Um único score ou user count não representa blast radius e contexto.",
-      "ownerRole": "Risk Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Aplicar dimensions versionadas.",
-        "Elevar tier por red flags independentemente da média."
-      ],
-      "evidence": [
-        "Risk assessment",
-        "Tier rationale",
-        "Red-flag record"
-      ],
-      "metrics": [
-        "Tier distribution",
-        "Overrides",
-        "Reclassifications"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-RSK-002",
-      "title": "Assessment e residual risk",
-      "domain": "risk",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Assessments aplicáveis devem mapear impacts, threats, controls, effectiveness, uncertainty e residual risk para authority compatível.",
-      "rationale": "Control presence não equivale a control effectiveness nem elimina risco residual.",
-      "ownerRole": "Risk Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Integrar impact, security, privacy e RAI assessments.",
-        "Registrar acceptance, conditions ou rejection."
-      ],
-      "evidence": [
-        "Assessment package",
-        "Control evidence",
-        "Residual-risk decision"
-      ],
-      "metrics": [
-        "Risks sem owner",
-        "Acceptance sem authority",
-        "Controls sem evidence"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-RSK-003",
-      "title": "Reavaliação contínua",
-      "domain": "risk",
-      "type": [
-        "detective",
-        "responsive",
-        "corrective"
-      ],
-      "statement": "Mudança material, incident, drift, nova obrigação ou exception expiry deve reabrir classificação e controls proporcionais.",
-      "rationale": "Risco de sistema dinâmico não permanece estável após release.",
-      "ownerRole": "Risk Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Configurar change triggers.",
-        "Ligar runtime signals a reassessment workflow."
-      ],
-      "evidence": [
-        "Change event",
-        "Reclassification history",
-        "Updated control mapping"
-      ],
-      "metrics": [
-        "Changes sem reassessment",
-        "Tempo para reclassificar"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-RAI-001",
-      "title": "Impact assessment",
-      "domain": "responsible-ai",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Sistemas com impacto material em pessoas devem avaliar intended use, affected parties, harms/benefits, data, slices, transparency, oversight e redress.",
-      "rationale": "Princípios abstratos não identificam distribuição de impactos no contexto real.",
-      "ownerRole": "Responsible AI Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Executar assessment proporcional.",
-        "Registrar limitations e residual impact."
-      ],
-      "evidence": [
-        "Impact assessment",
-        "Affected-party map",
-        "Residual-impact decision"
-      ],
-      "metrics": [
-        "Assessments aplicáveis concluídos",
-        "Findings e remediation time"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-RAI-002",
-      "title": "Human accountability e contestação",
-      "domain": "responsible-ai",
+      "id": "AGF-ADP-001",
+      "title": "Discovery, guidance e suporte",
+      "domain": "adoption",
       "type": [
         "preventive",
         "responsive"
       ],
-      "statement": "Ações materiais devem possuir accountability boundary, oversight significativo, authority humana e contest/correction path quando aplicável.",
-      "rationale": "Humano nominal ou botão genérico não previne automation bias nem assegura redress.",
-      "ownerRole": "Business Owner",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Definir recommend/prepare/execute/prohibit.",
-        "Testar approval UX, override e contestation."
-      ],
-      "evidence": [
-        "Boundary matrix",
-        "Approval logs",
-        "Contest records"
-      ],
-      "metrics": [
-        "Rubber-stamp rate",
-        "Overrides",
-        "Correction time"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-RAI-003",
-      "title": "Transparência, fairness e monitoramento",
-      "domain": "responsible-ai",
-      "type": [
-        "preventive",
-        "detective",
-        "corrective"
-      ],
-      "statement": "Limites, papel da IA e canais de suporte devem ser comunicados; performance e harms devem ser avaliados por slices relevantes e monitorados.",
-      "rationale": "Métrica agregada e disclosure genérico podem esconder falha material ou impacto desigual.",
-      "ownerRole": "Responsible AI Authority",
-      "appliesToTiers": [
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Criar transparency artifacts.",
-        "Definir slices, thresholds e remediation actions."
-      ],
-      "evidence": [
-        "User notice",
-        "Slice evaluation",
-        "Monitoring report"
-      ],
-      "metrics": [
-        "Performance disparities",
-        "Complaints",
-        "Limitations não comunicadas"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-EVA-001",
-      "title": "Evaluation strategy e thresholds",
-      "domain": "evaluation",
-      "type": [
-        "preventive",
-        "detective"
-      ],
-      "statement": "Cada agent version deve possuir intended use, scenarios, metrics, datasets, thresholds, negative cases e promotion/rollback criteria.",
-      "rationale": "Demo ou média genérica não demonstra readiness para o contexto e tier.",
-      "ownerRole": "Evaluation Owner",
+      "statement": "Agentes publicados devem possuir catalog entry, intended/prohibited use, limitations, support owner e escalation path.",
+      "rationale": "Publicação sem discovery e suporte aumenta duplicidade, misuse e tempo de resposta.",
+      "ownerRole": "Adoption Lead",
       "appliesToTiers": [
         "T1",
         "T2",
@@ -787,85 +22,84 @@
         "T4"
       ],
       "implementation": [
-        "Versionar evaluation plan e test sets.",
-        "Definir red flags binárias quando tolerância é zero."
+        "Publicar entry versionada.",
+        "Definir support tiers e escalation."
       ],
       "evidence": [
-        "Evaluation plan",
-        "Dataset provenance",
-        "Raw results"
+        "Catalog entry",
+        "Guidance",
+        "Support runbook"
       ],
       "metrics": [
-        "Critical-scenario coverage",
-        "Pass/fail por slice",
-        "Threshold exceptions"
+        "Discovery-to-use",
+        "Duplicate creation",
+        "Support resolution time"
       ],
-      "automation": "mixed"
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que agentes publicados têm entrada de catálogo, uso pretendido e proibido, e owner de suporte.",
+        "Medir tempo entre a dúvida do usuário e a resposta do canal de suporte."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "GOVERN",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
-      "id": "AGF-EVA-002",
-      "title": "Release evidence gate",
-      "domain": "evaluation",
+      "id": "AGF-ADP-002",
+      "title": "Competência e feedback loop",
+      "domain": "adoption",
       "type": [
         "preventive",
-        "detective"
-      ],
-      "statement": "Release deve depender de evidence package completo, findings tratados, residual risk decidido, run readiness e approvals do tier.",
-      "rationale": "Approval sem raw evidence transforma governance em assinatura.",
-      "ownerRole": "Design Authority",
-      "appliesToTiers": [
-        "T1",
-        "T2",
-        "T3",
-        "T4"
-      ],
-      "implementation": [
-        "Validar package contra baseline do tier.",
-        "Bloquear missing evidence ou registrar condition explícita."
-      ],
-      "evidence": [
-        "Release package",
-        "Gate decision",
-        "Conditions/expiry"
-      ],
-      "metrics": [
-        "Packages incompletos",
-        "Devoluções",
-        "Agents com evidence expirada"
-      ],
-      "automation": "mixed"
-    },
-    {
-      "id": "AGF-EVA-003",
-      "title": "Runtime evaluation e regression",
-      "domain": "evaluation",
-      "type": [
         "detective",
         "corrective"
       ],
-      "statement": "Qualidade, safety, policy e tool outcomes devem ser amostrados em runtime; incidents e failures devem atualizar regression suites.",
-      "rationale": "Pre-release evidence perde validade com drift, mudança e uso real.",
-      "ownerRole": "Evaluation Owner",
+      "statement": "Builders, reviewers, users e operators devem receber enablement por persona; feedback deve ser triado em decisions e backlog.",
+      "rationale": "Treinamento genérico e feedback sem owner não mudam comportamento nem controls.",
+      "ownerRole": "Adoption Lead",
       "appliesToTiers": [
         "T2",
         "T3",
         "T4"
       ],
       "implementation": [
-        "Executar runtime sampling e drift checks.",
-        "Converter failures em tests antes da reactivation."
+        "Criar learning paths e paved road.",
+        "Medir competence, misuse e feedback-to-decision."
       ],
       "evidence": [
-        "Runtime evaluation",
-        "Drift report",
-        "Regression update"
+        "Learning assets",
+        "Competence record",
+        "Feedback backlog"
       ],
       "metrics": [
-        "Escaped defects",
-        "Regression recurrence",
-        "Time-to-evaluate change"
+        "Training competence",
+        "Misuse reports",
+        "Feedback cycle time"
       ],
-      "automation": "mixed"
+      "automation": "manual",
+      "scope": "organization",
+      "verification": [
+        "Verificar competência demonstrada por papel, não apenas conclusão de treinamento.",
+        "Medir retrabalho de review e violações de policy como sinal de lacuna de enablement."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "GOVERN",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 26 — obligations of deployers",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-AUD-001",
@@ -895,7 +129,20 @@
         "Actions sem correlation",
         "Events sem version"
       ],
-      "automation": "mixed"
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Reconstruir uma execução ponta a ponta a partir dos eventos, sem consultar o time que a construiu.",
+        "Medir ações sem correlação completa na janela de observação."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 12 — record-keeping",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-AUD-002",
@@ -928,7 +175,20 @@
         "Missing artifacts",
         "Changes após approval"
       ],
-      "automation": "mixed"
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Verificar integridade dos artefatos referenciados e que links continuam recuperáveis.",
+        "Confirmar que ausente, não aplicável e atendido são estados distintos no manifesto."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 18 — documentation keeping",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-AUD-003",
@@ -962,7 +222,684 @@
         "Retention failures",
         "Time to reconstruct incident"
       ],
-      "automation": "mixed"
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar teste de export e de exclusão e confirmar aderência à retenção declarada.",
+        "Medir tempo para reconstruir um incidente a partir da evidência retida."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 12 — record-keeping; Art. 19 — automatically generated logs",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-DAT-001",
+      "title": "Data contract e owner",
+      "domain": "data",
+      "type": [
+        "preventive"
+      ],
+      "statement": "Toda fonte, index, memory ou connector deve possuir owner, purpose, classification, provenance, quality, access, retention e region definidos.",
+      "rationale": "Disponibilidade técnica não demonstra adequação à finalidade de IA.",
+      "ownerRole": "Data Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Criar data contract.",
+        "Obter approval do data owner antes do connector."
+      ],
+      "evidence": [
+        "Data contract",
+        "Owner approval",
+        "Classification record"
+      ],
+      "metrics": [
+        "Connectors sem contract",
+        "Sources sem owner"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que toda fonte em uso consta no catálogo com owner, classificação e finalidade.",
+        "Verificar que fonte sem classificação confiável está bloqueada para consumo."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 10 — data and data governance",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-DAT-002",
+      "title": "Autorização e minimização",
+      "domain": "data",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Retrieval deve aplicar autorização antes de retornar conteúdo e limitar dados ao necessário para finalidade e user context.",
+      "rationale": "Filtrar apenas a resposta permite acesso indevido durante retrieval e agent reasoning.",
+      "ownerRole": "Data Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Aplicar pre-retrieval authorization.",
+        "Testar segregação entre users, groups e tenants."
+      ],
+      "evidence": [
+        "Access policy",
+        "Leakage tests",
+        "DLP results"
+      ],
+      "metrics": [
+        "Unauthorized retrieval attempts",
+        "Leakage failures",
+        "Dados não necessários acessados"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar teste de vazamento com usuário de menor privilégio e confirmar que o resultado respeita a ACL.",
+        "Amostrar recuperações e verificar minimização em relação à finalidade declarada."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 10 — data and data governance",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Exfiltration",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-DAT-003",
+      "title": "Provenance, retenção e exclusão",
+      "domain": "data",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Fontes, outputs, memories, indexes e traces devem preservar provenance e cumprir retention, correction e deletion aplicáveis.",
+      "rationale": "Stores derivados podem sobreviver à fonte e perpetuar dados incorretos ou proibidos.",
+      "ownerRole": "Data Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Versionar lineage e source IDs.",
+        "Testar propagação de correction/deletion."
+      ],
+      "evidence": [
+        "Lineage record",
+        "Retention policy",
+        "Deletion test"
+      ],
+      "metrics": [
+        "Stale indexes",
+        "Deletion failures",
+        "Records sem provenance"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar exclusão na origem e confirmar propagação a índices, cache e memória dentro do prazo.",
+        "Amostrar outputs e confirmar rastreabilidade até a fonte."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 10 — data and data governance",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-EVA-001",
+      "title": "Evaluation strategy e thresholds",
+      "domain": "evaluation",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada agent version deve possuir intended use, scenarios, metrics, datasets, thresholds, negative cases e promotion/rollback criteria.",
+      "rationale": "Demo ou média genérica não demonstra readiness para o contexto e tier.",
+      "ownerRole": "Evaluation Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Versionar evaluation plan e test sets.",
+        "Definir red flags binárias quando tolerância é zero."
+      ],
+      "evidence": [
+        "Evaluation plan",
+        "Dataset provenance",
+        "Raw results"
+      ],
+      "metrics": [
+        "Critical-scenario coverage",
+        "Pass/fail por slice",
+        "Threshold exceptions"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que a suíte cobre os cenários críticos declarados e inclui casos negativos.",
+        "Verificar que thresholds e critérios de promoção e rollback estão definidos antes da execução."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 15 — accuracy, robustness and cybersecurity",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-EVA-002",
+      "title": "Release evidence gate",
+      "domain": "evaluation",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Release deve depender de evidence package completo, findings tratados, residual risk decidido, run readiness e approvals do tier.",
+      "rationale": "Approval sem raw evidence transforma governance em assinatura.",
+      "ownerRole": "Design Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Validar package contra baseline do tier.",
+        "Bloquear missing evidence ou registrar condition explícita."
+      ],
+      "evidence": [
+        "Release package",
+        "Gate decision",
+        "Conditions/expiry"
+      ],
+      "metrics": [
+        "Packages incompletos",
+        "Devoluções",
+        "Agents com evidence expirada"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Submeter um release com item obrigatório ausente e confirmar que o gate registra ausência e não aprovação.",
+        "Confirmar que a decisão registra authority, condições, expiry e próxima revisão."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-EVA-003",
+      "title": "Runtime evaluation e regression",
+      "domain": "evaluation",
+      "type": [
+        "detective",
+        "corrective"
+      ],
+      "statement": "Qualidade, safety, policy e tool outcomes devem ser amostrados em runtime; incidents e failures devem atualizar regression suites.",
+      "rationale": "Pre-release evidence perde validade com drift, mudança e uso real.",
+      "ownerRole": "Evaluation Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar runtime sampling e drift checks.",
+        "Converter failures em tests antes da reactivation."
+      ],
+      "evidence": [
+        "Runtime evaluation",
+        "Drift report",
+        "Regression update"
+      ],
+      "metrics": [
+        "Escaped defects",
+        "Regression recurrence",
+        "Time-to-evaluate change"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Amostrar execuções de produção e comparar qualidade observada com os thresholds do release.",
+        "Confirmar que falhas de runtime atualizaram a suíte de regressão."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-IDN-001",
+      "title": "Workload identity atribuível",
+      "domain": "identity",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Agentes em produção devem usar identidade apropriada e atribuível; shared accounts exigem exceção temporária.",
+      "rationale": "Identidade genérica reduz atribuição, amplia blast radius e dificulta revogação.",
+      "ownerRole": "Identity Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Provisionar workload identity.",
+        "Correlacionar user, agent e delegated subject quando aplicável."
+      ],
+      "evidence": [
+        "Identity record",
+        "Authentication configuration",
+        "Correlation logs"
+      ],
+      "metrics": [
+        "Shared accounts",
+        "Actions sem agent identity"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Listar identidades em uso e confirmar que nenhuma é compartilhada entre agentes sem exceção vigente.",
+        "Rastrear uma ação de produção até a identidade que a executou."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Initial Access; Privilege Escalation",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "OWASP Top 10 for Agentic Applications",
+          "reference": "Identidade e autorização de agentes",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-IDN-002",
+      "title": "Least privilege e autorização",
+      "domain": "identity",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Scopes devem ser derivados de tarefas aprovadas, limitados por finalidade, ambiente e duração e testados com casos positivos e negativos.",
+      "rationale": "Autenticação forte não impede excessive agency quando autorização é ampla.",
+      "ownerRole": "Identity Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Manter permission matrix.",
+        "Usar JIT ou bounded tokens nos tiers altos."
+      ],
+      "evidence": [
+        "Permission matrix",
+        "Role/scope binding",
+        "Positive/negative tests"
+      ],
+      "metrics": [
+        "Scopes não usados",
+        "Authorization denials",
+        "Standing privileges"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar testes positivos e negativos de autorização, incluindo parâmetro fora do permitido.",
+        "Medir scopes concedidos e não utilizados na janela de observação."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Privilege Escalation",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "OWASP Top 10 for Agentic Applications",
+          "reference": "Excessive agency",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-IDN-003",
+      "title": "Secrets e revogação",
+      "domain": "identity",
+      "type": [
+        "preventive",
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Secrets devem permanecer em storage gerenciado e identities/tokens devem ser revogáveis no incident, change ou sunset.",
+      "rationale": "Credenciais embutidas ou persistentes impedem contenção confiável.",
+      "ownerRole": "Identity Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Bloquear secrets em prompt e código.",
+        "Testar revocation e orphan scan."
+      ],
+      "evidence": [
+        "Secret-scan result",
+        "Revocation drill",
+        "Orphan report"
+      ],
+      "metrics": [
+        "Secrets detectados",
+        "Tempo de revogação",
+        "Orphan identities"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Executar scan de secrets em prompts, código, configuração e memória.",
+        "Executar drill de revogação e medir o tempo até a identidade deixar de funcionar."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Credential Access",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-LFC-001",
+      "title": "State machine e transições autorizadas",
+      "domain": "lifecycle",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "scope": "agent",
+      "statement": "Todo agente deve possuir estado válido em uma state machine versionada, e cada transição deve registrar evento, authority, evidência e ações automáticas.",
+      "rationale": "Sem estados com consequência operacional, suspensão, quarentena e retirada viram o mesmo botão e a auditoria perde a história do ativo.",
+      "ownerRole": "Platform / Lifecycle Service",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Publicar matriz de transições com authority e evidência exigida.",
+        "Impedir transição fora da matriz e preservar histórico de estados."
+      ],
+      "evidence": [
+        "Matriz de transições",
+        "Histórico de estados por agente",
+        "Registro de authority por transição"
+      ],
+      "metrics": [
+        "Transições fora da matriz",
+        "Agentes sem estado válido",
+        "Reativações sem evidência de regressão"
+      ],
+      "automation": "assisted",
+      "verification": [
+        "Tentar uma transição fora da matriz autorizada e confirmar que é recusada.",
+        "Confirmar que cada transição registrou evento, authority e evidência."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-LFC-002",
+      "title": "Dormência e sucessão de ownership",
+      "domain": "lifecycle",
+      "type": [
+        "detective",
+        "corrective"
+      ],
+      "scope": "agent",
+      "statement": "Inatividade além do threshold do tier e saída ou mudança de owner devem acionar notificação, attestation e desfecho registrado dentro do grace period.",
+      "rationale": "Agente sem uso e agente sem dono continuam consumindo acesso, custo e superfície de ataque enquanto ninguém responde por eles.",
+      "ownerRole": "Platform / Lifecycle Service",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Calibrar thresholds em report-only antes de automatizar a cadeia até suspensão.",
+        "Consultar o registry por ownership em evento de desligamento e reatribuir ou suspender."
+      ],
+      "evidence": [
+        "Threshold calibrado e rationale",
+        "Histórico de notificação e desfecho",
+        "Registro de reatribuição"
+      ],
+      "metrics": [
+        "Agentes dormentes por tier e desfecho",
+        "Agentes com owner inativo",
+        "Exceções sazonais vencidas"
+      ],
+      "automation": "assisted",
+      "verification": [
+        "Confirmar que o threshold de dormência gera notificação, attestation e desfecho registrado.",
+        "Verificar que a saída de um owner produziu reatribuição ou suspensão dentro do prazo."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-MDL-001",
+      "title": "Catálogo de combinações aprovadas",
+      "domain": "model",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "scope": "agent",
+      "statement": "Provider, model, version, finalidade, classe de dados e região devem formar uma combinação aprovada antes do uso em produção.",
+      "rationale": "Aprovar uma marca não controla comportamento: o mesmo modelo pode ser adequado a dados públicos e inadequado a dados restritos.",
+      "ownerRole": "AI Platform Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Manter catálogo por combinação com classes de dados, regiões e restrições.",
+        "Bloquear em runtime combinação fora do catálogo para a classe de dados do agente."
+      ],
+      "evidence": [
+        "Model catalog entry",
+        "Provider assessment",
+        "Data handling record"
+      ],
+      "metrics": [
+        "Agentes usando combinação fora do catálogo",
+        "Combinações sem restrição declarada"
+      ],
+      "automation": "assisted",
+      "verification": [
+        "Comparar as combinações de provedor, modelo e versão observadas em runtime com o catálogo aprovado.",
+        "Confirmar que cada combinação declara classes de dados, região e restrições."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-MDL-002",
+      "title": "Evaluation vinculada à versão",
+      "domain": "model",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "scope": "agent",
+      "statement": "Cada versão de modelo em produção deve possuir evaluation do caso de uso vinculada, e mudança de versão deve produzir evidência de regressão antes do rollout.",
+      "rationale": "Uma nova versão pode alterar reasoning, seleção de ferramentas, safety e custo sem qualquer mudança no código do agente.",
+      "ownerRole": "AI Platform Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Definir evaluation baseline por caso antes de aprovar versão.",
+        "Tratar mudança de major version como change control com regression evidence."
+      ],
+      "evidence": [
+        "Evaluation results por versão",
+        "Regression evidence",
+        "Decisão de materialidade"
+      ],
+      "metrics": [
+        "Versões em produção sem evaluation vinculada",
+        "Mudanças de versão sem regressão"
+      ],
+      "automation": "assisted",
+      "verification": [
+        "Confirmar que a versão em produção tem evaluation vinculada e que a mudança de versão gerou regressão.",
+        "Verificar que a versão avaliada consta no blueprint e na evidência de release."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 15 — accuracy, robustness and cybersecurity",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-MDL-003",
+      "title": "Fallback, portabilidade e saída",
+      "domain": "model",
+      "type": [
+        "preventive",
+        "corrective"
+      ],
+      "scope": "agent",
+      "statement": "Fallback e routing só podem acionar combinação aprovada para a mesma classe de dados e capability; dependências críticas devem possuir plano de saída testado.",
+      "rationale": "Failover para provedor com políticas incompatíveis é violação de controle, não resiliência.",
+      "ownerRole": "AI Platform Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Declarar equivalência de controles do fallback e testá-la.",
+        "Documentar abstrações, portabilidade de prompts e evals, e testar substituição em dependência crítica."
+      ],
+      "evidence": [
+        "Declaração de equivalência",
+        "Teste de fallback",
+        "Exit plan e teste de substituição"
+      ],
+      "metrics": [
+        "Acionamentos de fallback para combinação não aprovada",
+        "Dependências críticas sem exit plan testado"
+      ],
+      "automation": "manual",
+      "verification": [
+        "Acionar o fallback em teste e confirmar que a combinação alternativa está aprovada para a mesma classe de dados.",
+        "Executar, para dependência crítica, um teste de substituição documentado."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-OPS-001",
@@ -994,7 +931,25 @@
         "MTTD",
         "MTTDecide"
       ],
-      "automation": "mixed"
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que todo sinal material tem owner, severidade e ação definidos.",
+        "Testar um alerta ponta a ponta até a ação registrada."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 26 — obligations of deployers",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-OPS-002",
@@ -1026,7 +981,20 @@
         "Failed containment",
         "Recurrence"
       ],
-      "automation": "mixed"
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar drill de contenção sem cooperação do agente e medir o tempo até a contenção efetiva.",
+        "Confirmar que a reativação exigiu causa e evidência de regressão."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-OPS-003",
@@ -1037,7 +1005,7 @@
         "responsive",
         "corrective"
       ],
-      "statement": "Material changes e incidents devem atualizar registry, risk, controls, evaluations, runbooks e attestation.",
+      "statement": "Changes e incidents devem atualizar registry, runbooks, evaluations e attestation, e acionar AGF-RSK-003 quando a mudança for material.",
       "rationale": "Correção local sem learning loop preserva causa sistêmica.",
       "ownerRole": "Run Authority",
       "appliesToTiers": [
@@ -1060,19 +1028,31 @@
         "Repeat incidents",
         "Expired attestations"
       ],
-      "automation": "mixed"
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Amostrar mudanças e incidentes e confirmar atualização de registry, runbooks e attestation.",
+        "Medir incidentes recorrentes com a mesma causa raiz."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
-      "id": "AGF-ADP-001",
-      "title": "Discovery, guidance e suporte",
-      "domain": "adoption",
+      "id": "AGF-ORG-001",
+      "title": "Mandato e authority de governança",
+      "domain": "organization",
       "type": [
-        "preventive",
-        "responsive"
+        "preventive"
       ],
-      "statement": "Agentes publicados devem possuir catalog entry, intended/prohibited use, limitations, support owner e escalation path.",
-      "rationale": "Publicação sem discovery e suporte aumenta duplicidade, misuse e tempo de resposta.",
-      "ownerRole": "Adoption Lead",
+      "statement": "A organização deve possuir mandato aprovado que define escopo, risk appetite, authority para exigir evidência e authority para conter sistemas fora do envelope aprovado.",
+      "rationale": "Sem mandato não existe autoridade legítima para exigir evidência, recusar publicação ou conter um sistema em operação; ownership por agente é tratado em AGF-REG-001.",
+      "ownerRole": "AI Governance Owner",
       "appliesToTiers": [
         "T1",
         "T2",
@@ -1080,53 +1060,865 @@
         "T4"
       ],
       "implementation": [
-        "Publicar entry versionada.",
-        "Definir support tiers e escalation."
+        "Registrar purpose e owners no registry.",
+        "Aprovar governance charter e escalation."
       ],
       "evidence": [
-        "Catalog entry",
-        "Guidance",
-        "Support runbook"
+        "Governance charter",
+        "Scope e risk appetite aprovados",
+        "Decisão de containment exercida"
       ],
       "metrics": [
-        "Discovery-to-use",
-        "Duplicate creation",
-        "Support resolution time"
+        "Escopo coberto pelo mandato",
+        "Decisões escaladas sem authority definida"
       ],
-      "automation": "mixed"
+      "automation": "manual",
+      "scope": "organization",
+      "verification": [
+        "Confirmar que existe charter aprovado com authority nomeada para exigir evidência e conter sistemas.",
+        "Verificar que a authority foi exercida ao menos uma vez em decisão registrada."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "GOVERN",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 17 — quality management system",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
-      "id": "AGF-ADP-002",
-      "title": "Competência e feedback loop",
-      "domain": "adoption",
+      "id": "AGF-ORG-002",
+      "title": "Decision rights e segregation",
+      "domain": "organization",
       "type": [
         "preventive",
-        "detective",
-        "corrective"
+        "detective"
       ],
-      "statement": "Builders, reviewers, users e operators devem receber enablement por persona; feedback deve ser triado em decisions e backlog.",
-      "rationale": "Treinamento genérico e feedback sem owner não mudam comportamento nem controls.",
-      "ownerRole": "Adoption Lead",
+      "statement": "Decisões de build, release, risk acceptance, containment e reactivation devem possuir authorities e segregation proporcionais ao tier.",
+      "rationale": "A mesma pessoa ou equipe não deve construir, autoaprovar e aceitar isoladamente risco material.",
+      "ownerRole": "AI Governance Council",
       "appliesToTiers": [
         "T2",
         "T3",
         "T4"
       ],
       "implementation": [
-        "Criar learning paths e paved road.",
-        "Medir competence, misuse e feedback-to-decision."
+        "Publicar RACI e decision matrix.",
+        "Aplicar reviewer independente nos tiers aplicáveis."
       ],
       "evidence": [
-        "Learning assets",
-        "Competence record",
-        "Feedback backlog"
+        "RACI",
+        "Decision log",
+        "Reviewer identity"
       ],
       "metrics": [
-        "Training competence",
-        "Misuse reports",
-        "Feedback cycle time"
+        "Decisões sem authority",
+        "Segregation exceptions"
       ],
-      "automation": "mixed"
+      "automation": "manual",
+      "scope": "organization",
+      "verification": [
+        "Amostrar decisões materiais e confirmar authority registrada e distinta de quem construiu.",
+        "Testar que uma tentativa de autoaprovação em tier que exige segregação é recusada."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "GOVERN",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-ORG-003",
+      "title": "Exceção com expiração",
+      "domain": "organization",
+      "type": [
+        "preventive",
+        "corrective"
+      ],
+      "statement": "Toda exceção deve registrar requisito, rationale, owner, compensating controls, expiry e review trigger.",
+      "rationale": "Exceção sem expiração se torna alteração de policy não governada.",
+      "ownerRole": "AI Governance Council",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Usar workflow versionado de waiver.",
+        "Alertar owner antes do vencimento e bloquear extensão automática."
+      ],
+      "evidence": [
+        "Waiver record",
+        "Compensating-control evidence",
+        "Expiry decision"
+      ],
+      "metrics": [
+        "Exceções vencidas",
+        "Exceções recorrentes"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Amostrar exceções e confirmar presença de rationale, owner, compensating control e expiry.",
+        "Verificar que exceção vencida bloqueia continuidade em vez de renovar automaticamente."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "GOVERN",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-RAI-001",
+      "title": "Impact assessment",
+      "domain": "responsible-ai",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Sistemas com impacto material em pessoas devem avaliar intended use, affected parties, harms/benefits, data, slices, transparency, oversight e redress.",
+      "rationale": "Princípios abstratos não identificam distribuição de impactos no contexto real.",
+      "ownerRole": "Responsible AI Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar assessment proporcional.",
+        "Registrar limitations e residual impact."
+      ],
+      "evidence": [
+        "Impact assessment",
+        "Affected-party map",
+        "Residual-impact decision"
+      ],
+      "metrics": [
+        "Assessments aplicáveis concluídos",
+        "Findings e remediation time"
+      ],
+      "automation": "manual",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que todo gatilho de impacto aplicável resultou em assessment concluído antes do release.",
+        "Verificar que o assessment registra partes afetadas, grupos vulneráveis e residual impact com authority."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 9 — risk management system",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-RAI-002",
+      "title": "Human accountability e contestação",
+      "domain": "responsible-ai",
+      "type": [
+        "preventive",
+        "responsive"
+      ],
+      "statement": "Ações materiais devem possuir accountability boundary, oversight significativo, authority humana e contest/correction path quando aplicável.",
+      "rationale": "Humano nominal ou botão genérico não previne automation bias nem assegura redress.",
+      "ownerRole": "Business Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Definir recommend/prepare/execute/prohibit.",
+        "Testar approval UX, override e contestation."
+      ],
+      "evidence": [
+        "Boundary matrix",
+        "Approval logs",
+        "Contest records"
+      ],
+      "metrics": [
+        "Rubber-stamp rate",
+        "Overrides",
+        "Correction time"
+      ],
+      "automation": "manual",
+      "scope": "agent",
+      "verification": [
+        "Medir taxa de aprovação humana sem alteração e tempo médio de decisão como indicador de rubber-stamping.",
+        "Confirmar que existe canal de contestação exercitável e que houve resposta registrada."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 14 — human oversight",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "GOVERN",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-RAI-003",
+      "title": "Transparência, fairness e monitoramento",
+      "domain": "responsible-ai",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Limites, papel da IA e canais de suporte devem ser comunicados; performance e harms devem ser avaliados por slices relevantes e monitorados.",
+      "rationale": "Métrica agregada e disclosure genérico podem esconder falha material ou impacto desigual.",
+      "ownerRole": "Responsible AI Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Criar transparency artifacts.",
+        "Definir slices, thresholds e remediation actions."
+      ],
+      "evidence": [
+        "User notice",
+        "Slice evaluation",
+        "Monitoring report"
+      ],
+      "metrics": [
+        "Performance disparities",
+        "Complaints",
+        "Limitations não comunicadas"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que a comunicação ao usuário declara papel da IA, limites e canal de suporte.",
+        "Avaliar performance por slices relevantes e registrar disparidade, tamanho de amostra e incerteza."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 13 — transparency and provision of information",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-REG-001",
+      "title": "Registry e ownership",
+      "domain": "registry",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Todo agente deve possuir ID estável, owners, lifecycle status, tier, current version e evidence links em registry reconciliável.",
+      "rationale": "Visibilidade acionável é pré-requisito para approval, operação, attestation e sunset.",
+      "ownerRole": "Registry Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Validar records contra schema.",
+        "Reconciliar fontes de plataforma e declaração humana."
+      ],
+      "evidence": [
+        "Registry record",
+        "Reconciliation report"
+      ],
+      "metrics": [
+        "Registry coverage",
+        "Ownerless ou stale records"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Reconciliar o registry contra ao menos duas fontes independentes de descoberta e medir cobertura.",
+        "Confirmar que agente sem owner recebe status de não gerenciado e é encaminhado para remediação."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 11 — technical documentation",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-REG-002",
+      "title": "Blueprint e mudança material",
+      "domain": "registry",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada versão deve possuir blueprint de modelos, dados, identidade, tools, permissions, trust boundaries e runtime, e declarar mudanças materiais para reavaliação sob AGF-RSK-003.",
+      "rationale": "Registry sem arquitetura não explica blast radius nem permite review proporcional.",
+      "ownerRole": "Technical Owner",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Versionar blueprint.",
+        "Detectar changes em model, data, identity, tool, exposure e autonomy."
+      ],
+      "evidence": [
+        "Blueprint",
+        "Material-change diff",
+        "Reassessment decision"
+      ],
+      "metrics": [
+        "Versões sem blueprint",
+        "Mudanças não declaradas"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Comparar o blueprint aprovado com a configuração observada em runtime e registrar drift.",
+        "Verificar que a versão anterior do blueprint permanece recuperável após novo release."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 11 — technical documentation",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-REG-003",
+      "title": "Attestation e sunset",
+      "domain": "registry",
+      "type": [
+        "preventive",
+        "detective",
+        "corrective"
+      ],
+      "statement": "Aprovação deve expirar; owners devem reconfirmar finalidade, risco, controls, uso e valor ou executar sunset completo.",
+      "rationale": "Agents e privilégios tornam-se órfãos quando aprovação é tratada como permanente.",
+      "ownerRole": "Business Owner",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Definir cadence por tier.",
+        "Revogar identity, connectors e discovery no sunset."
+      ],
+      "evidence": [
+        "Attestation",
+        "Sunset plan",
+        "Revocation proof"
+      ],
+      "metrics": [
+        "Attestations expiradas",
+        "Tempo para sunset",
+        "Órfãos após retirement"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que attestation vencida muda o estado do agente e não apenas gera aviso.",
+        "Executar uma retirada e verificar revogação efetiva de identidade e acessos."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-RSK-001",
+      "title": "Tiering e red flags",
+      "domain": "risk",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada agente deve ser classificado por finalidade, alcance, dados, autonomia, capability, interconectividade, reversibilidade, exposure e affected parties.",
+      "rationale": "Um único score ou user count não representa blast radius e contexto.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Aplicar dimensions versionadas.",
+        "Elevar tier por red flags independentemente da média."
+      ],
+      "evidence": [
+        "Risk assessment",
+        "Tier rationale",
+        "Red-flag record"
+      ],
+      "metrics": [
+        "Tier distribution",
+        "Overrides",
+        "Reclassifications"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Reclassificar uma amostra com avaliador independente e medir divergência de tier.",
+        "Confirmar que cada red flag aplicável elevou o tier no registro."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 9 — risk management system",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-RSK-002",
+      "title": "Assessment e residual risk",
+      "domain": "risk",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Assessments aplicáveis devem mapear impacts, threats, controls, effectiveness, uncertainty e residual risk para authority compatível.",
+      "rationale": "Control presence não equivale a control effectiveness nem elimina risco residual.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Integrar impact, security, privacy e RAI assessments.",
+        "Registrar acceptance, conditions ou rejection."
+      ],
+      "evidence": [
+        "Assessment package",
+        "Control evidence",
+        "Residual-risk decision"
+      ],
+      "metrics": [
+        "Risks sem owner",
+        "Acceptance sem authority",
+        "Controls sem evidence"
+      ],
+      "automation": "manual",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que cada residual risk aceito tem authority compatível com o tier e prazo de revisão.",
+        "Verificar que control sem evidência aparece como ausente e não como atendido."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 9 — risk management system",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-RSK-003",
+      "title": "Reavaliação contínua",
+      "domain": "risk",
+      "type": [
+        "detective",
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Mudança material, incident, drift, nova obrigação ou expiry de exceção deve reabrir classificação e controls a partir do ponto afetado; este control é a fonte única do requisito de reavaliação.",
+      "rationale": "Risco de sistema dinâmico não permanece estável após release.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Configurar change triggers.",
+        "Ligar runtime signals a reassessment workflow."
+      ],
+      "evidence": [
+        "Change event",
+        "Reclassification history",
+        "Updated control mapping"
+      ],
+      "metrics": [
+        "Changes sem reassessment",
+        "Tempo para reclassificar"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Amostrar mudanças materiais ocorridas e confirmar reassessment do ponto afetado dentro do prazo.",
+        "Medir mudanças detectadas por auditoria em vez de declaradas pelo owner."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 9 — risk management system",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-SEC-001",
+      "title": "Threat model do sistema agentic",
+      "domain": "security",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "O blueprint deve possuir threat model cobrindo prompts, retrieval, memory, identity, tools, supply chain, egress e multi-agent trust.",
+      "rationale": "Model-only review ignora caminhos que transformam saída em efeito operacional.",
+      "ownerRole": "Security Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Mapear assets, trust boundaries e misuse cases.",
+        "Revisar após material change ou incident."
+      ],
+      "evidence": [
+        "Threat model",
+        "Misuse cases",
+        "Residual risk"
+      ],
+      "metrics": [
+        "Coverage de threat models",
+        "Incidentes fora do model"
+      ],
+      "automation": "manual",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que o threat model cobre prompt, retrieval, memória, identidade, ferramentas e cadeia externa.",
+        "Verificar que incidentes ocorridos estavam previstos no modelo ou geraram atualização."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Threat modeling de sistemas de IA",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-SEC-002",
+      "title": "Sandbox, egress e supply chain",
+      "domain": "security",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Code execution e components externos devem usar sandbox, resource limits, egress control e provenance/versioning compatíveis com o tier.",
+      "rationale": "Agents podem transformar dependency compromise ou prompt injection em execução e exfiltration.",
+      "ownerRole": "Security Authority",
+      "appliesToTiers": [
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Isolar filesystem/process/network.",
+        "Verificar model, prompt, package e MCP provenance."
+      ],
+      "evidence": [
+        "Sandbox policy",
+        "Egress tests",
+        "Dependency/provenance report"
+      ],
+      "metrics": [
+        "Egress violations",
+        "Assets sem provenance",
+        "Resource-limit events"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Testar egress para destino não permitido e confirmar bloqueio.",
+        "Confirmar limites de recurso e proveniência declarada dos componentes externos."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Execution; Exfiltration",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "OWASP Top 10 for Agentic Applications",
+          "reference": "Supply chain e execução",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-SEC-003",
+      "title": "Adversarial testing e regression",
+      "domain": "security",
+      "type": [
+        "detective",
+        "corrective"
+      ],
+      "statement": "Testes devem cobrir direct/indirect injection, tool poisoning, data exfiltration, authorization bypass e chain failure; incidentes viram regressions.",
+      "rationale": "Testes felizes não demonstram resistência a abuso ou comportamento emergente.",
+      "ownerRole": "Security Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Executar component, chain e system tests.",
+        "Adicionar escaped incidents à regression suite."
+      ],
+      "evidence": [
+        "Adversarial test results",
+        "Red-team report",
+        "Regression update"
+      ],
+      "metrics": [
+        "Attack success rate",
+        "Escaped security defects",
+        "Recurrence"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar a suíte adversarial e medir taxa de sucesso de ataque por categoria.",
+        "Confirmar que cada incidente virou caso de regressão na suíte."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "MITRE ATLAS",
+          "reference": "Adversarial testing",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "OWASP Top 10 for Agentic Applications",
+          "reference": "Prompt injection direta e indireta",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 15 — accuracy, robustness and cybersecurity",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-TOL-001",
+      "title": "Tool/MCP registry e provenance",
+      "domain": "tools",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Toda tool, API ou MCP server deve possuir owner, version/provenance, operations, data flow, scopes, side effects e approval validity registrados.",
+      "rationale": "Descriptions e discovery dinâmico não constituem base de confiança.",
+      "ownerRole": "Tool Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Manter tool registry/allowlist.",
+        "Detectar version e capability changes."
+      ],
+      "evidence": [
+        "Tool record",
+        "Provenance/version",
+        "Change report"
+      ],
+      "metrics": [
+        "Tools não registradas",
+        "Versões fora de baseline"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Comparar ferramentas invocadas em runtime com o registro aprovado e apontar as não registradas.",
+        "Confirmar versão e proveniência de cada servidor externo em uso."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "OWASP MCP Top 10",
+          "reference": "Governança de servidores e ferramentas MCP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-TOL-002",
+      "title": "Gateway e validação de ação",
+      "domain": "tools",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Tools state-changing devem passar por enforcement que valida caller, policy, schema, arguments, destination, limits e human approval quando exigido.",
+      "rationale": "Prompt instructions não substituem autorização e validação técnica.",
+      "ownerRole": "Tool Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Usar API/MCP gateway ou broker.",
+        "Emitir credencial limitada à ação/transação."
+      ],
+      "evidence": [
+        "Gateway policy",
+        "Allow/deny tests",
+        "Approval logs"
+      ],
+      "metrics": [
+        "Bypass calls",
+        "Denied actions",
+        "Calls sem correlation"
+      ],
+      "automation": "automated",
+      "scope": "agent",
+      "verification": [
+        "Tentar invocar uma ação state-changing fora do gateway e confirmar que a chamada é recusada.",
+        "Submeter parâmetro fora do permitido e confirmar bloqueio antes da execução."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "OWASP Top 10 for Agentic Applications",
+          "reference": "Tool misuse; excessive agency",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "OWASP MCP Top 10",
+          "reference": "Mediação e validação de invocação",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
+    },
+    {
+      "id": "AGF-TOL-003",
+      "title": "Kill switch e circuit breaker",
+      "domain": "tools",
+      "type": [
+        "responsive",
+        "corrective"
+      ],
+      "statement": "Cada capability com efeito material deve ser revogável independentemente do agente e possuir circuit breaker para anomalia, budget ou policy breach.",
+      "rationale": "Containment dentro do agente pode falhar quando o próprio agente está comprometido.",
+      "ownerRole": "Run Authority",
+      "appliesToTiers": [
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Implementar revogação no gateway/IAM.",
+        "Executar drill de kill switch e recovery."
+      ],
+      "evidence": [
+        "Kill-switch configuration",
+        "Drill result",
+        "Reactivation decision"
+      ],
+      "metrics": [
+        "Tempo para revogar",
+        "Failed containment",
+        "Reactivation sem regression"
+      ],
+      "automation": "assisted",
+      "scope": "agent",
+      "verification": [
+        "Executar drill revogando a capability sem cooperação do agente e medir o tempo até a interrupção.",
+        "Confirmar que a reativação exige causa registrada e evidência de regressão."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-VAL-001",
@@ -1158,7 +1950,20 @@
         "Itens sem baseline",
         "Value hypotheses sem owner"
       ],
-      "automation": "mixed"
+      "automation": "manual",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que existe baseline registrada ou plano datado para obtê-la antes do release.",
+        "Verificar que o business case declara alternativa não-IA considerada e critérios de sunset."
+      ],
+      "blocking": true,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-VAL-002",
@@ -1189,7 +1994,20 @@
         "Agents com uso sem outcome",
         "Claims sem baseline"
       ],
-      "automation": "mixed"
+      "automation": "assisted",
+      "scope": "organization",
+      "verification": [
+        "Confirmar que criação, adoção, uso, qualidade, eficiência e outcome são reportados separadamente.",
+        "Verificar que nenhum claim de valor é apresentado sem baseline e incerteza."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MEASURE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     },
     {
       "id": "AGF-VAL-003",
@@ -1222,7 +2040,20 @@
         "Duplicates",
         "Time-to-sunset"
       ],
-      "automation": "mixed"
+      "automation": "manual",
+      "scope": "agent",
+      "verification": [
+        "Confirmar que a revisão de portfólio produziu decisão registrada para cada agente avaliado.",
+        "Medir agentes inativos ou duplicados que permanecem operando após a revisão."
+      ],
+      "blocking": false,
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MANAGE",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ]
     }
   ]
 }
