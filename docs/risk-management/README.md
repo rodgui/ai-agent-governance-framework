@@ -78,6 +78,8 @@ A saída do fast path é **automática**: qualquer red flag, escalador ou impact
 
 Materiais externos que usem uma faixa `T0` convergem para T1: `T0` e `T1` externos mapeiam para T1 canônico; `T2`, `T3` e `T4` permanecem equivalentes.
 
+O piso de controles exigido por tier para entrar e permanecer em produção está no [Minimum Production Bar](minimum-production-bar.md).
+
 ## Processo
 
 ```mermaid

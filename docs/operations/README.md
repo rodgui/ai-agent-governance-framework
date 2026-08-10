@@ -47,6 +47,12 @@ Antes do release, deve existir:
 
 Dashboards precisam de owner, threshold e action; caso contrário são visualização, não governança.
 
+Três leituras derivam deste modelo e têm documento próprio:
+
+- [behavioral analytics](behavioral-analytics.md) — quando o comportamento muda em relação ao normal do agente;
+- [FinOps e unit economics](finops.md) — quanto custa por resultado e onde está o desperdício;
+- [KPIs, KRIs e governance dashboard](kpi-kri-dashboard.md) — o que vai a um fórum e com qual ação associada.
+
 ## Incident lifecycle
 
 ```mermaid
