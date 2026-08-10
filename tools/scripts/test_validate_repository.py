@@ -457,6 +457,105 @@ class TierTaxonomyTests(unittest.TestCase):
         self.assertTrue(any(issue.category == "control-scope" for issue in issues))
 
 
+class CaseBundleTests(unittest.TestCase):
+    """A second reference case must be verified by the same rules as the first."""
+
+    def setUp(self) -> None:
+        self.original_root = getattr(validator, "ROOT")
+        self.temporary = tempfile.TemporaryDirectory()
+        self.root = Path(self.temporary.name)
+        for source in REPO_ROOT.rglob("*.json"):
+            destination = self.root / source.relative_to(REPO_ROOT)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source, destination)
+        setattr(validator, "ROOT", self.root)
+        self.case = "examples/cases/demo-case"
+
+    def tearDown(self) -> None:
+        setattr(validator, "ROOT", self.original_root)
+        self.temporary.cleanup()
+
+    def seed_case(self, mutate_registry=None, mutate_blueprint=None) -> list[Path]:
+        """Copy the canonical case into examples/cases/demo-case, optionally corrupted."""
+        registry = json.loads((self.root / "examples/agent-registry.example.json").read_text(encoding="utf-8"))
+        blueprint = json.loads((self.root / "examples/agent-blueprint.example.json").read_text(encoding="utf-8"))
+        registry["currentBlueprint"]["path"] = f"{self.case}/blueprint.json"
+        if mutate_registry:
+            mutate_registry(registry)
+        if mutate_blueprint:
+            mutate_blueprint(blueprint)
+        target = self.root / self.case
+        target.mkdir(parents=True, exist_ok=True)
+        for name, document in (("registry.json", registry), ("blueprint.json", blueprint)):
+            (target / name).write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        for role_file, source in (
+            ("model-catalog.json", "examples/model-provider-catalog.example.json"),
+            ("source-catalog.json", "examples/certified-source-catalog.example.json"),
+            ("tool-catalog.json", "examples/enterprise-tool-registry.example.json"),
+        ):
+            shutil.copy2(self.root / source, target / role_file)
+        return sorted(self.root.rglob("*.json"))
+
+    def case_issues(self, issues) -> list:
+        return [issue for issue in issues if issue.category == "cross-record" and self.case in issue.path]
+
+    def test_discovers_flat_and_directory_bundles(self) -> None:
+        json_files = self.seed_case()
+        parsed = {validator.relative(path): validator.load_json(path) for path in json_files}
+        bundles = validator.discover_case_bundles(parsed)
+        labels = {bundle.get("caseLabel") for bundle in bundles}
+        self.assertIn("examples", labels)
+        self.assertIn(self.case, labels)
+
+    def test_accepts_consistent_case_bundle(self) -> None:
+        json_files = self.seed_case()
+        self.assertEqual([], self.case_issues(validator.validate_json_and_schemas(json_files)))
+
+    def test_rejects_tier_mismatch_inside_a_case(self) -> None:
+        json_files = self.seed_case(
+            mutate_blueprint=lambda document: document["governance"].__setitem__("riskTier", "T3")
+        )
+        issues = validator.validate_json_and_schemas(json_files)
+        self.assertTrue(
+            any("risk tier values differ" in issue.message for issue in self.case_issues(issues))
+        )
+
+    def test_rejects_unknown_catalog_binding_inside_a_case(self) -> None:
+        json_files = self.seed_case(
+            mutate_blueprint=lambda document: document["tools"][0].__setitem__(
+                "catalogEntryId", "TLR-NOT-CATALOGED-999"
+            )
+        )
+        issues = validator.validate_json_and_schemas(json_files)
+        self.assertTrue(
+            any("TLR-NOT-CATALOGED-999" in issue.message for issue in self.case_issues(issues))
+        )
+
+    def test_rejects_schema_invalid_record_inside_a_case(self) -> None:
+        json_files = self.seed_case(mutate_registry=lambda document: document.pop("ownership"))
+        issues = validator.validate_json_and_schemas(json_files)
+        self.assertTrue(
+            any(
+                issue.category == "schema" and issue.path == f"{self.case}/registry.json"
+                for issue in issues
+            )
+        )
+
+    def test_case_failures_do_not_blame_the_canonical_example(self) -> None:
+        json_files = self.seed_case(
+            mutate_blueprint=lambda document: document["governance"].__setitem__("riskTier", "T3")
+        )
+        issues = validator.validate_json_and_schemas(json_files)
+        self.assertEqual(
+            [],
+            [
+                issue
+                for issue in issues
+                if issue.category == "cross-record" and issue.path == "examples"
+            ],
+        )
+
+
 class TierLabelTests(unittest.TestCase):
     """ADR-0009 in prose: a tier column says T1-T4, not baixo/moderado/alto/critico."""
 

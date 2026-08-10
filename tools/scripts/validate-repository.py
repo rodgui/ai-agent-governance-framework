@@ -48,6 +48,37 @@ ALLOWED_VENDOR_LITERALS = {
     ),
 }
 CANONICAL_TIERS = ("T1", "T2", "T3", "T4")
+# Um caso de referência é um conjunto de records que precisam concordar entre si. O papel de
+# cada arquivo é dado pelo nome, para que acrescentar um caso não exija tocar no validador.
+CASE_ROLE_FILES = {
+    "registry": "registry.json",
+    "blueprint": "blueprint.json",
+    "releaseManifest": "release-manifest.json",
+    "modelCatalog": "model-catalog.json",
+    "sourceCatalog": "source-catalog.json",
+    "toolCatalog": "tool-catalog.json",
+    "auditEvent": "audit-event.json",
+}
+CASE_ROLE_SCHEMAS = {
+    "registry": "schemas/agent-registry.schema.json",
+    "blueprint": "schemas/agent-blueprint.schema.json",
+    "releaseManifest": "schemas/release-evidence-manifest.schema.json",
+    "modelCatalog": "schemas/model-provider-catalog.schema.json",
+    "sourceCatalog": "schemas/certified-source-catalog.schema.json",
+    "toolCatalog": "schemas/enterprise-tool-registry.schema.json",
+    "auditEvent": "schemas/audit-event.schema.json",
+}
+# O caso histórico mantém os records na raiz de examples/, onde o corpus já os referencia.
+FLAT_CASE_BUNDLE = {
+    "caseLabel": "examples",
+    "registry": "examples/agent-registry.example.json",
+    "blueprint": "examples/agent-blueprint.example.json",
+    "releaseManifest": "examples/release-evidence-manifest.example.json",
+    "modelCatalog": "examples/model-provider-catalog.example.json",
+    "sourceCatalog": "examples/certified-source-catalog.example.json",
+    "toolCatalog": "examples/enterprise-tool-registry.example.json",
+    "auditEvent": "examples/audit-event.example.json",
+}
 PROSE_TIER_ROW_RE = re.compile(r"^\|\s*(baixo|moderado|alto|crítico)\s*\|", flags=re.IGNORECASE)
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 REPOSITORY_REF_RE = re.compile(
@@ -321,19 +352,31 @@ def validate_json_references(parsed: dict[str, Any]) -> list[Issue]:
     return issues
 
 
-def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
+def validate_case_bundle(paths: dict[str, str], parsed: dict[str, Any]) -> list[Issue]:
+    """Cross-record invariants for one case bundle.
+
+    `paths` maps a role (registry, blueprint, releaseManifest, model/source/tool catalog,
+    auditEvent) to the repository-relative file that plays it. Binding the invariants to a
+    bundle instead of fixed paths is what lets a second reference case be verified by the
+    same rules as the first.
+    """
     issues: list[Issue] = []
-    registry = parsed.get("examples/agent-registry.example.json")
-    blueprint = parsed.get("examples/agent-blueprint.example.json")
+    case_label = paths.get("caseLabel", "examples")
+    registry_path = paths.get("registry", "")
+    blueprint_path = paths.get("blueprint", "")
+    manifest_path = paths.get("releaseManifest", "")
+    audit_path = paths.get("auditEvent", "")
+    registry = parsed.get(registry_path)
+    blueprint = parsed.get(blueprint_path)
     if isinstance(registry, dict) and isinstance(blueprint, dict):
         if registry.get("agentId") != blueprint.get("agentId"):
-            issues.append(Issue("cross-record", "examples", "registry and blueprint agentId values differ"))
+            issues.append(Issue("cross-record", case_label, "registry and blueprint agentId values differ"))
         current = registry.get("currentBlueprint", {})
         if isinstance(current, dict):
-            if current.get("path") != "examples/agent-blueprint.example.json":
-                issues.append(Issue("cross-record", "examples/agent-registry.example.json", "currentBlueprint.path does not identify the canonical example blueprint"))
+            if current.get("path") != blueprint_path:
+                issues.append(Issue("cross-record", registry_path, "currentBlueprint.path does not identify the canonical example blueprint"))
             if current.get("version") != blueprint.get("version"):
-                issues.append(Issue("cross-record", "examples", "registry and blueprint version values differ"))
+                issues.append(Issue("cross-record", case_label, "registry and blueprint version values differ"))
 
     if isinstance(registry, dict):
         lifecycle = registry.get("lifecycle", {})
@@ -348,7 +391,7 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
             issues.append(
                 Issue(
                     "cross-record",
-                    "examples/agent-registry.example.json",
+                    registry_path,
                     "release-relevant registry record has no evidenceLinks",
                 )
             )
@@ -361,7 +404,7 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
                 issues.append(
                     Issue(
                         "cross-record",
-                        "examples/agent-registry.example.json",
+                        registry_path,
                         "attestation expires before it was issued",
                     )
                 )
@@ -369,7 +412,7 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
                 issues.append(
                     Issue(
                         "cross-record",
-                        "examples/agent-registry.example.json",
+                        registry_path,
                         "attestation expires before lastReviewed",
                     )
                 )
@@ -385,9 +428,9 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
             if isinstance(item, dict) and isinstance(item.get("id"), str)
         }
 
-    model_entries = catalog_entries("examples/model-provider-catalog.example.json")
-    source_entries = catalog_entries("examples/certified-source-catalog.example.json")
-    tool_entries = catalog_entries("examples/enterprise-tool-registry.example.json")
+    model_entries = catalog_entries(paths.get("modelCatalog", ""))
+    source_entries = catalog_entries(paths.get("sourceCatalog", ""))
+    tool_entries = catalog_entries(paths.get("toolCatalog", ""))
     model_ids = set(model_entries)
     source_ids = set(source_entries)
     tool_ids = set(tool_entries)
@@ -397,9 +440,9 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
         blueprint_governance = blueprint.get("governance", {})
         if isinstance(registry_risk, dict) and isinstance(blueprint_governance, dict):
             if registry_risk.get("tier") != blueprint_governance.get("riskTier"):
-                issues.append(Issue("cross-record", "examples", "registry and blueprint risk tier values differ"))
+                issues.append(Issue("cross-record", case_label, "registry and blueprint risk tier values differ"))
             if registry_risk.get("admissibility") != blueprint_governance.get("admissibility"):
-                issues.append(Issue("cross-record", "examples", "registry and blueprint admissibility values differ"))
+                issues.append(Issue("cross-record", case_label, "registry and blueprint admissibility values differ"))
 
     if isinstance(blueprint, dict):
         bindings = (
@@ -418,7 +461,7 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
                     issues.append(
                         Issue(
                             "cross-record",
-                            "examples/agent-blueprint.example.json",
+                            blueprint_path,
                             f"{label}/{index}: unknown catalogEntryId {reference}",
                         )
                     )
@@ -431,7 +474,7 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
             issues.append(
                 Issue(
                     "cross-record",
-                    "examples/agent-blueprint.example.json",
+                    blueprint_path,
                     f"{label}/{index}: {message}",
                 )
             )
@@ -520,24 +563,24 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
                     issues.append(
                         Issue(
                             "cross-record",
-                            "examples/agent-blueprint.example.json",
+                            blueprint_path,
                             f"models/{index}/fallback: unknown catalogEntryId {reference}",
                         )
                     )
 
-    manifest = parsed.get("examples/release-evidence-manifest.example.json")
+    manifest = parsed.get(manifest_path)
     catalog = parsed.get("controls/control-catalog.json")
     if isinstance(manifest, dict) and isinstance(blueprint, dict):
         if manifest.get("agentId") != blueprint.get("agentId"):
-            issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint agentId values differ"))
+            issues.append(Issue("cross-record", manifest_path, "manifest and blueprint agentId values differ"))
         if manifest.get("blueprintVersion") != blueprint.get("version"):
-            issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint version values differ"))
+            issues.append(Issue("cross-record", manifest_path, "manifest and blueprint version values differ"))
         governance = blueprint.get("governance", {})
         if isinstance(governance, dict):
             if manifest.get("riskTier") != governance.get("riskTier"):
-                issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint risk tier values differ"))
+                issues.append(Issue("cross-record", manifest_path, "manifest and blueprint risk tier values differ"))
             if manifest.get("admissibility") != governance.get("admissibility"):
-                issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint admissibility values differ"))
+                issues.append(Issue("cross-record", manifest_path, "manifest and blueprint admissibility values differ"))
     if isinstance(manifest, dict) and isinstance(catalog, dict):
         known_controls = {
             item["id"]
@@ -554,7 +597,7 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
             issues.append(
                 Issue(
                     "cross-record",
-                    "examples/release-evidence-manifest.example.json",
+                    manifest_path,
                     f"unknown control IDs: {unknown_controls}",
                 )
             )
@@ -572,22 +615,57 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
                     issues.append(
                         Issue(
                             "cross-record",
-                            "examples/release-evidence-manifest.example.json",
+                            manifest_path,
                             f"artifact hash mismatch for {artifact_path}",
                         )
                     )
 
-    audit_event = parsed.get("examples/audit-event.example.json")
+    audit_event = parsed.get(audit_path)
     if isinstance(audit_event, dict) and isinstance(blueprint, dict):
         if audit_event.get("agentId") != blueprint.get("agentId"):
-            issues.append(Issue("cross-record", "examples/audit-event.example.json", "audit event and blueprint agentId values differ"))
+            issues.append(Issue("cross-record", audit_path, "audit event and blueprint agentId values differ"))
         if audit_event.get("agentVersion") != blueprint.get("version"):
-            issues.append(Issue("cross-record", "examples/audit-event.example.json", "audit event and blueprint version values differ"))
+            issues.append(Issue("cross-record", audit_path, "audit event and blueprint version values differ"))
         audit_tool = audit_event.get("tool", {})
         if isinstance(audit_tool, dict):
             reference = audit_tool.get("catalogEntryId")
             if isinstance(reference, str) and reference not in tool_ids:
-                issues.append(Issue("cross-record", "examples/audit-event.example.json", f"unknown tool catalogEntryId {reference}"))
+                issues.append(Issue("cross-record", audit_path, f"unknown tool catalogEntryId {reference}"))
+
+    return issues
+
+
+def discover_case_bundles(parsed: dict[str, Any]) -> list[dict[str, str]]:
+    """Locate every reference case whose records must satisfy the cross-record invariants.
+
+    Two shapes are recognised. The historical case keeps its records at the root of
+    `examples/`, where the rest of the corpus already links to them. New cases live under
+    `examples/cases/<case-id>/` with one file per role. Discovery by convention is what
+    keeps a new case from being added without being verified.
+    """
+    bundles: list[dict[str, str]] = [dict(FLAT_CASE_BUNDLE)]
+    seen: set[str] = set()
+    for relative_path in parsed:
+        parts = relative_path.split("/")
+        if len(parts) < 4 or parts[0] != "examples" or parts[1] != "cases":
+            continue
+        case_id = parts[2]
+        if case_id in seen:
+            continue
+        seen.add(case_id)
+        bundle: dict[str, str] = {"caseLabel": f"examples/cases/{case_id}"}
+        for role, filename in CASE_ROLE_FILES.items():
+            candidate = f"examples/cases/{case_id}/{filename}"
+            if candidate in parsed:
+                bundle[role] = candidate
+        bundles.append(bundle)
+    return bundles
+
+
+def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
+    issues: list[Issue] = []
+    for bundle in discover_case_bundles(parsed):
+        issues.extend(validate_case_bundle(bundle, parsed))
 
     assessment_path = "examples/maturity-assessment.example.json"
     assessment = parsed.get(assessment_path)
@@ -657,6 +735,15 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
         ("schemas/release-evidence-manifest.schema.json", "examples/release-evidence-manifest.example.json"),
         ("schemas/audit-event.schema.json", "examples/audit-event.example.json"),
     ]
+    # Records de casos de referência entram na validação de schema pela mesma convenção de
+    # nome que os liga ao bundle. Um caso adicionado sem isso ficaria no repositório com
+    # aparência de evidência e sem nenhuma verificação por trás.
+    for bundle in discover_case_bundles(parsed):
+        for role, schema_rel in CASE_ROLE_SCHEMAS.items():
+            instance_rel = bundle.get(role)
+            if instance_rel and (schema_rel, instance_rel) not in pairs:
+                pairs.append((schema_rel, instance_rel))
+
     missing_instance = object()
     schema_invalid_instances: set[str] = set()
     for schema_rel, instance_rel in pairs:
