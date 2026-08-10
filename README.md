@@ -39,6 +39,8 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 | estudar a referência completa | [Handbook e ordem de leitura](docs/handbook/README.md) |
 | implantar a governança | [Implementation playbook](docs/guides/framework-implementation-playbook.md) |
 | executar os primeiros 90 dias | [Roadmap de 90 dias](docs/guides/implementation-plan-90-days.md) |
+| conduzir o programa completo | [Programa de 24 semanas](docs/guides/implementation-program-24-weeks.md) |
+| validar antes de escalar | [Plano de piloto](docs/guides/pilot-plan.md) |
 | avaliar maturidade | [Maturity model](docs/guides/maturity-model.md) |
 | reutilizar soluções arquiteturais | [Catálogo de design patterns](docs/patterns/README.md) |
 | adotar controles verificáveis | [Control catalog](controls/README.md) |
@@ -55,7 +57,10 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 | [Arquitetura](docs/architecture/overview.md) | planos, fluxos e boundaries |
 | [Patterns](docs/patterns/README.md) | soluções recorrentes e antipatterns |
 | [Control catalog](controls/README.md) | requisitos, implementações e evidências |
+| [Minimum Production Bar](docs/risk-management/minimum-production-bar.md) | piso de controles por tier para entrar e permanecer em produção |
 | [Registry + blueprint](schemas/README.md) | inventário, arquitetura e accountability estruturados |
+| [Lifecycle](docs/lifecycle/README.md) | estados, mudança material, attestation, dormancy e retirement |
+| [Modelos e provedores](docs/model-governance/README.md) | catálogo de combinações aprovadas, fallback e exit strategy |
 | [Assessments](assessments/README.md) | risco, maturidade e comparações |
 | [Templates](templates/README.md) | execução humana e evidências |
 | [Handbook](docs/handbook/README.md) | ordem editorial para leitura linear e futura publicação |
