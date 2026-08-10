@@ -18,6 +18,18 @@ Exemplos fictícios e sanitizados que demonstram o uso dos schemas e templates.
 - [`support-runbook.example.md`](support-runbook.example.md) — sinais, contenção e recuperação.
 - [`slo.example.md`](slo.example.md) — objetivos e owner actions ilustrativos.
 
+## Operating model e estate
+
+- [`governance-raci.example.md`](governance-raci.example.md) — decision rights preenchidos, com um único accountable por decisão material.
+- [`handoff-matrix.example.md`](handoff-matrix.example.md) — transições, pré-condições, evidência transferida e SLA.
+- [`manual-bottleneck-register.example.md`](manual-bottleneck-register.example.md) — onde a governança depende de trabalho manual repetitivo.
+- [`target-maturity-roadmap.example.md`](target-maturity-roadmap.example.md) — alvos por capability com dependências e confiança declarada.
+
+## Dados e runtime
+
+- [`certified-source-catalog.example.md`](certified-source-catalog.example.md) — critérios de certificação, catálogo de fontes e backlog de remediação.
+- [`behavioral-analytics-catalog.example.md`](behavioral-analytics-catalog.example.md) — casos, thresholds, modo de operação e métrica de falso positivo.
+
 ## Validação
 
 Os exemplos são testados automaticamente contra os schemas em [`schemas/`](../schemas/README.md).
