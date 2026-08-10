@@ -20,6 +20,9 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 ### Changed
 
 - O evidence pack de T2 declara herança de T1, como T3 e T4 já faziam.
+- Developer experience e paved road, atributos de qualidade e riscos arquiteturais entram na ordem editorial do handbook e na navegação do site. Eram conteúdo real inalcançável a partir de qualquer entrada do repositório.
+- `docs/index.md` ganha navegação por pasta, ligando os índices de seção que existiam sem nenhum caminho de entrada.
+- Os marcadores de tempo do sunset plan passam de `T0`/`T+15`/`T+30` para `D0`/`D+15`/`D+30`, eliminando a colisão com o rótulo de tier que a taxonomia canônica rejeita.
 
 ### Deprecated
 

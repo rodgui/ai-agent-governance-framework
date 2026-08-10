@@ -23,6 +23,8 @@ Conectar estratégia, dados, controles, Responsible AI, adoção, suporte e oper
 
 A ligação entre estas capabilities e os sistemas que a organização já opera é artefato separado, por decisão: [mapeamento de capability para tecnologia](capability-to-technology.md). Mantê-lo fora daqui é o que permite trocar de produto sem reescrever a arquitetura.
 
+Duas leituras complementam esta arquitetura: os [atributos de qualidade](quality-attributes.md) que ela precisa sustentar e os [riscos arquiteturais](risks.md) que ela assume. Uma arquitetura sem atributo declarado não pode ser avaliada; sem risco declarado, não pode ser desafiada.
+
 ## Modelo em cinco planos
 
 ```mermaid

@@ -51,6 +51,8 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 6. [Operating model e decision rights](../governance/operating-model.md)
 7. [Arquitetura de referência](../architecture/overview.md)
    - [Mapeamento de capability para tecnologia](../architecture/capability-to-technology.md)
+   - [Atributos de qualidade](../architecture/quality-attributes.md)
+   - [Riscos arquiteturais](../architecture/risks.md)
 8. [Gestão proporcional de riscos](../risk-management/README.md)
 9. [Maturity model](../guides/maturity-model.md)
 
@@ -70,6 +72,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 21. [Auditabilidade e evidências](../auditability/README.md)
 22. [Operações, resposta e runtime](../operations/README.md)
 23. [Adoção, enablement e suporte](../adoption/README.md)
+    - [Developer experience e paved road](../devex/README.md)
 
 ## Parte IV — Método, patterns e toolkit
 

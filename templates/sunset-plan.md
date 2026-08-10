@@ -15,13 +15,13 @@ Duplicate agent / replaced by an official version
 Platform is no longer approved
 Severe incident not remediated within the deadline
 Standard process (3 phases)
-Warning (T0): agent marked as a “Sunset Candidate”
+Warning (D0): agent marked as a “Sunset Candidate”
 Notifies owners + Run Authority
 Defines a remediation deadline (e.g., 15 days)
-Quarantine (T+15): limitations
+Quarantine (D+15): limitations
 Disables write actions, reduces scope, limits users
 Keeps logs and evidence
-Deactivate (T+30): deactivation
+Deactivate (D+30): deactivation
 Removes access, disables integrations, revokes identity
 Records the reason and artifacts in the Catalog
 (Optional) archives configurations for X days for rollback

@@ -145,6 +145,21 @@ Os únicos gates canônicos são G0–G7. O [programa de 24 semanas](guides/impl
 | estudar um caso Microsoft opcional | [Customer Zero case](explanations/microsoft-agent-governance-case-study.md) + [crosswalk histórico](../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md) |
 | seguir uma leitura linear | [Handbook](handbook/README.md) |
 
+## Navegação por pasta
+
+O handbook e as jornadas acima são a leitura orientada. Quem prefere navegar a estrutura direto no repositório encontra um índice curto em cada pasta:
+
+| Pasta | Índice |
+|---|---|
+| arquitetura | [`docs/architecture/`](architecture/README.md) — visão, princípios, atributos de qualidade, riscos, diagramas e decision log |
+| executivo | [`docs/executive/`](executive/README.md) — conteúdo orientado a decisão |
+| governança | [`docs/governance/`](governance/README.md) — policy modular e operating model |
+| guias | [`docs/guides/`](guides/README.md) — playbook, roadmaps e piloto |
+| referência técnica | [`docs/reference/`](reference/README.md) — glossário, catálogo de artefatos e checklist de autossuficiência |
+| fontes | [`references/`](../references/README.md) — regras de proveniência, ledger de fontes e bibliografia |
+
+Esses índices existem para navegação de pasta e não constituem uma segunda ordem editorial. A ordem canônica é a do [handbook](handbook/README.md).
+
 ## Camadas do conhecimento
 
 - **Normativo:** policy modular e decisões formalmente aprovadas.

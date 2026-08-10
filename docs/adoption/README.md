@@ -60,6 +60,8 @@ Publicar sem discovery gera agentes invisíveis; discovery sem lifecycle promove
 
 O paved road deve ser mais simples que contornar a governança.
 
+A sequência que o builder percorre nesse caminho — do registro do caso de uso à retirada — está em [developer experience e paved road](../devex/README.md), com os building blocks e as métricas de fricção correspondentes.
+
 ## Suporte em camadas
 
 1. **Self-service:** documentação, status, FAQ e runbooks.
