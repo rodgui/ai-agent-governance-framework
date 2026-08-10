@@ -31,19 +31,46 @@ O teste: se você trocar o produto e a capacidade desaparecer, você comprou uma
 Ponto de partida: os [domínios canônicos](../architecture/overview.md#domínios-canônicos-por-plano). Quebre uma capability em duas apenas quando a filha tiver owner, processo **ou** evidência diferentes.
 
 | Capacidade | Pergunta de diagnóstico | Sinal típico de estado inicial | Alvo comum |
-|---|---|---|---|
-| estratégia e governança | existe mandato, escopo e decisão clara? | política genérica de IA, sem charter de agentes | charter aprovado, fóruns, decision rights, processo de exceção |
-| estate e registry | sabemos quais agentes existem e quem responde? | planilhas por plataforma | discovery contínuo + registry corporativo reconciliável |
-| risco e Responsible AI | risco e impacto roteiam controles? | mesma review para todos os casos | tiers, escaladores e impact assessment por gatilho |
-| lifecycle | estados e mudanças estão definidos? | publicação ad hoc | state machine, gates, attestation e retirada |
-| identidade e acesso | cada ação é atribuível? | chaves e contas de serviço compartilhadas | identidade própria por agente e delegação quando aplicável |
-| dados e conhecimento | as fontes são classificadas e certificadas? | recuperação sobre qualquer pasta autorizada | catálogo de fontes certificadas com critérios AI-ready |
-| tools e MCP | as ações são catalogadas e mediadas? | ferramentas embutidas por time | registry de tools, mediação e classificação por ação |
-| modelos e provedores | há critérios de admissão e saída? | escolha por preferência do time | catálogo de combinações aprovadas com restrições |
-| runtime e plataforma | existe ponto de enforcement? | acesso direto aos endpoints | gateway ou broker com policy aplicada |
-| segurança | há threat model e resposta específicos? | operação de segurança vê apenas logs tradicionais | cenários de ameaça agentic, detecção e contenção |
-| observabilidade e valor | dá para investigar e medir? | logs de aplicação e custo por chave | telemetria correlacionada e custo por resultado |
-| adoção e competência | as pessoas conseguem executar? | treinamento pontual | currículo por papel e caminho governado mais fácil que o desvio |
+| --- | --- | --- | --- |
+| estratégia e governança | existe mandato, portfólio, funding e decisão clara? | política genérica de IA, sem charter ou priorização de agentes | charter aprovado, fóruns, decision rights, risk appetite e portfolio review |
+| estate inventory e registry | sabemos quais agentes existem, onde operam e quem responde? | planilhas por plataforma e baixa cobertura de shadow agents | discovery contínuo + registry corporativo reconciliável |
+| risco e Responsible AI | risco, admissibilidade e impacto roteiam controles? | mesma review para todos os casos | tiers, admissibilidade, escaladores e impact assessment por gatilho |
+| lifecycle e Agent SDLC | versões, estados e mudanças estão governados? | publicação ad hoc e approvals permanentes | stage/state, gates, transition history, attestation e retirada |
+| identidade e acesso | cada ação é atribuível e autorizada? | chaves e contas de serviço compartilhadas | identidade própria por agente, least privilege, JML e delegação quando aplicável |
+| dados e conhecimento | as fontes são classificadas, permitidas e AI-ready? | recuperação sobre qualquer pasta autorizada | catálogo de fontes certificadas com lineage, restrictions e recertification |
+| tools, APIs e MCP | as ações são catalogadas, limitadas e mediadas? | ferramentas embutidas por time | enterprise tool registry, gateway e autorização por ação/parâmetro |
+| modelos e provedores | combinações e versões possuem critérios de admissão e saída? | escolha por preferência do time | catálogo provider/model/version, evaluation binding, fallback e exit strategy |
+| runtime e plataforma | existem enforcement, isolamento, resiliência e rollback? | acesso direto a endpoints e configuração por agente | control plane, policy enforcement, budgets, containment e recovery patterns |
+| segurança e AgentSecOps | ameaças agentic entram em prevention, detection e response? | SOC vê apenas logs tradicionais | threat model agentic, red teaming, supply-chain controls e incident integration |
+| observabilidade e behavioral analytics | é possível reconstruir, detectar desvio e agir? | logs de aplicação sem correlation ou owner action | event envelope, traces, baselines, thresholds, runbooks e feedback loop |
+| FinOps | custo é atribuível a agente, tarefa e outcome? | custo por chave ou centro de custo agregado | budgets, unit economics, anomaly response e arquitetura guiada por custo/qualidade |
+| value realization | outcomes influenciam funding, expansão e sunset? | contagem de agentes e relatos de benefício | baseline, KPI, attribution caveats e portfolio decisions por evidência |
+| assurance e auditabilidade | controls e decisões podem ser testados por challenge apropriado? | evidence preparada manualmente para auditoria | continuous evidence, segregation, sampling, findings e assurance proporcional |
+| adoção, suporte e competências | cada papel consegue usar a rota governada corretamente? | treinamento pontual e suporte informal | currículo por papel, champions, support model e feedback incorporado aos standards |
+
+## Crosswalk para maturity e controls
+
+O framework mantém **15 capabilities** para planejamento porque elas podem ter owners, processos e evidências diferentes. O [maturity model](maturity-model.md) agrega essas capacidades em dez dimensões para scoring; agregação de score não funde accountability.
+
+| Capability | Dimensão(ões) do maturity model | Domínios de controls principais |
+| --- | --- | --- |
+| estratégia e governança | 1. Estratégia, portfólio e valor; 2. Policy, operating model e decision rights | `organization`, `value` |
+| estate inventory e registry | 3. Registry, blueprint e lifecycle | `registry` |
+| risco e Responsible AI | 7. Risco, Responsible AI e human oversight | `risk`, `responsible-ai` |
+| lifecycle e Agent SDLC | 3. Registry, blueprint e lifecycle; 8. Evaluations e release | `lifecycle`, `registry`, `evaluation` |
+| identidade e acesso | 4. Identidade e acesso | `identity` |
+| dados e conhecimento | 5. Dados e connectors | `data` |
+| tools, APIs e MCP | 6. Tools, APIs e MCP | `tools` |
+| modelos e provedores | 8. Evaluations e release | `model`, `evaluation` |
+| runtime e plataforma | 9. Auditabilidade e operações | `operations`, `security` |
+| segurança e AgentSecOps | 6. Tools, APIs e MCP; 9. Auditabilidade e operações | `security`, `tools`, `audit` |
+| observabilidade e behavioral analytics | 9. Auditabilidade e operações | `audit`, `operations` |
+| FinOps | 1. Estratégia, portfólio e valor; 9. Auditabilidade e operações | `value`, `operations` |
+| value realization | 1. Estratégia, portfólio e valor | `value` |
+| assurance e auditabilidade | 2, 7, 8 e 9 | `organization`, `audit`, `evaluation`, `risk` |
+| adoção, suporte e competências | 10. Adoção, suporte e competência | `adoption` |
+
+Use o crosswalk para navegar, não para declarar equivalência um-para-um. Uma capability pode depender de vários domínios, e um control pode contribuir para mais de uma capability.
 
 ## Procedimento
 

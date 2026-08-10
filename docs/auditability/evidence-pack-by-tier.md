@@ -10,6 +10,8 @@ related:
   - ../risk-management/minimum-production-bar.md
   - ../patterns/evidence-package-as-code.md
   - ../guides/framework-implementation-playbook.md
+  - ../../schemas/release-evidence-manifest.schema.json
+  - ../../templates/release-evidence-manifest.md
 ---
 
 # Evidence pack proporcional por tier
@@ -20,7 +22,7 @@ Definir qual evidência cada tier precisa produzir, em que formato e por quanto 
 
 **Todos os tiers produzem evidência.** Governança proporcional não significa ausência de registro; significa que evidência simples e gerada automaticamente é suficiente quando o risco é baixo. Sem isso, a organização perde rastreabilidade exatamente onde o volume é maior.
 
-T4 também exige evidência, mesmo quando a decisão é rejeitar ou manter o uso restrito: a decisão e qualquer exceção precisam ser auditáveis.
+T4 também exige evidência reforçada por criticidade. Admissibilidade é separada: quando a decisão for `restricted` ou `prohibited`, a decisão e qualquer exceção precisam ser auditáveis em qualquer tier.
 
 ## Evidence pack mínimo por tier
 
@@ -29,7 +31,13 @@ T4 também exige evidência, mesmo quando a decisão é rejeitar ou manter o uso
 | **T1** | `agent_id` e registro de descoberta; resultado do pre-screen e tier; contexto de owner e usuário; resultado do policy gate; log básico de runtime; owner e data de attestation | comprovar que o caso foi descoberto, classificado e permaneceu dentro do padrão automatizado |
 | **T2** | blueprint versionado; risk record formal com escaladores; domain reviews acionadas; aprovações de dados e tools; identidade e permissões; resultados de evals e testes de segurança; rollback testado; telemetria; residual risk; aprovação de publicação | permitir assurance formal, investigação e reassessment de agente transacional |
 | **T3** | tudo de T2 + threat model e abuse cases; impact assessment quando aplicável; testes adversariais e de resiliência; design de oversight humano e step-up; teste de kill switch e quarentena; baseline de comportamento; aceitação explícita de residual risk pela authority; attestation frequente | demonstrar que autonomia e impacto elevados receberam assurance reforçado e capacidade de contenção |
-| **T4** | registro de uso restrito ou rejeição; rationale; evidência do padrão proibido; pedido de exceção quando existir; aprovações executiva, jurídica e de risco; compensating controls; expiry; escopo do teste permitido; evidência de contenção | comprovar o default deny e tornar qualquer exceção explícita, temporária, limitada e auditável |
+| **T4** | tudo de T3 + architecture/assurance challenge reforçado; cenários críticos; segregation e dual control quando aplicável; containment/fail-safe exercitados; executive risk decision; attestation orientada a evento | sustentar investigação e decisão para impactos críticos ou difíceis de reverter |
+
+### Overlay de admissibilidade
+
+- `conditional`: inclua condições, owner, testes, monitoring e expiry;
+- `restricted`: inclua exception request, authority, compensating controls, escopo e expiry;
+- `prohibited`: inclua rationale e decision record de rejeição; não gere manifesto de release aprovado.
 
 ## Qualidade da evidência
 
@@ -60,6 +68,7 @@ Quando a evidência exige trabalho extra significativo, isso é sinal de que o p
 
 - Agent Evidence Pack Standard: lista por tier, formato, repositório, retenção, vínculo de versão e verificação de completude;
 - índice de evidências por agente e release;
+- [release evidence manifest](../../schemas/release-evidence-manifest.schema.json) e [template humano](../../templates/release-evidence-manifest.md);
 - [evidence package as code](../patterns/evidence-package-as-code.md).
 
 ## Evidências

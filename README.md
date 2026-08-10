@@ -38,9 +38,9 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 | entender o framework em 20 minutos | [Brief executivo](docs/executive/governing-agents-at-scale.md) |
 | estudar a referência completa | [Handbook e ordem de leitura](docs/handbook/README.md) |
 | implantar a governança | [Implementation playbook](docs/guides/framework-implementation-playbook.md) |
-| executar os primeiros 90 dias | [Roadmap de 90 dias](docs/guides/implementation-plan-90-days.md) |
-| conduzir o programa completo | [Programa de 24 semanas](docs/guides/implementation-program-24-weeks.md) |
-| validar antes de escalar | [Plano de piloto](docs/guides/pilot-plan.md) |
+| usar uma sequência inicial acelerada | [Roadmap sugestivo de 90 dias](docs/guides/implementation-plan-90-days.md) |
+| usar um programa detalhado como referência | [Programa sugestivo de 24 semanas](docs/guides/implementation-program-24-weeks.md) |
+| escolher uma rota de validação delimitada | [Plano opcional de piloto](docs/guides/pilot-plan.md) |
 | avaliar maturidade | [Maturity model](docs/guides/maturity-model.md) |
 | reutilizar soluções arquiteturais | [Catálogo de design patterns](docs/patterns/README.md) |
 | adotar controles verificáveis | [Control catalog](controls/README.md) |
@@ -57,8 +57,10 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 | [Arquitetura](docs/architecture/overview.md) | planos, fluxos e boundaries |
 | [Patterns](docs/patterns/README.md) | soluções recorrentes e antipatterns |
 | [Control catalog](controls/README.md) | requisitos, implementações e evidências |
+| [Risk tier e admissibilidade](docs/risk-management/README.md#admissibilidade-é-uma-dimensão-separada) | criticidade separada da decisão de permitir, condicionar, restringir ou proibir |
 | [Minimum Production Bar](docs/risk-management/minimum-production-bar.md) | piso de controles por tier para entrar e permanecer em produção |
 | [Registry + blueprint](schemas/README.md) | inventário, arquitetura e accountability estruturados |
+| [Catálogos estruturados](schemas/README.md) | models/providers, certified sources, enterprise tools, release evidence e audit events |
 | [Lifecycle](docs/lifecycle/README.md) | estados, mudança material, attestation, dormancy e retirement |
 | [Modelos e provedores](docs/model-governance/README.md) | catálogo de combinações aprovadas, fallback e exit strategy |
 | [Assessments](assessments/README.md) | risco, maturidade e comparações |
@@ -92,7 +94,7 @@ O framework surgiu de trabalho aplicado de governança de agentes em contexto in
 
 ## Navegação
 
-- [Site de documentação](https://rodgui.github.io/ai-agent-governance-framework/) — mesma fonte, leitura contínua com navegação e busca
+- [Build local opcional do site](docs/architecture/decisions/0008-manual-documentation-site-publication.md) — leitura contínua reproduzível; publicação é manual e não é requisito
 - [Índice completo e jornadas por persona](docs/index.md)
 - [Roadmap do produto de conhecimento](ROADMAP.md)
 - [Glossário](references/glossary.md)

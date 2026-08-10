@@ -2,7 +2,7 @@
 title: Auditabilidade, evidence package e traceability
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -10,6 +10,9 @@ related:
   - ../operations/README.md
   - ../evaluations/README.md
   - ../../controls/README.md
+  - ../../schemas/audit-event.schema.json
+  - ../../schemas/release-evidence-manifest.schema.json
+  - ../../templates/release-evidence-manifest.md
 ---
 
 # Auditabilidade, evidence package e traceability
@@ -61,6 +64,8 @@ Logs indiscriminados podem aumentar risco de privacy, custo e exposição. O des
 
 Sensitive payloads devem ser referenciados ou protegidos, não copiados sem necessidade.
 
+O [AI Agent Audit Event schema](../../schemas/audit-event.schema.json) oferece um envelope mínimo vendor-neutral. Ele não obriga ferramenta ou pipeline específico e deliberadamente evita payload completo.
+
 ## Evidence package
 
 Um package de release ou attestation deve ser:
@@ -77,6 +82,7 @@ Um package de release ou attestation deve ser:
 “Sem evidência” não significa “controle passou”.
 
 A composição mínima de cada package por nível de risco está em [evidence pack proporcional por tier](evidence-pack-by-tier.md).
+Use o [Release Evidence Manifest schema](../../schemas/release-evidence-manifest.schema.json) para lineage machine-readable e o [template humano](../../templates/release-evidence-manifest.md) para preparar a decisão.
 
 ## Integridade e acesso
 
@@ -109,9 +115,11 @@ Attestation/value/sunset decision
 
 - logging specification;
 - sample events e schema;
+- [audit event estruturado](../../schemas/audit-event.schema.json);
 - access/retention configuration;
 - integrity test;
 - evidence package index;
+- [release evidence manifest](../../schemas/release-evidence-manifest.schema.json);
 - audit export test;
 - deletion e legal-hold records;
 - findings e remediação.

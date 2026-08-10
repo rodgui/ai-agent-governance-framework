@@ -1,10 +1,12 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "agentId": "service-desk-knowledge-agent",
   "name": "Service Desk Knowledge Agent",
   "description": "Exemplo fictício de agente interno de consulta a conhecimento aprovado.",
   "purpose": "Ajudar analistas internos a localizar procedimentos aprovados e preparar respostas com referências.",
-  "intendedUsers": ["service-desk-analysts"],
+  "intendedUsers": [
+    "service-desk-analysts"
+  ],
   "prohibitedUses": [
     "Executar mudanças em sistemas",
     "Responder a usuários externos sem revisão humana",
@@ -29,18 +31,35 @@
     }
   },
   "lifecycle": {
-    "status": "active",
+    "stage": "production",
+    "operationalState": "enabled",
     "createdAt": "2026-07-01",
+    "enteredStageAt": "2026-08-01T14:00:00Z",
     "approvedAt": "2026-08-01",
     "sunsetBy": "2027-08-01",
-    "statusReason": "Exemplo aprovado para documentação; não representa deployment real."
+    "statusReason": "Exemplo aprovado para documentação; não representa deployment real.",
+    "transitionHistory": [
+      {
+        "transitionType": "both",
+        "fromStage": "approved",
+        "toStage": "production",
+        "fromOperationalState": "not-deployed",
+        "toOperationalState": "enabled",
+        "occurredAt": "2026-08-01T14:00:00Z",
+        "authority": "Example Release Authority",
+        "reason": "Gate G5 aprovado com evidence pack do exemplo.",
+        "evidenceRef": "examples/release-decision.example.md"
+      }
+    ]
   },
   "risk": {
     "tier": "T2",
     "assessmentRef": "examples/risk-assessment.example.md",
     "classifiedAt": "2026-08-01",
     "redFlags": [],
-    "residualRisk": "moderate"
+    "residualRisk": "moderate",
+    "admissibility": "permitted",
+    "admissibilityRationale": "Uso interno, fontes certificadas, ações limitadas a drafts e revisão humana obrigatória."
   },
   "currentBlueprint": {
     "version": "1.0",
@@ -55,7 +74,10 @@
       "externalId": "example-agent-001"
     }
   ],
-  "capabilities": ["observe", "create"],
+  "capabilities": [
+    "observe",
+    "create"
+  ],
   "evidenceLinks": [
     {
       "type": "evaluation",
@@ -72,11 +94,30 @@
     "expiresAt": "2026-11-01",
     "decisionRef": "examples/release-decision.example.md"
   },
-  "tags": ["internal", "knowledge", "read-only"],
-  "source": {
-    "system": "example-control-plane",
+  "tags": [
+    "internal",
+    "knowledge",
+    "read-only"
+  ],
+  "lastReviewed": "2026-08-09",
+  "discovery": {
+    "status": "confirmed",
+    "confidence": "high",
+    "firstSeenAt": "2026-07-01T10:00:00Z",
     "lastSeenAt": "2026-08-09T12:00:00Z",
-    "confidence": "high"
-  },
-  "lastReviewed": "2026-08-09"
+    "signals": [
+      {
+        "system": "example-control-plane",
+        "signalType": "control-plane",
+        "observedAt": "2026-08-09T12:00:00Z",
+        "evidenceRef": "examples/release-decision.example.md"
+      },
+      {
+        "system": "example-identity-inventory",
+        "signalType": "identity",
+        "observedAt": "2026-08-09T11:55:00Z",
+        "evidenceRef": "examples/release-decision.example.md"
+      }
+    ]
+  }
 }

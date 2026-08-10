@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://rodgui.github.io/ai-agent-governance-framework/schemas/agent-registry.schema.json",
-  "title": "AI Agent Registry Record",
-  "description": "Registro canônico de lifecycle, ownership, risco e evidências de um agente.",
+  "title": "AI Agent Registry Record 2.0",
+  "description": "Registro canônico de discovery, lifecycle, estado operacional, ownership, risco, admissibilidade e evidências de um agente.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -11,6 +11,7 @@
     "name",
     "purpose",
     "ownership",
+    "discovery",
     "lifecycle",
     "risk",
     "currentBlueprint",
@@ -18,36 +19,73 @@
     "lastReviewed"
   ],
   "properties": {
-    "schemaVersion": { "const": "1.0" },
+    "schemaVersion": {
+      "const": "2.0"
+    },
     "agentId": {
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
     },
-    "name": { "type": "string", "minLength": 3, "maxLength": 160 },
-    "description": { "type": "string", "maxLength": 2000 },
-    "purpose": { "type": "string", "minLength": 10, "maxLength": 1000 },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 160
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 1000
+    },
     "intendedUsers": {
       "type": "array",
       "minItems": 1,
-      "items": { "type": "string", "minLength": 2 },
+      "items": {
+        "type": "string",
+        "minLength": 2
+      },
       "uniqueItems": true
     },
     "prohibitedUses": {
       "type": "array",
-      "items": { "type": "string", "minLength": 3 },
+      "items": {
+        "type": "string",
+        "minLength": 3
+      },
       "uniqueItems": true
     },
-    "ownership": { "$ref": "#/$defs/ownership" },
-    "lifecycle": { "$ref": "#/$defs/lifecycle" },
-    "risk": { "$ref": "#/$defs/risk" },
+    "ownership": {
+      "$ref": "#/$defs/ownership"
+    },
+    "lifecycle": {
+      "$ref": "#/$defs/lifecycle"
+    },
+    "risk": {
+      "$ref": "#/$defs/risk"
+    },
     "currentBlueprint": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["version", "path"],
+      "required": [
+        "version",
+        "path"
+      ],
       "properties": {
-        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$" },
-        "path": { "type": "string", "minLength": 3 },
-        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 3
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
       }
     },
     "platforms": {
@@ -56,55 +94,172 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["name", "environment"],
+        "required": [
+          "name",
+          "environment"
+        ],
         "properties": {
-          "name": { "type": "string", "minLength": 2 },
-          "environment": { "enum": ["development", "test", "staging", "production"] },
-          "tenant": { "type": "string" },
-          "region": { "type": "string" },
-          "externalId": { "type": "string" }
+          "name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "environment": {
+            "enum": [
+              "development",
+              "test",
+              "staging",
+              "production"
+            ]
+          },
+          "tenant": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          }
         }
       }
     },
     "capabilities": {
       "type": "array",
       "items": {
-        "enum": ["observe", "create", "modify", "execute", "approve", "delete", "delegate"]
+        "enum": [
+          "observe",
+          "create",
+          "modify",
+          "execute",
+          "approve",
+          "delete",
+          "delegate"
+        ]
       },
       "uniqueItems": true
     },
     "evidenceLinks": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "$ref": "#/$defs/evidenceLink" }
+      "items": {
+        "$ref": "#/$defs/evidenceLink"
+      }
     },
     "attestation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "expiresAt"],
+      "required": [
+        "status",
+        "expiresAt"
+      ],
       "properties": {
-        "status": { "enum": ["valid", "conditional", "expired", "not-required"] },
-        "attestedAt": { "type": "string", "format": "date" },
-        "expiresAt": { "type": "string", "format": "date" },
-        "decisionRef": { "type": "string" }
+        "status": {
+          "enum": [
+            "valid",
+            "conditional",
+            "expired",
+            "not-required"
+          ]
+        },
+        "attestedAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "decisionRef": {
+          "type": "string"
+        }
       }
     },
     "tags": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]{0,39}$" },
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+      },
       "uniqueItems": true
     },
-    "source": {
+    "lastReviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "discovery": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["system", "lastSeenAt"],
+      "required": [
+        "status",
+        "confidence",
+        "firstSeenAt",
+        "lastSeenAt",
+        "signals"
+      ],
       "properties": {
-        "system": { "type": "string" },
-        "lastSeenAt": { "type": "string", "format": "date-time" },
-        "confidence": { "enum": ["low", "medium", "high"] }
+        "status": {
+          "enum": [
+            "confirmed",
+            "probable",
+            "suspected"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "firstSeenAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "system",
+              "signalType",
+              "observedAt",
+              "evidenceRef"
+            ],
+            "properties": {
+              "system": {
+                "type": "string",
+                "minLength": 2
+              },
+              "signalType": {
+                "enum": [
+                  "control-plane",
+                  "identity",
+                  "network",
+                  "repository",
+                  "procurement",
+                  "declaration",
+                  "other"
+                ]
+              },
+              "observedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "evidenceRef": {
+                "type": "string",
+                "minLength": 3
+              }
+            }
+          }
+        }
       }
-    },
-    "lastReviewed": { "type": "string", "format": "date" }
+    }
   },
   "allOf": [
     {
@@ -113,8 +268,18 @@
           {
             "properties": {
               "lifecycle": {
-                "properties": { "status": { "enum": ["conditional", "approved", "active"] } },
-                "required": ["status"]
+                "properties": {
+                  "stage": {
+                    "enum": [
+                      "approved",
+                      "production",
+                      "retirement-review"
+                    ]
+                  }
+                },
+                "required": [
+                  "stage"
+                ]
               }
             }
           },
@@ -122,8 +287,14 @@
             "properties": {
               "platforms": {
                 "contains": {
-                  "properties": { "environment": { "const": "production" } },
-                  "required": ["environment"]
+                  "properties": {
+                    "environment": {
+                      "const": "production"
+                    }
+                  },
+                  "required": [
+                    "environment"
+                  ]
                 }
               }
             }
@@ -131,13 +302,28 @@
         ]
       },
       "then": {
-        "required": ["attestation", "evidenceLinks"],
+        "required": [
+          "attestation",
+          "evidenceLinks"
+        ],
         "properties": {
-          "evidenceLinks": { "minItems": 1 },
+          "evidenceLinks": {
+            "minItems": 1
+          },
           "attestation": {
-            "required": ["status", "attestedAt", "expiresAt", "decisionRef"],
+            "required": [
+              "status",
+              "attestedAt",
+              "expiresAt",
+              "decisionRef"
+            ],
             "properties": {
-              "status": { "enum": ["valid", "conditional"] }
+              "status": {
+                "enum": [
+                  "valid",
+                  "conditional"
+                ]
+              }
             }
           }
         }
@@ -147,14 +333,122 @@
       "if": {
         "properties": {
           "lifecycle": {
-            "properties": { "status": { "enum": ["conditional", "approved", "active"] } },
-            "required": ["status"]
+            "properties": {
+              "stage": {
+                "enum": [
+                  "approved",
+                  "production",
+                  "retirement-review"
+                ]
+              }
+            },
+            "required": [
+              "stage"
+            ]
           }
         }
       },
       "then": {
         "properties": {
-          "lifecycle": { "required": ["approvedAt"] }
+          "lifecycle": {
+            "required": [
+              "approvedAt"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle": {
+            "properties": {
+              "stage": {
+                "const": "production"
+              }
+            },
+            "required": [
+              "stage"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "lifecycle": {
+            "properties": {
+              "operationalState": {
+                "enum": [
+                  "enabled",
+                  "suspended",
+                  "quarantined"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "lifecycle": {
+            "properties": {
+              "stage": {
+                "enum": [
+                  "retired",
+                  "archived"
+                ]
+              }
+            },
+            "required": [
+              "stage"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "lifecycle": {
+            "properties": {
+              "operationalState": {
+                "const": "disabled"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "platforms": {
+            "contains": {
+              "properties": {
+                "environment": {
+                  "const": "production"
+                }
+              },
+              "required": [
+                "environment"
+              ]
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "risk": {
+            "properties": {
+              "admissibility": {
+                "enum": [
+                  "permitted",
+                  "conditional",
+                  "restricted"
+                ]
+              }
+            }
+          }
         }
       }
     }
@@ -163,79 +457,341 @@
     "owner": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "role"],
+      "required": [
+        "name",
+        "role"
+      ],
       "properties": {
-        "name": { "type": "string", "minLength": 2 },
-        "role": { "type": "string", "minLength": 2 },
-        "contact": { "type": "string", "maxLength": 200 },
-        "organizationUnit": { "type": "string" }
+        "name": {
+          "type": "string",
+          "minLength": 2
+        },
+        "role": {
+          "type": "string",
+          "minLength": 2
+        },
+        "contact": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "organizationUnit": {
+          "type": "string"
+        }
       }
     },
     "ownership": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["businessOwner", "technicalOwner"],
+      "required": [
+        "businessOwner",
+        "technicalOwner"
+      ],
       "properties": {
-        "businessOwner": { "$ref": "#/$defs/owner" },
-        "technicalOwner": { "$ref": "#/$defs/owner" },
-        "runOwner": { "$ref": "#/$defs/owner" },
+        "businessOwner": {
+          "$ref": "#/$defs/owner"
+        },
+        "technicalOwner": {
+          "$ref": "#/$defs/owner"
+        },
+        "runOwner": {
+          "$ref": "#/$defs/owner"
+        },
         "dataOwners": {
           "type": "array",
-          "items": { "$ref": "#/$defs/owner" }
+          "items": {
+            "$ref": "#/$defs/owner"
+          }
         }
       }
     },
     "lifecycle": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["status", "createdAt"],
+      "required": [
+        "stage",
+        "operationalState",
+        "createdAt",
+        "enteredStageAt",
+        "statusReason",
+        "transitionHistory"
+      ],
       "properties": {
-        "status": {
+        "stage": {
           "enum": [
             "discovered",
-            "registered",
-            "assessed",
-            "conditional",
+            "draft",
+            "under-review",
             "approved",
-            "active",
-            "quarantined",
-            "sunset-planned",
+            "production",
+            "retirement-review",
             "retired",
             "archived"
           ]
         },
-        "createdAt": { "type": "string", "format": "date" },
-        "approvedAt": { "type": "string", "format": "date" },
-        "sunsetBy": { "type": "string", "format": "date" },
-        "statusReason": { "type": "string", "maxLength": 1000 }
+        "operationalState": {
+          "enum": [
+            "not-deployed",
+            "enabled",
+            "suspended",
+            "quarantined",
+            "disabled"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "enteredStageAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "approvedAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "sunsetBy": {
+          "type": "string",
+          "format": "date"
+        },
+        "statusReason": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 1000
+        },
+        "transitionHistory": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/lifecycleTransition"
+          }
+        }
       }
     },
     "risk": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["tier", "assessmentRef", "classifiedAt"],
+      "required": [
+        "tier",
+        "admissibility",
+        "admissibilityRationale",
+        "assessmentRef",
+        "classifiedAt"
+      ],
       "properties": {
-        "tier": { "enum": ["T1", "T2", "T3", "T4"] },
-        "assessmentRef": { "type": "string", "minLength": 3 },
-        "classifiedAt": { "type": "string", "format": "date" },
+        "tier": {
+          "enum": [
+            "T1",
+            "T2",
+            "T3",
+            "T4"
+          ]
+        },
+        "admissibility": {
+          "enum": [
+            "permitted",
+            "conditional",
+            "restricted",
+            "prohibited"
+          ]
+        },
+        "admissibilityRationale": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 1000
+        },
+        "assessmentRef": {
+          "type": "string",
+          "minLength": 3
+        },
+        "classifiedAt": {
+          "type": "string",
+          "format": "date"
+        },
         "redFlags": {
           "type": "array",
-          "items": { "type": "string", "minLength": 3 },
+          "items": {
+            "type": "string",
+            "minLength": 3
+          },
           "uniqueItems": true
         },
-        "residualRisk": { "enum": ["low", "moderate", "high", "critical", "unknown"] }
-      }
+        "residualRisk": {
+          "enum": [
+            "low",
+            "moderate",
+            "high",
+            "critical",
+            "unknown"
+          ]
+        },
+        "conditionRefs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 3
+          },
+          "uniqueItems": true
+        },
+        "exceptionRef": {
+          "type": "string",
+          "minLength": 3
+        },
+        "exceptionExpiresAt": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "admissibility": {
+                "const": "conditional"
+              }
+            },
+            "required": [
+              "admissibility"
+            ]
+          },
+          "then": {
+            "required": [
+              "conditionRefs"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "admissibility": {
+                "const": "restricted"
+              }
+            },
+            "required": [
+              "admissibility"
+            ]
+          },
+          "then": {
+            "required": [
+              "exceptionRef",
+              "exceptionExpiresAt"
+            ]
+          }
+        }
+      ]
     },
     "evidenceLink": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["type", "path"],
+      "required": [
+        "type",
+        "path"
+      ],
       "properties": {
         "type": {
-          "enum": ["assessment", "control", "evaluation", "approval", "incident", "attestation", "sunset"]
+          "enum": [
+            "assessment",
+            "control",
+            "evaluation",
+            "approval",
+            "incident",
+            "attestation",
+            "sunset"
+          ]
         },
-        "path": { "type": "string", "minLength": 3 },
-        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+        "path": {
+          "type": "string",
+          "minLength": 3
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "lifecycleTransition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "transitionType",
+        "fromStage",
+        "toStage",
+        "fromOperationalState",
+        "toOperationalState",
+        "occurredAt",
+        "authority",
+        "reason",
+        "evidenceRef"
+      ],
+      "properties": {
+        "transitionType": {
+          "enum": [
+            "stage",
+            "operational",
+            "both"
+          ]
+        },
+        "fromStage": {
+          "enum": [
+            null,
+            "discovered",
+            "draft",
+            "under-review",
+            "approved",
+            "production",
+            "retirement-review",
+            "retired",
+            "archived"
+          ]
+        },
+        "toStage": {
+          "enum": [
+            "discovered",
+            "draft",
+            "under-review",
+            "approved",
+            "production",
+            "retirement-review",
+            "retired",
+            "archived"
+          ]
+        },
+        "fromOperationalState": {
+          "enum": [
+            null,
+            "not-deployed",
+            "enabled",
+            "suspended",
+            "quarantined",
+            "disabled"
+          ]
+        },
+        "toOperationalState": {
+          "enum": [
+            "not-deployed",
+            "enabled",
+            "suspended",
+            "quarantined",
+            "disabled"
+          ]
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "authority": {
+          "type": "string",
+          "minLength": 3
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 1000
+        },
+        "evidenceRef": {
+          "type": "string",
+          "minLength": 3
+        }
       }
     }
   }

@@ -1,10 +1,11 @@
 ---
 title: ADR-0004 — Taxonomia de tiers T1–T4 e fast path de baixo risco
-status: accepted
+status: superseded
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
 review_cycle: major-change
 supersedes: null
+superseded_by: 0009-risk-tier-and-admissibility.md
 related:
   - 0003-single-canonical-source-and-guide-absorption.md
   - ../../risk-management/README.md
@@ -13,6 +14,8 @@ related:
 ---
 
 # ADR-0004 — Taxonomia de tiers T1–T4 e fast path de baixo risco
+
+> **Superseded:** a [ADR-0009](0009-risk-tier-and-admissibility.md) preserva T1–T4 e o fast path, mas separa risk tier de admissibilidade e corrige o mapeamento de `Restricted`.
 
 ## Contexto
 

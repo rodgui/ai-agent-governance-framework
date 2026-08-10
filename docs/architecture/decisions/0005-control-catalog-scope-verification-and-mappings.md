@@ -1,10 +1,11 @@
 ---
 title: ADR-0005 — Control catalog 1.1: escopo, verificação, bloqueio e mappings
-status: accepted
+status: superseded
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
 review_cycle: major-change
 supersedes: null
+superseded_by: 0010-structured-governance-contracts-2.0.md
 related:
   - 0004-risk-tier-taxonomy-and-fast-path.md
   - ../../../controls/README.md
@@ -16,6 +17,8 @@ related:
 <!-- A numeração 1–13 da decisão é deliberadamente contínua entre as subseções. -->
 
 # ADR-0005 — Control catalog 1.1: escopo, verificação, bloqueio e mappings
+
+> **Superseded:** a [ADR-0010](0010-structured-governance-contracts-2.0.md) preserva o conteúdo 1.1, mas corrige o contrato incompatível para schema 2.0 e amplia os contratos estruturados.
 
 ## Contexto
 

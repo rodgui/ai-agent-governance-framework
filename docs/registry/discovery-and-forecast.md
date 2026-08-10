@@ -10,6 +10,8 @@ related:
   - ../lifecycle/README.md
   - ../guides/framework-implementation-playbook.md
   - ../value/README.md
+  - ../../schemas/agent-registry.schema.json
+  - ../../examples/agent-registry.example.json
 ---
 
 # Descoberta contínua do estate e forecast de crescimento
@@ -37,9 +39,14 @@ O agent estate muda mais rápido que um CMDB tradicional porque agentes nascem d
 
 Nenhuma fonte isolada é suficiente. A cobertura vem da correlação, e a correlação exige um schema mínimo comum.
 
-## Grau de confiança
+## Status de confirmação e confidence
 
-Classificar confiança evita dois erros opostos: inflar métricas e descartar sinais de shadow AI.
+Dois campos diferentes evitam inflar métricas e descartar sinais de shadow AI:
+
+- `discovery.status` descreve o quanto a existência e o contexto do agente foram confirmados;
+- `discovery.confidence` expressa a confiança na correlação dos sinais disponíveis.
+
+Status não deve receber `low|medium|high`, e confidence não deve receber `confirmed|probable|suspected`.
 
 | Status | Significado | Ação |
 |---|---|---|
@@ -49,11 +56,19 @@ Classificar confiança evita dois erros opostos: inflar métricas e descartar si
 
 Objetos incertos **não são descartados**. Eles entram no backlog com owner e prazo.
 
+| Confidence | Uso |
+| --- | --- |
+| `high` | sinais independentes coerentes e recentes |
+| `medium` | evidência útil com gap conhecido de cobertura ou contexto |
+| `low` | sinal fraco, antigo ou ainda não reconciliado |
+
+O [Agent Registry 2.0](../../schemas/agent-registry.schema.json) preserva `firstSeenAt`, `lastSeenAt` e `signals[]`, cada sinal com origem, tipo, timestamp e evidence reference.
+
 ## Procedimento
 
 1. Definir o universo de descoberta: tenants, nuvens, repositórios, builders, SaaS, APIs de modelo, service accounts e integrações MCP conhecidas.
 2. Coletar inventários e sinais das fontes acima.
-3. Normalizar em schema mínimo: `agent_id`, nome, owner, plataforma, ambiente, status, fontes de dados, tools, modelo/provedor, audiência e `last_seen`.
+3. Normalizar no schema mínimo: `agent_id`, nome, owner, plataforma, ambiente, lifecycle stage, operational state, fontes de dados, tools, modelo/provedor, audiência e o objeto `discovery`.
 4. Deduplicar por identificadores e evidências, distinguindo **um agente** de **uma versão ou instância**.
 5. Classificar confiança e registrar o que ficou incerto.
 6. Entrevistar 5–10 áreas com maior probabilidade de adoção para revelar shadow agents e demanda futura.
@@ -80,7 +95,7 @@ Backlog dos pontos onde a governança depende de trabalho humano repetitivo. É 
 
 | Atividade manual | Volume/mês | Lead time | Risco de automatizar | Decisão inicial |
 |---|---|---|---|---|
-| aprovar agente T1 somente leitura | 400 | 2 dias | baixo | automatizar com policy gate após piloto |
+| aprovar agente T1 somente leitura | 400 | 2 dias | baixo | automatizar com policy gate após calibração em cohort controlada ou evidência equivalente |
 | criar identidade de agente T2 | 40 | 4 dias | médio | workflow + API de IAM, mantendo caminho de exceção |
 | revisar ferramenta privilegiada T3 | 5 | 5 dias | alto | manter decisão humana; automatizar o preparo da evidência |
 
@@ -89,6 +104,7 @@ A leitura correta da tabela é: **automatizar a preparação da evidência é qu
 ## Artefatos
 
 - Agent Estate Inventory com confiança e data de corte;
+- [Agent Registry 2.0](../../schemas/agent-registry.schema.json) e [exemplo preenchido](../../examples/agent-registry.example.json);
 - Agent Estate Forecast em três cenários, com mix de risco;
 - Manual Bottleneck Register priorizado por volume, lead time e risco.
 
@@ -121,4 +137,4 @@ A leitura correta da tabela é: **automatizar a preparação da evidência é qu
 
 ## Decision gate
 
-O baseline só é aceito com data de corte, cobertura mensurável por fonte, gaps registrados com owner e distribuição de confiança declarada. Cobertura desconhecida é gap crítico, não ausência de risco.
+O baseline só é aceito com data de corte, cobertura mensurável por fonte, gaps registrados com owner e distribuições de status e confidence declaradas separadamente. Cobertura desconhecida é gap crítico, não ausência de risco.

@@ -10,6 +10,8 @@ related:
   - finops.md
   - ../security/README.md
   - ../patterns/runtime-observability-and-quarantine.md
+  - ../../templates/behavioral-analytics-use-case.md
+  - ../../schemas/audit-event.schema.json
 ---
 
 # Behavioral analytics de agentes
@@ -72,6 +74,8 @@ Comece com resposta humana para casos novos. Só automatize contenção depois d
 7. Definir resposta por severidade.
 8. Medir taxa de falso positivo e incidentes não detectados; ajustar.
 9. Versionar regra e baseline — o incidente precisa indicar qual lógica gerou a decisão.
+
+Use o [Behavioral Analytics Use Case](../../templates/behavioral-analytics-use-case.md) para registrar hipótese, features, privacy boundaries, thresholds, response contract, calibração e sunset. Os sinais podem usar o [audit event envelope](../../schemas/audit-event.schema.json) como contrato mínimo.
 
 ## Evidências
 

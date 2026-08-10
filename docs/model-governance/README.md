@@ -11,6 +11,9 @@ related:
   - ../evaluations/README.md
   - ../security/README.md
   - ../../controls/README.md
+  - ../../schemas/model-provider-catalog.schema.json
+  - ../../examples/model-provider-catalog.example.json
+  - ../../schemas/agent-blueprint.schema.json
 ---
 
 # Governança de modelos, provedores e dependências de IA
@@ -50,7 +53,9 @@ O catálogo é por **combinação**, não por marca. Registro mínimo:
 - evaluation baseline vinculado à versão;
 - fallback aprovado e condições de acionamento;
 - data de depreciação prevista e processo de notificação de incidente;
-- status: `approved`, `conditional`, `experimental` ou `prohibited`.
+- status do catálogo: `approved`, `conditional`, `deprecated` ou `blocked`.
+
+O contrato vendor-neutral está no [schema do Model and Provider Catalog](../../schemas/model-provider-catalog.schema.json), com [exemplo preenchido](../../examples/model-provider-catalog.example.json). Uma organização pode implementá-lo em GRC, CMDB, catálogo interno, planilha controlada ou API; o formato de armazenamento não muda a semântica.
 
 Um provedor sem capacidade mínima de telemetria não é reprovado automaticamente, mas exige gateway ou proxy que produza a evidência ausente — o custo desse componente pertence à decisão.
 
@@ -75,6 +80,8 @@ Uma nova major version pode alterar reasoning, seleção de ferramentas, postura
 - registre a versão avaliada no blueprint e no release evidence;
 - preserve a capacidade de fixar versão quando o provedor permitir.
 
+Quando pinning não for tecnicamente possível, `versionPinned: false` exige referência ao mecanismo de change detection e à policy de mudança do serviço. Um alias sem detecção de mudança não é version binding.
+
 ## Fallback, routing e equivalência de controles
 
 Se o runtime pode trocar de modelo, o fallback é parte da superfície governada.
@@ -83,6 +90,8 @@ Se o runtime pode trocar de modelo, o fallback é parte da superfície governada
 - failover para provedor com políticas incompatíveis é violação de controle, não resiliência;
 - routing por custo ou latência não pode reduzir silenciosamente o nível de assurance;
 - a troca precisa aparecer na telemetria e no registro da execução.
+
+Se não houver fallback equivalente, `fail-closed` é uma decisão válida e frequentemente mais segura que degradar silenciosamente para uma combinação não avaliada.
 
 ## Dependência, portabilidade e saída
 
@@ -116,7 +125,8 @@ Execute em ordem na primeira implantação. Em ciclos posteriores, uma mudança 
 ## Artefatos
 
 - Model & Provider Governance Standard;
-- Approved Model/Provider Catalog por classe de dados, caso e região;
+- [Approved Model/Provider Catalog](../../schemas/model-provider-catalog.schema.json) por classe de dados, caso e região;
+- [exemplo estruturado do catálogo](../../examples/model-provider-catalog.example.json);
 - evaluation baseline e regression suite por combinação;
 - provider assessment e data handling record;
 - exit plan e teste de substituição;
@@ -156,4 +166,4 @@ Execute em ordem na primeira implantação. Em ciclos posteriores, uma mudança 
 
 ## Decision gate
 
-Nenhum agente entra em produção com combinação provider/model/version fora do catálogo aprovado para a sua classe de dados, sem evaluation vinculada à versão, sem fallback com equivalência de controles declarada e sem registro da dependência no blueprint.
+Nenhum agente entra em produção com combinação provider/model/version fora do catálogo aprovado para a sua classe de dados, sem evaluation vinculada à versão e sem registro da dependência no blueprint. Fallback precisa ter equivalência de controles demonstrada **ou** o runtime precisa falhar fechado com rationale documentado.

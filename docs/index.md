@@ -2,7 +2,7 @@
 title: Índice e jornadas de leitura
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -62,7 +62,7 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 **Objetivo:** levar um agente da hipótese à operação com evidência suficiente.
 
 1. [Implementation playbook](guides/framework-implementation-playbook.md)
-2. [Roadmap de 90 dias](guides/implementation-plan-90-days.md)
+2. [Roadmap sugestivo de 90 dias](guides/implementation-plan-90-days.md)
 3. [Risk pre-screen](../templates/risk-pre-screen.md)
 4. [Evaluations](evaluations/README.md)
 5. [Adoção e suporte](adoption/README.md)
@@ -103,8 +103,8 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 
 1. [Handbook](handbook/README.md)
 2. [Implementation playbook](guides/framework-implementation-playbook.md)
-3. [Programa de 24 semanas](guides/implementation-program-24-weeks.md)
-4. [Plano de piloto](guides/pilot-plan.md)
+3. [Programa sugestivo de 24 semanas](guides/implementation-program-24-weeks.md)
+4. [Plano opcional de piloto](guides/pilot-plan.md)
 5. [Maturity model](guides/maturity-model.md)
 6. [Design patterns](patterns/README.md)
 7. [Toolkit](../templates/README.md)
@@ -119,12 +119,12 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 | inventariar agentes | [Estate e registry](registry/README.md) + [descoberta e forecast](registry/discovery-and-forecast.md) + [schemas](../schemas/README.md) |
 | decidir se o caso pede um agente | [Decisão arquitetural](architecture/agent-or-not.md) + [intake](../templates/use-case-intake.md) |
 | mapear capacidades atuais e alvo | [Capability map](guides/capability-map.md) + [maturity model](guides/maturity-model.md) |
-| classificar risco | [Risk-tiered governance](patterns/risk-tiered-governance.md) + [risk management](risk-management/README.md) |
+| classificar risco e admissibilidade | [Risk-tiered governance](patterns/risk-tiered-governance.md) + [risk management](risk-management/README.md) + [Agent Risk Record](../templates/agent-risk-record.md) |
 | governar identidade e dados | [Identity](identity/README.md) + [data access](data-access/README.md) |
 | governar tools e MCP | [Tool governance](tool-governance/README.md) + [MCP gateway pattern](patterns/tool-and-mcp-gateway.md) |
 | governar modelos e provedores | [Model governance](model-governance/README.md) + [evaluations](evaluations/README.md) |
 | governar mudança e retirement | [Lifecycle](lifecycle/README.md) + [lifecycle pattern](patterns/lifecycle-attestation-and-sunset.md) |
-| publicar com evidência | [Evaluations](evaluations/README.md) + [control catalog](../controls/README.md) |
+| publicar com evidência | [Evaluations](evaluations/README.md) + [control catalog](../controls/README.md) + [release manifest](../templates/release-evidence-manifest.md) |
 | operar e conter | [Operations](operations/README.md) + [runtime pattern](patterns/runtime-observability-and-quarantine.md) |
 | medir maturidade | [Maturity model](guides/maturity-model.md) + [assessment example](../examples/maturity-assessment.example.json) |
 | medir portfólio e valor | [Strategy and value](value/README.md) + [lifecycle pattern](patterns/lifecycle-attestation-and-sunset.md) |

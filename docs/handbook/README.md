@@ -2,7 +2,7 @@
 title: Handbook de governança de IA e agentes
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -61,13 +61,14 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 ## Parte IV — Método, patterns e toolkit
 
 24. [Implementation playbook](../guides/framework-implementation-playbook.md)
-25. [Roadmap de 90 dias](../guides/implementation-plan-90-days.md)
+25. [Roadmap sugestivo de 90 dias](../guides/implementation-plan-90-days.md)
     - [Capability map](../guides/capability-map.md)
-26. [Programa de implantação em 24 semanas](../guides/implementation-program-24-weeks.md)
-27. [Plano de piloto e critérios de expansão](../guides/pilot-plan.md)
+26. [Programa sugestivo de implantação em 24 semanas](../guides/implementation-program-24-weeks.md)
+27. [Plano opcional de piloto e critérios de expansão](../guides/pilot-plan.md)
 28. [Catálogo de design patterns](../patterns/README.md)
 29. [Control catalog](../../controls/README.md)
 30. [Schemas e examples](../../schemas/README.md)
+    - [Migração dos contratos para 2.0](../guides/schema-migration-2.0.md)
 31. [Templates](../../templates/README.md)
 
 ## Parte V — Fontes e limitações

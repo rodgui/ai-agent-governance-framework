@@ -11,6 +11,8 @@ related:
   - ../risk-management/README.md
   - ../../controls/README.md
   - ../architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md
+  - ../architecture/decisions/0009-risk-tier-and-admissibility.md
+  - ../architecture/decisions/0010-structured-governance-contracts-2.0.md
 ---
 
 # AI Agent Governance Policy — fonte canônica modular
@@ -29,7 +31,7 @@ Confundir os dois níveis transforma versionamento em declaração de conformida
 
 ## Composição da policy
 
-A policy candidate é formada por:
+A policy canônica deste framework é formada por:
 
 1. [princípios arquiteturais](../architecture/principles.md);
 2. [operating model e decision rights](operating-model.md);
@@ -51,6 +53,7 @@ Não integram a policy, salvo incorporação explícita e versionada:
 - fontes e referências externas em `references/`;
 - exemplos fictícios em `examples/`;
 - roadmap, specs e experimentos;
+- calendários de 90 dias/24 semanas e o plano opcional de piloto;
 - mappings de fornecedores;
 - a camada comercial em `consulting/`.
 
@@ -77,6 +80,6 @@ Mudanças normativas devem:
 
 A [AI Agent Policy and Governance v1](ai-agent-policy-and-governance-v1.md) foi o ponto inicial deste trabalho. Ela é preservada byte a byte para rastreabilidade histórica, mas não é usada como fonte normativa recorrente do framework modular.
 
-O guia externo "Governança de Agentes de IA em Escala", mantido anteriormente como documento independente, também é **origem histórica**. Seu conteúdo procedural foi absorvido por este repositório conforme a [ADR-0003](../architecture/decisions/0003-single-canonical-source-and-guide-absorption.md), reescrito no formato canônico. Cópias daquele documento não são normativas e podem conter taxonomia divergente: onde usarem uma faixa `T0`, aplica-se a conversão definida na [ADR-0004](../architecture/decisions/0004-risk-tier-taxonomy-and-fast-path.md).
+O guia externo "Governança de Agentes de IA em Escala", mantido anteriormente como documento independente, também é **origem histórica**. Seu conteúdo procedural foi absorvido por este repositório conforme a [ADR-0003](../architecture/decisions/0003-single-canonical-source-and-guide-absorption.md), reescrito no formato canônico. Cópias daquele documento não são normativas e podem conter taxonomia divergente: a conversão para T1–T4 e a separação de `Restricted` como admissibilidade seguem a [ADR-0009](../architecture/decisions/0009-risk-tier-and-admissibility.md).
 
 Este repositório é a **fonte única e final**. Qualquer publicação em outro formato deve ser derivada destes módulos, nunca mantida como cópia editorial independente.

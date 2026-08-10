@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rodgui.github.io/ai-agent-governance-framework/schemas/audit-event.schema.json",
+  "title": "AI Agent Audit Event",
+  "description": "Envelope mínimo de evento auditável sem payload sensível, para correlação de identidade, versão, policy e tool action.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "eventId",
+    "timestamp",
+    "agentId",
+    "agentVersion",
+    "eventType",
+    "actor",
+    "correlationId",
+    "outcome",
+    "policyDecision",
+    "dataClassifications",
+    "redactionApplied",
+    "evidenceRef"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "eventId": {
+      "type": "string",
+      "pattern": "^EVT-[A-Z0-9-]{3,100}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "agentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "agentVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+    },
+    "eventType": {
+      "enum": [
+        "session-start",
+        "model-call",
+        "retrieval",
+        "tool-request",
+        "tool-result",
+        "approval",
+        "policy-decision",
+        "containment",
+        "session-end"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "identityRef"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "user",
+            "workload",
+            "agent",
+            "service",
+            "human-approver"
+          ]
+        },
+        "identityRef": {
+          "type": "string",
+          "minLength": 3
+        }
+      }
+    },
+    "correlationId": {
+      "type": "string",
+      "minLength": 3
+    },
+    "outcome": {
+      "enum": [
+        "success",
+        "denied",
+        "failed",
+        "partial",
+        "cancelled"
+      ]
+    },
+    "policyDecision": {
+      "enum": [
+        "allow",
+        "allow-with-conditions",
+        "deny",
+        "not-evaluated"
+      ]
+    },
+    "dataClassifications": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "public",
+          "internal",
+          "confidential",
+          "restricted",
+          "regulated"
+        ]
+      }
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalogEntryId",
+        "action",
+        "stateChanging"
+      ],
+      "properties": {
+        "catalogEntryId": {
+          "type": "string",
+          "pattern": "^TLR-[A-Z0-9-]{3,80}$"
+        },
+        "action": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stateChanging": {
+          "type": "boolean"
+        },
+        "approvalRef": {
+          "type": "string",
+          "minLength": 3
+        }
+      }
+    },
+    "redactionApplied": {
+      "type": "boolean"
+    },
+    "evidenceRef": {
+      "type": "string",
+      "minLength": 3
+    },
+    "reasonCode": {
+      "type": "string",
+      "minLength": 2
+    }
+  }
+}

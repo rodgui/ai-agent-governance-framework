@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.1",
-  "catalogVersion": "1.1",
+  "schemaVersion": "2.0",
+  "catalogVersion": "1.2.0",
   "title": "AI Agent Governance Framework — Control Catalog",
   "lastReviewed": "2026-08-10",
   "controls": [
@@ -117,8 +117,8 @@
         "T4"
       ],
       "implementation": [
-        "Definir event envelope comum.",
-        "Preservar version/hash e correlation IDs."
+        "Adotar event envelope comum referenciado no schema de audit event.",
+        "Preservar version/hash e correlation IDs sem registrar payload sensível."
       ],
       "evidence": [
         "Event schema",
@@ -681,7 +681,7 @@
         "detective"
       ],
       "scope": "agent",
-      "statement": "Todo agente deve possuir estado válido em uma state machine versionada, e cada transição deve registrar evento, authority, evidência e ações automáticas.",
+      "statement": "Todo agente deve possuir lifecycle stage e operational state válidos em state machine versionada, e cada transição deve registrar evento, authority, evidência e ações automáticas.",
       "rationale": "Sem estados com consequência operacional, suspensão, quarentena e retirada viram o mesmo botão e a auditoria perde a história do ativo.",
       "ownerRole": "Platform / Lifecycle Service",
       "appliesToTiers": [
@@ -866,7 +866,7 @@
         "corrective"
       ],
       "scope": "agent",
-      "statement": "Fallback e routing só podem acionar combinação aprovada para a mesma classe de dados e capability; dependências críticas devem possuir plano de saída testado.",
+      "statement": "Fallback e routing só podem acionar combinação aprovada para a mesma classe de dados e capability; sem alternativa equivalente, o runtime deve falhar fechado; dependências críticas devem possuir plano de saída testado.",
       "rationale": "Failover para provedor com políticas incompatíveis é violação de controle, não resiliência.",
       "ownerRole": "AI Platform Authority",
       "appliesToTiers": [
@@ -875,7 +875,7 @@
         "T4"
       ],
       "implementation": [
-        "Declarar equivalência de controles do fallback e testá-la.",
+        "Declarar equivalência de controles do fallback e testá-la, ou documentar fail-closed.",
         "Documentar abstrações, portabilidade de prompts e evals, e testar substituição em dependência crítica."
       ],
       "evidence": [
@@ -889,7 +889,7 @@
       ],
       "automation": "manual",
       "verification": [
-        "Acionar o fallback em teste e confirmar que a combinação alternativa está aprovada para a mesma classe de dados.",
+        "Acionar o fallback em teste e confirmar que a combinação alternativa está aprovada para a mesma classe de dados, ou que o runtime falha fechado.",
         "Executar, para dependência crítica, um teste de substituição documentado."
       ],
       "blocking": false,
@@ -1339,7 +1339,7 @@
         "preventive",
         "detective"
       ],
-      "statement": "Todo agente deve possuir ID estável, owners, lifecycle status, tier, current version e evidence links em registry reconciliável.",
+      "statement": "Todo agente deve possuir ID estável, owners, discovery status, lifecycle stage, operational state, tier, admissibilidade, current version e evidence links em registry reconciliável.",
       "rationale": "Visibilidade acionável é pré-requisito para approval, operação, attestation e sunset.",
       "ownerRole": "Registry Owner",
       "appliesToTiers": [
@@ -1627,6 +1627,57 @@
           "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
         }
       ]
+    },
+    {
+      "id": "AGF-RSK-004",
+      "title": "Admissibilidade e exceções temporárias",
+      "domain": "risk",
+      "type": [
+        "preventive",
+        "detective"
+      ],
+      "statement": "Cada agente deve possuir admissibilidade explícita e rationale; uso restricted exige exceção temporária com authority e expiry, e uso prohibited não pode operar em produção.",
+      "rationale": "Criticidade não determina sozinha se uma finalidade pode operar; separar admissibilidade evita default deny ambíguo e exceções permanentes.",
+      "ownerRole": "Risk Authority",
+      "appliesToTiers": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ],
+      "implementation": [
+        "Registrar admissibilidade no risk record, registry, blueprint e release evidence.",
+        "Bloquear production para prohibited e expirar automaticamente exceções de restricted."
+      ],
+      "evidence": [
+        "Admissibility decision record",
+        "Exception record com authority e expiry",
+        "Release evidence manifest"
+      ],
+      "metrics": [
+        "Agentes sem admissibilidade registrada",
+        "Exceções restricted vencidas",
+        "Usos prohibited observados em produção"
+      ],
+      "automation": "mixed",
+      "frameworkMappings": [
+        {
+          "framework": "NIST AI RMF 1.0",
+          "reference": "MAP",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        },
+        {
+          "framework": "EU AI Act (Regulation (EU) 2024/1689)",
+          "reference": "Art. 9 — risk management system",
+          "notes": "Alinhamento direcional declarado pelo framework. Não constitui equivalência, conformidade nem atestação."
+        }
+      ],
+      "scope": "agent",
+      "verification": [
+        "Confirmar que tier e admissibilidade foram decididos separadamente e têm rationale recuperável.",
+        "Tentar publicar um uso prohibited e confirmar bloqueio; expirar uma exceção restricted e confirmar contenção."
+      ],
+      "blocking": true
     },
     {
       "id": "AGF-SEC-001",

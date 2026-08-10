@@ -1,10 +1,11 @@
 ---
 title: ADR-0007 — Site de documentação gerado a partir do corpus canônico
-status: accepted
+status: superseded
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
 review_cycle: major-change
 supersedes: null
+superseded_by: 0008-manual-documentation-site-publication.md
 related:
   - 0003-single-canonical-source-and-guide-absorption.md
   - ../../handbook/README.md
@@ -12,6 +13,8 @@ related:
 ---
 
 # ADR-0007 — Site de documentação gerado a partir do corpus canônico
+
+> **Superseded:** a [ADR-0008](0008-manual-documentation-site-publication.md) preserva build strict e CI, mas torna publicação opcional e manual, sem prerequisite de GitHub Pages.
 
 ## Contexto
 

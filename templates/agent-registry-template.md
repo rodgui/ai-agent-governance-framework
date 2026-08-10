@@ -23,16 +23,28 @@
 
 ## Lifecycle
 
-- Status:
+- Lifecycle stage: `discovered` / `draft` / `under-review` / `approved` / `production` / `retirement-review` / `retired` / `archived`
+- Operational state: `not-deployed` / `enabled` / `suspended` / `quarantined` / `disabled`
 - Criado em:
+- Entrou no stage em:
 - Aprovado em:
 - Sunset previsto:
-- Motivo do status:
+- Motivo do stage/state:
 - Attestation válida até:
+
+### Transition history
+
+| Type | From stage/state | To stage/state | Occurred at | Authority | Reason | Evidence ref |
+| --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | |
 
 ## Risco
 
 - Tier: T1 / T2 / T3 / T4
+- Admissibilidade: `permitted` / `conditional` / `restricted` / `prohibited`
+- Admissibility rationale:
+- Condition refs:
+- Exception ref/authority/expiry — se `restricted`:
 - Assessment:
 - Classificado em:
 - Red flags:
@@ -72,11 +84,17 @@
 | Attestation | | | |
 | Sunset | | | |
 
-## Fonte e reconciliação
+## Discovery e reconciliação
 
-- Source system:
-- Last seen:
+- Discovery status: `confirmed` / `probable` / `suspected`
 - Confidence:
+- First seen:
+- Last seen:
+
+| Source system | Signal type | Observed at | Evidence ref |
+| --- | --- | --- | --- |
+| | | | |
+
 - Conflitos encontrados:
 - Decisão de reconciliação:
 
@@ -84,7 +102,8 @@
 
 - [ ] Owners foram confirmados.
 - [ ] Purpose e prohibited use são claros.
-- [ ] Tier possui rationale e evidence.
+- [ ] Tier e admissibilidade possuem rationale e evidence.
 - [ ] Blueprint atual está ligado.
-- [ ] Status e attestation são válidos.
+- [ ] Stage, operational state, transition history e attestation são válidos.
+- [ ] Discovery status e confidence não foram confundidos.
 - [ ] Missing evidence permanece explícito.

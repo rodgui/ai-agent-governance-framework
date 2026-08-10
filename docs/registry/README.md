@@ -25,7 +25,7 @@ Sem essa camada, todas as outras falham por falta de sujeito: não há como apli
 
 | Objeto | Pergunta que responde | Natureza |
 |---|---|---|
-| **Registry** | qual agente é este, quem responde, qual tier e estado? | fonte corporativa de identificação e correlação |
+| **Registry** | qual agente é este, quem responde, qual tier, admissibilidade, stage e operational state? | fonte corporativa de identificação e correlação |
 | **Blueprint** | como esta versão deve ser configurada e controlada? | especificação versionada do desired state |
 | **Policy/gate** | a configuração e as evidências atendem às regras? | decisão automática ou semiautomática |
 | **Runtime/telemetria** | o agente está operando conforme aprovado? | estado observado |
@@ -66,28 +66,28 @@ Evite taxonomia baseada em produto ("agente da plataforma X"). O produto informa
 
 ## Registry: capacidades mínimas
 
-O registry não precisa armazenar tudo — pode referenciar sources of truth existentes. O requisito é responder de forma consistente: **qual agente é este, quem responde, qual tier, qual estado, quais identidades, tools, dados e modelos usa, e quando foi visto pela última vez.**
+O registry não precisa armazenar tudo — pode referenciar sources of truth existentes. O requisito é responder de forma consistente: **qual agente é este, quem responde, qual tier e admissibilidade, qual lifecycle stage e operational state, quais identidades, tools, dados e modelos usa, e quando foi visto pela última vez.**
 
 | Grupo | Campos | Source of truth preferido |
 |---|---|---|
 | identidade do ativo | `agent_id` imutável, nome, versão, plataforma, ambiente | registry/plataforma |
 | ownership | business owner, technical owner, delegado, time/centro de custo | diretório organizacional + registry |
-| governança | tier, score, escaladores, status de aprovação, ID de exceção | sistema de risco |
+| governança | tier, admissibilidade, score, escaladores, decision/exception refs | sistema de risco |
 | dependências | IDs de fontes de dados, tools, servidores MCP, modelos | catálogos + blueprint |
 | runtime | ID de identidade, endpoint, perfil de telemetria, `last_seen`, budget | IAM/plataforma/observabilidade |
-| lifecycle | estado, data de publicação, próxima attestation, dormancy, retirada | serviço de lifecycle |
+| lifecycle | stage, operational state, transition history, próxima attestation, dormancy, retirada | serviço de lifecycle |
 | valor | ID do caso de uso, KPI, status no portfólio, valor observado | portfólio |
 
 ### Obrigatoriedade por tier
 
 | Campo | T1 | T2 | T3 | T4 |
 |---|---|---|---|---|
-| owner | obrigatório | dual (business + technical) | dual + delegado | sponsor da exceção + executivo accountable |
-| tier | obrigatório | obrigatório | obrigatório + reassessment | uso restrito + registro de exceção |
-| dados e tools | lista | lista + classificação | lista + constraints + evidência | constraints completos; em regra sem produção |
-| identidade | definida | identidade própria | identidade própria + policy reforçada | identidade dedicada e isolamento |
-| observabilidade | padrão | completa | completa + baseline de comportamento | monitoramento reforçado se a exceção permitir teste |
-| attestation | periódica | periódica | frequente ou orientada a evento | orientada a evento e expiry da exceção |
+| owner | obrigatório | dual (business + technical) | dual + delegado | sponsor executivo + owners accountable |
+| tier e admissibilidade | ambos obrigatórios | ambos obrigatórios | ambos + reassessment | ambos + authority compatível; exceção somente se `restricted` |
+| dados e tools | lista | lista + classificação | lista + constraints + evidência | constraints e lineage críticos completos |
+| identidade | definida | identidade própria | identidade própria + policy reforçada | identidade dedicada, isolamento e dual control onde aplicável |
+| observabilidade | padrão | completa | completa + baseline de comportamento | monitoramento e containment reforçados |
+| attestation | periódica | periódica | frequente ou orientada a evento | orientada a evento e executive review |
 
 O fast path de T1 existe para reduzir input manual em alto volume, **não** para dispensar registro: descoberta, owner, logging e fontes aprovadas continuam obrigatórios.
 
@@ -108,7 +108,7 @@ O registry só é controle quando detecta continuamente que deixou de representa
 
 O blueprint é o contrato entre design, desenvolvimento, governança, CI/CD e runtime. Machine-readable significa que os campos relevantes podem ser interpretados por automação para gerar policy checks, verificar o baseline do tier e comparar drift entre configuração aprovada e runtime.
 
-Isso não exige que toda a governança esteja em YAML: decisões narrativas, impact assessments e risk acceptance continuam como evidências **referenciadas** pelo blueprint. O schema canônico está em [`schemas/agent-blueprint.schema.json`](../../schemas/agent-blueprint.schema.json).
+Isso não exige que toda a governança esteja em YAML: decisões narrativas, impact assessments e risk acceptance continuam como evidências **referenciadas** pelo blueprint. Os contratos canônicos são o [Agent Registry 2.0](../../schemas/agent-registry.schema.json) e o [Agent Blueprint 2.0](../../schemas/agent-blueprint.schema.json).
 
 ### Como implementar
 
@@ -123,6 +123,8 @@ Isso não exige que toda a governança esteja em YAML: decisões narrativas, imp
 ## Artefatos
 
 - Agent Registry Data Standard: campos, tipos, obrigatoriedade por tier, sources of truth e quality checks;
+- [Agent Registry schema](../../schemas/agent-registry.schema.json) e [exemplo estruturado](../../examples/agent-registry.example.json);
+- [Agent Blueprint schema](../../schemas/agent-blueprint.schema.json) e [exemplo estruturado](../../examples/agent-blueprint.example.json);
 - Agent Taxonomy & Metadata Dictionary;
 - [template de registry](../../templates/agent-registry-template.md) e [template de blueprint](../../templates/agent-blueprint-template.md);
 - [descoberta contínua e forecast do estate](discovery-and-forecast.md).
@@ -158,4 +160,4 @@ Isso não exige que toda a governança esteja em YAML: decisões narrativas, imp
 
 ## Decision gate
 
-Nenhum agente é construído em ambiente compartilhado ou publicado sem `agent_id`, owner e tier registrados. Nenhum agente permanece em produção com quality finding crítico aberto no registry.
+Nenhum agente é construído em ambiente compartilhado ou publicado sem `agent_id`, owner, tier e admissibilidade registrados. Nenhum agente permanece em produção sem stage/operational state coerentes ou com quality finding crítico aberto no registry.

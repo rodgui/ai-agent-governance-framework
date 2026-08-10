@@ -337,12 +337,12 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
     if isinstance(registry, dict):
         lifecycle = registry.get("lifecycle", {})
         platforms = registry.get("platforms", [])
-        status = lifecycle.get("status") if isinstance(lifecycle, dict) else None
+        stage = lifecycle.get("stage") if isinstance(lifecycle, dict) else None
         production = any(
             isinstance(platform, dict) and platform.get("environment") == "production"
             for platform in platforms
         )
-        release_relevant = status in {"conditional", "approved", "active"} or production
+        release_relevant = stage in {"approved", "production", "retirement-review"} or production
         if release_relevant and not registry.get("evidenceLinks"):
             issues.append(
                 Issue(
@@ -372,6 +372,221 @@ def validate_cross_record_invariants(parsed: dict[str, Any]) -> list[Issue]:
                         "attestation expires before lastReviewed",
                     )
                 )
+
+    def catalog_entries(relative_path: str) -> dict[str, dict[str, Any]]:
+        document = parsed.get(relative_path)
+        if not isinstance(document, dict):
+            return {}
+        entries = document.get("entries", [])
+        return {
+            item["id"]: item
+            for item in entries
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+
+    model_entries = catalog_entries("examples/model-provider-catalog.example.json")
+    source_entries = catalog_entries("examples/certified-source-catalog.example.json")
+    tool_entries = catalog_entries("examples/enterprise-tool-registry.example.json")
+    model_ids = set(model_entries)
+    source_ids = set(source_entries)
+    tool_ids = set(tool_entries)
+
+    if isinstance(registry, dict) and isinstance(blueprint, dict):
+        registry_risk = registry.get("risk", {})
+        blueprint_governance = blueprint.get("governance", {})
+        if isinstance(registry_risk, dict) and isinstance(blueprint_governance, dict):
+            if registry_risk.get("tier") != blueprint_governance.get("riskTier"):
+                issues.append(Issue("cross-record", "examples", "registry and blueprint risk tier values differ"))
+            if registry_risk.get("admissibility") != blueprint_governance.get("admissibility"):
+                issues.append(Issue("cross-record", "examples", "registry and blueprint admissibility values differ"))
+
+    if isinstance(blueprint, dict):
+        bindings = (
+            ("models", blueprint.get("models", []), model_ids),
+            ("data.sources", blueprint.get("data", {}).get("sources", []), source_ids),
+            ("tools", blueprint.get("tools", []), tool_ids),
+        )
+        for label, records, known_ids in bindings:
+            if not isinstance(records, list):
+                continue
+            for index, record in enumerate(records):
+                if not isinstance(record, dict):
+                    continue
+                reference = record.get("catalogEntryId")
+                if isinstance(reference, str) and reference not in known_ids:
+                    issues.append(
+                        Issue(
+                            "cross-record",
+                            "examples/agent-blueprint.example.json",
+                            f"{label}/{index}: unknown catalogEntryId {reference}",
+                        )
+                    )
+
+        governance = blueprint.get("governance", {})
+        risk_tier = governance.get("riskTier") if isinstance(governance, dict) else None
+        review_cutoff = registry.get("lastReviewed") if isinstance(registry, dict) else None
+
+        def binding_issue(label: str, index: int, message: str) -> None:
+            issues.append(
+                Issue(
+                    "cross-record",
+                    "examples/agent-blueprint.example.json",
+                    f"{label}/{index}: {message}",
+                )
+            )
+
+        models = blueprint.get("models", [])
+        if isinstance(models, list):
+            for index, model in enumerate(models):
+                if not isinstance(model, dict):
+                    continue
+                entry_id = model.get("catalogEntryId")
+                entry = model_entries.get(entry_id) if isinstance(entry_id, str) else None
+                if not isinstance(entry, dict):
+                    continue
+                if entry.get("status") not in {"approved", "conditional"}:
+                    binding_issue("models", index, f"catalog status is {entry.get('status')}")
+                for field in ("provider", "modelId", "modelVersion"):
+                    if model.get(field) != entry.get(field):
+                        binding_issue("models", index, f"{field} differs from catalog entry")
+                data_classes = set(model.get("allowedDataClasses", []))
+                if not data_classes <= set(entry.get("allowedDataClasses", [])):
+                    binding_issue("models", index, "allowedDataClasses exceed catalog entry")
+                regions = set(model.get("allowedRegions", []))
+                if not regions <= set(entry.get("allowedRegions", [])):
+                    binding_issue("models", index, "allowedRegions exceed catalog entry")
+                if risk_tier not in entry.get("allowedRiskTiers", []):
+                    binding_issue("models", index, f"risk tier {risk_tier} is not allowed by catalog entry")
+                expiry = entry.get("reviewExpiresAt")
+                if isinstance(expiry, str) and isinstance(review_cutoff, str) and expiry < review_cutoff:
+                    binding_issue("models", index, "catalog entry expired before registry lastReviewed")
+
+        data = blueprint.get("data", {})
+        sources = data.get("sources", []) if isinstance(data, dict) else []
+        if isinstance(sources, list):
+            for index, source in enumerate(sources):
+                if not isinstance(source, dict):
+                    continue
+                entry_id = source.get("catalogEntryId")
+                entry = source_entries.get(entry_id) if isinstance(entry_id, str) else None
+                if not isinstance(entry, dict):
+                    continue
+                if entry.get("status") not in {"certified", "conditional"}:
+                    binding_issue("data.sources", index, f"catalog status is {entry.get('status')}")
+                if source.get("classification") != entry.get("classification"):
+                    binding_issue("data.sources", index, "classification differs from catalog entry")
+                region = source.get("region")
+                if isinstance(region, str) and region not in entry.get("allowedRegions", []):
+                    binding_issue("data.sources", index, f"region {region} is not allowed by catalog entry")
+                if risk_tier not in entry.get("allowedRiskTiers", []):
+                    binding_issue("data.sources", index, f"risk tier {risk_tier} is not allowed by catalog entry")
+                expiry = entry.get("expiresAt")
+                if isinstance(expiry, str) and isinstance(review_cutoff, str) and expiry < review_cutoff:
+                    binding_issue("data.sources", index, "catalog entry expired before registry lastReviewed")
+
+        tools = blueprint.get("tools", [])
+        if isinstance(tools, list):
+            for index, tool in enumerate(tools):
+                if not isinstance(tool, dict):
+                    continue
+                entry_id = tool.get("catalogEntryId")
+                entry = tool_entries.get(entry_id) if isinstance(entry_id, str) else None
+                if not isinstance(entry, dict):
+                    continue
+                if entry.get("status") not in {"approved", "conditional"}:
+                    binding_issue("tools", index, f"catalog status is {entry.get('status')}")
+                for field in ("class", "protocol", "stateChanging", "reversible", "version"):
+                    if tool.get(field) != entry.get(field):
+                        binding_issue("tools", index, f"{field} differs from catalog entry")
+                if tool.get("approvalMode") not in entry.get("approvalModes", []):
+                    binding_issue("tools", index, "approvalMode is not allowed by catalog entry")
+                scopes = set(tool.get("scopes", []))
+                if not scopes <= set(entry.get("allowedScopes", [])):
+                    binding_issue("tools", index, "scopes exceed catalog entry")
+                if risk_tier not in entry.get("allowedRiskTiers", []):
+                    binding_issue("tools", index, f"risk tier {risk_tier} is not allowed by catalog entry")
+                expiry = entry.get("reviewExpiresAt")
+                if isinstance(expiry, str) and isinstance(review_cutoff, str) and expiry < review_cutoff:
+                    binding_issue("tools", index, "catalog entry expired before registry lastReviewed")
+
+        for index, model in enumerate(blueprint.get("models", [])):
+            if not isinstance(model, dict):
+                continue
+            fallback = model.get("fallback", {})
+            if isinstance(fallback, dict) and fallback.get("mode") == "approved-alternative":
+                reference = fallback.get("catalogEntryId")
+                if isinstance(reference, str) and reference not in model_ids:
+                    issues.append(
+                        Issue(
+                            "cross-record",
+                            "examples/agent-blueprint.example.json",
+                            f"models/{index}/fallback: unknown catalogEntryId {reference}",
+                        )
+                    )
+
+    manifest = parsed.get("examples/release-evidence-manifest.example.json")
+    catalog = parsed.get("controls/control-catalog.json")
+    if isinstance(manifest, dict) and isinstance(blueprint, dict):
+        if manifest.get("agentId") != blueprint.get("agentId"):
+            issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint agentId values differ"))
+        if manifest.get("blueprintVersion") != blueprint.get("version"):
+            issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint version values differ"))
+        governance = blueprint.get("governance", {})
+        if isinstance(governance, dict):
+            if manifest.get("riskTier") != governance.get("riskTier"):
+                issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint risk tier values differ"))
+            if manifest.get("admissibility") != governance.get("admissibility"):
+                issues.append(Issue("cross-record", "examples/release-evidence-manifest.example.json", "manifest and blueprint admissibility values differ"))
+    if isinstance(manifest, dict) and isinstance(catalog, dict):
+        known_controls = {
+            item["id"]
+            for item in catalog.get("controls", [])
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+        referenced_controls = {
+            item["controlId"]
+            for item in manifest.get("controlEvidence", [])
+            if isinstance(item, dict) and isinstance(item.get("controlId"), str)
+        }
+        unknown_controls = sorted(referenced_controls - known_controls)
+        if unknown_controls:
+            issues.append(
+                Issue(
+                    "cross-record",
+                    "examples/release-evidence-manifest.example.json",
+                    f"unknown control IDs: {unknown_controls}",
+                )
+            )
+        for artifact in manifest.get("artifactHashes", []):
+            if not isinstance(artifact, dict):
+                continue
+            artifact_path = artifact.get("path")
+            expected_hash = artifact.get("sha256")
+            if not isinstance(artifact_path, str) or not isinstance(expected_hash, str):
+                continue
+            target = ROOT / artifact_path
+            if target.is_file():
+                observed_hash = hashlib.sha256(target.read_bytes()).hexdigest()
+                if observed_hash != expected_hash:
+                    issues.append(
+                        Issue(
+                            "cross-record",
+                            "examples/release-evidence-manifest.example.json",
+                            f"artifact hash mismatch for {artifact_path}",
+                        )
+                    )
+
+    audit_event = parsed.get("examples/audit-event.example.json")
+    if isinstance(audit_event, dict) and isinstance(blueprint, dict):
+        if audit_event.get("agentId") != blueprint.get("agentId"):
+            issues.append(Issue("cross-record", "examples/audit-event.example.json", "audit event and blueprint agentId values differ"))
+        if audit_event.get("agentVersion") != blueprint.get("version"):
+            issues.append(Issue("cross-record", "examples/audit-event.example.json", "audit event and blueprint version values differ"))
+        audit_tool = audit_event.get("tool", {})
+        if isinstance(audit_tool, dict):
+            reference = audit_tool.get("catalogEntryId")
+            if isinstance(reference, str) and reference not in tool_ids:
+                issues.append(Issue("cross-record", "examples/audit-event.example.json", f"unknown tool catalogEntryId {reference}"))
 
     assessment_path = "examples/maturity-assessment.example.json"
     assessment = parsed.get(assessment_path)
@@ -435,6 +650,11 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
         ("schemas/control-catalog.schema.json", "examples/control-catalog.example.json"),
         ("schemas/control-catalog.schema.json", "controls/control-catalog.json"),
         ("schemas/maturity-assessment.schema.json", "examples/maturity-assessment.example.json"),
+        ("schemas/model-provider-catalog.schema.json", "examples/model-provider-catalog.example.json"),
+        ("schemas/certified-source-catalog.schema.json", "examples/certified-source-catalog.example.json"),
+        ("schemas/enterprise-tool-registry.schema.json", "examples/enterprise-tool-registry.example.json"),
+        ("schemas/release-evidence-manifest.schema.json", "examples/release-evidence-manifest.example.json"),
+        ("schemas/audit-event.schema.json", "examples/audit-event.example.json"),
     ]
     missing_instance = object()
     schema_invalid_instances: set[str] = set()
@@ -485,6 +705,28 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
                 "active or production registry record without evidenceLinks was accepted",
             )
         )
+        without_transition_history = copy.deepcopy(registry_example)
+        lifecycle = without_transition_history.get("lifecycle", {})
+        if isinstance(lifecycle, dict):
+            lifecycle.pop("transitionHistory", None)
+            guardrail_cases.append(
+                (
+                    "schemas/agent-registry.schema.json",
+                    without_transition_history,
+                    "production registry record without transition history was accepted",
+                )
+            )
+        collapsed_discovery = copy.deepcopy(registry_example)
+        discovery = collapsed_discovery.get("discovery", {})
+        if isinstance(discovery, dict):
+            discovery["status"] = "high"
+            guardrail_cases.append(
+                (
+                    "schemas/agent-registry.schema.json",
+                    collapsed_discovery,
+                    "discovery status was collapsed into confidence grading",
+                )
+            )
     blueprint_example = schema_valid_records.get("examples/agent-blueprint.example.json")
     if isinstance(blueprint_example, dict):
         without_release_evidence = copy.deepcopy(blueprint_example)
@@ -506,6 +748,64 @@ def validate_json_and_schemas(json_files: list[Path]) -> list[Issue]:
                     "schemas/agent-blueprint.schema.json",
                     empty_release_evidence,
                     "production blueprint with empty release and assessment references was accepted",
+                )
+            )
+        for required_model_field in ("modelVersion", "catalogEntryId", "evaluationRef"):
+            incomplete_model = copy.deepcopy(blueprint_example)
+            models = incomplete_model.get("models", [])
+            if isinstance(models, list) and models and isinstance(models[0], dict):
+                models[0].pop(required_model_field, None)
+                guardrail_cases.append(
+                    (
+                        "schemas/agent-blueprint.schema.json",
+                        incomplete_model,
+                        f"model binding without {required_model_field} was accepted",
+                    )
+                )
+        source_without_catalog = copy.deepcopy(blueprint_example)
+        sources = source_without_catalog.get("data", {}).get("sources", [])
+        if isinstance(sources, list) and sources and isinstance(sources[0], dict):
+            sources[0].pop("catalogEntryId", None)
+            guardrail_cases.append(
+                (
+                    "schemas/agent-blueprint.schema.json",
+                    source_without_catalog,
+                    "source binding without catalogEntryId was accepted",
+                )
+            )
+        tool_without_catalog = copy.deepcopy(blueprint_example)
+        tools = tool_without_catalog.get("tools", [])
+        if isinstance(tools, list) and tools and isinstance(tools[0], dict):
+            tools[0].pop("catalogEntryId", None)
+            guardrail_cases.append(
+                (
+                    "schemas/agent-blueprint.schema.json",
+                    tool_without_catalog,
+                    "tool binding without catalogEntryId was accepted",
+                )
+            )
+        restricted_without_exception = copy.deepcopy(blueprint_example)
+        restricted_governance = restricted_without_exception.get("governance", {})
+        if isinstance(restricted_governance, dict):
+            restricted_governance["admissibility"] = "restricted"
+            restricted_governance.pop("exceptionRef", None)
+            restricted_governance.pop("exceptionExpiresAt", None)
+            guardrail_cases.append(
+                (
+                    "schemas/agent-blueprint.schema.json",
+                    restricted_without_exception,
+                    "restricted production blueprint without exception authority was accepted",
+                )
+            )
+        prohibited_production = copy.deepcopy(blueprint_example)
+        prohibited_governance = prohibited_production.get("governance", {})
+        if isinstance(prohibited_governance, dict):
+            prohibited_governance["admissibility"] = "prohibited"
+            guardrail_cases.append(
+                (
+                    "schemas/agent-blueprint.schema.json",
+                    prohibited_production,
+                    "prohibited blueprint was accepted for production",
                 )
             )
         create_marked_read_only = copy.deepcopy(blueprint_example)
@@ -717,7 +1017,7 @@ def validate_policy_integrity() -> list[Issue]:
 
 
 def validate_tier_taxonomy() -> list[Issue]:
-    """Enforce ADR-0004: T1-T4 is the canonical risk-tier taxonomy."""
+    """Enforce ADR-0009: T1-T4 is the canonical risk-tier taxonomy."""
     issues: list[Issue] = []
     enum_locations = [
         ("schemas/control-catalog.schema.json", ("$defs", "control", "properties", "appliesToTiers", "items")),
@@ -764,7 +1064,7 @@ def validate_tier_taxonomy() -> list[Issue]:
 
 
 def validate_control_scope() -> list[Issue]:
-    """Enforce ADR-0005: an organization-scoped control cannot block a release."""
+    """Enforce ADR-0010: an organization-scoped control cannot block a release."""
     issues: list[Issue] = []
     catalog_path = ROOT / "controls/control-catalog.json"
     if not catalog_path.exists():
@@ -934,6 +1234,23 @@ def validate_required_paths() -> list[Issue]:
         "schemas/agent-blueprint.schema.json",
         "schemas/control-catalog.schema.json",
         "schemas/maturity-assessment.schema.json",
+        "schemas/model-provider-catalog.schema.json",
+        "schemas/certified-source-catalog.schema.json",
+        "schemas/enterprise-tool-registry.schema.json",
+        "schemas/release-evidence-manifest.schema.json",
+        "schemas/audit-event.schema.json",
+        "examples/model-provider-catalog.example.json",
+        "examples/certified-source-catalog.example.json",
+        "examples/enterprise-tool-registry.example.json",
+        "examples/release-evidence-manifest.example.json",
+        "examples/audit-event.example.json",
+        "templates/capability-assessment-worksheet.md",
+        "templates/agent-risk-record.md",
+        "templates/behavioral-analytics-use-case.md",
+        "templates/governance-raci-template.md",
+        "templates/attestation-sunset-record.md",
+        "templates/release-evidence-manifest.md",
+        "docs/guides/schema-migration-2.0.md",
         "consulting/README.md",
         "consulting/ROADMAP.md",
         "consulting/consulting-engagement-model.md",

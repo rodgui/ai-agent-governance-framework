@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "1.0",
+  "title": "Example Enterprise Tool Registry",
+  "owner": "Example Tool Governance Authority",
+  "lastReviewed": "2026-08-10",
+  "entries": [
+    {
+      "id": "TLR-KNOWLEDGE-SEARCH-001",
+      "name": "Approved Knowledge Search",
+      "version": "1.0",
+      "owner": "Example Knowledge Platform Team",
+      "protocol": "api",
+      "class": "observe",
+      "stateChanging": false,
+      "reversible": true,
+      "approvalModes": [
+        "automated"
+      ],
+      "status": "approved",
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/knowledge-search",
+      "allowedRiskTiers": [
+        "T1",
+        "T2"
+      ],
+      "allowedScopes": [
+        "knowledge.search"
+      ],
+      "provenance": "Internal cataloged API with reviewed connector.",
+      "reviewExpiresAt": "2026-11-01"
+    },
+    {
+      "id": "TLR-DRAFT-BUILDER-001",
+      "name": "Draft Response Builder",
+      "version": "1.0",
+      "owner": "Example Service Operations",
+      "protocol": "api",
+      "class": "create",
+      "stateChanging": true,
+      "reversible": true,
+      "approvalModes": [
+        "human"
+      ],
+      "status": "approved",
+      "gatewayRef": "example-tool-gateway",
+      "killSwitchRef": "example-kill-switch/draft-create",
+      "allowedRiskTiers": [
+        "T1",
+        "T2"
+      ],
+      "allowedScopes": [
+        "draft.create"
+      ],
+      "provenance": "Internal cataloged API that creates non-published drafts.",
+      "reviewExpiresAt": "2026-11-01"
+    }
+  ]
+}

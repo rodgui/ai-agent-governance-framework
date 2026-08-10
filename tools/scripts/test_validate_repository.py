@@ -289,6 +289,70 @@ class JsonValidationRobustnessTests(unittest.TestCase):
         issues = validator.validate_json_and_schemas(self.json_files)
         self.assertTrue(any(issue.category == "controls" and "duplicate IDs" in issue.message for issue in issues))
 
+    def test_accepts_all_canonical_governance_contract_examples(self) -> None:
+        issues = validator.validate_json_and_schemas(self.json_files)
+        contract_issues = [issue for issue in issues if issue.category != "json-reference"]
+        self.assertEqual([], contract_issues)
+
+    def test_rejects_unknown_model_catalog_binding(self) -> None:
+        self.rewrite_json(
+            "examples/agent-blueprint.example.json",
+            lambda document: document["models"][0].__setitem__(
+                "catalogEntryId", "MPC-NOT-CATALOGED-999"
+            ),
+        )
+        issues = validator.validate_json_and_schemas(self.json_files)
+        self.assertTrue(
+            any(
+                issue.category == "cross-record"
+                and "unknown catalogEntryId MPC-NOT-CATALOGED-999" in issue.message
+                for issue in issues
+            )
+        )
+
+    def test_rejects_release_manifest_governance_mismatch(self) -> None:
+        self.rewrite_json(
+            "examples/release-evidence-manifest.example.json",
+            lambda document: document.__setitem__("riskTier", "T4"),
+        )
+        issues = validator.validate_json_and_schemas(self.json_files)
+        self.assertTrue(
+            any(
+                issue.category == "cross-record"
+                and "manifest and blueprint risk tier values differ" in issue.message
+                for issue in issues
+            )
+        )
+
+    def test_rejects_release_manifest_artifact_hash_mismatch(self) -> None:
+        self.rewrite_json(
+            "examples/release-evidence-manifest.example.json",
+            lambda document: document["artifactHashes"][0].__setitem__("sha256", "0" * 64),
+        )
+        issues = validator.validate_json_and_schemas(self.json_files)
+        self.assertTrue(
+            any(
+                issue.category == "cross-record"
+                and "artifact hash mismatch" in issue.message
+                for issue in issues
+            )
+        )
+
+    def test_requires_control_automation_mode(self) -> None:
+        self.rewrite_json(
+            "controls/control-catalog.json",
+            lambda document: document["controls"][0].pop("automation"),
+        )
+        issues = validator.validate_json_and_schemas(self.json_files)
+        self.assertTrue(
+            any(
+                issue.category == "schema"
+                and issue.path == "controls/control-catalog.json"
+                and "automation" in issue.message
+                for issue in issues
+            )
+        )
+
 
 class FrontmatterRelatedPathTests(unittest.TestCase):
     def setUp(self) -> None:
@@ -317,7 +381,7 @@ class FrontmatterRelatedPathTests(unittest.TestCase):
 
 
 class TierTaxonomyTests(unittest.TestCase):
-    """ADR-0004: T1-T4 is the canonical risk-tier taxonomy."""
+    """ADR-0009: T1-T4 is the canonical risk-tier taxonomy."""
 
     def setUp(self) -> None:
         self.original_root = getattr(validator, "ROOT")
@@ -391,6 +455,64 @@ class TierTaxonomyTests(unittest.TestCase):
         self.rewrite_json("controls/control-catalog.json", promote)
         issues = validator.validate_control_scope()
         self.assertTrue(any(issue.category == "control-scope" for issue in issues))
+
+
+class GovernanceContractV2Tests(unittest.TestCase):
+    """Approved spec 002: structured governance contracts are explicit and versioned."""
+
+    def load_json(self, relative_path: str):
+        return json.loads((REPO_ROOT / relative_path).read_text(encoding="utf-8"))
+
+    def test_registry_v2_separates_lifecycle_operation_and_discovery(self) -> None:
+        schema = self.load_json("schemas/agent-registry.schema.json")
+        self.assertEqual("2.0", schema["properties"]["schemaVersion"]["const"])
+        lifecycle = schema["$defs"]["lifecycle"]
+        self.assertTrue({"stage", "operationalState", "transitionHistory"} <= set(lifecycle["required"]))
+        self.assertTrue({"stage", "operationalState", "transitionHistory"} <= set(lifecycle["properties"]))
+        discovery = schema["properties"]["discovery"]
+        self.assertTrue({"status", "confidence", "signals"} <= set(discovery["required"]))
+        self.assertEqual(
+            ["confirmed", "probable", "suspected"],
+            discovery["properties"]["status"]["enum"],
+        )
+
+    def test_blueprint_v2_requires_governed_model_source_and_tool_bindings(self) -> None:
+        schema = self.load_json("schemas/agent-blueprint.schema.json")
+        self.assertEqual("2.0", schema["properties"]["schemaVersion"]["const"])
+        model = schema["properties"]["models"]["items"]
+        self.assertTrue(
+            {"modelVersion", "catalogEntryId", "evaluationRef"} <= set(model["required"])
+        )
+        source = schema["properties"]["data"]["properties"]["sources"]["items"]
+        self.assertIn("catalogEntryId", source["required"])
+        tool = schema["properties"]["tools"]["items"]
+        self.assertIn("catalogEntryId", tool["required"])
+        governance = schema["properties"]["governance"]
+        self.assertTrue({"riskTier", "admissibility", "admissibilityRationale"} <= set(governance["required"]))
+        self.assertEqual(
+            ["permitted", "conditional", "restricted", "prohibited"],
+            governance["properties"]["admissibility"]["enum"],
+        )
+
+    def test_control_catalog_breaking_contract_is_schema_v2(self) -> None:
+        schema = self.load_json("schemas/control-catalog.schema.json")
+        self.assertEqual("2.0", schema["properties"]["schemaVersion"]["const"])
+        control_required = set(schema["$defs"]["control"]["required"])
+        self.assertTrue({"automation", "frameworkMappings"} <= control_required)
+        self.assertNotIn("schemaVersion", set(schema) - {"properties"})
+
+    def test_reference_contracts_have_schemas_and_examples(self) -> None:
+        pairs = (
+            ("schemas/model-provider-catalog.schema.json", "examples/model-provider-catalog.example.json"),
+            ("schemas/certified-source-catalog.schema.json", "examples/certified-source-catalog.example.json"),
+            ("schemas/enterprise-tool-registry.schema.json", "examples/enterprise-tool-registry.example.json"),
+            ("schemas/release-evidence-manifest.schema.json", "examples/release-evidence-manifest.example.json"),
+            ("schemas/audit-event.schema.json", "examples/audit-event.example.json"),
+        )
+        for schema_path, example_path in pairs:
+            with self.subTest(schema=schema_path, example=example_path):
+                self.assertTrue((REPO_ROOT / schema_path).is_file())
+                self.assertTrue((REPO_ROOT / example_path).is_file())
 
 
 if __name__ == "__main__":

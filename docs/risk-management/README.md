@@ -2,7 +2,7 @@
 title: Gestão proporcional de riscos de IA e agentes
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -10,6 +10,8 @@ related:
   - ../responsible-ai/README.md
   - ../security/README.md
   - ../patterns/risk-tiered-governance.md
+  - ../architecture/decisions/0009-risk-tier-and-admissibility.md
+  - ../../templates/agent-risk-record.md
 ---
 
 # Gestão proporcional de riscos de IA e agentes
@@ -51,7 +53,7 @@ Não existe fórmula universal. Scoring apoia consistência; a decisão preserva
 
 ## Tiers
 
-T1–T4 é a taxonomia canônica de risco da policy modular. Uma organização pode mapear classificações locais, regulatórias ou legadas, desde que preserve os critérios, documente divergências e aplique o caminho decisório mais restritivo quando houver ambiguidade.
+T1–T4 é a taxonomia canônica de risco/criticidade da policy modular. Uma organização pode mapear classificações locais, regulatórias ou legadas, desde que preserve os critérios, documente divergências e aplique o caminho decisório mais restritivo quando houver ambiguidade.
 
 | Tier | Perfil | Exemplo de controle |
 |---|---|---|
@@ -64,7 +66,7 @@ Red flags podem elevar o tier independentemente do score: decisão sobre direito
 
 ### Fast path de T1
 
-Em estates com alto volume de casos simples, exigir revisão humana caso a caso transforma a governança em gargalo — e a organização passa a contorná-la. O fast path é a rota **automatizada** de T1, definida na [ADR-0004](../architecture/decisions/0004-risk-tier-taxonomy-and-fast-path.md).
+Em estates com alto volume de casos simples, exigir revisão humana caso a caso transforma a governança em gargalo — e a organização passa a contorná-la. O fast path é a rota **automatizada** de T1, preservada pela [ADR-0009](../architecture/decisions/0009-risk-tier-and-admissibility.md).
 
 O fast path elimina revisão manual caso a caso. Ele **não** elimina controle. Permanecem obrigatórios:
 
@@ -76,7 +78,20 @@ O fast path elimina revisão manual caso a caso. Ele **não** elimina controle. 
 
 A saída do fast path é **automática**: qualquer red flag, escalador ou impact trigger remove o agente da rota rápida e exige a rota do tier resultante. A entrada é que precisa ser conquistada — na dúvida, o caso não entra.
 
-Materiais externos que usem uma faixa `T0` convergem para T1: `T0` e `T1` externos mapeiam para T1 canônico; `T2`, `T3` e `T4` permanecem equivalentes.
+Materiais externos que usem uma faixa `T0` convergem para T1: `T0` e `T1` externos mapeiam para o T1 canônico. Os demais rótulos precisam ser decompostos em criticidade e admissibilidade; `Restricted` do guia v3.4 mapeia para admissibilidade, não redefine T4.
+
+## Admissibilidade é uma dimensão separada
+
+Risk tier responde **quão severo pode ser o impacto**. Admissibilidade responde **se e sob quais condições o uso pode operar**. Um T1 pode ser proibido por finalidade ou obrigação legal; um T4 pode ser admitido quando authority, controls e evidências compatíveis existirem.
+
+| Admissibilidade | Regra de decisão |
+| --- | --- |
+| `permitted` | pode operar dentro do blueprint e dos controls aprovados |
+| `conditional` | pode operar somente enquanto condições documentadas forem satisfeitas |
+| `restricted` | default deny; exige exceção explícita, temporária, com authority e expiry |
+| `prohibited` | não entra nem permanece em produção no escopo avaliado |
+
+Tier e admissibilidade são registrados juntos no [Agent Risk Record](../../templates/agent-risk-record.md), no Registry, no Blueprint e no release evidence manifest. Mudança em qualquer dimensão é mudança material.
 
 O piso de controles exigido por tier para entrar e permanecer em produção está no [Minimum Production Bar](minimum-production-bar.md).
 
@@ -87,7 +102,8 @@ flowchart LR
     S[Scope] --> M[Mapear contexto]
     M --> I[Identificar impactos e ameaças]
     I --> C[Classificar tier]
-    C --> K[Selecionar controls]
+    C --> A[Decidir admissibilidade]
+    A --> K[Selecionar controls]
     K --> T[Testar]
     T --> R[Residual risk]
     R --> D{Decision authority}
@@ -104,12 +120,13 @@ Classificação, impact assessment e aprovação não são três aprovações co
 
 1. **Pre-screen no intake** com perguntas objetivas sobre dados, autonomia, ações, pessoas afetadas e alcance. Use o [template de risk pre-screen](../../templates/risk-pre-screen.md).
 2. **Calcular o risco base e aplicar os red flags.** O score apoia consistência; os red flags impedem que um fator crítico seja diluído por uma média.
-3. **Definir o tier preliminar e os controles obrigatórios** correspondentes, conforme o [Minimum Production Bar](minimum-production-bar.md).
-4. **Aplicar o impact trigger screen.** O agente influencia direitos, oportunidades, acesso a serviços, decisões sobre pessoas, segurança física, comunicação pública ou processo regulado? Se sim, executa-se o [impact assessment](../responsible-ai/README.md#impact-assessment) formal — **mesmo em caso tecnicamente simples**.
-5. **Acionar domain reviews apenas quando relevantes.** Privacidade por dados pessoais; segurança por ferramentas e privilégio; dados por fontes; arquitetura por mudança de pattern; jurídico por obrigação aplicável. Review acionada por regra fixa vira fila.
-6. **Registrar riscos, mitigações, residual risk e owner.** **Nenhuma review aprovada deve existir sem residual risk explícito** e sem a authority compatível com o tier.
-7. **Compilar o evidence pack.** O gate de publicação verifica a evidência exigida pelo tier — ele não refaz as reviews. Ver [evidence pack por tier](../auditability/evidence-pack-by-tier.md).
-8. **Após mudança material, o reassessment recomeça do ponto afetado**, não do zero. Reassessment integral por padrão é caro, e o que é caro deixa de ser feito.
+3. **Definir o tier preliminar e a admissibilidade.** Tier determina proporcionalidade; admissibilidade determina se o uso é permitido, condicionado, restrito ou proibido.
+4. **Selecionar os controles obrigatórios** correspondentes, conforme o [Minimum Production Bar](minimum-production-bar.md).
+5. **Aplicar o impact trigger screen.** O agente influencia direitos, oportunidades, acesso a serviços, decisões sobre pessoas, segurança física, comunicação pública ou processo regulado? Se sim, executa-se o [impact assessment](../responsible-ai/README.md#impact-assessment) formal — **mesmo em caso tecnicamente simples**.
+6. **Acionar domain reviews apenas quando relevantes.** Privacidade por dados pessoais; segurança por ferramentas e privilégio; dados por fontes; arquitetura por mudança de pattern; jurídico por obrigação aplicável. Review acionada por regra fixa vira fila.
+7. **Registrar riscos, admissibilidade, mitigações, residual risk e owner.** **Nenhuma review aprovada deve existir sem residual risk explícito** e sem a authority compatível com o tier e a admissibilidade.
+8. **Compilar o evidence pack.** O gate de publicação verifica a evidência exigida pelo tier — ele não refaz as reviews. Ver [evidence pack por tier](../auditability/evidence-pack-by-tier.md).
+9. **Após mudança material, o reassessment recomeça do ponto afetado**, não do zero. Reassessment integral por padrão é caro, e o que é caro deixa de ser feito.
 
 ## Risk register mínimo
 
@@ -119,6 +136,7 @@ Classificação, impact assessment e aprovação não são três aprovações co
 - likelihood, impact e uncertainty;
 - existing controls e eficácia observada;
 - residual risk;
+- admissibilidade, rationale, condições ou exception/expiry;
 - owner e decision authority;
 - treatment, due date e status;
 - indicators e escalation threshold;
@@ -152,6 +170,8 @@ Acceptance exige:
 - prazo e gatilhos de revisão;
 - compensating controls quando aplicável;
 - opção de não implementar ou reduzir scope.
+
+Risk acceptance não transforma uso `prohibited` em permitido. Para uso `restricted`, a exceção é registro distinto, temporário e revogável.
 
 Risco não pode ser “aceito” pelo technical owner se o impacto pertence ao negócio, a pessoas ou a obrigação de outro domínio.
 

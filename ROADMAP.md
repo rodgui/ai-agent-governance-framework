@@ -17,10 +17,10 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 - fonte canônica modular e jornadas por persona;
 - brief executivo, fundamentos, operating model e arquitetura;
 - domínios de control e implementation playbook;
-- maturity model, roadmap de 90 dias e programa de 24 semanas;
+- maturity model, capability map de 15 capacidades e guias sugestivos de 90 dias/24 semanas;
 - 10 design patterns e catálogo de antipatterns;
-- 43 controls estruturados em 15 domínios, com verificação e bloqueio declarados;
-- schemas, examples e templates;
+- 44 controls estruturados em 15 domínios, com verificação, automação, mappings e bloqueio declarados;
+- 9 schemas, examples vinculados e toolkit humano ampliado;
 - caso Microsoft separado do framework neutro;
 - visual principal vendor-neutral;
 - camada comercial separada em `consulting/`.
@@ -30,17 +30,17 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 ### A1. Vocabulário e taxonomia
 
 - [ ] estabilizar glossary e synonyms;
-- [ ] versionar taxonomia de lifecycle/status;
+- [x] versionar lifecycle stage e operational state no Registry 2.0;
 - [ ] alinhar IDs de domains, risks, controls e evidence types;
-- [ ] publicar regras de deprecation e migration.
+- [x] publicar regras de migration para contratos 2.0;
 
 **Gate:** termos centrais têm definição única, owner e uso consistente.
 
 ### A2. Crosswalk de controls
 
-- [ ] mapear controls para NIST AI RMF;
+- [x] mapear controls para NIST AI RMF;
 - [ ] mapear controls para ISO/IEC 42001 e 23894;
-- [ ] mapear security controls para OWASP e MITRE ATLAS;
+- [x] mapear security controls para OWASP e MITRE ATLAS;
 - [ ] separar equivalência, cobertura parcial e evidência inexistente.
 
 **Gate:** mappings são informativos, revisados e não afirmam certificação.
@@ -60,7 +60,7 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 
 - [ ] definir reconciliation algorithm e source precedence;
 - [ ] criar material-change diff;
-- [ ] validar cross-record references;
+- [x] validar cross-record references;
 - [ ] criar attestation e sunset records estruturados.
 
 **Gate:** um record de exemplo percorre create, change, attest e retire sem campos ambíguos.
@@ -77,7 +77,7 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 ### B3. Evaluation e release toolkit
 
 - [ ] criar evaluation strategy template estruturado;
-- [ ] criar release evidence manifest;
+- [x] criar release evidence manifest;
 - [ ] vincular thresholds a risk tier;
 - [ ] definir regression e expiry rules.
 
@@ -85,7 +85,7 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 
 ### B4. Runtime governance
 
-- [ ] definir event schema vendor-neutral;
+- [x] definir event schema vendor-neutral;
 - [ ] documentar policy decision e action logs;
 - [ ] criar drill scripts para quarantine, rollback e reactivation;
 - [ ] modelar evidence continuity durante incident.

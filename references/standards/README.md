@@ -17,7 +17,7 @@ E **não** encontra: cláusulas, requisitos literais, tabelas de Anexo, numeraç
 
 ## Por que não existe mapeamento control a control para ISO
 
-Os 43 controls declaram `frameworkMappings` para NIST AI RMF, EU AI Act, OWASP e MITRE ATLAS — todos públicos e verificáveis. **ISO não está mapeada**, e isso é deliberado: mapear exige o texto, e um número de cláusula produzido de memória ou de fonte secundária seria uma afirmação que o repositório não pode sustentar.
+Os 44 controls declaram `frameworkMappings` para NIST AI RMF, EU AI Act, OWASP e MITRE ATLAS — todos públicos e verificáveis. **ISO não está mapeada**, e isso é deliberado: mapear exige o texto, e um número de cláusula produzido de memória ou de fonte secundária seria uma afirmação que o repositório não pode sustentar.
 
 Enquanto o mapeamento não existir, a relação com ISO deve ser comunicada como **alinhamento conceitual**, nunca como rastreabilidade. A diferença importa: alinhamento conceitual diz "pensamos sobre os mesmos problemas"; rastreabilidade diz "este control atende àquele requisito" — e só a segunda sobrevive a uma pergunta de auditoria.
 

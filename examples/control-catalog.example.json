@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "1.1",
-  "catalogVersion": "1.1",
+  "schemaVersion": "2.0",
+  "catalogVersion": "1.2.0",
   "title": "Example AI Governance Control Catalog",
   "lastReviewed": "2026-08-10",
   "controls": [
@@ -12,7 +12,7 @@
         "preventive",
         "detective"
       ],
-      "statement": "Todo agente deve possuir registro, business owner, technical owner, status e versão ativa antes de produção.",
+      "statement": "Todo agente deve possuir ID estável, owners, discovery status, lifecycle stage, operational state, tier, admissibilidade e versão ativa antes de produção.",
       "rationale": "Sem ownership e lifecycle não é possível atribuir decisão, corrigir ou aposentar o agente.",
       "ownerRole": "Registry Owner",
       "appliesToTiers": [
@@ -39,7 +39,8 @@
       "verification": [
         "Reconciliar o registry contra ao menos duas fontes independentes de descoberta e medir cobertura.",
         "Confirmar que agente sem owner recebe status de não gerenciado e é encaminhado para remediação."
-      ]
+      ],
+      "frameworkMappings": []
     },
     {
       "id": "AGF-OPS-001",
@@ -76,7 +77,8 @@
       "verification": [
         "Confirmar que todo sinal material possui owner, severidade e ação definidos.",
         "Testar um alerta ponta a ponta até a ação registrada."
-      ]
+      ],
+      "frameworkMappings": []
     }
   ]
 }

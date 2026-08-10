@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rodgui.github.io/ai-agent-governance-framework/schemas/release-evidence-manifest.schema.json",
+  "title": "Release Evidence Manifest",
+  "description": "Manifesto imutável de decisão, controls, evidências, avaliações, exceções e artefatos de uma release de agente.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "releaseId",
+    "agentId",
+    "blueprintVersion",
+    "decision",
+    "riskTier",
+    "admissibility",
+    "createdAt",
+    "approvers",
+    "controlEvidence",
+    "evaluationRefs",
+    "artifactHashes"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "releaseId": {
+      "type": "string",
+      "pattern": "^REL-[A-Z0-9-]{3,80}$"
+    },
+    "agentId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "blueprintVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+(?:\\.[0-9]+)?$"
+    },
+    "decision": {
+      "enum": [
+        "approved",
+        "conditional",
+        "rejected",
+        "expired"
+      ]
+    },
+    "riskTier": {
+      "enum": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ]
+    },
+    "admissibility": {
+      "enum": [
+        "permitted",
+        "conditional",
+        "restricted",
+        "prohibited"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approvers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "authority",
+          "decisionAt"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "minLength": 2
+          },
+          "authority": {
+            "type": "string",
+            "minLength": 2
+          },
+          "decisionAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "controlEvidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "controlId",
+          "status",
+          "evidenceRefs"
+        ],
+        "properties": {
+          "controlId": {
+            "type": "string",
+            "pattern": "^AGF-[A-Z]{3,5}-[0-9]{3}$"
+          },
+          "status": {
+            "enum": [
+              "pass",
+              "conditional",
+              "fail",
+              "not-applicable"
+            ]
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 3
+            }
+          }
+        }
+      }
+    },
+    "evaluationRefs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "exceptionRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "artifactHashes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 3
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "admissibility": {
+            "const": "prohibited"
+          }
+        },
+        "required": [
+          "admissibility"
+        ]
+      },
+      "then": {
+        "properties": {
+          "decision": {
+            "const": "rejected"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "decision": {
+            "const": "conditional"
+          }
+        },
+        "required": [
+          "decision"
+        ]
+      },
+      "then": {
+        "required": [
+          "exceptionRefs"
+        ],
+        "properties": {
+          "exceptionRefs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

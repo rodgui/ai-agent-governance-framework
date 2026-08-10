@@ -6,15 +6,6 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 ### Added
 
-- Site de documentação gerado a partir do corpus canônico, com navegação pela ordem do handbook, busca e mermaid renderizado ([ADR-0007](docs/architecture/decisions/0007-documentation-site-build.md)).
-- `references/standards/` com escopo de cada norma ISO referenciada e o motivo de não haver mapeamento control a control.
-- Capability map atual versus alvo, com procedimento e perguntas de challenge.
-- Decisão arquitetural "agente é o mecanismo certo?", com árvore de decisão e exemplos.
-- Template de intake de caso de uso, orientado a problema e não a tecnologia.
-- Método de execução do maturity assessment: preparação, evidence request list, workshop de scoring, dependências quebradas e definition of done.
-- Workstreams, prioridade de backlog e cadência no programa de 24 semanas; ciclo trimestral de melhoria contínua e critérios de reassessment.
-- Exemplo preenchido de governance charter e scope statement.
-
 ### Changed
 
 ### Deprecated
@@ -23,9 +14,50 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 ### Fixed
 
+### Security
+
+## [1.1.0] — 2026-08-10
+
+Correção editorial e contratual após revisão independente do guia v3.4 contra o corpus. Esta release fortalece o repositório como framework de referência; não declara adoção organizacional, certificação ou eficácia em estate real.
+
+### Added
+
+- Agent Registry 2.0 com discovery status/confidence, lifecycle stage, operational state e transition history.
+- Agent Blueprint 2.0 com model version/evaluation binding e referências a catálogos de models, sources e tools.
+- Schemas e exemplos vendor-neutral para Model/Provider Catalog, Certified Source Catalog, Enterprise Tool Registry, Release Evidence Manifest e Audit Event.
+- `AGF-RSK-004` para admissibilidade e exceções temporárias; Control Catalog conteúdo 1.2.0.
+- Templates de Capability Assessment, Agent Risk Record, Behavioral Analytics Use Case, Governance RACI, Attestation/Sunset e Release Evidence Manifest.
+- Capability map de 15 capacidades com crosswalk para as dez dimensões de maturity e os quinze domínios de controls.
+- Guia de migração dos contratos estruturados para 2.0.
+- Site de documentação gerado a partir do corpus canônico, com navegação pela ordem do handbook, busca e Mermaid renderizado.
+- `references/standards/` com escopo de cada norma ISO referenciada e o motivo de não haver mapeamento control a control.
+- Capability map atual versus alvo, com procedimento e perguntas de challenge.
+- Decisão arquitetural "agente é o mecanismo certo?", com árvore de decisão e exemplos.
+- Template de intake de caso de uso, orientado a problema e não a tecnologia.
+- Método de execução do maturity assessment: preparação, evidence request list, workshop de scoring, dependências quebradas e definition of done.
+- Workstreams, prioridade de backlog e cadência no programa sugestivo de 24 semanas; ciclo trimestral de melhoria contínua e critérios de reassessment.
+- Exemplo preenchido de governance charter e scope statement.
+
+### Changed
+
+- Risk tier T1–T4 representa criticidade; admissibilidade usa `permitted`, `conditional`, `restricted` e `prohibited` como dimensão independente ([ADR-0009](docs/architecture/decisions/0009-risk-tier-and-admissibility.md)).
+- Control Catalog usa schema 2.0, com `automation` e `frameworkMappings` obrigatórios; `catalogVersion` permanece independente ([ADR-0010](docs/architecture/decisions/0010-structured-governance-contracts-2.0.md)).
+- Roadmaps de 90 dias/24 semanas e piloto são guidance adaptável; G0–G7 permanecem os únicos decision gates canônicos.
+- Build do site permanece quality gate; publicação é opcional e manual, sem prerequisite de GitHub Pages ([ADR-0008](docs/architecture/decisions/0008-manual-documentation-site-publication.md)).
+- Lifecycle, registry, model governance, data, tools, auditability e templates agora usam os mesmos contratos estruturados.
+
+### Fixed
+
+- Eliminada a semântica concorrente que tratava T4 simultaneamente como criticidade e default deny.
+- Eliminada a incompatibilidade entre a state machine documentada e o Agent Registry.
+- Breaking change do Control Catalog deixa de ser apresentado como schema minor.
+- Validator verifica bindings de catálogo, coerência de tier/admissibilidade, release manifest, audit event e hash dos artefatos.
 - O validador do repositório deixa de inspecionar artefatos de build (`site/`, `site_src/`).
 
 ### Security
+
+- Production rejeita admissibilidade `prohibited`; `restricted` exige exception reference e expiry.
+- Model/source/tool bindings e artifact hashes passam a ser verificáveis nos exemplos canônicos.
 
 ## [1.0.0] — 2026-08-10
 

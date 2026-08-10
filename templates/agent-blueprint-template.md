@@ -10,6 +10,8 @@
 - Última revisão:
 - Registry record:
 - Risk tier:
+- Admissibilidade:
+- Admissibility rationale:
 
 ## 1. Intended architecture
 
@@ -31,17 +33,21 @@
 
 ## 2. Modelos
 
-| Model ID | Provider | Purpose | Hosting | Version pinned? | Data use | Limitações |
-|---|---|---|---|---|---|---|
-| | | | | | | |
+| Model ID | Provider | Model version | Catalog entry ID | Evaluation ref | Role | Hosting | Version pinned? |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| | | | | | primary / fallback / specialized | | |
+
+| Allowed data classes | Allowed regions | Data use | Fallback mode | Fallback catalog/equivalence ref | Limitações |
+| --- | --- | --- | --- | --- | --- |
+| | | | approved-alternative / fail-closed / not-required | | |
 
 ## 3. Dados e memória
 
 ### Sources/connectors
 
-| Source ID | Classificação | Purpose | Owner | Authorization | Retention | Região |
-|---|---|---|---|---|---|---|
-| | | | | | | |
+| Source ID | Catalog entry ID | Classificação | Purpose | Owner | Authorization | Retention | Região |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | | |
 
 ### Memory
 
@@ -65,11 +71,11 @@
 
 ## 5. Tools, APIs e MCP
 
-> Na taxonomia estruturada v1.0, a classe `create` representa criação/persistência de artefato ou registro fora da resposta transitória e exige `stateChanging: true`.
+> Na taxonomia estruturada 2.0, a classe `create` representa criação/persistência de artefato ou registro fora da resposta transitória e exige `stateChanging: true`.
 
-| Tool ID | Class | Protocol | State-changing | Reversible | Approval | Scopes | Owner | Gateway | Kill switch |
-|---|---|---|---|---|---|---|---|---|---|
-| | | | | | | | | | |
+| Tool ID | Catalog entry ID | Class | Protocol | State-changing | Reversible | Approval | Scopes | Owner | Gateway | Kill switch |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | | | | | |
 
 ## 6. Agent logic e boundaries
 
@@ -116,6 +122,10 @@
 
 ## 10. Governance
 
+- Risk tier e rationale:
+- Admissibilidade e rationale:
+- Condition refs:
+- Exception ref/expiry — se `restricted`:
 - Control IDs:
 - Assessment refs:
 - Release evidence:
@@ -132,6 +142,8 @@
 ## Reviewer checklist
 
 - [ ] Blueprint explica dados, identidade, tools e blast radius.
+- [ ] Model version/catalog/evaluation e source/tool catalog IDs estão completos.
+- [ ] Risk tier e admissibilidade estão separados e coerentes com Registry/manifest.
 - [ ] Controls são externos ao prompt quando necessário.
 - [ ] State-changing actions possuem enforcement.
 - [ ] Runtime, containment e rollback são concretos.
