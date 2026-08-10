@@ -571,6 +571,17 @@ class CaseBundleTests(unittest.TestCase):
             )
         )
 
+    def test_rejects_blueprint_declaring_a_control_that_does_not_exist(self) -> None:
+        json_files = self.seed_case(
+            mutate_blueprint=lambda document: document["governance"]["controlIds"].append(
+                "AGF-NOPE-999"
+            )
+        )
+        issues = validator.validate_json_and_schemas(json_files)
+        self.assertTrue(
+            any("AGF-NOPE-999" in issue.message for issue in self.case_issues(issues))
+        )
+
     def test_case_without_own_catalogs_still_checks_bindings(self) -> None:
         """A case that omits catalogs inherits the shared ones instead of skipping the checks."""
         json_files = self.seed_case(

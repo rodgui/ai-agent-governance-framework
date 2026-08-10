@@ -19,6 +19,7 @@ Exemplos fictícios e sanitizados que demonstram o uso dos schemas e templates.
 Records agrupados por caso em [`cases/`](cases/), validados pelos mesmos schemas e invariantes dos exemplos da raiz. Cada caso tem a narrativa correspondente em [`docs/explanations/cases/`](../docs/explanations/cases/README.md).
 
 - [`cases/meeting-notes-summarizer/`](cases/meeting-notes-summarizer/) — T1 na rota rápida, somente leitura.
+- [`cases/benefits-eligibility-triage/`](cases/benefits-eligibility-triage/) — T3 com impacto sobre pessoas e admissibilidade `conditional`.
 
 ## Evidence package operacional
 

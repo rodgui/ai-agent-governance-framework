@@ -87,7 +87,7 @@ A entrada é que precisa ser conquistada. Na dúvida, o caso não entra — porq
 | identidade | `delegated-user` | `hybrid`, com principal próprio |
 | authority no G5 | policy gate automatizado | Example Design Authority |
 | decisão | `approved` | `conditional`, com quatro condições e expiry |
-| controls exigidos | 4 | 5 |
+| controls declarados no blueprint | 4 | 6 |
 | evidência | gerada pela rota | evidence pack com evaluation report |
 
 A diferença entre os dois não é qualidade de documentação: é **capacidade de ação**. O T2 pode criar rascunho e por isso ganha uma authority humana e condições verificáveis. O T1 não pode fazer nada além de ler, e por isso a rota automatizada é suficiente.
@@ -96,4 +96,4 @@ Se os dois exigissem o mesmo, o framework estaria errado — proporcionalidade �
 
 ## O que este caso não demonstra
 
-Não demonstra eficácia — é fictício. Não exercita admissibilidade diferente de `permitted`, nem impacto sobre pessoas, nem oversight humano com autoridade real. Para isso, veja o caso T3 quando estiver disponível.
+Não demonstra eficácia — é fictício. Não exercita admissibilidade diferente de `permitted`, nem impacto sobre pessoas, nem oversight humano com autoridade real. Para isso, veja o [caso T3](benefits-eligibility-triage.md).

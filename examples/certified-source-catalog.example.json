@@ -33,6 +33,35 @@
       "restrictions": [
         "Sem dados pessoais, credenciais ou procedimentos não aprovados."
       ]
+    },
+    {
+      "id": "SRC-BENEFITS-POLICY-002",
+      "name": "Benefits Eligibility Policy Set",
+      "owner": "Example Benefits Policy Owner",
+      "systemOfRecord": "Example Benefits Policy Repository",
+      "classification": "confidential",
+      "status": "certified",
+      "purposes": [
+        "Recuperar a regra de elegibilidade vigente e sua data de vigência."
+      ],
+      "allowedRiskTiers": [
+        "T2",
+        "T3"
+      ],
+      "allowedRegions": [
+        "example-region"
+      ],
+      "connectorPattern": "example-connector-002",
+      "authorizationMode": "pre-retrieval",
+      "retention": "A fonte governa o original; nenhuma cópia é retida pelo agente.",
+      "certificationEvidenceRefs": [
+        "examples/evaluation-report.example.md"
+      ],
+      "reviewedAt": "2026-08-01",
+      "expiresAt": "2026-11-01",
+      "restrictions": [
+        "Sem dado pessoal de requerente; apenas o texto da política e sua vigência."
+      ]
     }
   ]
 }

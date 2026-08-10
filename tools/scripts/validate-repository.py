@@ -568,8 +568,34 @@ def validate_case_bundle(paths: dict[str, str], parsed: dict[str, Any]) -> list[
                         )
                     )
 
-    manifest = parsed.get(manifest_path)
     catalog = parsed.get("controls/control-catalog.json")
+    known_control_ids: set[str] = set()
+    if isinstance(catalog, dict):
+        known_control_ids = {
+            item["id"]
+            for item in catalog.get("controls", [])
+            if isinstance(item, dict) and isinstance(item.get("id"), str)
+        }
+    # O blueprint declara quais controls o agente afirma satisfazer. Sem conferir contra o
+    # catálogo, um ID inexistente atravessa o gate parecendo cobertura — foi assim que um
+    # AGF-HUM-001 imaginário entrou num caso de referência sem ninguém notar.
+    if isinstance(blueprint, dict) and known_control_ids:
+        governance_block = blueprint.get("governance", {})
+        declared = governance_block.get("controlIds", []) if isinstance(governance_block, dict) else []
+        if isinstance(declared, list):
+            unknown_declared = sorted(
+                item for item in declared if isinstance(item, str) and item not in known_control_ids
+            )
+            if unknown_declared:
+                issues.append(
+                    Issue(
+                        "cross-record",
+                        blueprint_path,
+                        f"governance/controlIds: unknown control IDs: {unknown_declared}",
+                    )
+                )
+
+    manifest = parsed.get(manifest_path)
     if isinstance(manifest, dict) and isinstance(blueprint, dict):
         if manifest.get("agentId") != blueprint.get("agentId"):
             issues.append(Issue("cross-record", manifest_path, "manifest and blueprint agentId values differ"))
@@ -582,11 +608,7 @@ def validate_case_bundle(paths: dict[str, str], parsed: dict[str, Any]) -> list[
             if manifest.get("admissibility") != governance.get("admissibility"):
                 issues.append(Issue("cross-record", manifest_path, "manifest and blueprint admissibility values differ"))
     if isinstance(manifest, dict) and isinstance(catalog, dict):
-        known_controls = {
-            item["id"]
-            for item in catalog.get("controls", [])
-            if isinstance(item, dict) and isinstance(item.get("id"), str)
-        }
+        known_controls = known_control_ids
         referenced_controls = {
             item["controlId"]
             for item in manifest.get("controlEvidence", [])

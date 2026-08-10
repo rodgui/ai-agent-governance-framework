@@ -76,7 +76,7 @@ Handoffs e decision rights vêm do programa, não do caso. O que o caso consome 
 
 A classificação combina dados internos, ação limitada a rascunho, alcance de uma unidade e alta reversibilidade → **T2**. Nenhum red flag disparou; se algum tivesse disparado, a [tabela de escaladores](../../risk-management/README.md#red-flags-e-escaladores) imporia a criticidade mínima independentemente do score.
 
-Cinco controls foram exigidos, e o residual risk foi aceito **para este escopo e esta data de corte** — não em geral.
+O risk assessment lista cinco controls; o blueprint declara seis, acrescentando `AGF-RSK-004` para admissibilidade. O residual risk foi aceito **para este escopo e esta data de corte** — não em geral.
 
 **Evidência:** [risk assessment](../../../examples/risk-assessment.example.md) · [evaluation report](../../../examples/evaluation-report.example.md)
 

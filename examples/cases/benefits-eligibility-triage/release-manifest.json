@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "releaseId": "REL-BENEFITS-TRIAGE-001",
+  "agentId": "benefits-eligibility-triage",
+  "blueprintVersion": "1.0",
+  "decision": "conditional",
+  "riskTier": "T3",
+  "admissibility": "conditional",
+  "createdAt": "2026-06-01T14:00:00Z",
+  "expiresAt": "2026-12-01T00:00:00Z",
+  "approvers": [
+    {
+      "role": "Release Authority",
+      "authority": "Example Design Authority",
+      "decisionAt": "2026-06-01T14:00:00Z"
+    },
+    {
+      "role": "Responsible AI Authority",
+      "authority": "Example Responsible AI Review",
+      "decisionAt": "2026-06-01T11:00:00Z"
+    }
+  ],
+  "conditions": [
+    {
+      "statement": "A decisão de elegibilidade permanece humana; o agente prepara recomendação e não aprova.",
+      "owner": "Example Business Owner",
+      "verification": "Gateway exige token de aprovação humana antes de gravar a recomendação; ausência bloqueia a escrita.",
+      "expiresAt": "2026-12-01T00:00:00Z"
+    },
+    {
+      "statement": "Canal de contestação disponível ao requerente, com prazo de resposta declarado.",
+      "owner": "Example Business Owner",
+      "verification": "Amostragem trimestral de contestações com tempo de resposta medido.",
+      "expiresAt": "2026-12-01T00:00:00Z"
+    },
+    {
+      "statement": "Desempenho por slice relevante reavaliado a cada mudança de versão de modelo.",
+      "owner": "Example Technical Owner",
+      "verification": "Pipeline bloqueia promoção sem relatório de avaliação por slice da versão candidata.",
+      "expiresAt": "2026-12-01T00:00:00Z"
+    },
+    {
+      "statement": "Atributo protegido e proxy conhecido não entram como critério nem em log.",
+      "owner": "Example Technical Owner",
+      "verification": "Verificação automatizada de campos na entrada e no log, com alerta em violação.",
+      "expiresAt": "2026-12-01T00:00:00Z"
+    },
+    {
+      "statement": "Perda de qualquer condição acima suspende o uso até nova decisão de authority.",
+      "owner": "Example Run Owner",
+      "verification": "Alerta de condição violada aciona quarentena automática e notifica a Design Authority.",
+      "expiresAt": "2026-12-01T00:00:00Z"
+    }
+  ],
+  "controlEvidence": [
+    {
+      "controlId": "AGF-REG-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/cases/benefits-eligibility-triage/registry.json"
+      ]
+    },
+    {
+      "controlId": "AGF-IDN-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/cases/benefits-eligibility-triage/blueprint.json"
+      ]
+    },
+    {
+      "controlId": "AGF-DAT-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/cases/benefits-eligibility-triage/blueprint.json"
+      ]
+    },
+    {
+      "controlId": "AGF-EVA-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/evaluation-report.example.md"
+      ]
+    },
+    {
+      "controlId": "AGF-OPS-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/cases/benefits-eligibility-triage/blueprint.json"
+      ]
+    },
+    {
+      "controlId": "AGF-RSK-004",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/cases/benefits-eligibility-triage/registry.json"
+      ]
+    }
+  ],
+  "evaluationRefs": [
+    "examples/evaluation-report.example.md"
+  ],
+  "exceptionRefs": [],
+  "artifactHashes": [
+    {
+      "path": "examples/cases/benefits-eligibility-triage/blueprint.json",
+      "sha256": "e62a065f959ba819801be5a44ac9d280185f0f0c15998b928fe4cf931903ca9b"
+    }
+  ]
+}

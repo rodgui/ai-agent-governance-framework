@@ -33,6 +33,40 @@
         "Não possui autoridade para executar mudanças",
         "Pode gerar conteúdo incorreto"
       ]
+    },
+    {
+      "id": "MPC-EXAMPLE-REASONING-002",
+      "provider": "example-provider",
+      "modelId": "example-reasoning-model",
+      "modelVersion": "2026-07-20",
+      "purpose": "Triagem de elegibilidade com rationale recuperável e citação de regra aplicada.",
+      "hosting": "managed",
+      "status": "conditional",
+      "versionPinned": true,
+      "dataUse": "no-training",
+      "allowedDataClasses": [
+        "public",
+        "internal",
+        "confidential"
+      ],
+      "allowedRegions": [
+        "example-region"
+      ],
+      "allowedRiskTiers": [
+        "T2",
+        "T3"
+      ],
+      "evaluationRef": "examples/evaluation-report.example.md",
+      "reviewExpiresAt": "2026-11-01",
+      "exitStrategy": "Fail closed para triagem manual; substituição exige avaliação de equivalência por slices.",
+      "limitations": [
+        "Não decide elegibilidade; prepara recomendação para decisão humana",
+        "Desempenho por slice precisa ser reavaliado a cada mudança de versão",
+        "Condicional: uso limitado a processos com contestação disponível"
+      ],
+      "conditionRefs": [
+        "examples/cases/benefits-eligibility-triage/release-manifest.json"
+      ]
     }
   ]
 }

@@ -31,6 +31,7 @@ A terceira já se pagou. Escrever o percurso do primeiro caso revelou que o regi
 |---|---|---|---|
 | [Meeting Notes Summarizer](meeting-notes-summarizer.md) | T1 | `permitted` | a rota automatizada gerando o evidence pack em vez de dispensá-lo |
 | [Service Desk Knowledge Agent](service-desk-knowledge-agent.md) | T2 | `permitted` | o percurso completo de um agente transacional interno, com release condicional e condições verificáveis |
+| [Benefits Eligibility Triage](benefits-eligibility-triage.md) | T3 | `conditional` | criticidade e admissibilidade divergindo, veto de Responsible AI e suspensão automática por condição violada |
 
 Os casos usam a mesma organização fictícia, para que se leia um portfólio e não três exemplos desconexos. Uma implantação real convive com tiers diferentes sob o mesmo operating model, e é isso que precisa aparecer.
 
