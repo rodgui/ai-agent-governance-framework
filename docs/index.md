@@ -117,6 +117,8 @@ O repositório usa documentos modulares como fonte canônica. Escolha uma jornad
 |---|---|
 | definir policy e accountability | [Policy modular](governance/policy.md) + [operating model](governance/operating-model.md) |
 | inventariar agentes | [Estate e registry](registry/README.md) + [descoberta e forecast](registry/discovery-and-forecast.md) + [schemas](../schemas/README.md) |
+| decidir se o caso pede um agente | [Decisão arquitetural](architecture/agent-or-not.md) + [intake](../templates/use-case-intake.md) |
+| mapear capacidades atuais e alvo | [Capability map](guides/capability-map.md) + [maturity model](guides/maturity-model.md) |
 | classificar risco | [Risk-tiered governance](patterns/risk-tiered-governance.md) + [risk management](risk-management/README.md) |
 | governar identidade e dados | [Identity](identity/README.md) + [data access](data-access/README.md) |
 | governar tools e MCP | [Tool governance](tool-governance/README.md) + [MCP gateway pattern](patterns/tool-and-mcp-gateway.md) |

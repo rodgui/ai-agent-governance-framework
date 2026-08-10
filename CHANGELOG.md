@@ -8,6 +8,12 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 
 - Site de documentação gerado a partir do corpus canônico, com navegação pela ordem do handbook, busca e mermaid renderizado ([ADR-0007](docs/architecture/decisions/0007-documentation-site-build.md)).
 - `references/standards/` com escopo de cada norma ISO referenciada e o motivo de não haver mapeamento control a control.
+- Capability map atual versus alvo, com procedimento e perguntas de challenge.
+- Decisão arquitetural "agente é o mecanismo certo?", com árvore de decisão e exemplos.
+- Template de intake de caso de uso, orientado a problema e não a tecnologia.
+- Método de execução do maturity assessment: preparação, evidence request list, workshop de scoring, dependências quebradas e definition of done.
+- Workstreams, prioridade de backlog e cadência no programa de 24 semanas; ciclo trimestral de melhoria contínua e critérios de reassessment.
+- Exemplo preenchido de governance charter e scope statement.
 
 ### Changed
 

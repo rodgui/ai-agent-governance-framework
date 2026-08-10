@@ -20,6 +20,7 @@ Exemplos fictícios e sanitizados que demonstram o uso dos schemas e templates.
 
 ## Operating model e estate
 
+- [`governance-charter.example.md`](governance-charter.example.md) — mandato, authority e scope statement com prazo de exclusão.
 - [`governance-raci.example.md`](governance-raci.example.md) — decision rights preenchidos, com um único accountable por decisão material.
 - [`handoff-matrix.example.md`](handoff-matrix.example.md) — transições, pré-condições, evidência transferida e SLA.
 - [`manual-bottleneck-register.example.md`](manual-bottleneck-register.example.md) — onde a governança depende de trabalho manual repetitivo.

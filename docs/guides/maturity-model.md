@@ -227,6 +227,62 @@ Exemplo: tools/MCP e identidade podem exigir target 3 antes de expansão de agen
 9. aprovar target e owners;
 10. revisar após mudanças ou no ciclo definido.
 
+## Como executar na prática
+
+Maturity assessment **não é pesquisa de percepção**. Responde duas perguntas: qual capacidade existe de fato e quão repetível ela é. Nota alta sem evidência é hipótese, não resultado.
+
+### Preparação
+
+1. **Congelar escopo, unidades, geografias e data de corte.** Se o assessment cobre uma unidade, a nota não se estende à empresa.
+2. **Congelar a lista de capacidades e suas descrições operacionais.** Mudar critério durante as entrevistas torna as notas incomparáveis.
+3. **Escrever critérios específicos por nível e por dimensão**, antes de olhar evidência. Exemplo de nível 3 para registry: cobertura acima de 90%, owner obrigatório, quality rules ativas e remediação medida.
+4. **Montar a evidence request list antes das entrevistas** — não durante.
+
+### Evidence request list
+
+Pedir o artefato certo separa avaliação de conversa. Cada linha declara o que a evidência comprova **e o sinal de que ela foi fabricada para o assessment**.
+
+| Capacidade | Evidência solicitada | O que comprova | Sinal de alerta |
+|---|---|---|---|
+| registry | export dos últimos 90 dias com owners, tier e `last_seen` | cobertura e qualidade reais | planilha criada para o assessment |
+| identidade | identidades não humanas, idade de credencial, owners e permissões | identidade dedicada e lifecycle | secret compartilhado sem owner |
+| lifecycle | tickets de publicação, suspensão, attestation e retirada | processo repetível | documento existe, nenhum caso executado |
+| observabilidade | dashboard, amostra de trace e correlação de incidente | rastreabilidade ponta a ponta | logs sem identificador de agente ou tarefa |
+
+### Entrevistas
+
+Por domínio, com **dois a quatro papéis — não apenas o líder**. Compare o discurso com a evidência operacional. Divergência entre o que o líder descreve e o que o operador executa é achado, não ruído.
+
+### Workshop de scoring
+
+De 60 a 90 minutos por conjunto de capacidades relacionadas.
+
+Sequência: apresentar a definição do nível → mostrar a evidência → pedir que o owner proponha a nota → desafiar com os critérios → registrar rationale.
+
+**Não vote.** Maturidade não é consenso político, é aderência a critério observável. Sem evidência suficiente, use a nota mais conservadora e marque confidence `low` — nunca a nota otimista com ressalva verbal.
+
+### Findings que orientam ação
+
+`M1` sozinho não orienta nada. O finding precisa ser uma condição observável.
+
+> **Identidade e acesso — nível 1, confidence `high`.** 18 de 27 agentes transacionais usam credencial compartilhada; não há processo de JML; quatro identidades de serviço sem owner ativo. Alvo proposto: nível 3 em 12 meses. Prioridade: identidade própria para T2/T3 e reatribuição automática por evento de owner.
+
+### Dependências quebradas
+
+Uma capacidade pode parecer nível 3 isoladamente e ser inutilizável em escala por depender de outra em nível 0. Registre essas dependências — elas mudam a ordem do roadmap mais que a severidade individual.
+
+### Playback e aprovação
+
+Faça playback com os stakeholders e **aceite contestação apenas com nova evidência**. Aprove baseline, data de corte, confidence e o backlog de evidências pendentes. Sem baseline aprovada, a próxima medição não é comparável.
+
+### Definition of done
+
+- cada nota tem critério, evidência e rationale;
+- confidence está registrado e não é escondido pela nota;
+- gaps são condições observáveis, não rótulos genéricos;
+- dependências quebradas e riscos imediatos estão identificados;
+- a baseline foi aprovada e pode ser repetida com o mesmo método.
+
 ## Entregáveis
 
 - assessment JSON validado;
@@ -238,6 +294,14 @@ Exemplo: tools/MCP e identidade podem exigir target 3 antes de expansão de agen
 - target state;
 - roadmap 90 dias e 6–12 meses;
 - executive decision memo.
+
+## Reassessment
+
+Reexecute o assessment completo pelo menos anualmente, ou após transformação material. Use os **mesmos critérios** e preserve a baseline anterior — mudar o método invalida a comparação, que é o único produto de uma segunda medição.
+
+Para capacidades em evolução rápida, um mini-assessment trimestral baseado em evidência é suficiente.
+
+**Não eleve a maturidade porque uma ferramenta foi adquirida.** Exija cobertura, processo, métrica e operação sustentada. Ferramenta comprada e não operada move o nível para baixo, não para cima: adiciona superfície sem adicionar capacidade.
 
 ## Antipatterns
 
