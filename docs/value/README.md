@@ -73,6 +73,8 @@ A medição de custo por resultado que sustenta a camada de eficiência está em
 
 ## Portfolio governance
 
+O artefato que carrega o portfólio é o [Agent Use-Case Portfolio](../../templates/use-case-portfolio.md): use case, sponsor, owner, tier, admissibilidade, status, valor esperado, valor observado, custo e flag de duplicidade. Ele responde "isso deveria continuar existindo", enquanto o [registry](../registry/README.md) responde "o que existe e quem responde por isso" — são artefatos distintos e não devem ser fundidos.
+
 Decisões de portfólio consideram:
 
 - alinhamento estratégico;

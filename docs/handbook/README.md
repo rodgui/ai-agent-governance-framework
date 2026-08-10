@@ -25,6 +25,18 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 - **Assurance:** capítulos 8, 9 e 18–21.
 - **Referência:** consulte por domínio; não precisa seguir a ordem.
 
+### Três níveis dentro de cada domínio
+
+Um domínio canônico é escrito para ser lido em três níveis. Um capítulo completo permite sair dele com algo **produzido, aprovado ou operacionalizado** — não apenas compreendido.
+
+| Nível | Pergunta que responde | Onde aparece no capítulo |
+|---|---|---|
+| **entender** | o que é e por que existe? | objetivo, conceitos e distinções |
+| **decidir** | qual opção aplicar e sob quais critérios? | tabelas de decisão, tiers, trade-offs e gatilhos |
+| **executar** | quais passos, evidências e entregáveis tornam a capacidade operacional? | playbook, artefatos, evidências e decision gate |
+
+Um capítulo que só entrega o primeiro nível é material de leitura, não de implantação. O [catálogo de artefatos](../reference/artifact-catalog.md) lista o que cada domínio deve produzir.
+
 ## Parte I — Fundamentos
 
 1. [Governar agentes em escala — brief executivo](../executive/governing-agents-at-scale.md)
@@ -38,6 +50,7 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 5. [Policy modular — fonte canônica](../governance/policy.md)
 6. [Operating model e decision rights](../governance/operating-model.md)
 7. [Arquitetura de referência](../architecture/overview.md)
+   - [Mapeamento de capability para tecnologia](../architecture/capability-to-technology.md)
 8. [Gestão proporcional de riscos](../risk-management/README.md)
 9. [Maturity model](../guides/maturity-model.md)
 
@@ -64,6 +77,8 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 25. [Roadmap sugestivo de 90 dias](../guides/implementation-plan-90-days.md)
     - [Capability map](../guides/capability-map.md)
 26. [Programa sugestivo de implantação em 24 semanas](../guides/implementation-program-24-weeks.md)
+    - [Catálogo de artefatos do programa](../reference/artifact-catalog.md)
+    - [Checklist de autossuficiência](../reference/self-sufficiency-checklist.md)
 27. [Plano opcional de piloto e critérios de expansão](../guides/pilot-plan.md)
 28. [Catálogo de design patterns](../patterns/README.md)
 29. [Control catalog](../../controls/README.md)

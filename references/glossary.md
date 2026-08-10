@@ -65,7 +65,11 @@ Este vocabulário reduz ambiguidade entre policy, arquitetura, patterns, control
 | **Lifecycle** | Discover, register, assess, approve, release, operate, change, attest, sunset e archive. | SDLC apenas. |
 | **Attestation** | Declaração periódica, por authority, de que owner, purpose, controls e evidence permanecem válidos. | Avaliação inicial. |
 | **Sunset** | Retirada planejada com revocation, retention, dependency e communication. | Desligamento sem cleanup. |
-| **Material change** | Mudança que pode alterar tier, controls, evaluation ou approval. | Toda alteração cosmética. |
+| **Material change** | Mudança que pode alterar tier, admissibilidade, controls, evaluation ou approval. | Toda alteração cosmética. |
+| **Dormancy** | Ausência de uso relevante por período definido, que dispara revisão de continuidade. | Falha técnica ou indisponibilidade. |
+| **Dormancy threshold** | Período calibrado por tipo de agente a partir do qual a dormência é tratada. Threshold único para todo o estate produz falso positivo em agente sazonal. | Timeout de sessão. |
+| **Grace period** | Prazo entre o trigger de retirada e a revogação efetiva, para dependentes reagirem. | Adiamento indefinido. |
+| **Joiner/mover/leaver (JML)** | Processo que reatribui ou revoga ownership e acessos quando a pessoa responsável entra, muda de função ou sai. | Offboarding apenas de credencial humana. |
 | **Evidence cutoff** | Data até a qual evidências foram consideradas em assessment ou decisão. | Data de publicação. |
 
 ## Risco, controles e assurance
@@ -76,8 +80,12 @@ Este vocabulário reduz ambiguidade entre policy, arquitetura, patterns, control
 | **Impact** | Magnitude da consequência se evento ocorrer. | Likelihood. |
 | **Likelihood** | Possibilidade estimada de ocorrência nas condições avaliadas. | Frequência histórica isolada. |
 | **Residual risk** | Risco remanescente após controls e mitigations. | Risco inicial. |
-| **Risk tier** | Classe de governança que determina rigor mínimo; neste framework T1–T4. | Score de maturidade. |
-| **Red flag** | Condição que impede fast path e exige review/escalation. | Falha automaticamente comprovada. |
+| **Risk tier** | Classe de governança que determina rigor mínimo por criticidade; neste framework T1–T4. | Admissibilidade ou score de maturidade. |
+| **Admissibilidade** | Dimensão que responde se e sob quais condições um uso pode operar: `permitted`, `conditional`, `restricted` ou `prohibited`. Independente do tier ([ADR-0009](../docs/architecture/decisions/0009-risk-tier-and-admissibility.md)). | Risk tier. Um T1 pode ser proibido; um T4 pode ser admitido. |
+| **Red flag** | Condição que impede fast path e eleva a criticidade mínima independentemente do score. | Falha automaticamente comprovada. |
+| **Escalador** | Red flag registrado na norma com criticidade mínima e efeito declarados. A lista normativa prevalece sobre o instrumento que a coleta. | Pergunta de questionário. |
+| **Fast path** | Rota automatizada de T1: elimina revisão manual caso a caso, não os controles nem a evidência. | Isenção de governança. |
+| **Minimum Production Bar (MPB)** | Piso de controles que precisam ser verdadeiros para um agente entrar **e permanecer** em produção, por tier. | Teto de controles ou gate de release completo. |
 | **Blast radius** | Extensão potencial do efeito por usuários, dados, sistemas, regiões e dependências. | Número de usuários apenas. |
 | **Reversibility** | Capacidade de desfazer efeito com custo, prazo e integridade aceitáveis. | Existência nominal de rollback. |
 | **Policy** | Regra normativa aprovada com authority e enforcement expectation. | Guidance. |
@@ -103,6 +111,9 @@ Este vocabulário reduz ambiguidade entre policy, arquitetura, patterns, control
 | Termo | Definição neste framework | Não confundir com |
 |---|---|---|
 | **Workload identity** | Identidade própria e gerenciada para service, workload ou agent. | Credencial humana compartilhada. |
+| **Non-human identity** | Categoria que abrange service accounts, workload identities e agentes; governada por lifecycle próprio, não pelo de pessoas. | Conta de serviço legada sem owner. |
+| **Step-up** | Exigência de autenticação ou autorização adicional no momento de uma ação de maior impacto. | Login inicial mais forte. |
+| **Prompt injection** | Instrução hostil embutida em conteúdo processado pelo agente, que tenta redirecionar comportamento ou extrair dados. | Erro de prompt do usuário. |
 | **Delegated access** | Acesso em nome do usuário, limitado por seus direitos e contexto. | Privilege próprio do agent. |
 | **Least privilege** | Menor permission, scope e duração necessários para finalidade aprovada. | Read-only por default em todos os casos. |
 | **Data contract** | Acordo versionado de source, purpose, classification, quality, access, retention e owner. | Connector config. |
@@ -129,6 +140,10 @@ Este vocabulário reduz ambiguidade entre policy, arquitetura, patterns, control
 | **Containment** | Ação para limitar blast radius preservando investigação e recovery. | Remediação definitiva. |
 | **Quarantine** | Estado controlado que restringe operação ou acesso até decisão. | Delete. |
 | **Kill switch** | Mecanismo testado para interromper capability, tool ou agent. | Botão documentado sem authority. |
+| **Circuit breaker** | Corte automático acionado por threshold, sem esperar decisão humana. | Kill switch, que é acionado por authority. |
+| **Behavioral baseline** | Padrão de comportamento observado e aceito de um agente, contra o qual desvios são medidos. | Resultado de eval pré-release. |
+| **Denial-of-wallet** | Exaustão de orçamento por consumo legítimo em aparência, sem indisponibilidade técnica. | Denial-of-service. |
+| **Unit economics** | Custo por resultado útil, não por token ou execução. | Custo total de plataforma. |
 | **Rollback** | Retorno verificável a versão/estado conhecido. | Restart. |
 | **Reactivation** | Retorno autorizado após evidence de correção e readiness. | Remover alerta. |
 | **Adoption** | Uso sustentado por personas/escopos definidos. | Número de agents criados. |

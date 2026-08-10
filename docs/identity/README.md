@@ -95,10 +95,10 @@ flowchart LR
 
 | Tier | Controle adicional |
 |---|---|
-| baixo | identidade atribuível e scopes documentados |
-| moderado | workload identity, expiry e teste negativo |
-| alto | JIT, dual control para privilégio, session recording quando cabível |
-| crítico | isolamento dedicado, autorização por transação e monitoramento contínuo |
+| T1 — baixo | identidade atribuível e scopes documentados |
+| T2 — moderado | workload identity, expiry e teste negativo |
+| T3 — alto | JIT, dual control para privilégio, session recording quando cabível |
+| T4 — crítico | isolamento dedicado, autorização por transação e monitoramento contínuo |
 
 ## Playbook de implantação
 
