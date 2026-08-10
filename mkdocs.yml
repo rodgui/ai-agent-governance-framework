@@ -1,0 +1,139 @@
+site_name: AI Agent Governance Framework
+site_description: Framework vendor-neutral para governar sistemas de IA e agentes do mandato executivo ao runtime.
+site_author: Rodrigo Garcia Guimarães
+site_url: https://rodgui.github.io/ai-agent-governance-framework/
+repo_url: https://github.com/rodgui/ai-agent-governance-framework
+repo_name: rodgui/ai-agent-governance-framework
+edit_uri: edit/main/
+copyright: CC BY 4.0 — Rodrigo Garcia Guimarães
+
+# O conteúdo canônico vive na raiz do repositório, distribuído entre docs/,
+# controls/, schemas/, templates/, examples/, references/ e consulting/.
+# Servir a raiz preserva os links relativos entre essas pastas sem reescrita.
+# site_src/ é montado por tools/scripts/build-docs-site.py a partir das pastas
+# canônicas, preservando a estrutura de diretórios. Isso mantém válidos os links
+# relativos que cruzam pastas (../../controls/README.md) sem nenhuma reescrita.
+docs_dir: site_src
+site_dir: site
+
+# O MkDocs exclui /templates/ por padrão, assumindo diretório de tema. Aqui
+# templates/ é conteúdo canônico, então o default precisa ser sobrescrito.
+# O MkDocs prefixa um exclude padrão que contém '/templates/', assumindo
+# diretório de tema. Aqui templates/ é conteúdo canônico; a semântica é
+# gitignore, então a exclusão padrão é negada explicitamente.
+exclude_docs: |
+  !/templates/
+
+theme:
+  name: material
+  language: pt-BR
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Tema escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Tema claro
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      # Mantém as âncoras idênticas às do GitHub, preservando acentuação.
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search:
+      lang:
+        - pt
+        - en
+
+# A ordem abaixo reproduz o handbook (docs/handbook/README.md), que é a
+# ordem editorial canônica. Alterações no handbook devem refletir aqui.
+nav:
+  - Início: README.md
+  - Como navegar:
+      - Índice e jornadas: docs/index.md
+      - Handbook — ordem de leitura: docs/handbook/README.md
+  - Parte I — Fundamentos:
+      - Brief executivo: docs/executive/governing-agents-at-scale.md
+      - Fundamentos: docs/fundamentals/README.md
+      - Princípios arquiteturais: docs/architecture/principles.md
+      - Vocabulário canônico: references/glossary.md
+  - Parte II — Policy, operating model e risco:
+      - Policy modular: docs/governance/policy.md
+      - Operating model e decision rights: docs/governance/operating-model.md
+      - Arquitetura de referência: docs/architecture/overview.md
+      - Gestão proporcional de riscos: docs/risk-management/README.md
+      - Minimum Production Bar: docs/risk-management/minimum-production-bar.md
+      - Maturity model: docs/guides/maturity-model.md
+  - Parte III — Domínios de controle:
+      - Estratégia, portfólio e valor: docs/value/README.md
+      - Estate, registry e taxonomia: docs/registry/README.md
+      - Descoberta e forecast: docs/registry/discovery-and-forecast.md
+      - Lifecycle e retirement: docs/lifecycle/README.md
+      - Identidade e least privilege: docs/identity/README.md
+      - Dados, acesso e provenance: docs/data-access/README.md
+      - Tools, APIs e MCP: docs/tool-governance/README.md
+      - Modelos e provedores: docs/model-governance/README.md
+      - Segurança e AgentSecOps: docs/security/README.md
+      - Responsible AI e assurance: docs/responsible-ai/README.md
+      - Human oversight: docs/human-oversight/README.md
+      - Evaluations e release: docs/evaluations/README.md
+      - Auditabilidade e evidências: docs/auditability/README.md
+      - Evidence pack por tier: docs/auditability/evidence-pack-by-tier.md
+      - Operações e resposta: docs/operations/README.md
+      - Behavioral analytics: docs/operations/behavioral-analytics.md
+      - FinOps e unit economics: docs/operations/finops.md
+      - KPIs, KRIs e dashboard: docs/operations/kpi-kri-dashboard.md
+      - Adoção e enablement: docs/adoption/README.md
+  - Parte IV — Método e toolkit:
+      - Implementation playbook: docs/guides/framework-implementation-playbook.md
+      - Roadmap de 90 dias: docs/guides/implementation-plan-90-days.md
+      - Programa de 24 semanas: docs/guides/implementation-program-24-weeks.md
+      - Plano de piloto: docs/guides/pilot-plan.md
+      - Design patterns: docs/patterns/README.md
+      - Control catalog: controls/README.md
+      - Schemas: schemas/README.md
+      - Templates: templates/README.md
+      - Examples: examples/README.md
+  - Parte V — Fontes e limitações:
+      - Fontes: references/sources.md
+      - Standards de referência: references/standards/README.md
+      - Bibliografia: references/bibliography.md
+  - Decisões e limites:
+      - Architecture decision log: docs/architecture/decisions/README.md
+      - Explicações e casos: docs/explanations/README.md
+      - Assessments: assessments/README.md
+      - Camada comercial: consulting/README.md

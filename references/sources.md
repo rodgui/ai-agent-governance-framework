@@ -49,7 +49,7 @@ Hierarquia não elimina análise de atualidade, escopo, conflito de interesse e 
 
 ## Limitações
 
-- Normas ISO completas podem exigir aquisição; as URLs registradas são páginas oficiais, não reprodução do conteúdo protegido.
+- Normas ISO completas podem exigir aquisição; as URLs registradas são páginas oficiais, não reprodução do conteúdo protegido. O escopo de cada norma e o motivo de não haver mapeamento control a control estão em [standards de referência](standards/README.md).
 - MITRE e OWASP evoluem; mappings devem registrar versão/evidence cutoff.
 - Os artigos Microsoft são fontes primárias sobre a abordagem declarada pela empresa e também materiais institucionais. Não constituem auditoria independente nem evidência causal de ROI ou redução de incidentes.
 - O framework usa referências para alinhamento; não afirma certificação ou conformidade automática.

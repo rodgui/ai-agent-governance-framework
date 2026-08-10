@@ -10,6 +10,7 @@ Decisões arquiteturais estáveis, com contexto, alternativas e consequências.
 | [ADR-0004](0004-risk-tier-taxonomy-and-fast-path.md) | accepted | Taxonomia de tiers T1–T4 e fast path de baixo risco |
 | [ADR-0005](0005-control-catalog-scope-verification-and-mappings.md) | accepted | Control catalog 1.1: escopo, verificação, bloqueio e mappings |
 | [ADR-0006](0006-framework-release-1-0-adoption.md) | accepted | Adoção da release 1.0 do framework |
+| [ADR-0007](0007-documentation-site-build.md) | accepted | Site de documentação gerado a partir do corpus canônico |
 
 ## Convenções
 

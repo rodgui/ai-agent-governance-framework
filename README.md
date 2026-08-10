@@ -92,10 +92,11 @@ O framework surgiu de trabalho aplicado de governança de agentes em contexto in
 
 ## Navegação
 
+- [Site de documentação](https://rodgui.github.io/ai-agent-governance-framework/) — mesma fonte, leitura contínua com navegação e busca
 - [Índice completo e jornadas por persona](docs/index.md)
 - [Roadmap do produto de conhecimento](ROADMAP.md)
 - [Glossário](references/glossary.md)
-- [Fontes](references/sources.md)
+- [Fontes](references/sources.md) e [standards de referência](references/standards/README.md)
 - [Como contribuir](CONTRIBUTING.md)
 
 ## Licença
