@@ -90,6 +90,7 @@ nav:
       - Brief executivo: docs/executive/governing-agents-at-scale.md
       - Fundamentos: docs/fundamentals/README.md
       - Princípios arquiteturais: docs/architecture/principles.md
+      - Agente é o mecanismo certo?: docs/architecture/agent-or-not.md
       - Vocabulário canônico: references/glossary.md
   - Parte II — Policy, operating model e risco:
       - Policy modular: docs/governance/policy.md
@@ -97,6 +98,7 @@ nav:
       - Arquitetura de referência: docs/architecture/overview.md
       - Gestão proporcional de riscos: docs/risk-management/README.md
       - Minimum Production Bar: docs/risk-management/minimum-production-bar.md
+      - Capability map: docs/guides/capability-map.md
       - Maturity model: docs/guides/maturity-model.md
   - Parte III — Domínios de controle:
       - Estratégia, portfólio e valor: docs/value/README.md

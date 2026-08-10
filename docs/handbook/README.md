@@ -30,6 +30,7 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 1. [Governar agentes em escala — brief executivo](../executive/governing-agents-at-scale.md)
 2. [Fundamentos de governança de IA e agentes](../fundamentals/README.md)
 3. [Princípios arquiteturais](../architecture/principles.md)
+   - [Decisão arquitetural: agente é o mecanismo certo?](../architecture/agent-or-not.md)
 4. [Vocabulário canônico](../../references/glossary.md)
 
 ## Parte II — Política, operating model e risco
@@ -61,6 +62,7 @@ Esta é a ordem editorial da edição em português. Os capítulos permanecem em
 
 24. [Implementation playbook](../guides/framework-implementation-playbook.md)
 25. [Roadmap de 90 dias](../guides/implementation-plan-90-days.md)
+    - [Capability map](../guides/capability-map.md)
 26. [Programa de implantação em 24 semanas](../guides/implementation-program-24-weeks.md)
 27. [Plano de piloto e critérios de expansão](../guides/pilot-plan.md)
 28. [Catálogo de design patterns](../patterns/README.md)

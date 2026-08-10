@@ -106,6 +106,82 @@ O detalhamento está no [plano de piloto](pilot-plan.md).
 
 **Critério de saída:** owners de BAU nomeados, cadência funcionando e próximos targets acordados.
 
+## Workstreams
+
+Workstream é trilha de execução paralela dentro do **mesmo** roadmap — não um segundo cronograma.
+
+| Workstream | Lead típico | F0–F2 | F3–F4 | F5–F6 |
+|---|---|---|---|---|
+| governança e risco | governança/risco | charter, tiers, triggers de RAI, operating model | workflow, evidência, reviews do piloto | automação, assurance, exceções |
+| arquitetura e plataforma | arquitetura/plataforma | patterns de referência | integração registry, runtime e policy | escala, resiliência, APIs |
+| identidade e segurança | IAM/segurança | patterns e ameaças | identidade própria, controles, runbooks | JML, integração com SOC, tuning |
+| dados e ferramentas | dados/API | desenho de standards e catálogos | fontes certificadas, tool registry | cobertura, remediação, recertificação |
+| observabilidade e custo | SRE/FinOps | desenho da telemetria | dashboards, baseline, budget | automação de comportamento, unit economics |
+| adoção e valor | negócio/change | portfólio, personas | treinamento do piloto, KPI | champions, operação regular, value review |
+
+### Prioridade do backlog
+
+`P0` · `P1` · `P2` é prioridade de backlog, **não** severidade nem fase paralela. Cada item continua vinculado a uma fase, a um workstream, a dependências e a um critério de saída.
+
+| Prioridade | Significado | Exemplos |
+|---|---|---|
+| **P0** | obrigatório para pilotar com segurança e rastreabilidade — sem isso o programa não deve se declarar pronto | charter, registry mínimo, tiers, blueprint, MPB, identidade para T2/T3, catálogos de fontes e ferramentas, logging, gate de publicação, kill switch, repositório de evidência |
+| **P1** | necessário para escalar sem criar gargalo manual ou perda de controle | discovery automatizado, JML, automação de attestation, integração com SOC, behavioral analytics, dashboard de custo, policy-as-code, rede de champions |
+| **P2** | otimização e automação avançada; antecipável quando houver dependência ou risco específico | scoring assistido, routing de modelos, detecção de duplicidade, grafo entre agentes, atribuição avançada de valor, remediação automática |
+
+### Um item de backlog de qualidade
+
+| Campo | Exemplo |
+|---|---|
+| outcome | 100% dos T2/T3 com identidade própria correlacionada ao registry |
+| por quê | eliminar credencial compartilhada e habilitar atribuição e baseline de comportamento |
+| dependências | `agent_id` no registry, API de IAM, dados de owner, eventos de lifecycle |
+| trabalho | standard, workflow de provisionamento, migração, JML, enriquecimento de telemetria |
+| evidência | export de registry e IAM mostrando cobertura; teste de revogação |
+| critério de saída | zero credencial compartilhada em T2/T3 sem exceção; 100% com owner válido |
+
+### Dependências entre workstreams
+
+Workstreams distribuem execução, mas **não podem otimizar localmente**. Identidade pode declarar "entregue" enquanto o registry ainda não associa identidade a `agent_id`: tecnicamente há entrega, operacionalmente a capacidade continua incompleta.
+
+Behavioral analytics depende de registry (identificar o ativo), identidade (atribuir a ação), telemetria (coletar as features) e runtime (responder ao desvio). Faltando qualquer uma, o backlog prioriza fundação — e essa relação precisa aparecer no plano integrado, não em listas separadas de cada time.
+
+**Milestones se definem por outcome cross-domain**, não por entrega de trilha.
+
+### Cadência
+
+| Frequência | Fórum | O que decide |
+|---|---|---|
+| semanal | workstream | entregas, dependências e bloqueios |
+| quinzenal | revisão integrada de arquitetura e governança | outcomes cross-domain |
+| mensal | sponsor e council | risco, prioridade, funding e exceções |
+| trimestral | revisão de maturidade | alvo e ajuste do roadmap |
+
+## Depois das 24 semanas — ciclo de melhoria contínua
+
+O framework não pode ficar estático enquanto agentes, modelos e protocolos evoluem. Mudança de policy precisa ser **impulsionada por evidência**: incidentes, exceções, falsos positivos, novos padrões de ataque, anomalias de custo, lacunas de maturidade, feedback de builders e mudança regulatória.
+
+Ciclo trimestral:
+
+1. Revisar KPIs, KRIs e tendências do estate.
+2. Analisar principais incidentes, quase-incidentes e eventos de quarentena.
+3. Revisar exceções e verificar se viraram padrão legítimo ou dívida de governança.
+4. Avaliar falsos positivos e negativos das regras de comportamento e dos policy gates.
+5. Revisar gargalos manuais e oportunidades de automação.
+6. Atualizar standards com changelog e data de vigência.
+7. Priorizar as próximas capacidades no roadmap de maturidade.
+
+O item 3 é o mais revelador: uma exceção que se repete não é exceção — é requisito que a policy ainda não reconheceu, ou controle que a operação não consegue cumprir. Os dois casos exigem mudança, não renovação.
+
+### Sinais de maturidade adaptativa
+
+- mudanças de policy são baseadas em dados de runtime e resultados de risco;
+- novos agentes são descobertos e registrados automaticamente;
+- mudança material dispara reavaliação proporcional;
+- sinais de comportamento reduzem capacidade ou exigem step-up automaticamente, com override governado;
+- custo e valor orientam retirada e arquitetura;
+- **evidência é produzida continuamente, não preparada para a auditoria.**
+
 ## Como usar sem virar teatro de programa
 
 - fases podem se sobrepor; gates não;
