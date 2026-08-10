@@ -119,6 +119,19 @@ Prompt instructions não substituem enforcement técnico.
 - audit de mudança de versão/capabilities;
 - periodic re-attestation.
 
+## Playbook de implantação
+
+Tools, APIs, connectors e MCP são a superfície onde o agente deixa de interpretar informação e passa a **agir**. Por isso a capacidade de ação precisa de classificação e autorização próprias, mesmo quando o agente já tem um tier.
+
+1. **Descobrir e registrar tools e servidores MCP.** Registry com owner, endpoint, autenticação, dados tocados, classes de ação, ambientes, consumidores e lifecycle. Descoberta automática ajuda; ownership e autorização precisam ser confirmados por pessoa.
+2. **Classificar ações, não produtos.** Uma API contém operações de riscos distintos. Separar leitura e busca, criação e atualização, exclusão e execução, privilegiada e administrativa, financeira e safety-critical. **O controle acompanha a ação específica.**
+3. **Definir tiers permitidos e pré-condições.** Para cada classe de ação: quais tiers podem consumi-la, identidade mínima, classe de dados, oversight humano e ambiente. Ação de alto impacto é default deny salvo exceção explícita.
+4. **Autorizar por parâmetros.** Validar alvo, valor, escopo, recurso e constraints no gateway ou broker. **O modelo pode propor parâmetros; nunca deve ser a autoridade que decide se são permitidos.**
+5. **Governar MCP como camada de confiança.** Registrar owner do servidor, ferramentas expostas, versão, autenticação, origem, fronteira de rede e política de descoberta. Descoberta externa ilimitada e servidores não aprovados não pertencem a agentes de produção.
+6. **Mediar ações materiais.** O broker aplica policy, rate limit, aprovações, validação de parâmetros e logging. Para ações privilegiadas, vincular a aprovação ao artefato da **ação exata**, não a uma sessão.
+7. **Definir quotas, circuit breakers e idempotência.** Um agente em loop repete ações válidas até causar dano. Limitar chamadas, custo, concorrência e retries; usar chave de idempotência e circuit breaker onde a operação suportar.
+8. **Monitorar e versionar mudanças.** Alteração de schema, autenticação, ação permitida ou servidor MCP pode ser mudança material. A telemetria precisa correlacionar `agent_id` → ferramenta → ação → resultado → decisão de policy.
+
 ## Evidências
 
 - tool registry record;

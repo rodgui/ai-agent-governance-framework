@@ -100,6 +100,19 @@ flowchart LR
 | alto | JIT, dual control para privilégio, session recording quando cabível |
 | crítico | isolamento dedicado, autorização por transação e monitoramento contínuo |
 
+## Playbook de implantação
+
+Identidade é o ponto que transforma atividade do agente em **ação atribuível**. Execute em ordem na primeira implantação; em ciclos posteriores, uma mudança material pode exigir apenas os passos afetados.
+
+1. **Classificar os modos de atuação.** Para cada agente: existe usuário presente? a ação ocorre exclusivamente no escopo dele? o agente executa de forma assíncrona ou para múltiplos usuários? Identidade delegada só quando a sessão humana e o escopo são reais; identidade própria quando o agente age por conta própria.
+2. **Inventariar e remediar credenciais.** Descobrir chaves de API, service accounts, tokens pessoais e secrets em builders, CI/CD e runtimes. Classificar como aprovada, transitória ou proibida, com owner e prazo. **Credencial compartilhada em T2/T3 é finding, não detalhe técnico.**
+3. **Padronizar emissão e ownership.** Convenção de nomes, owner, ambiente, expiry, tags, authority de criação e contato de recuperação. O registry precisa correlacionar `agent_id` ↔ `identity_id` ↔ owner — sem isso, JML e behavioral analytics ficam frágeis.
+4. **Modelar autorização por recurso, ação e parâmetros.** Least privilege não é apenas limitar a API. Uma ferramenta de atualização pode editar descrição sem poder alterar prioridade crítica; uma ferramenta de pagamento pode consultar sem poder executar acima do limite sem aprovação humana.
+5. **Definir tokens, secrets e sessão.** Tokens curtos, cofre, rotação e claims específicos. Proibir secrets em prompt, memória e código. Declarar o que acontece quando a identidade é revogada **durante** uma execução longa.
+6. **Integrar JML e attestation.** Saída de owner produz reatribuição ou suspensão; mudança de área pode alterar authority e centro de custo; attestation confirma owner, necessidade e permissões. Preservar o histórico de ownership e de mudanças de permissão.
+7. **Aplicar step-up e dual control em ações críticas.** A aprovação é vinculada a `agent_id`, ferramenta, alvo, parâmetros e validade. **Aprovação genérica em chat não é aprovação.** Para ações privilegiadas, autorização de curta duração e segregação de funções quando exigido.
+8. **Fechar o ciclo com logs e investigação.** Registrar usuário, agente, delegação, resultado da policy, ferramenta, ação, alvo e hash dos parâmetros. Validar que é possível reconstruir **quem pediu, qual agente decidiu, qual identidade executou e qual política autorizou**.
+
 ## Evidências
 
 - identity record e owner;
