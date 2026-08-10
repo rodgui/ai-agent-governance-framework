@@ -1,6 +1,6 @@
 ---
 title: ADR-0011 — Adoção da release 1.1.0 do framework
-status: approved
+status: accepted
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
 review_cycle: major-change

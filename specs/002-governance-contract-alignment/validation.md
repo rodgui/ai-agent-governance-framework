@@ -17,16 +17,16 @@ related:
 
 | Critério | Evidência esperada | Estado |
 | --- | --- | --- |
-| T4 separado de admissibility | ADR, docs, schemas e probes | pending |
-| lifecycle e discovery estruturados | Registry 2.0 + example + tests | pending |
-| model/source/tool bindings | Blueprint 2.0 + catalogs + invariants | pending |
-| Control Catalog versionado corretamente | schema 2.0 + migration + tests | pending |
-| Pages manual documentado | ADR de supersession; workflow preservado | pending |
-| programas sugestivos | callouts nos guias e índices | pending |
-| capability crosswalk | 15 capabilities → maturity → controls | pending |
-| toolkit humano ampliado | seis templates e index | pending |
-| release reproduzível | tags e GitHub Releases | pending |
-| quality gates | comandos e resultados reais | pending |
+| T4 separado de admissibility | ADR, docs, schemas e probes | done |
+| lifecycle e discovery estruturados | Registry 2.0 + example + tests | done |
+| model/source/tool bindings | Blueprint 2.0 + catalogs + invariants | done |
+| Control Catalog versionado corretamente | schema 2.0 + migration + tests | done |
+| Pages manual documentado | ADR de supersession; workflow preservado | done |
+| programas sugestivos | callouts nos guias e índices | done |
+| capability crosswalk | 15 capabilities → maturity → controls | done |
+| toolkit humano ampliado | seis templates e index | done |
+| release reproduzível | tags e GitHub Releases | done |
+| quality gates | comandos e resultados reais | done |
 
 ## Comandos planejados
 

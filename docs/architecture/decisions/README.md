@@ -14,7 +14,7 @@ Decisões arquiteturais estáveis, com contexto, alternativas e consequências.
 | [ADR-0008](0008-manual-documentation-site-publication.md) | accepted | Build verificável e publicação manual do site |
 | [ADR-0009](0009-risk-tier-and-admissibility.md) | accepted | Separação entre risk tier e admissibilidade |
 | [ADR-0010](0010-structured-governance-contracts-2.0.md) | accepted | Contratos estruturados de governança 2.0 |
-| [ADR-0011](0011-framework-release-1.1-adoption.md) | approved | Adoção da release 1.1.0 após quality gates e release |
+| [ADR-0011](0011-framework-release-1.1-adoption.md) | accepted | Adoção da release 1.1.0 após quality gates e release |
 
 ## Convenções
 
