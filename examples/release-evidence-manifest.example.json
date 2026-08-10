@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "releaseId": "REL-SERVICE-DESK-001",
+  "agentId": "service-desk-knowledge-agent",
+  "blueprintVersion": "1.0",
+  "decision": "approved",
+  "riskTier": "T2",
+  "admissibility": "permitted",
+  "createdAt": "2026-08-01T14:00:00Z",
+  "approvers": [
+    {
+      "role": "Release Authority",
+      "authority": "Example Governance Forum",
+      "decisionAt": "2026-08-01T14:00:00Z"
+    }
+  ],
+  "controlEvidence": [
+    {
+      "controlId": "AGF-REG-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/agent-registry.example.json"
+      ]
+    },
+    {
+      "controlId": "AGF-EVA-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/evaluation-report.example.md"
+      ]
+    },
+    {
+      "controlId": "AGF-OPS-001",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/support-runbook.example.md"
+      ]
+    },
+    {
+      "controlId": "AGF-RSK-004",
+      "status": "pass",
+      "evidenceRefs": [
+        "examples/risk-assessment.example.md"
+      ]
+    }
+  ],
+  "evaluationRefs": [
+    "examples/evaluation-report.example.md"
+  ],
+  "exceptionRefs": [],
+  "artifactHashes": [
+    {
+      "path": "examples/agent-blueprint.example.json",
+      "sha256": "adb2b04a4b3875ef762a2ae6b3556c4e6140858da8e89710b40ffb794d7ccbc8"
+    }
+  ]
+}

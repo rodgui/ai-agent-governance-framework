@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "eventId": "EVT-EXAMPLE-0001",
+  "timestamp": "2026-08-09T12:00:00Z",
+  "agentId": "service-desk-knowledge-agent",
+  "agentVersion": "1.0",
+  "eventType": "tool-request",
+  "actor": {
+    "type": "workload",
+    "identityRef": "workload://example/service-desk-knowledge-agent"
+  },
+  "correlationId": "example-correlation-001",
+  "outcome": "success",
+  "policyDecision": "allow",
+  "dataClassifications": [
+    "internal"
+  ],
+  "tool": {
+    "catalogEntryId": "TLR-KNOWLEDGE-SEARCH-001",
+    "action": "knowledge.search",
+    "stateChanging": false
+  },
+  "redactionApplied": true,
+  "evidenceRef": "examples/release-evidence-manifest.example.json",
+  "reasonCode": "APPROVED-SOURCE"
+}

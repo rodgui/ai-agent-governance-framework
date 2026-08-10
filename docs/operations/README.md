@@ -2,7 +2,7 @@
 title: Operações, observabilidade, resposta e lifecycle
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -43,7 +43,7 @@ Antes do release, deve existir:
 | tool | allow/deny, latency, side effect, failure e cost |
 | identity | authn/authz, scope e anomalies |
 | business | outcome, error, control impact e value |
-| governance | exception, finding, attestation e lifecycle status |
+| governance | exception, finding, attestation, lifecycle stage e operational state |
 
 Dashboards precisam de owner, threshold e action; caso contrário são visualização, não governança.
 

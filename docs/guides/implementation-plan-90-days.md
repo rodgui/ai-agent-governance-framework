@@ -2,7 +2,7 @@
 title: Roadmap de implantação — 90 dias
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -13,6 +13,8 @@ related:
 ---
 
 # Roadmap de implantação — 90 dias
+
+> **Referência acelerada, não SLA.** Os 90 dias ajudam equipes que precisam de uma sequência inicial. Adapte duração e sobreposição às dependências, ao estate e à capacidade da organização. O calendário nunca substitui G0–G7 nem cria obrigação de piloto.
 
 ## Objetivo
 

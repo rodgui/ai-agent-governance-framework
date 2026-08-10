@@ -14,7 +14,7 @@ related:
 
 # Control catalog de governança de IA e agentes
 
-O catálogo traduz policy e princípios em requirements verificáveis. A fonte estruturada é [`control-catalog.json`](control-catalog.json), validada pelo [`control-catalog.schema.json`](../schemas/control-catalog.schema.json).
+O catálogo 1.2.0 traduz policy e princípios em requirements verificáveis. A fonte estruturada é [`control-catalog.json`](control-catalog.json), validada pelo [`control-catalog.schema.json`](../schemas/control-catalog.schema.json) 2.0. Consulte a [migração dos contratos](../docs/guides/schema-migration-2.0.md).
 
 ## Estrutura de um control
 
@@ -31,7 +31,7 @@ Cada control declara:
 - evidence esperada;
 - `blocking`: se a reprovação impede release ou continuidade em produção;
 - metrics;
-- automation: `manual`, `assisted` ou `automated`;
+- automation: `manual`, `assisted`, `automated` ou `mixed`;
 - mappings externos quando houver referência verificável.
 
 A distinção entre `evidence` e `verification` é deliberada. **Evidence é o artefato; verification é o teste.** "Governance charter" não diz o que faz o control passar — por isso todo control declara os dois.
@@ -42,8 +42,8 @@ Os controls são módulos diretos da [policy canônica](../docs/governance/polic
 
 ## Como aplicar
 
-1. classifique o agent/use case;
-2. selecione a baseline do tier;
+1. classifique o agent/use case e decida admissibilidade;
+2. selecione a baseline do tier e as condições/exception controls da admissibilidade;
 3. avalie applicability e contexto;
 4. registre implementation owner;
 5. vincule evidence verificável;
@@ -52,7 +52,7 @@ Os controls são módulos diretos da [policy canônica](../docs/governance/polic
 8. trate findings e residual risk;
 9. reavalie após change, incident ou attestation.
 
-O catálogo integra a policy candidate. Ele se torna baseline normativa de uma organização somente quando a release correspondente é explicitamente aprovada e adotada.
+O catálogo integra a policy canônica adotada deste repositório. Ele se torna baseline normativa de uma organização somente quando a release correspondente é explicitamente aprovada e adotada pela authority da própria organização.
 
 O piso operacional que traduz esta baseline em gate verificável é o [Minimum Production Bar por tier](../docs/risk-management/minimum-production-bar.md).
 
@@ -63,13 +63,13 @@ O piso operacional que traduz esta baseline em gate verificável é o [Minimum P
 | adoption | 2 | organization | 3 |
 | audit | 3 | registry | 3 |
 | data | 3 | responsible-ai | 3 |
-| evaluation | 3 | risk | 3 |
+| evaluation | 3 | risk | 4 |
 | identity | 3 | security | 3 |
 | lifecycle | 2 | tools | 3 |
 | model | 3 | value | 3 |
 | operations | 3 | | |
 
-Total: **43 controls** — 39 de escopo `agent` e 4 de escopo `organization`; 26 bloqueantes.
+Total: **44 controls** — 40 de escopo `agent` e 4 de escopo `organization`; 27 bloqueantes.
 
 A distribuição é aproximadamente uniforme, e isso é um sinal a observar, não uma virtude: risco real não é simétrico entre domínios. Os números atuais refletem a origem editorial do catálogo. Conforme evidência operacional se acumular, espere que alguns domínios cresçam e outros encolham — e trate uma distribuição que **permanece** uniforme como indício de que o catálogo não está aprendendo com a operação.
 
@@ -111,6 +111,7 @@ A distribuição é aproximadamente uniforme, e isso é um sinal a observar, nã
 | `AGF-RSK-001` | risk | Tiering e red flags | agent | T1, T2, T3, T4 | sim |
 | `AGF-RSK-002` | risk | Assessment e residual risk | agent | T2, T3, T4 | sim |
 | `AGF-RSK-003` | risk | Reavaliação contínua | agent | T1, T2, T3, T4 | não |
+| `AGF-RSK-004` | risk | Admissibilidade e exceções temporárias | agent | T1, T2, T3, T4 | sim |
 | `AGF-SEC-001` | security | Threat model do sistema agentic | agent | T2, T3, T4 | sim |
 | `AGF-SEC-002` | security | Sandbox, egress e supply chain | agent | T3, T4 | sim |
 | `AGF-SEC-003` | security | Adversarial testing e regression | agent | T2, T3, T4 | não |
@@ -141,7 +142,7 @@ O catálogo especifica outcomes e evidências, não produtos. Por exemplo, `AGF-
 
 ## Mappings externos
 
-Todos os 43 controls declaram `frameworkMappings` para as referências **públicas e verificáveis**: NIST AI RMF 1.0 (funções `GOVERN`, `MAP`, `MEASURE`, `MANAGE`), EU AI Act (Regulamento (UE) 2024/1689, no nível de artigo), OWASP para riscos agentic e MCP, e MITRE ATLAS para táticas adversariais.
+Todos os 44 controls declaram `frameworkMappings` para as referências **públicas e verificáveis**: NIST AI RMF 1.0 (funções `GOVERN`, `MAP`, `MEASURE`, `MANAGE`), EU AI Act (Regulamento (UE) 2024/1689, no nível de artigo), OWASP para riscos agentic e MCP, e MITRE ATLAS para táticas adversariais.
 
 Cada mapping carrega a nota de que representa **alinhamento direcional declarado pelo framework** — não equivalência, conformidade nem atestação. Um mapping é uma afirmação sobre intenção de desenho, não sobre o resultado de uma avaliação.
 

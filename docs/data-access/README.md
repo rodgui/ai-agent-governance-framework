@@ -2,7 +2,7 @@
 title: Dados, acesso, provenance e AI-ready data
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -10,6 +10,8 @@ related:
   - ../risk-management/README.md
   - ../responsible-ai/README.md
   - ../patterns/ai-ready-data-gate.md
+  - ../../schemas/certified-source-catalog.schema.json
+  - ../../examples/certified-source-catalog.example.json
 ---
 
 # Dados, acesso, provenance e AI-ready data
@@ -113,11 +115,11 @@ O gate deve existir no ponto de criação do connector e na mudança material de
 
 AI-ready não é sinônimo de "disponível para recuperação". Uma fonte só é certificada quando ownership, classificação, qualidade, autorização, finalidade e restrições de uso por IA são conhecidos **e operáveis**.
 
-1. **Inventariar fontes candidatas.** Começar pelos casos do piloto e descobrir repositórios, APIs, bases estruturadas, documentos e knowledge stores. Registrar owner, sistema de origem e consumidores atuais.
+1. **Inventariar fontes candidatas.** Começar pelos casos prioritários ou por uma cohort representativa e descobrir repositórios, APIs, bases estruturadas, documentos e knowledge stores. Registrar owner, sistema de origem e consumidores atuais.
 2. **Classificar e confirmar a authority do owner.** Validar classificação, presença de dados pessoais ou restritos, residency, retenção e quem pode autorizar uso por IA. **Fonte sem owner ou classificação confiável vai para remediação, não para produção.**
 3. **Definir critérios AI-ready observáveis.** Transformar "qualidade" em atualidade, completude, versionamento, metadados, ACL consistente, fonte autoritativa, restrições de modelo e procedimento de correção.
 4. **Certificar com evidência.** Aplicar o checklist, amostrar conteúdo e permissões, registrar findings e a decisão `certified`, `conditional` ou `not-ready`. Condicional exige restrições explícitas e data de revisão.
-5. **Manter catálogo e backlog.** O catálogo é o allowlist governado; o backlog contém fontes legítimas que ainda não atendem aos critérios. Ver o [exemplo preenchido](../../examples/certified-source-catalog.example.md).
+5. **Manter catálogo e backlog.** O catálogo é o allowlist governado; o backlog contém fontes legítimas que ainda não atendem aos critérios. Use o [schema do Certified Source Catalog](../../schemas/certified-source-catalog.schema.json) e o [exemplo JSON](../../examples/certified-source-catalog.example.json); o [exemplo narrativo](../../examples/certified-source-catalog.example.md) mostra como documentar rationale e backlog.
 6. **Separar acesso do agente do acesso do usuário.** Em recuperação e ferramentas, confirmar que o resultado respeita ACL e claims. **"O agente consegue buscar" não significa que todo usuário pode receber todo resultado.**
 7. **Controlar ingestão, indexação e memória.** Decidir quais campos podem virar embedding, o que pode ser cacheado, por quanto tempo, e como exclusão ou correção na origem se propaga ao índice e à memória.
 8. **Reavaliar em operação.** Nova classe de dados, mudança de owner, queda de qualidade, alteração de ACL ou troca de provedor podem invalidar a certificação. Monitorar atualidade, anomalias de acesso negado e incidentes de vazamento.

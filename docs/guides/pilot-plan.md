@@ -1,5 +1,5 @@
 ---
-title: Plano de piloto e critérios de expansão
+title: Plano opcional de piloto e critérios de expansão
 status: maintained
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
@@ -12,11 +12,13 @@ related:
   - ../operations/behavioral-analytics.md
 ---
 
-# Plano de piloto e critérios de expansão
+# Plano opcional de piloto e critérios de expansão
+
+> **Uso opcional.** Este documento é um template para organizações que escolhem um piloto porque precisam aprender em ambiente delimitado. Cohort de onboarding, phased rollout ou evidência de agentes existentes podem cumprir o mesmo objetivo. G0–G7, MPB e evidence requirements continuam iguais em qualquer rota.
 
 ## Objetivo
 
-O piloto existe para **testar a governança**, não para provar que um modelo de linguagem funciona.
+Quando escolhido, o piloto existe para **testar a governança**, não para provar que um modelo de linguagem funciona.
 
 Se todos os casos-piloto forem de leitura, a organização não valida identidade própria, mediação de ferramentas, oversight humano, rollback, quarentena, evidence pack ou resposta a incidente — e conclui, erradamente, que está pronta.
 
@@ -31,7 +33,7 @@ Selecione de três a quatro casos que **forcem rotas diferentes** do framework.
 | T2 | transação e governança de ferramentas | agente que abre e atualiza chamados |
 | T3 | assurance completo e aprovação humana | agente que propõe mudança material e executa após aprovação |
 
-Não comece por T4. T4 é default deny: pilotar exceção antes de a rota normal funcionar inverte a ordem de aprendizado.
+Como regra de aprendizagem, não comece por T4: primeiro demonstre fundações e containment em casos menos críticos. Exceções são legítimas quando o primeiro caso real já é T4 ou quando a criticidade exige validação imediata; nesse cenário, aplique authority e controls de T4 desde o início. T4 não é sinônimo de `restricted`.
 
 ## Desenho
 
@@ -56,9 +58,9 @@ Não comece por T4. T4 é default deny: pilotar exceção antes de a rota normal
 | resultado | KPI de negócio do caso, contra baseline congelada |
 | experiência | percepção de builder, reviewer, owner e operador |
 
-## Critérios de expansão
+## Critérios de expansão quando a rota escolhida é piloto
 
-Não escale antes de todos serem verdadeiros:
+Se a organização escolheu piloto, não escale a cohort antes de todos serem verdadeiros:
 
 - nenhum finding crítico aberto; findings altos apenas com residual risk aceito pela authority correta;
 - lead time de T1 baixo o suficiente para que **contornar a governança não compense**;
@@ -86,4 +88,4 @@ O relatório fecha o ciclo e alimenta a decisão de expansão. Deve conter: obje
 
 ## Decision gate
 
-A expansão para a próxima onda exige relatório de piloto com decisão registrada, critérios de expansão atendidos e mudanças de standard já incorporadas e versionadas.
+Quando houver piloto, a expansão para a próxima onda exige relatório com decisão registrada, critérios atendidos e mudanças de standard incorporadas e versionadas. Sem piloto, a organização precisa apresentar evidência equivalente da primeira cohort, phased rollout ou operação existente; o gate avalia a qualidade da evidência, não o nome da rota.

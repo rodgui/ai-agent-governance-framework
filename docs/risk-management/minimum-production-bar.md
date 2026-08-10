@@ -11,6 +11,7 @@ related:
   - ../guides/framework-implementation-playbook.md
   - ../../controls/README.md
   - ../../templates/publication-checklist.md
+  - ../architecture/decisions/0009-risk-tier-and-admissibility.md
 ---
 
 # Minimum Production Bar por tier
@@ -24,24 +25,36 @@ O MPB define o **piso, não o teto**. Controles adicionais disparados por risco,
 ## Como ler a tabela
 
 - T1 inclui a rota automatizada do [fast path](README.md#fast-path-de-t1): os itens continuam obrigatórios, mas são verificados por policy em vez de revisão manual.
-- **T4 não é um tier de produção mais rigoroso.** É a categoria de uso restrito ou proibido. A coluna T4 deve ser lida como *default deny + controles de exceção*, não como rota normal de go-live. Ela aparece na tabela para preservar rastreabilidade: mesmo uma rejeição precisa de registro auditável.
+- T4 é o tier de risco crítico. `restricted` e `prohibited` pertencem à dimensão separada de admissibilidade; não são sinônimos de T4.
+- Leia primeiro a baseline de risco e depois o gate de admissibilidade. As duas condições precisam ser satisfeitas.
 
 ## Baseline por tier
 
-| Controle | T1 | T2 | T3 | T4 (default deny) |
+| Controle | T1 | T2 | T3 | T4 crítico |
 |---|---|---|---|---|
-| registro e descoberta | obrigatório, automatizável | obrigatório completo | obrigatório + delegado | registro obrigatório mesmo quando rejeitado |
-| ownership | owner atribuído | business + technical | business + technical + delegado | sponsor executivo + owners accountable |
-| classificação de risco | pre-screen registrado | tier record formal | tier formal + escaladores + reassessment | uso restrito + registro de exceção e authority |
-| identidade | padrão aprovado | identidade própria do agente | identidade própria + policy reforçada e step-up | identidade isolada, controles máximos, se a avaliação for permitida |
-| dados | classes aprovadas e conhecidas | classificados + fonte certificada ou condicional | constraints explícitas + evidência | tratamento restrito explícito; nenhuma transferência não aprovada |
-| tools | catálogo/allowlist, sem alto impacto | registradas + autorização com escopo | mediadas + controles de alto impacto | apenas ferramentas mediadas sob exceção |
+| registro e descoberta | obrigatório, automatizável | obrigatório completo | obrigatório + delegado | obrigatório + owner/sponsor e dependências críticas reconciliadas |
+| ownership | owner atribuído | business + technical | business + technical + delegado | sponsor executivo + owners accountable + Run Authority |
+| classificação de risco | pre-screen registrado | tier record formal | tier formal + escaladores + reassessment | tier e cenários críticos revisados pela authority competente |
+| identidade | padrão aprovado | identidade própria do agente | identidade própria + policy reforçada e step-up | identidade isolada, privilégio mínimo e dual control onde aplicável |
+| dados | classes aprovadas e conhecidas | classificados + fonte certificada ou condicional | constraints explícitas + evidência | constraints críticas, lineage e containment demonstrados |
+| tools | catálogo/allowlist, sem alto impacto | registradas + autorização com escopo | mediadas + controles de alto impacto | mediadas, segregadas e sujeitas a dual control quando irreversíveis |
 | logging e telemetria | padrão, campos mínimos chegando ao pipeline | completa com correlação | completa + baseline de comportamento | telemetria forense completa |
-| testes | funcionais | segurança e evals | adversariais + resiliência | adversariais completos + específicos da exceção |
-| impact assessment | por trigger | por trigger | obrigatório e aprofundado | obrigatório se a exceção for sequer considerada |
-| rollback e kill switch | documentado | testável | testado + runbook de quarentena | contenção testada antes de qualquer teste da exceção |
-| evidência | pacote leve, recuperável | evidence pack do tier | evidence pack reforçado | dossiê de exceção com evidência para a authority |
-| attestation | periódica | periódica | frequente ou orientada a evento | expiry da exceção e revisão frequente |
+| testes | funcionais | segurança e evals | adversariais + resiliência | adversariais, resilience e failure containment completos |
+| impact assessment | por trigger | por trigger | obrigatório e aprofundado | obrigatório e aprovado pela authority compatível |
+| rollback e kill switch | documentado | testável | testado + runbook de quarentena | containment, fail-safe e recuperação exercitados |
+| evidência | pacote leve, recuperável | evidence pack do tier | evidence pack reforçado | evidence pack crítico com challenge e segregation demonstrados |
+| attestation | periódica | periódica | frequente ou orientada a evento | frequente, orientada a evento e com executive review |
+
+## Gate de admissibilidade
+
+| Admissibilidade | Condição para produção |
+| --- | --- |
+| `permitted` | MPB do tier satisfeito e evidence pack aprovado |
+| `conditional` | MPB satisfeito, condições testáveis, owner, prazo e monitoramento registrados |
+| `restricted` | MPB satisfeito **e** exception record com authority, rationale, compensating controls e expiry |
+| `prohibited` | produção não é permitida; preservar registro da decisão e evidências |
+
+Admissibilidade não reduz o MPB. Uma exceção de uso `restricted` autoriza avaliar a publicação sob condições; não dispensa controls do tier.
 
 ## Como operacionalizar
 
@@ -87,9 +100,9 @@ O gate **não** pede que segurança "reavalie tudo". Ele verifica que a evidênc
 - verificar o MPB apenas antes do go-live e nunca mais;
 - tratar exceção de MPB como aprovação silenciosa e sem prazo;
 - confundir o piso com o teto e parar de aplicar controles por risco;
-- ler a coluna T4 como rota de produção;
+- tratar T4 como sinônimo automático de `restricted` ou `prohibited`;
 - automatizar o check antes de o dado de origem ser confiável.
 
 ## Decision gate
 
-Nenhum agente entra em produção sem o MPB do seu tier satisfeito e evidenciado. Nenhum agente permanece em produção com item de MPB reprovado sem exceção registrada, compensating control e expiry.
+Nenhum agente entra em produção sem o MPB do seu tier satisfeito e evidenciado **e** admissibilidade diferente de `prohibited`. Nenhum agente permanece em produção com item de MPB reprovado sem exceção registrada, compensating control e expiry; usos `restricted` exigem também exception authority e validade próprias.

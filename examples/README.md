@@ -8,6 +8,11 @@ Exemplos fictícios e sanitizados que demonstram o uso dos schemas e templates.
 - [`agent-blueprint.example.json`](agent-blueprint.example.json) — blueprint técnico correspondente.
 - [`control-catalog.example.json`](control-catalog.example.json) — catálogo mínimo para demonstrar o schema.
 - [`maturity-assessment.example.json`](maturity-assessment.example.json) — assessment de organização fictícia.
+- [`model-provider-catalog.example.json`](model-provider-catalog.example.json) — combinação provider/model/version aprovada.
+- [`certified-source-catalog.example.json`](certified-source-catalog.example.json) — fontes certificadas e restrições estruturadas.
+- [`enterprise-tool-registry.example.json`](enterprise-tool-registry.example.json) — tools catalogadas com scopes e containment.
+- [`release-evidence-manifest.example.json`](release-evidence-manifest.example.json) — decisão e evidence lineage de release.
+- [`audit-event.example.json`](audit-event.example.json) — envelope auditável de uma tool request sem payload sensível.
 
 ## Evidence package operacional
 

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "1.0",
+  "title": "Example Approved Model and Provider Catalog",
+  "owner": "Example Model Governance Authority",
+  "lastReviewed": "2026-08-10",
+  "entries": [
+    {
+      "id": "MPC-EXAMPLE-INSTRUCTION-001",
+      "provider": "example-provider",
+      "modelId": "example-instruction-model",
+      "modelVersion": "2026-07-15",
+      "purpose": "Classificação de intenção, síntese grounded e preparação de respostas internas.",
+      "hosting": "managed",
+      "status": "approved",
+      "versionPinned": true,
+      "dataUse": "no-training",
+      "allowedDataClasses": [
+        "public",
+        "internal"
+      ],
+      "allowedRegions": [
+        "example-region"
+      ],
+      "allowedRiskTiers": [
+        "T1",
+        "T2"
+      ],
+      "evaluationRef": "examples/evaluation-report.example.md",
+      "reviewExpiresAt": "2026-11-01",
+      "exitStrategy": "Fail closed e substituir somente após avaliação de equivalência aprovada.",
+      "limitations": [
+        "Não possui autoridade para executar mudanças",
+        "Pode gerar conteúdo incorreto"
+      ]
+    }
+  ]
+}

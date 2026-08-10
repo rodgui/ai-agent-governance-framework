@@ -5,6 +5,7 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 ## Governança e arquitetura
 
 - [Governance Charter](governance-charter-template.md)
+- [Governance RACI](governance-raci-template.md)
 - [Terms of reference de fórum](governance-forum-tor.md)
 - [Dicionário de taxonomia e metadados](agent-taxonomy-dictionary.md)
 - [Agent Registry Record](agent-registry-template.md)
@@ -15,13 +16,21 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 ## Assessment e release
 
 - [Maturity Assessment](maturity-assessment-template.md)
+- [Capability Assessment Worksheet](capability-assessment-worksheet.md)
 - [Intake de caso de uso](use-case-intake.md)
 - [Risk pre-screen](risk-pre-screen.md)
+- [Agent Risk Record](agent-risk-record.md)
 - [Autoavaliação de agente](self-assessment-form.md)
 - [Exemplo de autoavaliação](self-assessment-example.md)
 - [Technology Assessment](assessment-template.md)
 - [Checklist de decisão de release](publication-checklist.md)
+- [Release Evidence Manifest](release-evidence-manifest.md)
+- [Attestation and Sunset Record](attestation-sunset-record.md)
 - [Sunset Plan](sunset-plan.md)
+
+## Operação e analytics
+
+- [Behavioral Analytics Use Case](behavioral-analytics-use-case.md)
 
 ## Comunicação e pesquisa
 

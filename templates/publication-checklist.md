@@ -11,9 +11,11 @@ Use antes de qualquer release ou mudança material. Cada item deve ter owner e e
 
 Evidence refs:
 
-## 2. Risk tier e decision rights
+## 2. Risk tier, admissibilidade e decision rights
 
 - [ ] Tier e rationale aprovados pela autoridade competente.
+- [ ] Admissibilidade e rationale registrados separadamente do tier.
+- [ ] Uso `restricted` possui exception authority, compensating controls e expiry; uso `prohibited` resulta em rejeição.
 - [ ] Decision rights e segregation of duties são proporcionais ao risco.
 - [ ] Human accountability boundary está explícita.
 - [ ] Exceptions possuem owner, prazo e expiry.

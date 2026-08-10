@@ -2,7 +2,7 @@
 title: Governança de tools, APIs e MCP
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -10,6 +10,8 @@ related:
   - ../security/README.md
   - ../operations/README.md
   - ../patterns/tool-and-mcp-gateway.md
+  - ../../schemas/enterprise-tool-registry.schema.json
+  - ../../examples/enterprise-tool-registry.example.json
 ---
 
 # Governança de tools, APIs e MCP
@@ -50,6 +52,8 @@ Cada tool, API ou MCP server registra:
 - approval mode;
 - kill switch e revocation path;
 - vulnerabilities, findings e validade da aprovação.
+
+O contrato mínimo vendor-neutral está no [Enterprise Tool Registry schema](../../schemas/enterprise-tool-registry.schema.json), com [exemplo preenchido](../../examples/enterprise-tool-registry.example.json). O registry pode viver em GRC, CMDB, catálogo de API ou plataforma equivalente; o importante é o binding estável `catalogEntryId` usado pelo Blueprint e pelos audit events.
 
 ## MCP governance
 
@@ -135,6 +139,7 @@ Tools, APIs, connectors e MCP são a superfície onde o agente deixa de interpre
 ## Evidências
 
 - tool registry record;
+- [Enterprise Tool Registry estruturado](../../schemas/enterprise-tool-registry.schema.json);
 - provenance e versão;
 - threat model;
 - permission matrix;

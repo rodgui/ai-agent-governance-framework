@@ -46,11 +46,13 @@ Responda `sim`, `não` ou `não sei`. **`Não sei` não é `não`** — é um ga
 
 ## Encaminhamento
 
-- Rota proposta: `T1 fast path` / `T1` / `T2` / `T3` / `T4 default deny`
+- Tier proposto: `T1 fast path` / `T1` / `T2` / `T3` / `T4`
+- Admissibilidade preliminar: `permitted` / `conditional` / `restricted` / `prohibited`
+- Rationale e authority necessárias para admissibilidade:
 - Escaladores acionados:
 - Impact assessment requerido: `sim` / `não`
 - Domain reviews acionadas:
 - Gaps com owner e prazo:
 - Rationale da rota:
 
-O pre-screen é evidência: registre-o com data, responsável e versão do modelo de risco. A classificação final e sua authority são registradas conforme o [contrato de decision gates](../docs/guides/framework-implementation-playbook.md#contrato-comum-dos-decision-gates).
+O pre-screen é evidência: registre-o com data, responsável e versão do modelo de risco. A classificação e a admissibilidade finais, com suas authorities, são registradas conforme o [contrato de decision gates](../docs/guides/framework-implementation-playbook.md#contrato-comum-dos-decision-gates).

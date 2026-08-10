@@ -11,6 +11,8 @@ related:
   - ../operations/README.md
   - ../patterns/lifecycle-attestation-and-sunset.md
   - ../guides/framework-implementation-playbook.md
+  - ../../schemas/agent-registry.schema.json
+  - ../../templates/attestation-sunset-record.md
 ---
 
 # Lifecycle, mudança material, attestation e retirement
@@ -30,15 +32,21 @@ O resultado esperado: **qualquer agente em produção possui estado conhecido, o
 
 Confundir as duas produz o erro mais comum do domínio: aprovar uma versão e tratar a aprovação como permanente para o ativo.
 
-## Etapa da jornada não é estado de lifecycle
+## Etapa da jornada, lifecycle stage e operational state
 
-**Etapa** descreve o trabalho em andamento (ideia, design, build, avaliação, operação). **Estado** é a condição machine-readable usada por workflow, IAM e automação. Uma etapa pode conter mais de um estado, e o estado precisa refletir consequência operacional — não atividade de projeto.
+Três visões coexistem sem ser sinônimas:
+
+- **etapa da jornada** orienta o trabalho humano: ideia, design, build, avaliação e operação;
+- **lifecycle stage** registra a posição formal do ativo: `discovered`, `draft`, `under-review`, `approved`, `production`, `retirement-review`, `retired` ou `archived`;
+- **operational state** registra a consequência técnica atual: `not-deployed`, `enabled`, `suspended`, `quarantined` ou `disabled`.
+
+Separar stage de operational state evita transformar quarentena em falso avanço de lifecycle. Um agente pode permanecer em stage `production` e mudar de `enabled` para `quarantined` sem perder o histórico de release.
 
 | Etapa | O que produz | Gate para avançar |
 |---|---|---|
 | ideia | intake, hipótese de valor, decisão `agent` vs `workflow` determinístico | problema e owner inicial claros |
 | registro | `agent_id`, owners, ambiente, finalidade, status inicial | nenhum build compartilhado ou produção sem ID e owner |
-| classificação | tier, escaladores, red flags, impact trigger screen | tier e triggers válidos; T4 segue exceção explícita |
+| classificação | tier, admissibilidade, escaladores, red flags, impact trigger screen | tier e admissibilidade válidos; `restricted` segue exceção explícita |
 | design | blueprint, identidade, dados, tools, modelo, oversight, telemetria, failure behavior | design atende ao baseline do tier; gaps têm owner |
 | build | configuração versionada, integrações, bindings de observabilidade | build reproduz o blueprint; secrets e permissões dentro da policy |
 | avaliação | evals funcionais, abuse cases, testes de dados/tools, resiliência, rollback | findings bloqueadores fechados ou aceitos pela authority correta |
@@ -53,28 +61,34 @@ Gate não significa reunião. Em T1, vários gates podem ser policy-driven. O qu
 
 ## State machine
 
-Estados mínimos que **mudam permissões ou tratamento operacional**:
+Stages mínimos:
 
-`draft` · `under-review` · `approved` · `production` · `suspended` · `quarantine` · `retirement-review` · `retired`
+`discovered` · `draft` · `under-review` · `approved` · `production` · `retirement-review` · `retired` · `archived`
+
+Operational states mínimos:
+
+`not-deployed` · `enabled` · `suspended` · `quarantined` · `disabled`
 
 Regras estruturais:
 
 - `draft` não vai diretamente a `production`;
-- `quarantine` não retorna a `production` sem correção, reteste e aprovação;
+- `quarantined` não retorna a `enabled` sem correção, reteste e aprovação;
 - cada transição registra evento disparador, authority, evidência e ações automáticas;
-- a state machine é versionada e o histórico é preservado — a auditoria precisa saber em que estado o agente estava no momento de um evento.
+- stage e operational state são versionados e o histórico é preservado — a auditoria precisa saber as duas condições no momento de um evento.
 
 ### Matriz de transição
 
-| Estado atual | Evento | Próximo estado | Authority | Ações automáticas |
-|---|---|---|---|---|
-| `draft` | solicitação de publicação | `under-review` | workflow | congelar versão do blueprint; executar pre-screen |
-| `under-review` | evidências e gates completos | `approved` | authority de publicação do tier | emitir approval record com expiry |
-| `approved` | deploy concluído e health check OK | `production` | plataforma | ativar policy de runtime, telemetria e budget |
-| `production` | sinal crítico de segurança ou comportamento | `quarantine` | Run Authority | desabilitar tools/identidade conforme runbook; preservar evidência |
-| `production` | dormancy threshold atingido | `retirement-review` | serviço de lifecycle | notificar owner; iniciar grace period |
-| `production` | mudança material declarada | `under-review` | Design Authority | reabrir apenas as etapas afetadas |
-| `retirement-review` | owner confirma desuso | `retired` | owner + plataforma | remover acessos e secrets; arquivar evidência |
+| Stage/state atual | Evento | Stage/state seguinte | Authority | Ações automáticas |
+| --- | --- | --- | --- | --- |
+| `draft` / `not-deployed` | solicitação de publicação | `under-review` / `not-deployed` | workflow | congelar blueprint; executar pre-screen |
+| `under-review` / `not-deployed` | evidências e gates completos | `approved` / `not-deployed` | authority de publicação do tier | emitir decision record com expiry |
+| `approved` / `not-deployed` | deploy e health check OK | `production` / `enabled` | plataforma | ativar policy de runtime, telemetria e budget |
+| `production` / `enabled` | sinal crítico de segurança ou comportamento | `production` / `quarantined` | Run Authority | desabilitar tools/identidade conforme runbook; preservar evidência |
+| `production` / `enabled` | suspensão administrativa | `production` / `suspended` | owner ou Run Authority | interromper novas execuções; preservar configuração |
+| `production` / qualquer | dormancy threshold atingido | `retirement-review` / estado observado | serviço de lifecycle | notificar owner; iniciar grace period |
+| `production` / qualquer | mudança material declarada | `under-review` / `not-deployed` para a versão candidata | Design Authority | manter release atual governada; reabrir apenas etapas afetadas |
+| `retirement-review` / qualquer | owner confirma desuso | `retired` / `disabled` | owner + plataforma | remover acessos e secrets; arquivar evidência |
+| `retired` / `disabled` | retenção concluída | `archived` / `disabled` | Records Authority | preservar somente evidência exigida |
 
 ### Suspensão, quarentena e retirada são ações diferentes
 
@@ -83,8 +97,8 @@ Um único botão "disable" para os três casos destrói a rastreabilidade.
 | Ação | Motivo | Evidência preservada | Reversível |
 |---|---|---|---|
 | `suspended` | administrativo ou planejado | configuração e histórico | sim, por decisão do owner |
-| `quarantine` | risco ou incidente | evidência forense preservada deliberadamente | somente com causa, correção e regression evidence |
-| `retired` | fim de vida | arquivada conforme retenção | não — exige novo ciclo completo |
+| `quarantined` | risco ou incidente | evidência forense preservada deliberadamente | somente com causa, correção e regression evidence |
+| `disabled` em stage `retired` | fim de vida | arquivada conforme retenção | não — exige novo ciclo completo |
 
 ## Mudança material
 
@@ -123,7 +137,7 @@ Valores iniciais sugeridos, a calibrar com evidência:
 | T1 | 120 dias | 30 dias |
 | T2 | 90 dias | 21 dias |
 | T3 | 60 dias | 14 dias |
-| T4 | 30 dias | 7 dias, com revisão da exceção vigente |
+| T4 | 30 dias | 7 dias, com revisão de admissibilidade e da exceção quando `restricted` |
 
 Procedimento de calibração:
 
@@ -152,13 +166,14 @@ A identidade de um agente não pode permanecer silenciosamente vinculada a algu�
 5. Calibrar attestation e dormancy pelo padrão real de uso, em report-only primeiro.
 6. Integrar JML de owners ao registry, com consulta reversa por ownership.
 7. Implementar suspensão, quarentena e retirada como ações distintas.
-8. Pilotar manualmente em 10–20 agentes — incluindo ao menos um T3, um leaver, uma mudança material e um incidente simulado — antes de virar policy-as-code.
+8. Antes de virar policy-as-code, validar manualmente em uma cohort representativa ou usar evidência operacional equivalente. Uma cohort sugerida contém 10–20 agentes, ao menos um T3, um leaver, uma mudança material e um incidente simulado; isso é guidance adaptável, não piloto obrigatório.
 
 ## Artefatos
 
 - Agent Lifecycle Standard: estados, transições, triggers, roles, timers, JML, quarentena, retirada e retenção;
 - matriz de transição e runbook operacional;
 - registro de attestation e de mudanças materiais;
+- [template de attestation e sunset](../../templates/attestation-sunset-record.md);
 - [plano de sunset](../../templates/sunset-plan.md).
 
 ## Evidências
@@ -193,4 +208,4 @@ A identidade de um agente não pode permanecer silenciosamente vinculada a algu�
 
 ## Decision gate
 
-Nenhum agente permanece em produção sem estado válido na state machine, owner ativo, attestation dentro do prazo do tier e caminho de contenção e retirada exercitado. Mudança material sem reassessment registrado é motivo de suspensão, não de exceção informal.
+Nenhum agente permanece em produção sem lifecycle stage e operational state válidos, owner ativo, attestation dentro do prazo do tier e caminho de contenção e retirada exercitado. Toda transição preserva authority e evidence. Mudança material sem reassessment registrado é motivo de suspensão, não de exceção informal.

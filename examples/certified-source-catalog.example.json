@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "1.0",
+  "title": "Example Certified Source Catalog",
+  "owner": "Example Data Governance Authority",
+  "lastReviewed": "2026-08-10",
+  "entries": [
+    {
+      "id": "SRC-APPROVED-KNOWLEDGE-001",
+      "name": "Approved Knowledge Index",
+      "owner": "Example Knowledge Owner",
+      "systemOfRecord": "Example Approved Procedure Repository",
+      "classification": "internal",
+      "status": "certified",
+      "purposes": [
+        "Recuperar procedimentos aprovados para analistas internos."
+      ],
+      "allowedRiskTiers": [
+        "T1",
+        "T2"
+      ],
+      "allowedRegions": [
+        "example-region"
+      ],
+      "connectorPattern": "example-connector-001",
+      "authorizationMode": "pre-retrieval",
+      "retention": "A fonte governa o original; o índice é reconstruído diariamente.",
+      "certificationEvidenceRefs": [
+        "examples/evaluation-report.example.md"
+      ],
+      "reviewedAt": "2026-08-01",
+      "expiresAt": "2026-11-01",
+      "restrictions": [
+        "Sem dados pessoais, credenciais ou procedimentos não aprovados."
+      ]
+    }
+  ]
+}

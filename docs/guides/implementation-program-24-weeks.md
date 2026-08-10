@@ -14,11 +14,13 @@ related:
 
 # Programa de implantação em 24 semanas
 
+> **Pattern de referência, não calendário normativo.** As 24 semanas oferecem um ponto de partida para equipes que ainda não sabem como organizar a implantação. Adapte duração, sobreposição, ordem e nomenclatura ao contexto. Os únicos decision gates canônicos são G0–G7; nem este programa nem um piloto são requisitos universais.
+
 ## Objetivo
 
 Dar forma de **programa** ao que o [implementation playbook](framework-implementation-playbook.md) define como **decisões**. As fases organizam tempo, equipe e entregáveis; os gates G0–G7 continuam sendo o que autoriza avançar.
 
-Uma fase pode terminar sem que o gate correspondente seja aprovado. Quando isso acontece, o programa não avança: o gate manda, o calendário não.
+Para uma organização que adote este pattern, uma fase pode terminar sem que o gate correspondente seja aprovado. Quando isso acontece, o escopo não avança: o gate manda, o calendário não.
 
 ## Fases e gates
 
@@ -28,11 +30,11 @@ Uma fase pode terminar sem que o gate correspondente seja aprovado. Quando isso 
 | **F1 — Descobrir** | 3–5 | baseline real | discovery do estate, forecast, gargalos manuais, capability map, maturity baseline | G1 |
 | **F2 — Desenhar** | 6–8 | target operating model | target de maturidade, tiers calibrados, triggers de RAI, operating model, patterns de referência | G3 e preparação de G4 |
 | **F3 — Construir** | 9–12 | controles de fundação | registry, padrões de identidade, catálogos de dados e tools, schema de telemetria, MPB, runbooks iniciais | G2 e G4 |
-| **F4 — Pilotar** | 13–16 | validar ponta a ponta | coortes por tier, fluxo risco→RAI→publicação, observabilidade, tabletop de incidente, KPIs de valor | G5 e G6 |
+| **F4 — Validar** | 13–16 | validar ponta a ponta | piloto opcional, cohort de onboarding ou estate existente; fluxo risco→RAI→publicação, observabilidade, tabletop e KPIs | G5 e G6 |
 | **F5 — Escalar** | 17–20 | automação e cobertura | automação de discovery, policy-as-code, JML, attestation, baselines de comportamento, FinOps, dashboards | G6 |
 | **F6 — Institucionalizar** | 21–24 | operação regular e assurance | evidência e assurance, enablement, handoff para BAU, cadência de governança, roadmap de 12 meses | G7 |
 
-O [roadmap de 90 dias](implementation-plan-90-days.md) é o caminho mínimo — corresponde a F0–F3 comprimidas. Este programa é a versão completa. Os dois são visões do mesmo conjunto de gates, não métodos concorrentes.
+O [roadmap de 90 dias](implementation-plan-90-days.md) é uma referência acelerada — corresponde aproximadamente a F0–F3 comprimidas. Este programa é uma referência mais detalhada. Os dois são guias adaptáveis do mesmo conjunto de gates, não métodos concorrentes nem prazos de compliance.
 
 ## F0 — Mobilizar (semanas 1–2)
 
@@ -67,14 +69,16 @@ O [roadmap de 90 dias](implementation-plan-90-days.md) é o caminho mínimo — 
 ## F3 — Construir (semanas 9–12)
 
 1. Implementar o registry mínimo viável e os identificadores.
-2. Implementar padrões de identidade e remediar credenciais compartilhadas nos casos-piloto.
+2. Implementar padrões de identidade e remediar credenciais compartilhadas na primeira cohort selecionada.
 3. Criar o standard de dados AI-ready e o catálogo inicial de fontes certificadas.
 4. Criar o registro de tools e a mediação para ações de alto impacto.
 5. Implementar schema de telemetria, dashboards básicos, [MPB](../risk-management/minimum-production-bar.md) e repositório de evidência.
 
-**Critério de saída:** controles centrais demonstráveis em ambiente piloto — não apresentados em slide.
+**Critério de saída:** controles centrais demonstráveis em ambiente controlado ou por evidência operacional equivalente — não apresentados apenas em slide.
 
-## F4 — Pilotar (semanas 13–16)
+## F4 — Validar (semanas 13–16)
+
+Escolha uma rota de validação proporcional: piloto dedicado, cohort de onboarding, phased rollout ou avaliação retrospectiva de agentes já operacionais. O [plano de piloto](pilot-plan.md) é um template útil quando a organização escolhe piloto; não é prerequisite deste programa.
 
 1. Selecionar de 8 a 15 agentes cobrindo T1 a T3 e padrões arquiteturais distintos.
 2. Executar o lifecycle completo de pelo menos um T2 e um T3.
@@ -82,9 +86,7 @@ O [roadmap de 90 dias](implementation-plan-90-days.md) é o caminho mínimo — 
 4. Rodar [behavioral analytics](../operations/behavioral-analytics.md) em monitor-only.
 5. Medir lead time, falsos positivos, fricção percebida e KPI de negócio.
 
-O detalhamento está no [plano de piloto](pilot-plan.md).
-
-**Critério de saída:** critérios de saída do piloto atendidos, controles ajustados e nenhum bloqueador crítico aberto.
+**Critério de saída:** evidence suficiente para os gates G5/G6, controls ajustados e nenhum bloqueador crítico aberto. Se a rota escolhida for piloto, aplique também os critérios do [plano de piloto](pilot-plan.md).
 
 ## F5 — Escalar (semanas 17–20)
 
@@ -102,7 +104,7 @@ O detalhamento está no [plano de piloto](pilot-plan.md).
 2. Transferir responsabilidades para a operação regular e documentar o modelo de suporte.
 3. Publicar o [governance dashboard](../operations/kpi-kri-dashboard.md) e a cadência de fóruns.
 4. Reavaliar maturidade e definir o target de 12 meses.
-5. Planejar a automação restante com base nos dados do piloto.
+5. Planejar a automação restante com base nos dados da rota de validação escolhida.
 
 **Critério de saída:** owners de BAU nomeados, cadência funcionando e próximos targets acordados.
 
@@ -112,12 +114,12 @@ Workstream é trilha de execução paralela dentro do **mesmo** roadmap — não
 
 | Workstream | Lead típico | F0–F2 | F3–F4 | F5–F6 |
 |---|---|---|---|---|
-| governança e risco | governança/risco | charter, tiers, triggers de RAI, operating model | workflow, evidência, reviews do piloto | automação, assurance, exceções |
+| governança e risco | governança/risco | charter, tiers, triggers de RAI, operating model | workflow, evidência, reviews da primeira cohort | automação, assurance, exceções |
 | arquitetura e plataforma | arquitetura/plataforma | patterns de referência | integração registry, runtime e policy | escala, resiliência, APIs |
 | identidade e segurança | IAM/segurança | patterns e ameaças | identidade própria, controles, runbooks | JML, integração com SOC, tuning |
 | dados e ferramentas | dados/API | desenho de standards e catálogos | fontes certificadas, tool registry | cobertura, remediação, recertificação |
 | observabilidade e custo | SRE/FinOps | desenho da telemetria | dashboards, baseline, budget | automação de comportamento, unit economics |
-| adoção e valor | negócio/change | portfólio, personas | treinamento do piloto, KPI | champions, operação regular, value review |
+| adoção e valor | negócio/change | portfólio, personas | enablement da primeira cohort, KPI | champions, operação regular, value review |
 
 ### Prioridade do backlog
 
@@ -125,7 +127,7 @@ Workstream é trilha de execução paralela dentro do **mesmo** roadmap — não
 
 | Prioridade | Significado | Exemplos |
 |---|---|---|
-| **P0** | obrigatório para pilotar com segurança e rastreabilidade — sem isso o programa não deve se declarar pronto | charter, registry mínimo, tiers, blueprint, MPB, identidade para T2/T3, catálogos de fontes e ferramentas, logging, gate de publicação, kill switch, repositório de evidência |
+| **P0** | obrigatório para iniciar a primeira release/cohort com segurança e rastreabilidade — sem isso o programa não deve se declarar pronto | charter, registry mínimo, tiers, blueprint, MPB, identidade para T2/T3, catálogos de fontes e ferramentas, logging, gate de publicação, kill switch, repositório de evidência |
 | **P1** | necessário para escalar sem criar gargalo manual ou perda de controle | discovery automatizado, JML, automação de attestation, integração com SOC, behavioral analytics, dashboard de custo, policy-as-code, rede de champions |
 | **P2** | otimização e automação avançada; antecipável quando houver dependência ou risco específico | scoring assistido, routing de modelos, detecção de duplicidade, grafo entre agentes, atribuição avançada de valor, remediação automática |
 
@@ -157,7 +159,7 @@ Behavioral analytics depende de registry (identificar o ativo), identidade (atri
 | mensal | sponsor e council | risco, prioridade, funding e exceções |
 | trimestral | revisão de maturidade | alvo e ajuste do roadmap |
 
-## Depois das 24 semanas — ciclo de melhoria contínua
+## Depois do horizonte de referência — ciclo de melhoria contínua
 
 O framework não pode ficar estático enquanto agentes, modelos e protocolos evoluem. Mudança de policy precisa ser **impulsionada por evidência**: incidentes, exceções, falsos positivos, novos padrões de ataque, anomalias de custo, lacunas de maturidade, feedback de builders e mudança regulatória.
 
@@ -188,12 +190,14 @@ O item 3 é o mais revelador: uma exceção que se repete não é exceção — 
 - prazo cumprido com evidência ausente é `hold`, não `approve`;
 - escopo reduzido é decisão legítima e registrada, não fracasso silencioso;
 - as 24 semanas dimensionam esforço, não prometem maturidade — maturidade se demonstra por evidência de operação, conforme o [maturity model](maturity-model.md).
+- encurtar, estender ou substituir fases é legítimo quando rationale, dependências e evidências permanecem explícitos.
 
 ## O que este programa não faz
 
 - não substitui análise jurídica ou regulatória;
 - não define threshold universal;
 - não seleciona produto;
+- não impõe calendário, piloto ou ordem universal;
 - não comprova maturidade por documentação;
 - não certifica conformidade;
 - não promete resultado financeiro.
