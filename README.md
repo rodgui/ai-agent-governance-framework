@@ -4,7 +4,7 @@
 
 Este repositório reúne policy, operating model, arquitetura, design patterns, controles, assessments, schemas e templates em uma única fonte canônica. O mesmo conteúdo pode ser consumido como referência técnica, guia de implantação, handbook e base para futuras publicações.
 
-> **Status normativo:** a [policy modular](docs/governance/policy.md) é a fonte canônica em evolução. Uma organização só deve declarar uma release como adotada após aprovação explícita e versionada pela authority competente.
+> **Status normativo:** a [policy modular](docs/governance/policy.md) é a fonte canônica. A **release 1.0 do framework está adotada** desde 2026-08-10 ([ADR-0006](docs/architecture/decisions/0006-framework-release-1-0-adoption.md)) — o que versiona esta baseline, e não declara adoção por nenhuma organização. Cada organização adota pela sua própria authority competente.
 
 ![AI Agent Governance Framework](docs/architecture/diagrams/ai-agent-governance-framework.png)
 

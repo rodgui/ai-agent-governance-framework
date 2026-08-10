@@ -377,6 +377,21 @@ class TierTaxonomyTests(unittest.TestCase):
         issues = validator.validate_tier_taxonomy()
         self.assertTrue(any(issue.category == "tier-taxonomy" for issue in issues))
 
+    def test_accepts_current_control_scopes(self) -> None:
+        self.assertEqual([], validator.validate_control_scope())
+
+    def test_rejects_blocking_organization_control(self) -> None:
+        def promote(document):
+            for control in document["controls"]:
+                if control.get("scope") == "organization":
+                    control["blocking"] = True
+                    return
+            raise AssertionError("catalog has no organization-scoped control")
+
+        self.rewrite_json("controls/control-catalog.json", promote)
+        issues = validator.validate_control_scope()
+        self.assertTrue(any(issue.category == "control-scope" for issue in issues))
+
 
 if __name__ == "__main__":
     unittest.main()

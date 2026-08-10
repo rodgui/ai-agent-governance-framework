@@ -753,6 +753,28 @@ def validate_tier_taxonomy() -> list[Issue]:
     return issues
 
 
+def validate_control_scope() -> list[Issue]:
+    """Enforce ADR-0005: an organization-scoped control cannot block a release."""
+    issues: list[Issue] = []
+    catalog_path = ROOT / "controls/control-catalog.json"
+    if not catalog_path.exists():
+        return issues
+    catalog = load_json(catalog_path)
+    controls = catalog.get("controls", []) if isinstance(catalog, dict) else []
+    for control in controls:
+        if not isinstance(control, dict):
+            continue
+        if control.get("scope") == "organization" and control.get("blocking") is True:
+            issues.append(
+                Issue(
+                    "control-scope",
+                    relative(catalog_path),
+                    f"{control.get('id', '<unknown>')} is organization-scoped and cannot be blocking",
+                )
+            )
+    return issues
+
+
 def validate_commercial_boundary() -> list[Issue]:
     issues: list[Issue] = []
     legacy_paths = [
@@ -928,6 +950,7 @@ def main() -> int:
     issues.extend(validate_assets())
     issues.extend(validate_policy_integrity())
     issues.extend(validate_tier_taxonomy())
+    issues.extend(validate_control_scope())
     issues.extend(validate_product_boundaries(files))
     issues.extend(validate_sensitive_content(files))
 
