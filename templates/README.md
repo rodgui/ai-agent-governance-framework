@@ -5,6 +5,9 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 ## Governança e arquitetura
 
 - [Governance Charter](governance-charter-template.md)
+- [Agent Intake and Suitability](agent-intake-and-suitability-template.md)
+- [Governance Forum Charter](governance-forum-charter-template.md)
+- [Governance Handoff Matrix](handoff-matrix-template.md)
 - [Agent Registry Record](agent-registry-template.md)
 - [Agent Blueprint](agent-blueprint-template.md)
 - [ADR](adr-template.md)
@@ -16,6 +19,7 @@ Templates para coleta, decisão, evidence e comunicação. Quando houver schema 
 - [Autoavaliação de agente](self-assessment-form.md)
 - [Exemplo de autoavaliação](self-assessment-example.md)
 - [Technology Assessment](assessment-template.md)
+- [Risk and Impact Assessment](risk-impact-assessment-template.md)
 - [Checklist de decisão de release](publication-checklist.md)
 - [Sunset Plan](sunset-plan.md)
 

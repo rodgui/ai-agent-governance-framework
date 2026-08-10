@@ -2,7 +2,7 @@
 title: Fundamentos de governança de IA e agentes
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -118,6 +118,25 @@ flowchart LR
 ```
 
 Cada transição exige decision rights e evidência compatíveis com o tier de risco.
+
+## Agent suitability decision at G0
+
+Governance begins before solution selection. The intake compares an agent with at least one simpler alternative: human process, deterministic workflow, rule-based automation, search/retrieval or a conventional model.
+
+An agent is defensible only when the problem materially requires contextual interpretation, adaptation or iterative interaction and when uncertainty can be bounded through identity, data, tools, evaluation, oversight and containment. “Use AI” or “build an agent” is not an acceptable problem statement.
+
+Record at least:
+
+- observable problem, baseline and desired outcome;
+- intended users and affected parties;
+- alternatives considered and their disposition;
+- intended and prohibited uses;
+- expected capabilities, data, tools, autonomy and blast radius;
+- owners, unknowns, evidence and next gate.
+
+Unknowns become discovery work or a risk floor. Missing owner, evidence or non-agent alternative blocks `proceed-agent`.
+
+Use [Agent Intake and Suitability Template](../../templates/agent-intake-and-suitability-template.md).
 
 ## Build time e runtime
 

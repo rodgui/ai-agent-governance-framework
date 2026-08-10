@@ -2,7 +2,7 @@
 title: Responsible AI e assurance
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -61,6 +61,25 @@ O assessment deve responder:
 8. quais human controls e redress mechanisms existem;
 9. quais limitações precisam ser comunicadas;
 10. qual residual impact permanece e quem pode aceitá-lo.
+
+## Impact Trigger Screen
+
+Run a short, recorded screen as part of risk classification. A positive answer does not itself prohibit the use case; it routes the case to a complete Impact Assessment and the relevant domain authorities.
+
+Minimum trigger families:
+
+- rights, opportunities, eligibility or decisions about people;
+- access to services or material benefits;
+- vulnerable groups or asymmetric ability to contest harm;
+- physical safety, health or environmental impact;
+- employment or workforce monitoring/management;
+- public autonomous communication or impersonation risk;
+- regulated or otherwise high-impact processes;
+- profiling, monitoring or persistent personalization.
+
+The screen records `yes/no`, rationale and evidence. `Unknown` is unresolved, not `no`. A positive trigger blocks completion of the risk record until `impactAssessmentRef` identifies a full assessment.
+
+Use the [Risk and Impact Assessment Template](../../templates/risk-impact-assessment-template.md).
 
 ## Tiering de assurance
 

@@ -2,7 +2,7 @@
 title: Gestão proporcional de riscos de IA e agentes
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -80,6 +80,23 @@ flowchart LR
     A --> M
 ```
 
+## Decision-grade risk and impact record
+
+The canonical human-readable record uses the [Risk and Impact Assessment Template](../../templates/risk-impact-assessment-template.md). It binds the assessment to the exact agent version and risk-model configuration used.
+
+The record requires:
+
+- risk-model ID/version, effective date and configuration reference;
+- intended/prohibited use, baseline, alternatives and affected parties;
+- observations and evidence for every contextual dimension;
+- uncertainty level and tier floor;
+- active red flags and their floors;
+- an Impact Trigger Screen and full assessment reference when triggered;
+- candidate/final tier, rationale, authority and residual-risk decision;
+- material-change triggers, limitations and evidence register.
+
+The final tier cannot be lower than the candidate tier, uncertainty floor or highest red-flag floor. Registry, blueprint and assessment must agree on agent ID, version and tier. A G5 release decision remains a separate record.
+
 ## Risk register mínimo
 
 - risk ID e categoria;
@@ -137,6 +154,21 @@ Reclassificar quando muda:
 - UI/approval flow;
 - incident, finding ou external threat;
 - obrigação legal ou risk appetite.
+
+## Risk-model governance and calibration
+
+A scoring worksheet or classifier may support routing, but it is not the authority. Dimensions, thresholds, red flags, floors, mappings and defaults form a versioned risk model and are governed as configuration.
+
+Before automated routing:
+
+1. define expected classifications for representative cases spanning tiers and red flags;
+2. compare model outputs with assessor and decision-authority outcomes;
+3. analyze under-tiering, over-tiering, disagreement, unknown-input handling and trigger coverage;
+4. approve the model version, configuration, effective date and rollback path;
+5. monitor overrides, false routing, drift and escaped material cases;
+6. recalibrate after material portfolio, policy or threat changes.
+
+The calibration population is contextual. A local target such as 20–30 representative cases can seed calibration, but it is not universal. Automated routing requires `calibrated` status and calibration evidence; manual or decision-support use still identifies the model version.
 
 ## Evidências
 

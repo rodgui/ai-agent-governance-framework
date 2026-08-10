@@ -4,6 +4,7 @@ Avaliações comparativas, de risco, maturidade, tecnologia e control effectiven
 
 ## Artefatos
 
+- [Crosswalk de conteúdo: Guia v3.4 × framework canônico](comparison-matrices/guide-v3-4-framework-content-crosswalk.md) — comparação editorial corrente e decisões de absorção seletiva.
 - [Crosswalk histórico Microsoft Customer Zero × Policy v1](comparison-matrices/microsoft-case-study-framework-crosswalk.md) — registro depreciado da primeira consolidação; não é fonte normativa corrente.
 - [Maturity model](../docs/guides/maturity-model.md) — escala e dimensões.
 - [Maturity assessment example](../examples/maturity-assessment.example.json) — record fictício validado.

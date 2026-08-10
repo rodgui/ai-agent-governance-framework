@@ -16,6 +16,8 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 - Executive brief for leadership decision-making.
 - Reproducible 1800 × 2400 governance infographic and Pillow renderer.
 - Source register entries and bibliography for the Microsoft series.
+- Content crosswalk between the external governance guide v3.4 and the canonical framework.
+- Operational templates for agent suitability, governance forums, handoffs and risk/impact assessment.
 
 ### Changed
 
@@ -23,6 +25,8 @@ Todas as alterações relevantes neste repositório são registradas aqui.
 - Vendor material is optional evidence or mapping and never a required framework component.
 - README, handbook, documentation index and roadmaps now separate canonical knowledge from commercial packaging.
 - Control records no longer carry thematic `policyRefs` to the historical Policy v1.
+- Fundamentals, risk management, Responsible AI and the operating model now incorporate selected operational guidance from the v3.4 guide without changing canonical taxonomies or gates.
+- The G5 publication checklist now separates evidence readiness from the human decision record.
 
 ### Deprecated
 

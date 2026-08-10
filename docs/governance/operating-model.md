@@ -2,7 +2,7 @@
 title: Operating model e decision rights
 status: maintained
 owner: Rodrigo Garcia Guimarães
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-10
 review_cycle: quarterly
 supersedes: null
 related:
@@ -147,6 +147,14 @@ Quando esses requisitos não estiverem demonstrados, use `peer challenge` ou `li
 
 Cadências são adaptadas ao contexto; eventos críticos ignoram o calendário e seguem incident response.
 
+### Forum charter
+
+Cada fórum recorrente mantém charter com mandato, limites de authority, composição, quorum, recusal/conflicts, inputs, decision protocol, records, handoffs e escalation. Targets priorizam o trabalho; tempo decorrido nunca cria approval.
+
+Decisões permitidas são `approve`, `condition`, `hold` e `reject`. Cada record identifica subject/version, rationale, evidence, authority, conditions/expiry, residual-risk owner e review/material-change trigger.
+
+Use [Governance Forum Charter Template](../../templates/governance-forum-charter-template.md).
+
 ## Handoffs obrigatórios
 
 1. **Estratégia → design:** propósito, owner, usuários, baseline e constraints.
@@ -157,6 +165,14 @@ Cadências são adaptadas ao contexto; eventos críticos ignoram o calendário e
 6. **Governance → sunset:** decisão, retenção, comunicação, revogação e archive.
 
 Um handoff sem owner receptor e evidência não está concluído.
+
+### Handoff contract
+
+Cada handoff material identifica sender, receiver, preconditions, evidence, acceptance criteria, target time, return/rollback path, escalation e record owner. Transferência de ticket ou silêncio não equivale a acceptance, e accountability só muda quando a policy ou um record aprovado assim determina.
+
+Outcomes permitidos são `accepted`, `conditioned`, `returned` e `escalated`. Conditions exigem owner e expiry.
+
+Use [Governance Handoff Matrix Template](../../templates/handoff-matrix-template.md).
 
 ## Segregation of duties por tier
 
