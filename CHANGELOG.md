@@ -38,6 +38,9 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 
 ### Removed
 
+- Meta de versionamento e adoção de release sai do conteúdo voltado ao leitor — o "status normativo" do README e a seção "dois níveis de adoção" da policy. Isso é registro de construção do repositório e vive nos ADRs, não na porta de entrada de quem vai implantar.
+- Referências à camada comercial saem de README, índice, handbook, executive, policy, templates e da navegação do site. A pasta permanece; deixa de ser superfície pública.
+
 ### Fixed
 
 - O evidence pack de T1 exigia menos do que o Minimum Production Bar do mesmo tier: faltavam blueprint reduzido, referências de dados e tools, padrão de identidade aprovado, testes funcionais, rollback e aprovação de owner. O gate exigia controles cuja existência ninguém precisava demonstrar.
@@ -140,6 +143,9 @@ Primeira release adotada do framework modular ([ADR-0006](docs/architecture/deci
 ### Deprecated
 
 ### Removed
+
+- Meta de versionamento e adoção de release sai do conteúdo voltado ao leitor — o "status normativo" do README e a seção "dois níveis de adoção" da policy. Isso é registro de construção do repositório e vive nos ADRs, não na porta de entrada de quem vai implantar.
+- Referências à camada comercial saem de README, índice, handbook, executive, policy, templates e da navegação do site. A pasta permanece; deixa de ser superfície pública.
 
 ### Fixed
 

@@ -6,4 +6,3 @@ Conteúdo orientado a decisão: mandate, target operating model, investment, ris
 
 Executive material diferencia outcome esperado, hypothesis e evidence observada. Não promete ROI, compliance ou ausência de incidentes.
 
-A produtificação comercial pessoal é mantida separadamente em [`consulting/`](../../consulting/README.md); não integra a comunicação executiva canônica do framework.

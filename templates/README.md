@@ -42,8 +42,6 @@ Esta página lista os templates por finalidade. Para saber **quando** cada artef
 - [Study Note](study-note-template.md)
 - [Experiment](experiment-template.md)
 
-O template de proposta comercial pertence à camada separada em [`consulting/templates/`](../consulting/templates/consulting-proposal-template.md).
-
 ## Regras de uso
 
 1. Adapte idioma, roles e thresholds ao contexto.

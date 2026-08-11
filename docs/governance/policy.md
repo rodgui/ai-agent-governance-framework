@@ -21,17 +21,13 @@ related:
 
 Este repositório é a fonte modular a partir da qual a **policy final de governança de IA e agentes** será mantida, revisada e versionada. A policy não é um documento monolítico nem depende de uma plataforma específica: ela é composta por princípios, decision rights, requisitos, controls, evidências e regras de lifecycle distribuídos em módulos canônicos.
 
-## Dois níveis de adoção
+## Adoção por uma organização
 
-A **release 1.0 deste framework está `adopted`** desde 2026-08-10, conforme a [ADR-0006](../architecture/decisions/0006-framework-release-1-0-adoption.md). Isso significa que esta versão é a baseline canônica estável e que mudança normativa passa a exigir proposta, rationale, authority, changelog e release versionada.
-
-Isso **não** significa que qualquer organização adotou esta policy. A adoção organizacional é uma decisão separada: cada organização declara esta baseline como sua policy interna pela sua própria authority competente, com escopo, exceções e obrigações próprias. Enquanto essa decisão não existir, o conteúdo é referência técnica canônica do framework — não a policy vigente daquela organização.
-
-Confundir os dois níveis transforma versionamento em declaração de conformidade. Nenhum claim de certificação, auditoria independente ou conformidade decorre da adoção da release.
+Adotar este framework é decisão de cada organização, pela sua própria authority competente, com escopo, exceções e obrigações próprias. Enquanto essa decisão não existir, o conteúdo é referência técnica — não a policy vigente daquela organização. Nenhum claim de certificação, auditoria independente ou conformidade decorre de usar este material.
 
 ## Se a organização já tem uma policy corporativa de IA
 
-Esse é o caso mais comum numa organização grande, e é diferente do anterior.
+Esse é o caso mais comum numa organização grande.
 
 Uma policy corporativa de IA governa **todos os AI systems e AI tools**, costuma pertencer a compliance ou a um conselho de IA, e é aprovada por instância executiva. Este framework governa **agentes**, que são um subconjunto — e o faz no nível de método, controls e evidência.
 
@@ -78,8 +74,7 @@ Não integram a policy, salvo incorporação explícita e versionada:
 - exemplos fictícios em `examples/`;
 - roadmap, specs e experimentos;
 - calendários de 90 dias/24 semanas e o plano opcional de piloto;
-- mappings de fornecedores;
-- a camada comercial em `consulting/`.
+- mappings de fornecedores.
 
 Esses artefatos podem informar decisões, mas não criam dependência tecnológica nem requisito normativo por associação.
 

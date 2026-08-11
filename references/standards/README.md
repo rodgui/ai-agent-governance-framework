@@ -4,7 +4,7 @@ Esta página existe para responder "o que esta norma cobre e como ela se relacio
 
 ## O que esta página é e não é
 
-Normas ISO/IEC são obras protegidas e comercializadas. Reproduzir o texto delas — mesmo parcialmente, mesmo em repositório privado — é violação de direito autoral e, num material de consultoria, um problema jurídico maior que a lacuna que ele tentaria resolver.
+Normas ISO/IEC são obras protegidas e comercializadas. Reproduzir o texto delas — mesmo parcialmente, mesmo em repositório privado — é violação de direito autoral — um problema jurídico maior que a lacuna que ele tentaria resolver.
 
 Portanto, aqui você encontra:
 

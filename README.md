@@ -4,8 +4,6 @@
 
 Este repositório reúne policy, operating model, arquitetura, design patterns, controles, assessments, schemas e templates em uma única fonte canônica. O mesmo conteúdo pode ser consumido como referência técnica, guia de implantação, handbook e base para futuras publicações.
 
-> **Status normativo:** a [policy modular](docs/governance/policy.md) é a fonte canônica. A **release 1.0 do framework está adotada** desde 2026-08-10 ([ADR-0006](docs/architecture/decisions/0006-framework-release-1-0-adoption.md)) — o que versiona esta baseline, e não declara adoção por nenhuma organização. Cada organização adota pela sua própria authority competente.
-
 ![AI Agent Governance Framework](docs/architecture/diagrams/ai-agent-governance-framework.png)
 
 ## Comece aqui
@@ -56,7 +54,6 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 | reutilizar soluções arquiteturais | [Catálogo de design patterns](docs/patterns/README.md) |
 | adotar controles verificáveis | [Control catalog](controls/README.md) |
 | registrar agentes e arquitetura | [Schemas e exemplos](schemas/README.md) |
-| conhecer a produtificação comercial separada | [Consultoria: três pacotes e nove módulos](consulting/README.md) |
 | estudar uma referência externa opcional | [Caso Microsoft Customer Zero](docs/explanations/microsoft-agent-governance-case-study.md) |
 
 ## Toolkit
@@ -93,9 +90,7 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 
 Os documentos modulares permanecem como fonte canônica e o [handbook](docs/handbook/README.md) define uma ordem editorial estável. Quando o conteúdo estiver maduro, PDF, EPUB ou outros formatos devem ser gerados a partir dessa fonte — nunca mantidos como cópias editoriais independentes.
 
-## Camada comercial separada
-
-A produtificação pessoal deste conhecimento está em [`consulting/`](consulting/README.md), organizada em três pacotes compostos por nove módulos. Ela deriva do framework, mas não integra a policy, o handbook ou a comunicação executiva canônica.
+## Limites do material
 
 O framework **não é certificação**, parecer jurídico, garantia de conformidade nem promessa de retorno financeiro. Resultados dependem de contexto, implementação, adoção e evidência observável.
 

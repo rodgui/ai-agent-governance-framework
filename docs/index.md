@@ -172,8 +172,6 @@ Esses índices existem para navegação de pasta e não constituem uma segunda o
 
 Um documento de guidance não altera a policy. Um estudo de caso não comprova eficácia causal. Um mapping de fornecedor não redefine o núcleo.
 
-A produtificação comercial pessoal está separada em [`consulting/`](../consulting/README.md). Ela reutiliza o conhecimento canônico, mas não integra estas camadas nem redefine a policy.
-
 ## Leitura completa
 
 Para leitura linear, use o [handbook](handbook/README.md). A geração de uma publicação fica para uma etapa futura, quando o conteúdo estiver maduro.

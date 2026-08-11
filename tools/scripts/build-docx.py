@@ -38,9 +38,6 @@ DISCLAIMER = """
 >
 > Se a organização já possui uma policy corporativa de IA, **ela prevalece**. Este material
 > é a camada de execução para agentes, não substituto de instrumento normativo aprovado.
->
-> A adoção de uma release versiona esta baseline; não constitui certificação, auditoria
-> independente nem declaração de conformidade por nenhuma organização.
 """
 
 # Cada entrega: título, subtítulo e a sequência de documentos-fonte.
