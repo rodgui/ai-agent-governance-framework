@@ -8,6 +8,7 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 
 ### Added
 
+- `tools/scripts/build-docx.py` gera três entregáveis Word do mesmo corpus canônico — executive brief, guia de implantação e referência completa. Resolve o que o corpus tem de específico de repositório e não sobrevive ao papel: link interno vira texto, mermaid vira nota de figura, front matter sai, e a ordem do guia é a do método, não a dos domínios.
 - Catálogo de artefatos do programa em `docs/reference/artifact-catalog.md`, com propósito, owner típico e fase de cada artefato — o instrumento de planejamento e controle de completude que o corpus descrevia e não entregava.
 - Tabela normativa dos dez escaladores de risco, com criticidade mínima, efeito adicional e a pergunta correspondente do pre-screen.
 - Colunas "quando evoluir para assessment formal" e "efeito na aprovação" no tiering de assurance de Responsible AI.
@@ -24,6 +25,7 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 
 ### Changed
 
+- `docs/governance/policy.md` declara como o framework se posiciona quando a organização **já tem** policy corporativa de IA: a corporativa prevalece e esta é a camada de execução para agentes. O corpus só cobria o caso de quem não tem policy nenhuma — que é o menos comum numa empresa grande. Apresentado como "a policy", o framework parece competir com instrumento aprovado e é rejeitado por jurisdição, não por mérito.
 - O evidence pack de T2 declara herança de T1, como T3 e T4 já faziam.
 - O playbook declara que a numeração G0–G7 não é cronograma, com a tabela de dependência real. G3 exige G2 apenas *suficiente para atribuir responsabilidade*, e é por isso que o programa de 24 semanas fecha G3 em F2 e completa G2 em F3 — paralelismo legítimo que a numeração escondia.
 - As invariantes cross-record operam sobre bundles de caso em vez de caminhos fixos, e casos em `examples/cases/<id>/` entram na validação de schema pela mesma convenção. Sem isso, um segundo caso ficaria no repositório com aparência de evidência e sem verificação.
@@ -31,10 +33,15 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 - Developer experience e paved road, atributos de qualidade e riscos arquiteturais entram na ordem editorial do handbook e na navegação do site. Eram conteúdo real inalcançável a partir de qualquer entrada do repositório.
 - `docs/index.md` ganha navegação por pasta, ligando os índices de seção que existiam sem nenhum caminho de entrada.
 - Os marcadores de tempo do sunset plan passam de `T0`/`T+15`/`T+30` para `D0`/`D+15`/`D+30`, eliminando a colisão com o rótulo de tier que a taxonomia canônica rejeita.
+- O programa de 24 semanas afirmava que o roadmap de 90 dias "corresponde aproximadamente a F0–F3 comprimidas", o que pararia em G4. O próprio roadmap de 90 dias percorre G0 a G7. A diferença entre as duas rotas é largura de estate e profundidade de construção, não quantidade de gates — declarada agora nos dois documentos e no índice de guias.
+- A policy do framework passa a se chamar **policy de governança de agentes**. "Modular" descrevia a forma, não a função, e o nome anterior competia justamente com o termo que ele precisa distinguir: a policy corporativa de IA da organização. O glossário passa a definir as duas e a relação entre elas. A ADR-0002 preserva o texto original com uma nota de nomenclatura.
 
 ### Deprecated
 
 ### Removed
+
+- Meta de versionamento e adoção de release sai do conteúdo voltado ao leitor — o "status normativo" do README e a seção "dois níveis de adoção" da policy. Isso é registro de construção do repositório e vive nos ADRs, não na porta de entrada de quem vai implantar.
+- Referências à camada comercial saem de README, índice, handbook, executive, policy, templates e da navegação do site. A pasta permanece; deixa de ser superfície pública.
 
 ### Fixed
 
@@ -138,6 +145,9 @@ Primeira release adotada do framework modular ([ADR-0006](docs/architecture/deci
 ### Deprecated
 
 ### Removed
+
+- Meta de versionamento e adoção de release sai do conteúdo voltado ao leitor — o "status normativo" do README e a seção "dois níveis de adoção" da policy. Isso é registro de construção do repositório e vive nos ADRs, não na porta de entrada de quem vai implantar.
+- Referências à camada comercial saem de README, índice, handbook, executive, policy, templates e da navegação do site. A pasta permanece; deixa de ser superfície pública.
 
 ### Fixed
 

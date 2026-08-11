@@ -94,7 +94,7 @@ nav:
       - Agente é o mecanismo certo?: docs/architecture/agent-or-not.md
       - Vocabulário canônico: references/glossary.md
   - Parte II — Policy, operating model e risco:
-      - Policy modular: docs/governance/policy.md
+      - Policy de governança de agentes: docs/governance/policy.md
       - Operating model e decision rights: docs/governance/operating-model.md
       - Arquitetura de referência: docs/architecture/overview.md
       - Capability para tecnologia: docs/architecture/capability-to-technology.md
@@ -152,4 +152,3 @@ nav:
       - Caso T2 — Service Desk: docs/explanations/cases/service-desk-knowledge-agent.md
       - Caso T3 — Elegibilidade: docs/explanations/cases/benefits-eligibility-triage.md
       - Assessments: assessments/README.md
-      - Camada comercial: consulting/README.md

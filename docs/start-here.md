@@ -17,6 +17,12 @@ Esta página existe porque o repositório tem muitos caminhos e uma organizaçã
 
 Se o objetivo é estudar, o [handbook](handbook/README.md) é a ordem certa e esta página não é necessária. Se o objetivo é implantar, comece aqui e ignore o resto da navegação até terminar a sua trilha.
 
+## Antes de tudo: sua organização já tem policy de IA?
+
+Se tem, **ela prevalece** e este framework entra como a camada de execução para agentes, não como substituta. Como fazer essa subordinação está em [policy de governança de agentes](governance/policy.md#se-a-organização-já-tem-uma-policy-corporativa-de-ia).
+
+Ignorar isso é o erro de posicionamento mais caro possível: o framework parece competir com um instrumento corporativo já aprovado e é rejeitado por jurisdição, não por mérito.
+
 ## A regra que economiza mais tempo
 
 **Leia o [implementation playbook](guides/framework-implementation-playbook.md) antes de qualquer outra coisa.**
@@ -48,7 +54,7 @@ Cada trilha termina numa decisão, não numa leitura concluída.
 
 ### Trilha 2 — Risco, Responsible AI, jurídico e compliance · ~1 semana
 
-1. [Policy modular](governance/policy.md)
+1. [Policy de governança de agentes](governance/policy.md)
 2. [Gestão de riscos](risk-management/README.md) — a tabela dos dez escaladores e a separação entre criticidade e admissibilidade
 3. [Minimum Production Bar](risk-management/minimum-production-bar.md)
 4. [Responsible AI](responsible-ai/README.md) e [human oversight](human-oversight/README.md)

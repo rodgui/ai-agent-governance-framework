@@ -1,5 +1,5 @@
 ---
-title: AI Agent Governance Policy — fonte canônica modular
+title: Policy de governança de agentes
 status: adopted
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
@@ -15,19 +15,41 @@ related:
   - ../architecture/decisions/0010-structured-governance-contracts-2.0.md
 ---
 
-# AI Agent Governance Policy — fonte canônica modular
+# Policy de governança de agentes
 
 ## Propósito
 
-Este repositório é a fonte modular a partir da qual a **policy final de governança de IA e agentes** será mantida, revisada e versionada. A policy não é um documento monolítico nem depende de uma plataforma específica: ela é composta por princípios, decision rights, requisitos, controls, evidências e regras de lifecycle distribuídos em módulos canônicos.
+Definir como um agente pode ser construído, aprovado, operado e retirado: princípios, decision rights, requisitos, controls, evidências e regras de lifecycle.
 
-## Dois níveis de adoção
+Não é um documento monolítico nem depende de uma plataforma específica. O conteúdo vive distribuído nos módulos canônicos deste repositório, que é a fonte a partir da qual a policy é mantida, revisada e versionada — este documento diz quais módulos a compõem e o que fica de fora.
 
-A **release 1.0 deste framework está `adopted`** desde 2026-08-10, conforme a [ADR-0006](../architecture/decisions/0006-framework-release-1-0-adoption.md). Isso significa que esta versão é a baseline canônica estável e que mudança normativa passa a exigir proposta, rationale, authority, changelog e release versionada.
+## Adoção por uma organização
 
-Isso **não** significa que qualquer organização adotou esta policy. A adoção organizacional é uma decisão separada: cada organização declara esta baseline como sua policy interna pela sua própria authority competente, com escopo, exceções e obrigações próprias. Enquanto essa decisão não existir, o conteúdo é referência técnica canônica do framework — não a policy vigente daquela organização.
+Adotar este framework é decisão de cada organização, pela sua própria authority competente, com escopo, exceções e obrigações próprias. Enquanto essa decisão não existir, o conteúdo é referência técnica — não a policy vigente daquela organização. Nenhum claim de certificação, auditoria independente ou conformidade decorre de usar este material.
 
-Confundir os dois níveis transforma versionamento em declaração de conformidade. Nenhum claim de certificação, auditoria independente ou conformidade decorre da adoção da release.
+## Se a organização já tem uma policy corporativa de IA
+
+Esse é o caso mais comum numa organização grande.
+
+Uma policy corporativa de IA governa **todos os AI systems e AI tools**, costuma pertencer a compliance ou a um conselho de IA, e é aprovada por instância executiva. Este framework governa **agentes**, que são um subconjunto — e o faz no nível de método, controls e evidência.
+
+São camadas distintas, e **esta é a de baixo**:
+
+| Camada | O que decide | Quem responde |
+|---|---|---|
+| policy corporativa de IA | princípios, obrigações mínimas, usos proibidos e conformidade regulatória, para toda a IA | compliance, jurídico, conselho de IA |
+| **este framework** | como governar agentes em conformidade com aquela policy: tiers, gates, controls, evidência e runtime | governança de IA, arquitetura, plataforma |
+
+Quando existe policy corporativa, **ela prevalece**. Este framework não a substitui, não a reinterpreta e não cria exceção a ela. O que ele faz é tornar executável, para agentes, aquilo que a policy exige em termos gerais.
+
+Na prática:
+
+1. **Mapeie as obrigações da policy corporativa** para os domínios canônicos daqui, e registre onde cada exigência é satisfeita. Obrigação sem control correspondente é gap; control sem obrigação correspondente é escolha do programa e precisa de rationale próprio.
+2. **Onde a policy corporativa for mais restritiva, ela vence.** Onde for silenciosa, este framework preenche.
+3. **Não duplique o que ela já cobre.** Conformidade regulatória por jurisdição, propriedade intelectual do output, classificação de dado pessoal e sanções por descumprimento normalmente já estão lá — e o framework as consome em vez de reescrevê-las.
+4. **Declare a subordinação no charter do programa.** Sem isso, o framework parece competir com um instrumento já aprovado, e a rejeição vem por jurisdição, não por mérito técnico.
+
+Apresentar este material a uma organização que já tem policy corporativa como se fosse "a policy" é o erro mais caro de posicionamento possível — e o mais fácil de evitar.
 
 ## Composição da policy
 
@@ -54,8 +76,7 @@ Não integram a policy, salvo incorporação explícita e versionada:
 - exemplos fictícios em `examples/`;
 - roadmap, specs e experimentos;
 - calendários de 90 dias/24 semanas e o plano opcional de piloto;
-- mappings de fornecedores;
-- a camada comercial em `consulting/`.
+- mappings de fornecedores.
 
 Esses artefatos podem informar decisões, mas não criam dependência tecnológica nem requisito normativo por associação.
 

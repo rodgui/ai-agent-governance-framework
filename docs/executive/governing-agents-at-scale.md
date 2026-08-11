@@ -31,7 +31,7 @@ A decisão não exige escolher uma plataforma universal, adotar um fornecedor es
 
 ## Contexto
 
-A [policy modular](../governance/policy.md) consolida princípios, decision rights, controls, evidências e lifecycle em uma fonte canônica que pode evoluir até a release final. A adoção organizacional continua sendo uma decisão explícita da authority competente.
+A [policy de governança de agentes](../governance/policy.md) consolida princípios, decision rights, controls, evidências e lifecycle em uma fonte canônica que pode evoluir até a release final. A adoção organizacional continua sendo uma decisão explícita da authority competente.
 
 O gap tratado pelo framework é transformar intenção de governança em um sistema operacional capaz de responder, com evidência:
 
@@ -84,7 +84,7 @@ O framework é vendor-neutral. Produtos podem implementar partes do control plan
 
 Decision rights são definidos no [operating model](../governance/operating-model.md).
 
-## O que a policy modular operacionaliza
+## O que a policy de governança de agentes operacionaliza
 
 - registry e blueprint separados;
 - risk tiering por ação, dados, alcance, criticidade e reversibilidade;
@@ -160,7 +160,7 @@ Detalhes: [implementation playbook](../guides/framework-implementation-playbook.
 
 ## Evidência complementar
 
-- [Policy modular](../governance/policy.md)
+- [Policy de governança de agentes](../governance/policy.md)
 - [Arquitetura de referência](../architecture/overview.md)
 - [Maturity model](../guides/maturity-model.md)
 - [Control catalog](../../controls/README.md)

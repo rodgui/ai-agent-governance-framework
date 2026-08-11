@@ -47,7 +47,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 
 ## Parte II — Política, operating model e risco
 
-5. [Policy modular — fonte canônica](../governance/policy.md)
+5. [Policy de governança de agentes](../governance/policy.md)
 6. [Operating model e decision rights](../governance/operating-model.md)
 7. [Arquitetura de referência](../architecture/overview.md)
    - [Mapeamento de capability para tecnologia](../architecture/capability-to-technology.md)
@@ -100,7 +100,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 - [Microsoft Customer Zero — caso de estudo](../explanations/microsoft-agent-governance-case-study.md)
 - [Crosswalk histórico Microsoft × Policy v1](../../assessments/comparison-matrices/microsoft-case-study-framework-crosswalk.md)
 
-Casos e mappings ajudam a interpretar implementações, mas não são capítulos necessários, componentes da solução ou requisitos do framework. A camada comercial também permanece fora do handbook, em [`consulting/`](../../consulting/README.md).
+Casos e mappings ajudam a interpretar implementações, mas não são capítulos necessários, componentes da solução ou requisitos do framework.
 
 ## Artefatos de manutenção do repositório
 

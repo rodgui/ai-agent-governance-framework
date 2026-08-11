@@ -7,6 +7,7 @@ review_cycle: quarterly
 supersedes: null
 related:
   - framework-implementation-playbook.md
+  - implementation-program-24-weeks.md
   - maturity-model.md
   - ../governance/operating-model.md
   - ../../schemas/README.md
@@ -24,7 +25,7 @@ O resultado não é “governança concluída”. É uma capacidade inicial veri
 
 ## Constraints
 
-- A policy modular é a fonte canônica; adoção organizacional requer release e authority explícitas.
+- A policy de governança de agentes é a fonte canônica; adoção organizacional requer release e authority explícitas.
 - Core e controls são multiplataforma.
 - Thresholds são aprovados no contexto da organização.
 - Dados, identidade, segurança, privacy, legal e RAI mantêm suas authorities.
@@ -184,7 +185,7 @@ O [contrato comum dos gates](framework-implementation-playbook.md#contrato-comum
 - publicar catalog entries, guidance e support paths;
 - ligar incident, support e domain escalation;
 - medir fricção, gaps e bypass attempts;
-- corrigir controls e templates pelo processo versionado da policy modular.
+- corrigir controls e templates pelo processo versionado da policy de governança de agentes.
 
 ### Entregáveis
 
@@ -267,4 +268,8 @@ O [contrato comum dos gates](framework-implementation-playbook.md#contrato-comum
 
 ## Próximo passo após 90 dias
 
-Expandir coverage, automatizar controles estáveis, aprofundar domains com maior residual risk e revisar o roadmap. Uma futura Policy v2, se necessária, deve seguir processo formal de mudança e não é consequência automática deste roadmap.
+Expandir coverage, automatizar controles estáveis, aprofundar domains com maior residual risk e revisar o roadmap.
+
+O [programa de 24 semanas](implementation-program-24-weeks.md) organiza esse mesmo trabalho com mais folga. A diferença não é alcance de gates — a rota é a mesma, G0 a G7 — e sim largura e profundidade: lá o estate inicial é maior e automação, cobertura e assurance são construídas no caminho, em vez de ficarem para depois.
+
+Uma futura Policy v2, se necessária, deve seguir processo formal de mudança e não é consequência automática deste roadmap.

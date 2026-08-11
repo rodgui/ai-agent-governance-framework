@@ -38,7 +38,16 @@ Repare que **F2 fecha G3 e F3 fecha G2** — a ordem numérica dos gates não é
 
 A coluna "entregáveis" nomeia os artefatos por fase. O [catálogo de artefatos](../reference/artifact-catalog.md) os detalha um a um, com propósito, owner típico e onde cada um está definido no corpus.
 
-O [roadmap de 90 dias](implementation-plan-90-days.md) é uma referência acelerada — corresponde aproximadamente a F0–F3 comprimidas. Este programa é uma referência mais detalhada. Os dois são guias adaptáveis do mesmo conjunto de gates, não métodos concorrentes nem prazos de compliance.
+O [roadmap de 90 dias](implementation-plan-90-days.md) percorre os **mesmos oito gates**, de G0 a G7 — não é um recorte das primeiras fases. A diferença entre os dois não está em quantos gates se atravessa, e sim em quanto estate e quanta construção cabem no caminho:
+
+| Dimensão | Roadmap de 90 dias | Este programa |
+|---|---|---|
+| gates percorridos | G0–G7 | G0–G7 |
+| escopo do estate | um portfólio inicial representativo | de 8 a 15 agentes cobrindo T1–T3 e padrões arquiteturais distintos |
+| profundidade da construção | o mínimo que sustenta a decisão em cada gate | automação, cobertura, assurance e handoff para BAU |
+| o que fica para depois | expandir cobertura e automatizar controles estáveis | roadmap de 12 meses sobre uma operação já regular |
+
+Escolha os 90 dias quando for preciso demonstrar que o sistema de governança fecha um ciclo inteiro; escolha as 24 semanas quando o compromisso já for institucionalizar. Os dois são recortes adaptáveis do mesmo conjunto de gates, não métodos concorrentes nem prazos de compliance.
 
 ## F0 — Mobilizar (semanas 1–2)
 

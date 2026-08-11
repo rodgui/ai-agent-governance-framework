@@ -16,7 +16,7 @@ related:
 
 ## Objetivo
 
-Converter os princípios da [policy modular](policy.md) em decisões executáveis, com autoridade, handoffs, evidências e tempos de resposta definidos. Sua adoção organizacional depende de release e authority explícitas.
+Converter os princípios da [policy de governança de agentes](policy.md) em decisões executáveis, com autoridade, handoffs, evidências e tempos de resposta definidos. Sua adoção organizacional depende de release e authority explícitas.
 
 ## Modelo federado
 

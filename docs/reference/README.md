@@ -12,4 +12,4 @@ Atalhos para artefatos usados como consulta durante design, assessment e operaç
 - [Templates](../../templates/README.md)
 - [Examples](../../examples/README.md)
 
-A referência técnica descreve termos e estruturas. Requirements normativos são definidos na [policy modular](../governance/policy.md) e passam a ser adotados por uma organização somente após release e approval aplicáveis.
+A referência técnica descreve termos e estruturas. Requirements normativos são definidos na [policy de governança de agentes](../governance/policy.md) e passam a ser adotados por uma organização somente após release e approval aplicáveis.

@@ -89,6 +89,8 @@ Este vocabulário reduz ambiguidade entre policy, arquitetura, patterns, control
 | **Blast radius** | Extensão potencial do efeito por usuários, dados, sistemas, regiões e dependências. | Número de usuários apenas. |
 | **Reversibility** | Capacidade de desfazer efeito com custo, prazo e integridade aceitáveis. | Existência nominal de rollback. |
 | **Policy** | Regra normativa aprovada com authority e enforcement expectation. | Guidance. |
+| **Policy corporativa de IA** | Instrumento que a organização já aprovou para toda a IA — princípios, obrigações mínimas, usos proibidos e conformidade regulatória. Quando existe, prevalece. | A policy de governança de agentes. |
+| **Policy de governança de agentes** | A camada normativa deste framework: como um agente é construído, aprovado, operado e retirado. Executa a policy corporativa no escopo de agentes; não a substitui. | Instrumento aprovado da organização, enquanto ela não o adotar. |
 | **Standard** | Requirement obrigatório que especifica como satisfazer policy. | Referência externa sem adoção. |
 | **Guidance** | Recomendação adaptável que não muda policy. | Requirement adotado. |
 | **Procedure** | Passos operacionais para executar tarefa ou control. | Control objective. |

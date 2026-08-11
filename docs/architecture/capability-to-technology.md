@@ -22,7 +22,7 @@ Este é o documento que falta entre a arquitetura de referência e a execução:
 
 ## Por que o mapeamento é um artefato separado
 
-A [arquitetura de referência](overview.md) e a [policy modular](../governance/policy.md) são agnósticas de produto por decisão registrada ([ADR-0002](decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md)). O mapeamento não é: ele nomeia sistemas concretos da organização.
+A [arquitetura de referência](overview.md) e a [policy de governança de agentes](../governance/policy.md) são agnósticas de produto por decisão registrada ([ADR-0002](decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md)). O mapeamento não é: ele nomeia sistemas concretos da organização.
 
 Manter os dois no mesmo documento é o erro que produz frameworks descartáveis. Quando o produto muda — e ele muda —, uma arquitetura contaminada por nomes de produto precisa ser reescrita inteira. Separados, troca-se o mapeamento e a arquitetura permanece.
 

@@ -74,4 +74,4 @@ Para cada tool ou ação, registre capability, scopes, condição de uso, revers
 - Condições e prazo:
 - Evidence refs:
 
-Use a [policy modular](../docs/governance/policy.md), o [operating model](../docs/governance/operating-model.md), o [playbook](../docs/guides/framework-implementation-playbook.md) e os [schemas](../schemas/README.md) como referências correntes.
+Use a [policy de governança de agentes](../docs/governance/policy.md), o [operating model](../docs/governance/operating-model.md), o [playbook](../docs/guides/framework-implementation-playbook.md) e os [schemas](../schemas/README.md) como referências correntes.

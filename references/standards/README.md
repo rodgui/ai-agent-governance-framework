@@ -4,7 +4,7 @@ Esta página existe para responder "o que esta norma cobre e como ela se relacio
 
 ## O que esta página é e não é
 
-Normas ISO/IEC são obras protegidas e comercializadas. Reproduzir o texto delas — mesmo parcialmente, mesmo em repositório privado — é violação de direito autoral e, num material de consultoria, um problema jurídico maior que a lacuna que ele tentaria resolver.
+Normas ISO/IEC são obras protegidas e comercializadas. Reproduzir o texto delas — mesmo parcialmente, mesmo em repositório privado — é violação de direito autoral — um problema jurídico maior que a lacuna que ele tentaria resolver.
 
 Portanto, aqui você encontra:
 
@@ -27,7 +27,7 @@ Enquanto o mapeamento não existir, a relação com ISO deve ser comunicada como
 
 **O que cobre, em linhas gerais.** Contexto organizacional e partes interessadas; liderança e política de IA; planejamento incluindo tratamento de riscos e objetivos; recursos, competência e conscientização; operação, incluindo avaliação de impacto e gestão do ciclo de vida dos sistemas de IA; avaliação de desempenho e auditoria interna; melhoria contínua. Possui um anexo de controles de referência que a organização seleciona e justifica.
 
-**Relação com este framework.** É a norma mais próxima do que o corpus faz: o [operating model](../../docs/governance/operating-model.md), a [policy modular](../../docs/governance/policy.md), o [control catalog](../../controls/README.md) e o [maturity model](../../docs/guides/maturity-model.md) endereçam o mesmo território.
+**Relação com este framework.** É a norma mais próxima do que o corpus faz: o [operating model](../../docs/governance/operating-model.md), a [policy de governança de agentes](../../docs/governance/policy.md), o [control catalog](../../controls/README.md) e o [maturity model](../../docs/guides/maturity-model.md) endereçam o mesmo território.
 
 **O que ela exige e este framework não entrega.** Certificação depende de auditoria por organismo acreditado, com escopo declarado, evidência amostrada e ciclo de manutenção. Este framework **não certifica, não audita e não substitui** esse processo. Adotar a release 1.0 não aproxima nem afasta uma organização de certificação.
 
