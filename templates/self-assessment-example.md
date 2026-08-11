@@ -58,4 +58,4 @@ Exemplo fictício e sanitizado. Não contém dados reais nem representa aprovaç
 - Review: trimestral ou após mudança material.
 - Sunset: remover integrações, revogar identidade e preservar evidências requeridas.
 
-Este exemplo usa a [policy modular](../docs/governance/policy.md) e não substitui evidência, review ou aprovação formal.
+Este exemplo usa a [policy de governança de agentes](../docs/governance/policy.md) e não substitui evidência, review ou aprovação formal.

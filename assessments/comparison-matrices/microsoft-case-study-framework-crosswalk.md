@@ -18,7 +18,7 @@ related:
 
 Comparar as capacidades descritas em cinco artigos do Microsoft Inside Track com a [AI Agent Policy and Governance v1 histórica](../../docs/governance/ai-agent-policy-and-governance-v1.md). O resultado registrou cobertura, lacunas e hipóteses de evolução na primeira consolidação.
 
-Este assessment está depreciado como instrumento de evolução normativa pela [ADR-0002](../../docs/architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md). Ele é preservado para rastreabilidade; não é fonte da policy modular nem backlog obrigatório.
+Este assessment está depreciado como instrumento de evolução normativa pela [ADR-0002](../../docs/architecture/decisions/0002-modular-policy-vendor-neutrality-and-commercial-boundary.md). Ele é preservado para rastreabilidade; não é fonte da policy de governança de agentes nem backlog obrigatório.
 
 ## Escala de cobertura
 
@@ -117,7 +117,7 @@ As principais lacunas estão menos na proteção básica e mais na evolução pa
 - O crosswalk compara documentos, não controles implantados em produção.
 - “Forte” significa cobertura documental explícita, não eficácia operacional comprovada.
 - A experiência Microsoft pode não refletir regulação, estrutura ou tolerância de risco locais.
-- Thresholds e exemplos da policy v1 pertencem ao contexto histórico e não são herdados automaticamente pela policy modular.
+- Thresholds e exemplos da policy v1 pertencem ao contexto histórico e não são herdados automaticamente pela policy de governança de agentes.
 
 ## Sources
 

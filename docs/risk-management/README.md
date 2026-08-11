@@ -53,7 +53,7 @@ Não existe fórmula universal. Scoring apoia consistência; a decisão preserva
 
 ## Tiers
 
-T1–T4 é a taxonomia canônica de risco/criticidade da policy modular. Uma organização pode mapear classificações locais, regulatórias ou legadas, desde que preserve os critérios, documente divergências e aplique o caminho decisório mais restritivo quando houver ambiguidade.
+T1–T4 é a taxonomia canônica de risco/criticidade da policy de governança de agentes. Uma organização pode mapear classificações locais, regulatórias ou legadas, desde que preserve os critérios, documente divergências e aplique o caminho decisório mais restritivo quando houver ambiguidade.
 
 | Tier | Perfil | Exemplo de controle |
 |---|---|---|

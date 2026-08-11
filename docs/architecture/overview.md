@@ -15,7 +15,7 @@ related:
 
 ## Status desta arquitetura
 
-Este documento integra a [policy modular](../governance/policy.md) como arquitetura canônica do framework. A adoção normativa de uma release continua dependendo da authority competente.
+Este documento integra a [policy de governança de agentes](../governance/policy.md) como arquitetura canônica do framework. A adoção normativa de uma release continua dependendo da authority competente.
 
 ## Objetivo
 

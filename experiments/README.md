@@ -12,4 +12,4 @@
 6. experimento expirado é arquivado ou removido;
 7. promoção exige documentação canônica, tests e decision authority.
 
-Use o [experiment template](../templates/experiment-template.md). Experiments não alteram a policy modular, não criam requisito normativo e não constituem endorsement de fornecedor.
+Use o [experiment template](../templates/experiment-template.md). Experiments não alteram a policy de governança de agentes, não criam requisito normativo e não constituem endorsement de fornecedor.

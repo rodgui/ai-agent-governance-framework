@@ -1,6 +1,6 @@
 # Governance
 
-Policy modular, operating model e decision rights para governança de IA e agentes.
+Policy de governança de agentes, operating model e decision rights.
 
 - [AI Agent Governance Policy](policy.md) — entrada normativa, composição modular, boundaries e versionamento.
 - [Operating model](operating-model.md) — roles, authorities, forums, escalation e exception flow.

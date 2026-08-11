@@ -47,7 +47,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 
 ## Parte II — Política, operating model e risco
 
-5. [Policy modular — fonte canônica](../governance/policy.md)
+5. [Policy de governança de agentes](../governance/policy.md)
 6. [Operating model e decision rights](../governance/operating-model.md)
 7. [Arquitetura de referência](../architecture/overview.md)
    - [Mapeamento de capability para tecnologia](../architecture/capability-to-technology.md)

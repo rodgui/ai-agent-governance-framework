@@ -14,6 +14,8 @@ related:
 
 # ADR-0002 — Policy modular, neutralidade estrita e boundary comercial
 
+> **Nota de nomenclatura.** O documento que esta decisão criou chama-se hoje [policy de governança de agentes](../../governance/policy.md). "Modular" descreve como ela é composta — em módulos canônicos distribuídos pelo repositório — e permanece verdadeiro; deixou apenas de ser o nome pelo qual ela é referenciada. O texto desta ADR é preservado como foi decidido.
+
 ## Contexto
 
 A primeira consolidação tratou a Policy v1 como baseline normativa, usou referências Microsoft para acelerar a arquitetura e colocou o modelo de consultoria dentro da área executiva. Essa estrutura foi útil para iniciar o framework, mas cria três ambiguidades: a policy histórica parece ser fonte permanente, referências de fornecedor podem parecer componentes da solução e a camada comercial pode ser confundida com conhecimento canônico.

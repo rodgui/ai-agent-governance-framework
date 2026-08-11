@@ -60,7 +60,7 @@ Control plane e assurance plane são complementares. Inventário, identidade e t
 
 | Artefato | Uso |
 |---|---|
-| [Policy modular](docs/governance/policy.md) | entrada normativa, composição, boundaries e versionamento |
+| [Policy de governança de agentes](docs/governance/policy.md) | entrada normativa, composição, boundaries e versionamento |
 | [Operating model](docs/governance/operating-model.md) | papéis, decision rights, fóruns e handoffs |
 | [Arquitetura](docs/architecture/overview.md) | planos, fluxos e boundaries |
 | [Patterns](docs/patterns/README.md) | soluções recorrentes e antipatterns |

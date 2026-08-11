@@ -68,7 +68,7 @@ O agente deve:
 ## Regras de policy e neutralidade
 
 - O documento principal de policy em `docs/governance/` é o artefato mais sensível.
-- A policy modular é a fonte canônica em evolução; versões anteriores são apenas histórico preservado.
+- A policy de governança de agentes é a fonte canônica em evolução; versões anteriores são apenas histórico preservado.
 - Qualquer modificação deve ser revisada antes de merge.
 - Alterações de policy devem incluir changelog entry explicando o motivo.
 - Versões antigas da policy devem ser preservadas, nunca reescritas.

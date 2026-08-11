@@ -1,5 +1,5 @@
 ---
-title: AI Agent Governance Policy — fonte canônica modular
+title: Policy de governança de agentes
 status: adopted
 owner: Rodrigo Garcia Guimarães
 last_reviewed: 2026-08-10
@@ -15,11 +15,13 @@ related:
   - ../architecture/decisions/0010-structured-governance-contracts-2.0.md
 ---
 
-# AI Agent Governance Policy — fonte canônica modular
+# Policy de governança de agentes
 
 ## Propósito
 
-Este repositório é a fonte modular a partir da qual a **policy final de governança de IA e agentes** será mantida, revisada e versionada. A policy não é um documento monolítico nem depende de uma plataforma específica: ela é composta por princípios, decision rights, requisitos, controls, evidências e regras de lifecycle distribuídos em módulos canônicos.
+Definir como um agente pode ser construído, aprovado, operado e retirado: princípios, decision rights, requisitos, controls, evidências e regras de lifecycle.
+
+Não é um documento monolítico nem depende de uma plataforma específica. O conteúdo vive distribuído nos módulos canônicos deste repositório, que é a fonte a partir da qual a policy é mantida, revisada e versionada — este documento diz quais módulos a compõem e o que fica de fora.
 
 ## Adoção por uma organização
 

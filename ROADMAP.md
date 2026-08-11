@@ -10,7 +10,7 @@ Evoluir uma fonte canônica, vendor-neutral e verificável para:
 - toolkit de diagnóstico, design, assurance e operação;
 - futura publicação executiva quando o conteúdo estiver maduro.
 
-O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudança normativa ainda exige proposta, revisão, authority, changelog e release. A produtificação comercial possui [roadmap próprio](consulting/ROADMAP.md).
+O roadmap evolui a [policy de governança de agentes](docs/governance/policy.md), mas cada mudança normativa ainda exige proposta, revisão, authority, changelog e release.
 
 ## Estado atual
 
@@ -22,8 +22,7 @@ O roadmap evolui a [policy modular](docs/governance/policy.md), mas cada mudanç
 - 44 controls estruturados em 15 domínios, com verificação, automação, mappings e bloqueio declarados;
 - 9 schemas, examples vinculados e toolkit humano ampliado;
 - caso Microsoft separado do framework neutro;
-- visual principal vendor-neutral;
-- camada comercial separada em `consulting/`.
+- visual principal vendor-neutral.
 
 ## Trilha A — Qualidade canônica
 

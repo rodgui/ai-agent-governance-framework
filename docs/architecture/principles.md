@@ -72,4 +72,4 @@ Quando dois princípios colidem, a decisão é registrada com rationale — não
 
 ## Relação com a policy
 
-Esses princípios integram a [policy modular](../governance/policy.md). Sua adoção e alteração exigem revisão formal, decision authority e release versionada; mappings de plataforma não podem redefini-los.
+Esses princípios integram a [policy de governança de agentes](../governance/policy.md). Sua adoção e alteração exigem revisão formal, decision authority e release versionada; mappings de plataforma não podem redefini-los.

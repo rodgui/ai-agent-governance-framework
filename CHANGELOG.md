@@ -33,6 +33,8 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 - Developer experience e paved road, atributos de qualidade e riscos arquiteturais entram na ordem editorial do handbook e na navegação do site. Eram conteúdo real inalcançável a partir de qualquer entrada do repositório.
 - `docs/index.md` ganha navegação por pasta, ligando os índices de seção que existiam sem nenhum caminho de entrada.
 - Os marcadores de tempo do sunset plan passam de `T0`/`T+15`/`T+30` para `D0`/`D+15`/`D+30`, eliminando a colisão com o rótulo de tier que a taxonomia canônica rejeita.
+- O programa de 24 semanas afirmava que o roadmap de 90 dias "corresponde aproximadamente a F0–F3 comprimidas", o que pararia em G4. O próprio roadmap de 90 dias percorre G0 a G7. A diferença entre as duas rotas é largura de estate e profundidade de construção, não quantidade de gates — declarada agora nos dois documentos e no índice de guias.
+- A policy do framework passa a se chamar **policy de governança de agentes**. "Modular" descrevia a forma, não a função, e o nome anterior competia justamente com o termo que ele precisa distinguir: a policy corporativa de IA da organização. O glossário passa a definir as duas e a relação entre elas. A ADR-0002 preserva o texto original com uma nota de nomenclatura.
 
 ### Deprecated
 
