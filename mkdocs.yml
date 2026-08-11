@@ -84,6 +84,7 @@ plugins:
 nav:
   - Início: README.md
   - Como navegar:
+      - Comece aqui — trilhas: docs/start-here.md
       - Índice e jornadas: docs/index.md
       - Handbook — ordem de leitura: docs/handbook/README.md
   - Parte I — Fundamentos:
@@ -118,6 +119,7 @@ nav:
       - Evaluations e release: docs/evaluations/README.md
       - Auditabilidade e evidências: docs/auditability/README.md
       - Evidence pack por tier: docs/auditability/evidence-pack-by-tier.md
+      - Integração com o audit universe: docs/auditability/audit-universe-crosswalk.md
       - Operações e resposta: docs/operations/README.md
       - Behavioral analytics: docs/operations/behavioral-analytics.md
       - FinOps e unit economics: docs/operations/finops.md
@@ -136,6 +138,7 @@ nav:
       - Schemas: schemas/README.md
       - Migração de schemas 2.0: docs/guides/schema-migration-2.0.md
       - Templates: templates/README.md
+      - Cláusulas de contrato com fornecedor: templates/ai-vendor-contract-clauses.md
       - Examples: examples/README.md
   - Parte V — Fontes e limitações:
       - Fontes: references/sources.md

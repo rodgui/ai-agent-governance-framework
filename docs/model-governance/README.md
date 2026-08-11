@@ -167,3 +167,5 @@ Execute em ordem na primeira implantação. Em ciclos posteriores, uma mudança 
 ## Decision gate
 
 Nenhum agente entra em produção com combinação provider/model/version fora do catálogo aprovado para a sua classe de dados, sem evaluation vinculada à versão e sem registro da dependência no blueprint. Fallback precisa ter equivalência de controles demonstrada **ou** o runtime precisa falhar fechado com rationale documentado.
+
+As decisões deste domínio viram exigência contratual pelo checklist de [cláusulas mínimas de contrato com fornecedor de IA](../../templates/ai-vendor-contract-clauses.md). Fornecedor aprovado no catálogo e sem contrato compatível é gap de controle, não pendência administrativa.
