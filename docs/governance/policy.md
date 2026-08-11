@@ -29,6 +29,30 @@ Isso **não** significa que qualquer organização adotou esta policy. A adoçã
 
 Confundir os dois níveis transforma versionamento em declaração de conformidade. Nenhum claim de certificação, auditoria independente ou conformidade decorre da adoção da release.
 
+## Se a organização já tem uma policy corporativa de IA
+
+Esse é o caso mais comum numa organização grande, e é diferente do anterior.
+
+Uma policy corporativa de IA governa **todos os AI systems e AI tools**, costuma pertencer a compliance ou a um conselho de IA, e é aprovada por instância executiva. Este framework governa **agentes**, que são um subconjunto — e o faz no nível de método, controls e evidência.
+
+São camadas distintas, e **esta é a de baixo**:
+
+| Camada | O que decide | Quem responde |
+|---|---|---|
+| policy corporativa de IA | princípios, obrigações mínimas, usos proibidos e conformidade regulatória, para toda a IA | compliance, jurídico, conselho de IA |
+| **este framework** | como governar agentes em conformidade com aquela policy: tiers, gates, controls, evidência e runtime | governança de IA, arquitetura, plataforma |
+
+Quando existe policy corporativa, **ela prevalece**. Este framework não a substitui, não a reinterpreta e não cria exceção a ela. O que ele faz é tornar executável, para agentes, aquilo que a policy exige em termos gerais.
+
+Na prática:
+
+1. **Mapeie as obrigações da policy corporativa** para os domínios canônicos daqui, e registre onde cada exigência é satisfeita. Obrigação sem control correspondente é gap; control sem obrigação correspondente é escolha do programa e precisa de rationale próprio.
+2. **Onde a policy corporativa for mais restritiva, ela vence.** Onde for silenciosa, este framework preenche.
+3. **Não duplique o que ela já cobre.** Conformidade regulatória por jurisdição, propriedade intelectual do output, classificação de dado pessoal e sanções por descumprimento normalmente já estão lá — e o framework as consome em vez de reescrevê-las.
+4. **Declare a subordinação no charter do programa.** Sem isso, o framework parece competir com um instrumento já aprovado, e a rejeição vem por jurisdição, não por mérito técnico.
+
+Apresentar este material a uma organização que já tem policy corporativa como se fosse "a policy" é o erro mais caro de posicionamento possível — e o mais fácil de evitar.
+
 ## Composição da policy
 
 A policy canônica deste framework é formada por:

@@ -8,6 +8,7 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 
 ### Added
 
+- `tools/scripts/build-docx.py` gera três entregáveis Word do mesmo corpus canônico — executive brief, guia de implantação e referência completa. Resolve o que o corpus tem de específico de repositório e não sobrevive ao papel: link interno vira texto, mermaid vira nota de figura, front matter sai, e a ordem do guia é a do método, não a dos domínios.
 - Catálogo de artefatos do programa em `docs/reference/artifact-catalog.md`, com propósito, owner típico e fase de cada artefato — o instrumento de planejamento e controle de completude que o corpus descrevia e não entregava.
 - Tabela normativa dos dez escaladores de risco, com criticidade mínima, efeito adicional e a pergunta correspondente do pre-screen.
 - Colunas "quando evoluir para assessment formal" e "efeito na aprovação" no tiering de assurance de Responsible AI.
@@ -24,6 +25,7 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 
 ### Changed
 
+- `docs/governance/policy.md` declara como o framework se posiciona quando a organização **já tem** policy corporativa de IA: a corporativa prevalece e esta é a camada de execução para agentes. O corpus só cobria o caso de quem não tem policy nenhuma — que é o menos comum numa empresa grande. Apresentado como "a policy", o framework parece competir com instrumento aprovado e é rejeitado por jurisdição, não por mérito.
 - O evidence pack de T2 declara herança de T1, como T3 e T4 já faziam.
 - O playbook declara que a numeração G0–G7 não é cronograma, com a tabela de dependência real. G3 exige G2 apenas *suficiente para atribuir responsabilidade*, e é por isso que o programa de 24 semanas fecha G3 em F2 e completa G2 em F3 — paralelismo legítimo que a numeração escondia.
 - As invariantes cross-record operam sobre bundles de caso em vez de caminhos fixos, e casos em `examples/cases/<id>/` entram na validação de schema pela mesma convenção. Sem isso, um segundo caso ficaria no repositório com aparência de evidência e sem verificação.
