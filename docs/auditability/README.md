@@ -148,3 +148,5 @@ Attestation/value/sunset decision
 ## Decision gate
 
 A release authority exige event model, retention, access, correlation e evidence package compatíveis com o tier antes de produção.
+
+A integração com o universo de auditoria que a organização já opera está em [integração com o audit universe existente](audit-universe-crosswalk.md). Um framework que chega como universo paralelo é tolerado, não adotado.

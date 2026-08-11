@@ -68,6 +68,27 @@ Todo decision record deve identificar `gate_id`, escopo, versão, tier, authorit
 | G6 — Operação | G5 válido e sistema instrumentado antes de exposição material | telemetry map, thresholds, runbooks, on-call, drills, rollback/quarantine e incident evidence | Run Authority, com domain escalation | sinais possuem owner/action e containment, recovery e reactivation foram exercitados | conter, fazer rollback ou suspender; reativação exige cause e regression evidence |
 | G7 — Valor e lifecycle | janela de operação definida, G6 aceito e baseline de outcome/custo disponível | owner attestation, use/quality/risk/value evidence, incidents, costs e sunset options | Business Owner; Governance Council para decisão de portfólio/material risk | decisão de manter, expandir, corrigir, restringir ou aposentar registrada | restringir/sunset ou abrir remediation; mudança normativa segue processo separado |
 
+### A numeração não é um cronograma
+
+**G0–G7 são pontos de decisão com dependência declarada, não etapas em ordem cronológica.** A numeração ajuda a referenciar; ela não diz em que semana cada gate acontece.
+
+A dependência real está na coluna de critérios de entrada acima:
+
+| Gate | Depende de |
+|---|---|
+| G0 | — |
+| G1 | G0 |
+| G2 | G1 |
+| G3 | G0 vigente e **G2 suficiente para atribuir responsabilidade** — não G2 completo |
+| G4 | G2 e G3 |
+| G5 | G4, para aquele escopo e versão |
+| G6 | G5 |
+| G7 | G6 |
+
+A consequência prática é que **G2 e G3 se sobrepõem**. Basta ter registry e ownership o bastante para saber a quem atribuir uma decisão; o resto das fundações continua sendo construído enquanto o operating model é aprovado. Por isso o [programa de 24 semanas](implementation-program-24-weeks.md) fecha G3 na fase F2 e completa G2 na F3 — não é inversão, é paralelismo legítimo.
+
+Um cronograma montado assumindo que a ordem numérica é a ordem de execução vai travar em F2 esperando um G2 completo que o G3 não exige.
+
 ## Gate 0 — Mandato, escopo e sponsorship
 
 ### Outcome

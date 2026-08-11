@@ -181,3 +181,5 @@ Nenhuma tool state-changing entra em produção sem owner, provenance, scopes, t
 ## Sources
 
 [14] <https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations> — OWASP Agentic AI Threats and Mitigations
+
+Para tools e MCP servers de terceiros, as exigências contratuais estão em [cláusulas mínimas de contrato com fornecedor de IA](../../templates/ai-vendor-contract-clauses.md).

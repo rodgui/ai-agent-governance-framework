@@ -34,6 +34,8 @@ Para uma organização que adote este pattern, uma fase pode terminar sem que o 
 | **F5 — Escalar** | 17–20 | automação e cobertura | automação de discovery, policy-as-code, JML, attestation, baselines de comportamento, FinOps, dashboards | G6 |
 | **F6 — Institucionalizar** | 21–24 | operação regular e assurance | evidência e assurance, enablement, handoff para BAU, cadência de governança, roadmap de 12 meses | G7 |
 
+Repare que **F2 fecha G3 e F3 fecha G2** — a ordem numérica dos gates não é a ordem de execução. G3 exige apenas que G2 esteja *suficiente para atribuir responsabilidade*, não completo, então as duas frentes correm em paralelo. A [dependência real entre gates](framework-implementation-playbook.md#a-numeração-não-é-um-cronograma) está declarada no playbook, e é ela que manda no cronograma.
+
 A coluna "entregáveis" nomeia os artefatos por fase. O [catálogo de artefatos](../reference/artifact-catalog.md) os detalha um a um, com propósito, owner típico e onde cada um está definido no corpus.
 
 O [roadmap de 90 dias](implementation-plan-90-days.md) é uma referência acelerada — corresponde aproximadamente a F0–F3 comprimidas. Este programa é uma referência mais detalhada. Os dois são guias adaptáveis do mesmo conjunto de gates, não métodos concorrentes nem prazos de compliance.

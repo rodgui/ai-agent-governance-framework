@@ -8,6 +8,17 @@ Este repositório reúne policy, operating model, arquitetura, design patterns, 
 
 ![AI Agent Governance Framework](docs/architecture/diagrams/ai-agent-governance-framework.png)
 
+## Comece aqui
+
+Uma pergunta antes de tudo: **estudar ou implantar?**
+
+- **Estudar** → [handbook](docs/handbook/README.md), na ordem editorial.
+- **Implantar** → [trilhas de leitura](docs/start-here.md) — sponsor, programa, risco e arquitetura, cada uma terminando numa decisão.
+
+Quem vai implantar deve ler o [implementation playbook](docs/guides/framework-implementation-playbook.md) antes de qualquer outra coisa: é o único documento que dá ordem; os demais dão conteúdo.
+
+O restante desta página é **referência** — serve para localizar um assunto, não para decidir por onde começar.
+
 ## O problema que o framework resolve
 
 Agentes combinam modelos probabilísticos, dados, identidades, ferramentas e capacidade de ação. Sem um sistema de governança, a organização perde respostas básicas:

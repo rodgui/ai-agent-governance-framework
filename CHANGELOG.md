@@ -13,6 +13,9 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 - Colunas "quando evoluir para assessment formal" e "efeito na aprovação" no tiering de assurance de Responsible AI.
 - Três níveis de leitura de um domínio (entender, decidir, executar) no handbook, e entrada por estágio da organização no índice.
 - Termos que o corpus passou a usar e o glossário não definia, com destaque para `admissibilidade` — dimensão criada pela ADR-0009 e até aqui sem definição canônica.
+- Porta de entrada única em `docs/start-here.md`: uma pergunta e quatro trilhas por papel, cada uma terminando numa decisão. As demais superfícies de navegação passam a ser declaradas como referência — somadas, ofereciam sessenta pontos de partida para uma pergunta só.
+- Cláusulas mínimas de contrato com fornecedor de IA, cobrindo uso de dados para treino, versão e mudança, auditoria, incidentes, portabilidade e saída. O corpus dizia o que decidir sobre um fornecedor e não dizia o que exigir em contrato.
+- Integração com o audit universe existente: onde os controls encaixam no que auditoria interna já testa, e as três diferenças que quebram o teste convencional.
 - Três casos de referência em `docs/explanations/cases/` — T1 na rota rápida, T2 transacional e T3 com impacto sobre pessoas — percorrendo os gates G0–G7 com registry, blueprint e manifesto validados pelo CI. Fecham o critério 6 do checklist de autossuficiência.
 - Guardrail que confere `governance.controlIds` do blueprint contra o control catalog. Um ID inexistente atravessava o gate parecendo cobertura.
 - Método de mapeamento de capability para tecnologia, separado da arquitetura para que trocar de produto não exija reescrever a arquitetura.
@@ -22,6 +25,7 @@ Terceira auditoria do corpus contra o guia externo v3.4, executada sobre a relea
 ### Changed
 
 - O evidence pack de T2 declara herança de T1, como T3 e T4 já faziam.
+- O playbook declara que a numeração G0–G7 não é cronograma, com a tabela de dependência real. G3 exige G2 apenas *suficiente para atribuir responsabilidade*, e é por isso que o programa de 24 semanas fecha G3 em F2 e completa G2 em F3 — paralelismo legítimo que a numeração escondia.
 - As invariantes cross-record operam sobre bundles de caso em vez de caminhos fixos, e casos em `examples/cases/<id>/` entram na validação de schema pela mesma convenção. Sem isso, um segundo caso ficaria no repositório com aparência de evidência e sem verificação.
 - Release Evidence Manifest ganha `conditions` e `expiresAt`. Uma decisão `conditional` passa a exigir as duas, em vez de exigir `exceptionRefs`: pelo glossário do próprio framework, exceção autoriza desvio de requisito e condição limita o escopo aprovado. Exigir waiver para toda aprovação condicional empurra a organização a registrar exceção falsa — e exceção falsa contamina justamente a métrica que deveria detectar acúmulo de risco.
 - Developer experience e paved road, atributos de qualidade e riscos arquiteturais entram na ordem editorial do handbook e na navegação do site. Eram conteúdo real inalcançável a partir de qualquer entrada do repositório.

@@ -14,6 +14,8 @@ related:
 
 O repositório usa documentos modulares como fonte canônica. Escolha uma jornada; não é necessário ler tudo em sequência.
 
+> **Vai implantar?** Use as [trilhas de leitura](start-here.md), que dão uma ordem só e terminam em decisões. Esta página é referência para localizar assuntos — ela oferece muitos caminhos de propósito, e isso atrapalha quem precisa de um.
+
 ## Por onde começar, conforme o estágio da organização
 
 As jornadas por persona respondem "o que eu leio". Esta tabela responde antes: **por onde a organização entra**.

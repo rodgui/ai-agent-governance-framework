@@ -70,6 +70,7 @@ Um capítulo que só entrega o primeiro nível é material de leitura, não de i
 19. [Human oversight e accountability](../human-oversight/README.md)
 20. [Evaluations e release evidence](../evaluations/README.md)
 21. [Auditabilidade e evidências](../auditability/README.md)
+    - [Integração com o audit universe existente](../auditability/audit-universe-crosswalk.md)
 22. [Operações, resposta e runtime](../operations/README.md)
 23. [Adoção, enablement e suporte](../adoption/README.md)
     - [Developer experience e paved road](../devex/README.md)

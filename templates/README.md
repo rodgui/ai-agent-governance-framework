@@ -26,6 +26,7 @@ Esta página lista os templates por finalidade. Para saber **quando** cada artef
 - [Autoavaliação de agente](self-assessment-form.md)
 - [Exemplo de autoavaliação](self-assessment-example.md)
 - [Technology Assessment](assessment-template.md)
+- [Cláusulas de contrato com fornecedor de IA](ai-vendor-contract-clauses.md)
 - [Checklist de decisão de release](publication-checklist.md)
 - [Release Evidence Manifest](release-evidence-manifest.md)
 - [Attestation and Sunset Record](attestation-sunset-record.md)
